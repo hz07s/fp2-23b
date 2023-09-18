@@ -67,15 +67,14 @@ public class Ejercicio01 {
 
     String palSecreta = getPalabraSecreta(palabras);
     System.out.println(figuras[0]);
-    
-    mostrarBlancos(palSecreta);
+    String blancos = mostrarBlancos(palSecreta);
   
     System.out.println("\n");
 
     while(contador <= 6){
       letra = ingreseLetra();
       if (letraEnPalabraSecreta(letra, palSecreta))
-        mostrarBlancosActualizados(letra);
+        blancos = mostrarBlancosActualizados(letra, palSecreta, blancos);
       else
         System.out.println(figuras[contador]);
       contador = contador +1;
@@ -94,10 +93,13 @@ public class Ejercicio01 {
     return lasPalabras[ind];
   }
 
-  public static void mostrarBlancos(String palabra){
-    for(int i = 0; i < palabra.length(); i++)
+  public static String mostrarBlancos(String palabra){
+    String blancos = "";
+    for(int i = 0; i < palabra.length(); i++) {
       System.out.print("_ " );
-
+      blancos += "_ ";
+    }
+    return blancos;
   }
 
   public static String ingreseLetra(){
@@ -121,8 +123,17 @@ public class Ejercicio01 {
     return false;
   }
 
-  public static void mostrarBlancosActualizados(String letra){
-  //COMPLETAR
-    System.out.println("PROCESANDO.....");
+  public static String mostrarBlancosActualizados(String letra, String palabra, String blancos){
+    System.out.println("PROCESANDO...");
+
+    char c = letra.charAt(0);
+    for(int i = 0; i < palabra.length(); i++) {
+      if (palabra.charAt(i) == c)
+        blancos += c + " ";
+      else
+        blancos += blancos.charAt(i * 2) + " ";
+    }
+    System.out.println(blancos);
+    return blancos;
   }
 }
