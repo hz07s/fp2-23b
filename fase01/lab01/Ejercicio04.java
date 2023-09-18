@@ -14,10 +14,8 @@ class Ejercicio04 {
     for (int i = 0; i < soldiers.length; i++) {
       System.out.print("Ingrese el nombre del soldado Nro " + (i + 1) + " : ");
       soldiers[i] = sc.next();
-    }
-
-    for (int i = 0; i < healt.length; i++) {
-      System.out.print("Ingrese la vida del soldado Nro " + (i + 1) + " : ");
+      
+      System.out.print("Vida: ");
       healt[i] = sc.nextInt();
     }
 
