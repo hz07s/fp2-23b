@@ -2,60 +2,60 @@ package fase01.lab02;
 import java.util.Scanner;
 public class Ejercicio01 {
   public static void main(String []args){
-    String ahor1 =  " +---+ \n"+
-                    " | | \n" +
-                    " | \n" +
-                    " | \n" +
-                    " | \n" +
-                    " | \n" +
+    String ahor1 =  " +---+  \n" +
+                    " |   |  \n" +
+                    "     |  \n" +
+                    "     |  \n" +
+                    "     |  \n" +
+                    "     |  \n" +
                     "========= ";
 //
-    String ahor2 =  " +---+ \n"+
-                    " | | \n"+
-                    " O | \n"+
-                    " | \n"+
-                    " | \n"+
-                    " | \n"+
+    String ahor2 =  " +---+   \n"+
+                    " |   |   \n"+
+                    " O   |   \n"+
+                    "     |   \n"+
+                    "     |   \n"+
+                    "     |   \n"+
                     "=========";
 //
-    String ahor3 =  " +---+ \n"+
-                    " | | \n"+
-                    " O | \n"+
-                    " | | \n"+
-                    " | \n"+
-                    " | \n"+
+    String ahor3 =  " +---+   \n"+
+                    " |   |   \n"+
+                    " O   |   \n"+
+                    " |   |   \n"+
+                    "     |   \n"+
+                    "     |   \n"+
                     "=========";
 //
-    String ahor4 =  " +---+ \n"+
-                    " | | \n"+
-                    " O | \n"+
-                    " /| | \n"+
-                    " | \n"+
-                    " | \n"+
+    String ahor4 =  " +---+   \n"+
+                    " |   |   \n"+
+                    " O   |   \n"+
+                    "/|   |   \n"+
+                    "     |   \n"+
+                    "     |   \n"+
                     "=========";
 //
-    String ahor5 =  " +---+ \n"+
-                    " | | \n"+
-                    " O | \n"+
-                    " /|\\ | \n"+
-                    " | \n"+
-                    " | \n"+
+    String ahor5 =  " +---+   \n"+
+                    " |   |   \n"+
+                    " O   |   \n"+
+                    "/|\\ |   \n"+
+                    "     |   \n"+
+                    "     |   \n"+
                     "=========";
 //
-    String ahor6 =  " +---+ \n"+
-                    " | | \n"+
-                    " O | \n"+
-                    " /|\\ | \n"+
-                    " / | \n"+
-                    " | \n"+
+    String ahor6 =  " +---+   \n"+
+                    " |   |   \n"+
+                    " O   |   \n"+
+                    "/|\\ |   \n"+
+                    "/    |   \n"+
+                    "     |   \n"+
                     "=========";
 //
-    String ahor7 =  " +---+ \n"+
-                    " | | \n"+
-                    " O | \n"+
-                    " /|\\ | \n"+
-                    " / \\ | \n"+
-                    " | \n"+
+    String ahor7 =  " +---+   \n"+
+                    " |   |   \n"+
+                    " O   |   \n"+
+                    "/|\\ |   \n"+
+                    "/ \\ |   \n"+
+                    "     |   \n"+
                     "=========";
 //
     String [] figuras = {ahor1, ahor2, ahor3,ahor4,ahor5,ahor6,ahor7};
