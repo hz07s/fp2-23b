@@ -37,7 +37,7 @@ public class Ejercicio01 {
     String ahor5 =  " +---+   \n"+
                     " |   |   \n"+
                     " O   |   \n"+
-                    "/|\\ |   \n"+
+                    "/|\\  |   \n"+
                     "     |   \n"+
                     "     |   \n"+
                     "=========";
@@ -45,7 +45,7 @@ public class Ejercicio01 {
     String ahor6 =  " +---+   \n"+
                     " |   |   \n"+
                     " O   |   \n"+
-                    "/|\\ |   \n"+
+                    "/|\\  |   \n"+
                     "/    |   \n"+
                     "     |   \n"+
                     "=========";
@@ -53,8 +53,8 @@ public class Ejercicio01 {
     String ahor7 =  " +---+   \n"+
                     " |   |   \n"+
                     " O   |   \n"+
-                    "/|\\ |   \n"+
-                    "/ \\ |   \n"+
+                    "/|\\  |   \n"+
+                    "/ \\  |   \n"+
                     "     |   \n"+
                     "=========";
 //
@@ -75,17 +75,21 @@ public class Ejercicio01 {
       letra = ingreseLetra();
       if (letraEnPalabraSecreta(letra, palSecreta)){
         blancos = mostrarBlancosActualizados(letra, palSecreta, blancos);
-        if ()
+        if (palSecreta.equals(blancos))
+          break;
       }
       else
         System.out.println(figuras[contador]);
       contador = contador +1;
     }
 
-    if () {
-
+    if (contador == 7){
+      System.out.println("Perdiste");
+      System.out.println("La palabra secreta era : " + palSecreta);
+    } else {
+      System.out.println("Ganaste");
+      System.out.println("Nro de intentos : " + contador);
     }
-    //COMPLETAR PARA INDICAR SI GANÓ, PERDIÓ Y CUÁNTOS TURNOS NECESITÓ
     System.out.println("\n");
   }
 
@@ -104,7 +108,7 @@ public class Ejercicio01 {
       blancos += "_";
     }
     for (int i = 0; i < blancos.length(); i++) {
-      System.out.println(blancos.charAt(i) + " ");
+      System.out.print(blancos.charAt(i) + " ");
     }
     return blancos;
   }
@@ -117,7 +121,8 @@ public class Ejercicio01 {
     char c = laLetra.charAt(0);
     while(laLetra.length()!= 1 || (int)c < 65 || (int)c > 90){
       System.out.println("ERROR CARACTER NO ADMITIDO - Ingrese letra: ");
-      laLetra = sc.next();
+      laLetra = sc.next().toUpperCase();
+      c = laLetra.charAt(0);
     }
     return laLetra;
   }
