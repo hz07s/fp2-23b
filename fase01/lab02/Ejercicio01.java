@@ -61,7 +61,7 @@ public class Ejercicio01 {
     String [] figuras = {ahor1, ahor2, ahor3,ahor4,ahor5,ahor6,ahor7};
     int contador = 1;
     String letra;
-
+// posiblemente en lugar de identacion seria : indentacion;
     String [] palabras = {"programacion", "java", "identacion", "clases",
     "objetos", "desarrollador", "pruebas"};
 
@@ -86,16 +86,16 @@ public class Ejercicio01 {
   }
 
   public static String getPalabraSecreta(String [] lasPalabras){
-    String palSecreta;
+    //String palSecreta;
     int ind;
     int indiceMayor = lasPalabras.length -1;
-    int indiceMenor =0;
+    int indiceMenor = 0;
     ind = (int) (Math.random() * (indiceMayor - indiceMenor + 1) + indiceMenor);
     return lasPalabras[ind];
   }
 
   public static void mostrarBlancos(String palabra){
-    for(int i=0; i< palabra.length(); i++)
+    for(int i = 0; i < palabra.length(); i++)
       System.out.print("_ " );
 
   }
@@ -104,9 +104,10 @@ public class Ejercicio01 {
     String laLetra;
     Scanner sc = new Scanner(System.in);
     System.out.println("Ingrese letra: ");
-    laLetra = sc.next();
-    while(laLetra.length()!= 1){
-      System.out.println("Ingrese letra: "); //COMPLETAR PARA VALIDAR CARACTERES PERMITIDOS
+    laLetra = sc.next().toUpperCase();
+    char c = laLetra.charAt(0);
+    while(laLetra.length()!= 1 || (int)c < 65 || (int)c > 90){
+      System.out.println("ERROR CARACTER NO ADMITIDO - Ingrese letra: ");
       laLetra = sc.next();
     }
     return laLetra;
