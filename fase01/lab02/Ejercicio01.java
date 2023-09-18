@@ -83,9 +83,12 @@ public class Ejercicio01 {
         if (palSecreta.equals(blancos))
           break;
       }
-      else 
+      else {
         System.out.println(figuras[contador]);
-      contador = contador +1;
+        // incluyendo el contador para que sirva al momento de contar los errores, y asi exista posibilida de ganar
+        // si la palabra contiene mas de 6 letras distintas 
+        contador = contador +1;
+      }
     }
 
     if (contador == 7){
@@ -93,7 +96,7 @@ public class Ejercicio01 {
       System.out.println("La palabra secreta era : " + palSecreta);
     } else {
       System.out.println("Ganaste");
-      System.out.println("Nro de intentos : " + contador);
+      System.out.println("Nro de intentos fallidos: " + contador);
     }
     System.out.println("\n");
   }
