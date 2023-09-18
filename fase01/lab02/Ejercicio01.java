@@ -73,13 +73,18 @@ public class Ejercicio01 {
 
     while(contador <= 6){
       letra = ingreseLetra();
-      if (letraEnPalabraSecreta(letra, palSecreta))
+      if (letraEnPalabraSecreta(letra, palSecreta)){
         blancos = mostrarBlancosActualizados(letra, palSecreta, blancos);
+        if ()
+      }
       else
         System.out.println(figuras[contador]);
       contador = contador +1;
     }
 
+    if () {
+
+    }
     //COMPLETAR PARA INDICAR SI GANÓ, PERDIÓ Y CUÁNTOS TURNOS NECESITÓ
     System.out.println("\n");
   }
@@ -96,8 +101,10 @@ public class Ejercicio01 {
   public static String mostrarBlancos(String palabra){
     String blancos = "";
     for(int i = 0; i < palabra.length(); i++) {
-      System.out.print("_ " );
-      blancos += "_ ";
+      blancos += "_";
+    }
+    for (int i = 0; i < blancos.length(); i++) {
+      System.out.println(blancos.charAt(i) + " ");
     }
     return blancos;
   }
@@ -130,11 +137,13 @@ public class Ejercicio01 {
     char c = letra.charAt(0);
     for(int i = 0; i < palabra.length(); i++) {
       if (palabra.charAt(i) == c)
-        newBlancos += c + " ";
+        newBlancos += c;
       else
-        newBlancos += blancos.charAt(i * 2) + " "; // asi usaremos el antiguo blancos
+        newBlancos += blancos.charAt(i); // asi usaremos el antiguo blancos
     }
-    System.out.println(blancos);
+    for (int i = 0; i < blancos.length(); i++) {
+      System.out.println(blancos.charAt(i) + " ");
+    }
     // retornamos blancos y asi guardarlos para la proxima coincidencia de la palabraSecreta
     return newBlancos;
   }
