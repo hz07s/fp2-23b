@@ -1,3 +1,8 @@
+// Laboratorio Nro 02 - Ejercicio01
+// Autor : Hernan Andy
+// Colaboró : -
+// Tiempo : -
+
 package fase01.lab02;
 import java.util.Scanner;
 public class Ejercicio01 {
@@ -78,7 +83,7 @@ public class Ejercicio01 {
         if (palSecreta.equals(blancos))
           break;
       }
-      else
+      else 
         System.out.println(figuras[contador]);
       contador = contador +1;
     }
@@ -117,11 +122,11 @@ public class Ejercicio01 {
     String laLetra;
     Scanner sc = new Scanner(System.in);
     System.out.println("Ingrese letra: ");
-    laLetra = sc.next().toUpperCase();
+    laLetra = sc.next().toLowerCase();
     char c = laLetra.charAt(0);
-    while(laLetra.length()!= 1 || (int)c < 65 || (int)c > 90){
-      System.out.println("ERROR CARACTER NO ADMITIDO - Ingrese letra: ");
-      laLetra = sc.next().toUpperCase();
+    while(laLetra.length()!= 1 || (int)c < 97 || (int)c > 122){
+      System.out.println("ERROR - CARACTER NO ADMITIDO - Ingrese letra: ");
+      laLetra = sc.next().toLowerCase();
       c = laLetra.charAt(0);
     }
     return laLetra;
@@ -146,10 +151,16 @@ public class Ejercicio01 {
       else
         newBlancos += blancos.charAt(i); // asi usaremos el antiguo blancos
     }
-    for (int i = 0; i < blancos.length(); i++) {
-      System.out.println(blancos.charAt(i) + " ");
+    for (int i = 0; i < newBlancos.length(); i++) {
+      System.out.print(newBlancos.charAt(i) + " ");
     }
+    System.out.println("");
     // retornamos blancos y asi guardarlos para la proxima coincidencia de la palabraSecreta
     return newBlancos;
   }
 }
+/*
+Luego de haber terminado el codigo, siento que el contador del main deberia incluirse dentro del else,
+ya que como se presenta ahora es imposible ganar si es que le toca palabras con mas de 6 letras distintas
+como lo es programacion y el incluirlo dentro del else ayudaría a ello
+ */
