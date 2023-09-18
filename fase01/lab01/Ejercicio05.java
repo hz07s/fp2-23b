@@ -24,4 +24,12 @@ class Ejercicio05 {
       System.out.println(army[i]);
     }
   }
+
+  public static void armyWinner(String[] army1, String[] army2) {
+    if (army1.length > army2.length) {
+      System.out.println("Ejercito Nro 1");
+    } else {
+      System.out.println("Ejercito Nro 2");
+    }
+  }
 }
