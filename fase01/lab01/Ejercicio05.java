@@ -3,11 +3,17 @@
 // Colaboró : -
 // Tiempo : -
 
-import java.util.Scanner;
 class Ejercicio05 {
   public static void main(String[] args) {
+    String[] army1 = createArmy();
+    String[] army2 = createArmy();
     
-  
+    System.out.println("Ejercito Nro 1");
+    showArmy(army1);
+    System.out.println("\nEjercito Nro 2" );
+    showArmy(army2);
+    
+    armyWinner(army1, army2);
   }
 
   public static String[] createArmy() {
@@ -29,7 +35,7 @@ class Ejercicio05 {
 
   public static void armyWinner(String[] army1, String[] army2) {
     if (army1.length > army2.length) {
-      System.out.println(" El ganador es el Ejercito Nro 1");
+      System.out.println("El ganador es el Ejercito Nro 1");
     } else if (army2.length > army1.length) {
       System.out.println("El ganador es el Ejercito Nro 2");
     } else {
