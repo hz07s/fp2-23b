@@ -1,0 +1,516 @@
+%package list
+\documentclass{article}
+\usepackage[top=3cm, bottom=3cm, outer=3cm, inner=3cm]{geometry}
+\usepackage{multicol}
+\UseRawInputEncoding
+\usepackage{graphicx}
+\usepackage{url}
+%\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{array}
+%\usepackage{multicol}
+\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{multirow}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{svg}
+\usepackage{xcolor}
+\usepackage{listings}
+\lstdefinestyle{ascii-tree}{
+    literate={├}{|}1 {─}{--}1 {└}{+}1
+  }
+\lstset{basicstyle=\ttfamily,
+  showstringspaces=false,
+  commentstyle=\color{red},
+  keywordstyle=\color{blue}
+}
+%\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{array}
+
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+
+%------------------------------ ÍTEMS ------------------------------
+
+\newcommand{\itemEmail}{hchoquehuancaz@unsa.edu.pe}
+\newcommand{\itemStudent}{Hernan Andy Choquehuanca Zapana}
+\newcommand{\itemCourse}{Fundamentos de la Programación II}
+\newcommand{\itemCourseCode}{20232191}
+\newcommand{\itemSemester}{II}
+\newcommand{\itemUniversity}{Universidad Nacional de San Agustín de Arequipa}
+\newcommand{\itemFaculty}{Facultad de Ingeniería de Producción y Servicios}
+\newcommand{\itemDepartment}{Departamento Académico de Ingeniería de Sistemas e Informática}
+\newcommand{\itemSchool}{Escuela Profesional de Ingeniería de Sistemas}
+\newcommand{\itemAcademic}{2023 - B}
+\newcommand{\itemInput}{Del 20 Septiembre 2023}
+\newcommand{\itemOutput}{Al 25 Septiembre 2023}
+\newcommand{\itemPracticeNumber}{04}
+\newcommand{\itemTheme}{Arreglos de Objetos, Búsqueda y Ordenamiento de Burbuja}
+
+%------------------------------  ------------------------------
+
+\usepackage[english,spanish]{babel}
+\usepackage[utf8]{inputenc}
+\AtBeginDocument{\selectlanguage{Spanish}}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\refname}{Referencias}
+\renewcommand{\tablename}{Tabla} %esto no funciona cuando se usa babel
+\AtBeginDocument{%
+	\renewcommand\tablename{Tabla}
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{30pt}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+\fancyhead[L]{\raisebox{-0.2\height}{\includegraphics[width=3cm]{img/logo_episunsa.png}}}
+\fancyhead[C]{\fontsize{7}{7}\selectfont	\itemUniversity \\ \itemFaculty \\ \itemDepartment \\ \itemSchool \\ \textbf{\itemCourse}}
+\fancyhead[R]{\raisebox{-0.2\height}{\includegraphics[width=1.2cm]{img/logo_abet}}}
+\fancyfoot[L]{Estudiante Hernan Choquehuanca Zapana}
+\fancyfoot[R]{\itemCourse}
+\fancyfoot[C]{Página \thepage}
+
+% para el codigo fuente
+\usepackage{listings}
+\usepackage{color, colortbl}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{codebackground}{rgb}{0.95, 0.95, 0.92}
+\definecolor{tablebackground}{rgb}{0.8, 0, 0}
+
+\lstset{frame=tb,
+	language=bash,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3,
+	backgroundcolor= \color{codebackground},
+}
+
+%------------------------------ INICIO DEL DOCUMENTO------------------------------
+
+\begin{document}
+	
+	\vspace*{10px}
+	
+	\begin{center}	
+		\fontsize{17}{17} \textbf{ Informe de Laboratorio \itemPracticeNumber}
+	\end{center}
+	\centerline{\textbf{\Large Tema: \itemTheme}}
+	%\vspace*{0.5cm}	
+
+	\begin{flushright}
+		\begin{tabular}{|M{2.5cm}|N|}
+			\hline 
+			\rowcolor{tablebackground}
+			\color{white} \textbf{Nota}  \\
+			\hline 
+			     \\[30pt]
+			\hline 			
+		\end{tabular}
+	\end{flushright}	
+
+	\begin{table}[H]
+		\begin{tabular}{|x{4.7cm}|x{4.8cm}|x{4.8cm}|}
+			\hline 
+			\rowcolor{tablebackground}
+			\color{white} \textbf{Estudiante} & \color{white}\textbf{Escuela}  & \color{white}\textbf{Asignatura}   \\
+			\hline 
+			{\itemStudent \par \itemEmail} & \itemSchool & {\itemCourse \par Semestre: \itemSemester \par Código: \itemCourseCode}     \\
+			\hline 			
+		\end{tabular}
+	\end{table}		
+	
+	\begin{table}[H]
+		\begin{tabular}{|x{4.7cm}|x{4.8cm}|x{4.8cm}|}
+			\hline 
+			\rowcolor{tablebackground}
+			\color{white}\textbf{Laboratorio} & \color{white}\textbf{Tema}  & \color{white}\textbf{Duración}   \\
+			\hline 
+			\itemPracticeNumber & \itemTheme & 02 horas   \\
+			\hline 
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[H]
+		\begin{tabular}{|x{4.7cm}|x{4.8cm}|x{4.8cm}|}
+			\hline 
+			\rowcolor{tablebackground}
+			\color{white}\textbf{Semestre académico} & \color{white}\textbf{Fecha de inicio}  & \color{white}\textbf{Fecha de entrega}   \\
+			\hline 
+			\itemAcademic & \itemInput &  \itemOutput  \\
+			\hline 
+		\end{tabular}
+	\end{table}
+
+%------------------------------ ACTIVIDADES (TAREA) ------------------------------
+
+	\section{Tarea}
+	\begin{itemize}		
+		\item Cree un Proyecto llamado Laboratorio4
+        \item Usted podrá reutilizar las dos clases Nave.java y DemoBatalla.java. creadas en Laboratorio 3
+        \item Completar el Código de la clase DemoBatalla
+        
+		\item Utilizar Git para evidenciar su trabajo.
+
+	\end{itemize}
+		
+	\section{Equipos, materiales y temas utilizados}
+	\begin{itemize}
+		\item Sistema Operativo Windows 11 Pro 22H2 64 bits.
+		\item VIM 9.0.
+		\item Visual Studio Code.
+		\item Git 2.41.1.
+		\item Cuenta en GitHub con el correo institucional.
+            \item Variables Simples
+		\item Arreglos de Objetos.
+        \item Métodos.
+        \item Métodos de Búsqueda y Ordenamiento.
+	\end{itemize}
+	
+	\section{URL de Repositorio Github}
+	\begin{itemize}
+		\item URL del Repositorio GitHub para clonar o recuperar.
+        \item \url{https://github.com/hernanchoquehuanca/fp2-23b.git}
+		\item URL para el laboratorio 04 en el Repositorio GitHub.
+		\item \url{https://github.com/hernanchoquehuanca/fp2-23b/tree/main/fase01/lab04}
+	\end{itemize}
+	
+	\section{Actividades con el repositorio GitHub}
+        
+        
+%-----------------------------------------------------------------------------------
+%------------------------------------- ACTIVIDADES  --------------------------------
+%-----------------------------------------------------------------------------------
+
+% ACTIVIDAD 1
+    \subsection{Commits}
+    \subsubsection{Actividad 1 : \\\\
+        1. Cree un Proyecto llamado Laboratorio4\\\\
+        2. Usted podrá reutilizar las dos clases Nave.java y DemoBatalla.java. creadas en Laboratorio 3\\\\
+        3. Completar el Código de la clase DemoBatalla :}
+
+    %%%
+
+    
+    \begin{itemize}	
+        \item Primero acomodamos y copiamos el código del lab03, para luego empezar a completarlo
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/CodigoDado.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Reutilizando el código del lab03 para la actividad}][H]
+		$ git add .
+		$ git commit -m "Reutilizando el código del lab03 para la actividad"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+     \begin{itemize}	
+        \item Luego Implementamos el método busquedaLinealNombre haciendo uso de un simple bucle for, dentro una condificonal if que imprimirá aquellas naves con el mismo nombre ingresados.
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/BusquedaLineal.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando el método busquedaLinealNombre y completando el main para recibir el nombre}][H]
+		$ git add .
+		$ git commit -m "Implementando el método busquedaLinealNombre y completando el main para recibir el nombre"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+    %%%
+
+    \begin{itemize}	
+        \item Adicionalmente a los métodos planteados, se creó un método (crearArreglo) para realizar copias del arreglo enviado como argumento y que no sea modificado.
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/CopiarArreglos.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando un nuevo método para copiar los arreglos antes de usarlos en los futuros métodos}][H]
+		$ git add .
+		$ git commit -m "Implementando un nuevo método para copiar los arreglos antes de usarlos en los futuros métodos"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+ \begin{itemize}	
+        \item Se creó otro método llamado intercambiar, el cual recibe como parámetros un arreglo, y dos enteros los cuales nos sirven para intercambiar posiciones dentro de un arreglo.
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/Intercambiar.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando el método intercambiar para usarlo en el ordenarPorNombreBurbuja}][H]
+		$ git add .
+		$ git commit -m "Implementando el método intercambiar para usarlo en el ordenarPorNombreBurbuja"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+ \begin{itemize}	
+        \item Utilizando el algoritmo de ordenación por Burbuja, se implementó el método con bucles anidados y una condicional de ordenamiento.
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/PuntosBurbuja.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando el método ordenarPorPuntosBurbuja usando el método intercambiar y el algoritmo de ordenamiento por burbuja}][H]
+		$ git add .
+		$ git commit -m "Implementando el método ordenarPorPuntosBurbuja usando el método intercambiar y el algoritmo de ordenamiento por burbuja"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+ \begin{itemize}	
+        \item De la misma manera que el método anterior, se realizó el odenamiento por Burbuja, pero utilizando el primer caracter de cada nombre para ordenarlos.
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/NombreBurbuja.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando el método ordenarPorNombreBurbuja usando un cast a la primera letra de los nombre para asi ordenarlos alfabéticamente}][H]
+		$ git add .
+		$ git commit -m "Implementando el método ordenarPorNombreBurbuja usando un cast a la primera letra de los nombre para asi ordenarlos alfabéticamente"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+ \begin{itemize}	
+        \item Implementando el método busquedaBinariaNombre utilizando el algoritmo proporcionado.
+        \item Se creó un nuevo método para comparar nombres por sus caracteres.
+        \item Así de esta manera la condicional de este algoritmo (else if) será más práctica al ejecutarse.	
+ \item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/BinariaNombre.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando el método busquedaBinariaNombre usando un nuevo método creado para compara valores de dos strings (nombres)}][H]
+		$ git add .
+		$ git commit -m "Implementando el método busquedaBinariaNombre usando un nuevo método creado para compara valores de dos strings (nombres)"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+ \begin{itemize}	
+        \item Usando como guía el algoritmo dado sobre Selección, se utilizó aquello para convertirlo a código.
+        \item Recorriendo el arreglo de Naves, conforme se selecciona aquel que tiene la menor cantidad de puntos, para luego relizar su intercambio de posición.
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/PuntosSeleccion.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando el método ordenarPorPuntosSeleccion usando el algoritmo proporcionado y el método intercambiar}][H]
+		$ git add .
+		$ git commit -m "Implementando el método ordenarPorPuntosSeleccion usando el algoritmo proporcionado y el método intercambiar"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+ \begin{itemize}	
+        \item Siguiendo la misma lógica del método anterior, pero esta vez para ordenarPorNombreSeleccion se utilizó el método ya mencionado (compararNombresMayor) para tomar en cuenta los valores de las letras que conforman el nombre.
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/Selection.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando el método ordenarPorNombreSeleccion usando el algoritmo dado, además del método compararNombresMayor creado anteriormente}][H]
+		$ git add .
+		$ git commit -m "Implementando el método ordenarPorNombreSeleccion usando el algoritmo dado, además del método compararNombresMayor creado anteriormente"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+ \begin{itemize}	
+        \item Haciendo uso del algoritmo por inserción brindado, se convirtió a código haciendo uso de dos bucles (while dentro de for), además que el while nos permite encontrar aquel Nave con mayor puntuación que la varible puntos, para luego realizar su intercambio.
+        \item Posteriormente se imprimen el nuevo arreglo de Naves ordenadas por puntos.
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/PuntosInsercion.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando el método ordenarPorPuntosInsercion haciendo uso del algoritmo proporcionado y adaptándolo al código}][H]
+		$ git add .
+		$ git commit -m "Implementando el método ordenarPorPuntosInsercion haciendo uso del algoritmo proporcionado y adaptándolo al código"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+ \begin{itemize}	
+        \item Finalmente siguiendo la lógica anterior, esta vez con los nombres se hizo uso del método compararNombresMayor para reordenar las Naves según el orden jerárquico de sus nombres.
+	\item El código fue el siguiente:
+    \end{itemize}
+    \lstinputlisting[language=Java, caption={DemoBatalla.java},numbers=left,]{src/NombresInsercion.java}
+    
+    \begin{lstlisting}[language=bash,caption={Commit: Implementando el método ordenarPorNombreInsercion utilizando elmétodo compararNombresMayor que fue creado anteriormente, además del algoritmo proporcionado}][H]
+		$ git add .
+		$ git commit -m "Implementando el método ordenarPorNombreInsercion utilizando elmétodo compararNombresMayor que fue creado anteriormente, además del algoritmo proporcionado"			
+		$ git push -u origin main
+	\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+%-----------------------------------------------------------------------------------
+%------------------------------ ESTRUCTURA DE LABORATORIO --------------------------
+%-----------------------------------------------------------------------------------
+    \newpage
+	\subsection{Estructura de laboratorio 03}
+    \begin{itemize}	
+		\item El contenido que se entrega en este laboratorio es el siguiente:
+	\end{itemize}
+	
+\begin{lstlisting}[style=ascii-tree]
+
+    lab04
+    |   DemoBatalla.java
+    |   Nave.java
+    |
+    └───latex
+        |   Informe_Lab04.pdf
+        |   Informe_Lab04.tex
+        |
+        ├───img
+        |       logo_abet.png
+        |       logo_episunsa.png
+        |       logo_unsa.jpg
+        |
+        └───src
+                BinariaNombre.java
+                BusquedaLineal.java
+                CodigoDado.java
+                CopiarArreglos.java
+                Intercambiar.java
+                NombreBurbuja.java
+                NombresInsercion.java
+                PuntosBurbuja.java
+                PuntosInsercion.java
+                PuntosSeleccion.java
+                Selection.java
+
+\end{lstlisting}    
+
+	\section{\textcolor{red}{Rúbricas}}
+	
+	\subsection{\textcolor{red}{Entregable Informe}}
+	\begin{table}[H]
+		\caption{Tipo de Informe}
+		\setlength{\tabcolsep}{0.5em} % for the horizontal padding
+		{\renewcommand{\arraystretch}{1.5}% for the vertical padding
+		\begin{tabular}{|p{3cm}|p{12cm}|}
+			\hline
+			\multicolumn{2}{|c|}{\textbf{\textcolor{red}{Informe}}}  \\
+			\hline 
+			\textbf{\textcolor{red}{Latex}} & \textcolor{blue}{El informe está en formato PDF desde Latex,  con un formato limpio (buena presentación) y facil de leer.}   \\ 
+			\hline 
+			
+			
+		\end{tabular}
+	}
+	\end{table}
+	
+	\clearpage
+%-----------------------------------------------------------------------------------
+%------------------------------ RÚBRICA DE EVALUACIÓN ------------------------------
+%-----------------------------------------------------------------------------------
+ 
+	\subsection{\textcolor{red}{Rúbrica para el contenido del Informe y demostración}}
+	\begin{itemize}			
+		\item El alumno debe marcar o dejar en blanco en celdas de la columna \textbf{Checklist} si cumplio con el ítem correspondiente.
+		\item Si un alumno supera la fecha de entrega,  su calificación será sobre la nota mínima aprobada, siempre y cuando cumpla con todos lo items.
+		\item El alumno debe autocalificarse en la columna \textbf{Estudiante} de acuerdo a la siguiente tabla:
+	
+		\begin{table}[ht]
+			\caption{Niveles de desempeño}
+			\begin{center}
+			\begin{tabular}{ccccc}
+    			\hline
+    			 & \multicolumn{4}{c}{Nivel}\\
+    			\cline{1-5}
+    			\textbf{Puntos} & Insatisfactorio 25\%& En Proceso 50\% & Satisfactorio 75\% & Sobresaliente 100\%\\
+    			\textbf{2.0}&0.5&1.0&1.5&2.0\\
+    			\textbf{4.0}&1.0&2.0&3.0&4.0\\
+    		\hline
+			\end{tabular}
+		\end{center}
+	\end{table}	
+	
+	\end{itemize}
+	
+	\begin{table}[H]
+		\caption{Rúbrica para contenido del Informe y demostración}
+		\setlength{\tabcolsep}{0.5em} % for the horizontal padding
+		{\renewcommand{\arraystretch}{1.5}% for the vertical padding
+		%\begin{center}
+		\begin{tabular}{|p{2.7cm}|p{7cm}|x{1.3cm}|p{1.2cm}|p{1.5cm}|p{1.1cm}|}
+			\hline
+    		\multicolumn{2}{|c|}{Contenido y demostración} & Puntos & Checklist & Estudiante & Profesor\\
+			\hline
+			\textbf{1. GitHub} & Hay enlace URL activo del directorio para el  laboratorio hacia su repositorio GitHub con código fuente terminado y fácil de revisar. &2 &X &2 & \\ 
+			\hline
+			\textbf{2. Commits} &  Hay capturas de pantalla de los commits más importantes con sus explicaciones detalladas. (El profesor puede preguntar para refrendar calificación). &4 &X &3 & \\ 
+			\hline 
+			\textbf{3. Código fuente} &  Hay porciones de código fuente importantes con numeración y explicaciones detalladas de sus funciones. &2 &X &2 & \\ 
+			\hline 
+			\textbf{4. Ejecución} & Se incluyen ejecuciones/pruebas del código fuente  explicadas gradualmente. &2 & & & \\ 
+			\hline			
+			\textbf{5. Pregunta} & Se responde con completitud a la pregunta formulada en la tarea.  (El profesor puede preguntar para refrendar calificación).  &2 &X &2 & \\ 
+			\hline	
+			\textbf{6. Fechas} & Las fechas de modificación del código fuente están dentro de los plazos de fecha de entrega establecidos. &2 &X &2 & \\ 
+			\hline 
+			\textbf{7. Ortografía} & El documento no muestra errores ortográficos. &2 &X &2 & \\ 
+			\hline 
+			\textbf{8. Madurez} & El Informe muestra de manera general una evolución de la madurez del código fuente,  explicaciones puntuales pero precisas y un acabado impecable.   (El profesor puede preguntar para refrendar calificación).  &4 &X &2 & \\ 
+			\hline
+			\multicolumn{2}{|c|}{\textbf{Total}} &20 & &15 & \\ 
+			\hline
+		\end{tabular}
+		%\end{center}
+		%\label{tab:multicol}
+		}
+	\end{table}
+	
+\clearpage
+
+%------------------------------ REFERENCIAS ------------------------------
+
+\section{Referencias}
+\begin{itemize}			
+    \item \url{https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html}
+    \item \url{https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html}
+    \item \url{https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html}
+\end{itemize}	
+	
+%\clearpage
+%\bibliographystyle{apalike}
+%\bibliographystyle{IEEEtranN}
+%\bibliography{bibliography}
+			
+\end{document}
