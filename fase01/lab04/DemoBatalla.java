@@ -41,12 +41,15 @@ public class DemoBatalla {
 
     //leer un nombre
     //mostrar los datos de la nave con dicho nombre, mensaje de “no encontrado” en caso contrario
+    System.out.println("Ingrese el nombre de la nave: (Busqueda Lineal)");
+    String nombre = sc.next();
     int pos=busquedaLinealNombre(misNaves,nombre);
+
     ordenarPorPuntosBurbuja(misNaves);
     mostrarNaves(misNaves);
     ordenarPorNombreBurbuja(misNaves);
     mostrarNaves(misNaves);
-    
+
     //mostrar los datos de la nave con dicho nombre, mensaje de “no encontrado” en caso contrario
     pos=busquedaBinariaNombre(misNaves,nombre);
     ordenarPorPuntosSeleccion(misNaves);
@@ -132,6 +135,12 @@ public class DemoBatalla {
 
   //Método para buscar la primera nave con un nombre que se pidió por teclado
   public static int busquedaLinealNombre(Nave[] flota, String s){
+    for (int i = 0; i < flota.length; i++){
+      if (flota[i].getNombre().equals(s))
+        return i;
+    }
+    System.out.println("No se encontró");
+    return -1;
   }
   //Método que ordena por número de puntos de menor a mayor
   public static void ordenarPorPuntosBurbuja(Nave[] flota){
