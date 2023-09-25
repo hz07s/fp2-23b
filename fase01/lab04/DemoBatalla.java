@@ -139,7 +139,7 @@ public class DemoBatalla {
       if (flota[i].getNombre().equals(s))
         return i;
     }
-    System.out.println("No se encontró");
+    System.out.println("No se encontro");
     return -1;
   }
   //Método que ordena por número de puntos de menor a mayor
@@ -162,5 +162,10 @@ public class DemoBatalla {
   }
   //Método que muestra las naves ordenadas por nombre de Z a A
   public static void ordenarPorNombreInsercion(Nave[] flota){
+  }
+  public static Nave[] crearArreglo(Nave[] flota){
+    Nave[] flotaNueva = new Nave[flota.length];
+    System.arraycopy(flota, 0, flotaNueva, 0, flota.length);
+    return flotaNueva;
   }
 }
