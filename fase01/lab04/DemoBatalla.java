@@ -151,6 +151,10 @@ public class DemoBatalla {
   }
   //Método que ordena por nombre de A a Z
   public static void ordenarPorNombreBurbuja(Nave[] flota){
+    for (int i = 1; i < flota.length; i++)
+      for (int j = 0; j < flota.length - i; j++)
+        if ((int)flota[j].getNombre().charAt(0) > (int)flota[j+1].getNombre().charAt(0))
+          intercambiar(flota, j, j+1);
   }
   //Método para buscar la primera nave con un nombre que se pidió por teclado
   public static int busquedaBinariaNombre(Nave[] flota, String s){
