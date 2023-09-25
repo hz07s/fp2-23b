@@ -158,6 +158,19 @@ public class DemoBatalla {
   }
   //Método para buscar la primera nave con un nombre que se pidió por teclado
   public static int busquedaBinariaNombre(Nave[] flota, String s){
+    ordenarPorNombreBurbuja(flota);
+    int baja = 0; int media; int alta = flota.length;
+
+    while (baja <= alta){
+      media = (alta + baja) / 2;
+      if (flota[media].getNombre().equals(s))
+        return media;
+      else if (compararNombresMayor(s, flota[media].getNombre()))
+        alta = media - 1;
+        else
+          baja = media + 1;
+    }
+    return -1;
   }
   //Método que ordena por número de puntos de menor a mayor
   public static void ordenarPorPuntosSeleccion(Nave[] flota){
@@ -180,5 +193,12 @@ public class DemoBatalla {
     Nave temp = flota[i];
     flota[i] = flota[j];
     flota[j] = temp;
+  }
+  public static boolean compararNombresMayor(String s1, String s2){
+    int n = Math.min(s1.length(), s2.length());
+    for (int i = 0; i < n; i++)   
+      if ((int)s1.charAt(i) < (int)s2.charAt(i))
+        return true;
+    return false;
   }
 }
