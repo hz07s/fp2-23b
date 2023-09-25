@@ -144,6 +144,10 @@ public class DemoBatalla {
   }
   //Método que ordena por número de puntos de menor a mayor
   public static void ordenarPorPuntosBurbuja(Nave[] flota){
+    for (int i = 1; i < flota.length; i++)
+      for (int j = 0; j < flota.length - i; j++)
+        if (flota[j].getPuntos() > flota[j+1].getPuntos())
+          intercambiar(flota, j, j+1);
   }
   //Método que ordena por nombre de A a Z
   public static void ordenarPorNombreBurbuja(Nave[] flota){
