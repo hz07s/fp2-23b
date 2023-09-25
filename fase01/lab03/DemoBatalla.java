@@ -41,6 +41,7 @@ public class DemoBatalla {
 
   //Método para mostrar todas las naves
   public static void mostrarNaves(Nave [] flota){
+    System.out.println("Naves ingresadas: ");
     for (int i = 0; i < flota.length; i++){
       mostrarNave(flota[i]);
     }
@@ -49,6 +50,7 @@ public class DemoBatalla {
   //Método para mostrar todas las naves de un nombre que se pide por teclado
   public static void mostrarPorNombre(Nave [] flota){
     Scanner sc = new Scanner(System.in);
+    System.out.println("Ingrese un nombre: ");
     String name = sc.next();
 
     for (int i = 0; i < flota.length; i++){
@@ -61,6 +63,7 @@ public class DemoBatalla {
   //al número de puntos que se pide por teclado
   public static void mostrarPorPuntos(Nave [] flota){
     Scanner sc = new Scanner(System.in);
+    System.out.println("Ingrese una cantidad de puntos: ");
     int puntos = sc.nextInt();
 
     for (int i = 0; i < flota.length; i++){
@@ -86,5 +89,7 @@ public class DemoBatalla {
     return flota[positionNave];
   }
 
-  //Crear un método que devuelva un nuevo arreglo de objetos con todos los objetos previamente ingresados //pero aleatoriamente desordenados
+  //Crear un método que devuelva un nuevo arreglo de objetos con todos los objetos previamente ingresados 
+  //pero aleatoriamente desordenados
+  
 }
