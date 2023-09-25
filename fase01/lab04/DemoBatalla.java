@@ -6,8 +6,9 @@
 import java.util.*;
 public class DemoBatalla {
   public static void main(String [] args){
-    Nave [] misNaves = new Nave[10];
+    Nave [] misNaves = new Nave[8];
     Scanner sc = new Scanner(System.in);
+    
     String nomb, col;
     int fil, punt;
     boolean est;
@@ -25,7 +26,7 @@ public class DemoBatalla {
       System.out.print("Puntos: ");
       punt = sc.nextInt();
 
-      misNaves[i] = new Nave();
+      misNaves[i] = new Nave(); //Se crea un objeto Nave y se asigna su referencia a misNaves
       misNaves[i].setNombre(nomb);
       misNaves[i].setFila(fil);
       misNaves[i].setColumna(col);
@@ -37,8 +38,26 @@ public class DemoBatalla {
     mostrarPorNombre(misNaves);
     mostrarPorPuntos(misNaves);
     System.out.println("\nNave con mayor número de puntos: " + mostrarMayorPuntos(misNaves));
-  }
 
+    //leer un nombre
+    //mostrar los datos de la nave con dicho nombre, mensaje de “no encontrado” en caso contrario
+    int pos=busquedaLinealNombre(misNaves,nombre);
+    ordenarPorPuntosBurbuja(misNaves);
+    mostrarNaves(misNaves);
+    ordenarPorNombreBurbuja(misNaves);
+    mostrarNaves(misNaves);
+    
+    //mostrar los datos de la nave con dicho nombre, mensaje de “no encontrado” en caso contrario
+    pos=busquedaBinariaNombre(misNaves,nombre);
+    ordenarPorPuntosSeleccion(misNaves);
+    mostrarNaves(misNaves);
+    ordenarPorPuntosInsercion(misNaves);
+    mostrarNaves(misNaves);
+    ordenarPorNombreSeleccion(misNaves);
+    mostrarNaves(misNaves);
+    ordenarPorNombreInsercion(misNaves);
+    mostrarNaves(misNaves);
+  }
   //Método para mostrar todas las naves
   public static void mostrarNaves(Nave [] flota){
     System.out.println("Naves ingresadas: ");
