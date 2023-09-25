@@ -10,8 +10,8 @@ public class Ejercicio02 {
    */
 
    public static void main(String[] args) {
-    String[] army1 = createArmy();
-    String[] army2 = createArmy();
+    Soldier[] army1 = createArmy();
+    Soldier[] army2 = createArmy();
     
     System.out.println("Ejercito Nro 1");
     showArmy(army1);
@@ -21,24 +21,24 @@ public class Ejercicio02 {
     armyWinner(army1, army2);
   }
 
-  public static String[] createArmy() {
+  public static Soldier[] createArmy() {
     int n = (int) (Math.random() * 5) + 1;
     
-    String [] army = new String[n];
+    Soldier [] army = new Soldier[n];
     for (int i = 0; i < n; i++) {
-      army[i] = "Soldado" + i; 
+      army[i].setNombre("Soldado" + i); 
     }
 
     return army;
   }
 
-  public static void showArmy(String[] army) {
+  public static void showArmy(Soldier[] army) {
     for (int i = 0; i < army.length; i++) {
-      System.out.println(army[i]);
+      System.out.println(army[i].getNombre());
     }
   }
 
-  public static void armyWinner(String[] army1, String[] army2) {
+  public static void armyWinner(Soldier[] army1, Soldier[] army2) {
     if (army1.length > army2.length) {
       System.out.println("El ganador es el Ejercito Nro 1");
     } else if (army2.length > army1.length) {
