@@ -17,6 +17,7 @@ public class StudentRegistration {
             listado[j] = new Student(dataS);
             j++;
         }
+        bubbleSortIterative(listado, 1);
         for (int i = 0; i < listado.length; i++){
             System.out.println(listado[i]);
         }
@@ -24,15 +25,46 @@ public class StudentRegistration {
 
     //Bubble
 
-    public static void bubbleSortIterative(int[] arr){
+    public static void bubbleSortIterative(Student[] arr, int orden){
         for (int i = 1; i < arr.length; i++)
             for (int j = 0; j < arr.length-1; j++)
-                if (arr[j] > arr[j+1]){
-                    int temp;
+                if (comparacion(arr, j, (j+1), orden) > 0){
+                    Student temp;
                     temp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
                 }
+    }
+
+    public static int comparacion(Student[] arr, int i, int j, int orden){
+        int result = 0;
+        switch (orden){
+            case 0:
+                result = arr[i].getCUI().compareTo(arr[j].getCUI());
+                break;
+            case 1:
+                result = arr[i].getName().compareTo(arr[j].getName());
+                break;
+            case 2:
+                result = arr[i].getBirth().compareTo(arr[j].getBirth());
+                break;
+            case 3:
+                result = arr[i].getAddress().compareTo(arr[j].getAddress());
+                break;
+            case 4:
+                result = arr[i].getLocality().compareTo(arr[j].getLocality());
+                break;
+            case 5:
+                result = arr[i].getTelephone().compareTo(arr[j].getTelephone());
+                break;
+            case 6:
+                result = arr[i].getEmail().compareTo(arr[j].getEmail());
+                break;
+            case 7:
+                result = arr[i].getSemester().compareTo(arr[j].getSemester());
+                break; 
+        }
+        return result;
     }
 
     public static void bubbleSortRecursive(int arr[], int n){
@@ -148,14 +180,4 @@ public class StudentRegistration {
 
 
 
-
-    /*
-    public static boolean compararNombresMayor(String s1, String s2){
-      int n = Math.min(s1.length(), s2.length());
-      for (int i = 0; i < n; i++)   
-        if ((int)s1.charAt(i) < (int)s2.charAt(i))
-          return true;
-      return false;
-    }
-     */
 }

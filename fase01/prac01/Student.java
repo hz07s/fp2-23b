@@ -1,19 +1,19 @@
 public class Student{
-    private String name, birth, address, locality, telephone, email;
-    private int cui, semester;
+    private String cui, name, birth, address, locality, telephone, email;
+    private String semester;
 
     public Student(String[] data){
-        setCUI(Integer.parseInt(data[0]));
+        setCUI(data[0]);
         setName(data[1]);
         setBirth(data[2]);
         setAddress(data[3]);
         setLocality(data[4]);
         setTelephone(data[5]);
         setEmail(data[6]);
-        setSemester(Integer.parseInt(data[7]));
+        setSemester(data[7]);
     }
     
-    public void setCUI(int i){
+    public void setCUI(String i){
         cui = i;
     }
     public void setName(String n){
@@ -34,12 +34,12 @@ public class Student{
     public void setEmail(String e){
         email = e;
     }
-    public void setSemester(int s){
+    public void setSemester(String s){
         semester = s;
     }
 
 
-    public int getCUI(){
+    public String getCUI(){
         return cui;
     }
     public String getName(){
@@ -60,7 +60,7 @@ public class Student{
     public String getEmail(){
         return email;
     }
-    public int getSemester(){
+    public String getSemester(){
         return semester;
     }
     
