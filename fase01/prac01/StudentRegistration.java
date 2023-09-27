@@ -21,4 +21,141 @@ public class StudentRegistration {
             System.out.println(listado[i]);
         }
     }
+
+    //Bubble
+
+    public static void bubbleSortIterative(int[] arr){
+        for (int i = 1; i < arr.length; i++)
+            for (int j = 0; j < arr.length-1; j++)
+                if (arr[j] > arr[j+1]){
+                    int temp;
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+    }
+
+    public static void bubbleSortRecursive(int arr[], int n){
+        if (n == 1)
+            return;
+  
+         int count = 0;
+        for (int i=0; i<n-1; i++)
+            if (arr[i] > arr[i+1])
+            {
+                int temp = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = temp;
+                  count = count+1;
+            }
+         if (count == 0)
+            return;
+        bubbleSortRecursive(arr, n-1);
+    }
+
+    //Selection
+    public static void selectionSort(int arr[]){
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr[j]) {
+                    // ...intercambiarlos, es decir, mover el actual a la derecha y el de la derecha al actual
+                    int temporal = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temporal;
+                }
+            }
+        }
+    }
+
+
+    //Insertion
+    public static void insertionNumeros(int numeros[]){
+        int key, j;
+        for (int i = 1; i < numeros.length; i++) {
+            key = numeros[i];
+            j = i - 1;
+            while (j >= 0 && numeros[j] > key) {
+                numeros[j + 1] = numeros[j];
+                j = j - 1;
+            }
+            numeros[j + 1] = key;
+        }
+    }
+    public static void insertionAlfabetico(String palabras[]){
+        for (int i = 1; i < palabras.length; i++) {
+            String key = palabras[i];
+            int j = i - 1;
+            while (j >= 0 && palabras[j].compareTo(key) > 0) {
+                palabras[j + 1] = palabras[j];
+                j = j - 1;
+            }
+            palabras[j + 1] = key;
+        }
+    }
+
+    //Merge
+    public static void merge(int[] arr, int l, int m, int r) {
+        int n1 = m - l + 1;
+        int n2 = r - m;
+
+        int L[] = new int[n1];
+        int R[] = new int[n2];
+
+        for (int i = 0; i < n1; ++i)
+            L[i] = arr[l + i];
+        for (int j = 0; j < n2; ++j)
+            R[j] = arr[m + 1 + j];
+
+        int i = 0, j = 0;
+
+        int k = l;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
+                i++;
+            }
+            else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    
+    }
+    public static void sort(int arr[], int l, int r ) {
+        if (l < r){
+            int m = l + (r - l) / 2;
+            sort(arr, l, m);
+            sort(arr, m + 1, r);
+            
+            merge(arr, l, m, r);
+        }
+    }
+    
+
+
+
+
+
+
+    /*
+    public static boolean compararNombresMayor(String s1, String s2){
+      int n = Math.min(s1.length(), s2.length());
+      for (int i = 0; i < n; i++)   
+        if ((int)s1.charAt(i) < (int)s2.charAt(i))
+          return true;
+      return false;
+    }
+     */
 }
