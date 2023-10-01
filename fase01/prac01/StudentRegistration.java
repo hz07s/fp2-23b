@@ -1,11 +1,17 @@
 import java.io.*;
 
-import org.jfree.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
 
 public class StudentRegistration {
     static long initialTime, currentTime, timeElapsed;
+    static long[] timeDataNano;
+    static double[] timeData;
     public static void main(String[] args) throws IOException{
         int numLine = 0;
         String file = "DatosEstudiantes.csv";
@@ -14,6 +20,9 @@ public class StudentRegistration {
         while (Lines.readLine() != null) {
             numLine++;
         }
+        timeDataNano = new long[numLine];
+        timeData = new double[numLine];
+
         Student[] listado = new Student[numLine];
         BufferedReader data = new BufferedReader(new FileReader(file));
         int j = 0;
@@ -26,6 +35,12 @@ public class StudentRegistration {
         for (int i = 0; i < listado.length; i++){
             System.out.println(listado[i]);
         }
+        
+        for (int i = 0; i < timeDataNano.length; i++){
+          timeData[i] = timeDataNano[i];
+          System.out.println(i + ".-    " + timeData[i]);
+        }
+        graphic(timeData);
     }
 
     //Bubble
@@ -42,10 +57,8 @@ public class StudentRegistration {
                 }
             }
             currentTime = System.nanoTime();
-            timeElapsed = currentTime - initialTime;
-            System.out.println(i + ".    " + timeElapsed);
+            timeDataNano[i] = currentTime - initialTime;
         }
-
     }
 
     public static int comparacion(Student[] arr, int i, int j, int orden){
@@ -78,7 +91,38 @@ public class StudentRegistration {
         }
         return result;
     }
+    
+    public static void graphic(double[] args) {
+        // Crear un conjunto de datos (Dataset) a partir de un arreglo de valores doubles
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
+        for (int i = 0; i < args.length; i++) {
+            dataset.addValue(args[i], "Serie 1", " "+i);
+        }
+
+        // Crear un gráfico de líneas
+        JFreeChart chart = ChartFactory.createLineChart(
+        "Gráfico de Líneas Ejemplo",
+        "Eje X",
+        "Eje Y",
+        dataset, // Tu conjunto de datos
+        PlotOrientation.VERTICAL,
+        true, // Mostrar leyenda
+        true,
+        false
+        );
+
+        // Crear un panel de gráfico y agregarlo a una ventana
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        JFrame frame = new JFrame("Gráfico de Líneas");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(chartPanel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+/*
     public static void bubbleSortRecursive(int arr[], int n){
         if (n == 1)
             return;
@@ -191,5 +235,5 @@ public class StudentRegistration {
 
 
 
-
+*/
 }
