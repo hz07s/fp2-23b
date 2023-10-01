@@ -1,5 +1,9 @@
 import java.io.*;
 
+import org.jfree.*;
+
+import javax.swing.*;
+
 public class StudentRegistration {
     public static void main(String[] args) throws IOException{
         int numLine = 0;
