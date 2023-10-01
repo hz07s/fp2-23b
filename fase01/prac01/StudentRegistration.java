@@ -5,6 +5,7 @@ import org.jfree.*;
 import javax.swing.*;
 
 public class StudentRegistration {
+    static long initialTime, currentTime, timeElapsed;
     public static void main(String[] args) throws IOException{
         int numLine = 0;
         String file = "DatosEstudiantes.csv";
@@ -30,14 +31,21 @@ public class StudentRegistration {
     //Bubble
 
     public static void bubbleSortIterative(Student[] arr, int orden){
-        for (int i = 1; i < arr.length; i++)
-            for (int j = 0; j < arr.length-1; j++)
+        initialTime = System.nanoTime();
+        for (int i = 1; i < arr.length; i++){
+            for (int j = 0; j < arr.length-1; j++){
                 if (comparacion(arr, j, (j+1), orden) > 0){
                     Student temp;
                     temp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
                 }
+            }
+            currentTime = System.nanoTime();
+            timeElapsed = currentTime - initialTime;
+            System.out.println(i + ".    " + timeElapsed);
+        }
+
     }
 
     public static int comparacion(Student[] arr, int i, int j, int orden){
