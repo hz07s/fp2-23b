@@ -1,76 +1,79 @@
 public class Student{
-    private String cui, name, birth, address, locality, telephone, email;
-    private String semester;
+    private String email, name, lastNameF, lastNameM, gender;
+    private boolean status;
+    private int cui, dateBirth;
 
     public Student(String[] data){
         setCUI(data[0]);
-        setName(data[1]);
-        setBirth(data[2]);
-        setAddress(data[3]);
-        setLocality(data[4]);
-        setTelephone(data[5]);
-        setEmail(data[6]);
-        setSemester(data[7]);
+        setEmail(data[1]);
+        setName(data[2]);
+        setLastNameF(data[3]);
+        setLastNameM(data[4]);
+        setDateBirth(data[5]);
+        setGender(data[6]);
+        setStatus(data[7]); 
     }
     
-    public void setCUI(String i){
-        cui = i;
-    }
-    public void setName(String n){
-        name = n;
-    }
-    public void setBirth(String dob){
-        birth = dob;
-    }
-    public void setAddress(String add){
-        address = add;
-    }
-    public void setLocality(String loc){
-        locality = loc;
-    }
-    public void setTelephone(String t){
-        telephone = t;
+    public void setCUI(String c){
+        cui = Integer.parseInt(c.substring(c.length()-8));        
     }
     public void setEmail(String e){
         email = e;
     }
-    public void setSemester(String s){
-        semester = s;
+    public void setName(String n){
+        name = n;
     }
+    public void setLastNameF(String nf){
+        lastNameF = nf;
+    }
+    public void setLastNameM(String nm){
+        lastNameM = nm;
+    }
+    public void setDateBirth(String db){
+        String cadena = db.substring(0, 4) + db.substring(5, 7) + db.substring(8);
+        int date = Integer.parseInt(cadena);
+        dateBirth = date;
+    }
+    public void setGender(String gn){
+        gender = gn;
+    }
+    public void setStatus(String st){
+        if(st.equals("activo")){
+            status = true;
+        } else {
+            status = false;
+        }
+    }
+    
 
-
-    public String getCUI(){
+    public int getCUI(){
         return cui;
-    }
-    public String getName(){
-        return name;
-    }
-    public String getBirth(){
-        return birth;
-    }
-    public String getAddress(){
-        return address;
-    }
-    public String getLocality(){
-        return locality;
-    }
-    public String getTelephone(){
-        return telephone;
     }
     public String getEmail(){
         return email;
     }
-    public String getSemester(){
-        return semester;
+    public String getName(){
+        return name;
+    }
+    public String getLastNameF(){
+        return lastNameF;
+    }
+    public String getLastNameM(){
+        return lastNameM;
+    }
+    public String getDateBirth(){
+        return (dateBirth/10000) + "/" + ((dateBirth/100)%100) + "/" + (dateBirth%100);
+    }
+    public String getGender(){
+        return gender;
+    }
+    public boolean getStatus(){
+        return status;
     }
     
-
+    
+    
     public String toString(){
-        if (name.length() < 24){
-            return name + "\t\t\t" + telephone;
-        } else if (name.length() < 33){
-            return name + "\t\t" + telephone;
-        }
-        return name + "\t" + telephone;
+        return cui + "\t" + email + "\t" + name + "\t" + lastNameF + "\t" + lastNameM + "\t" + dateBirth + "\t" + status;
     }
 }
