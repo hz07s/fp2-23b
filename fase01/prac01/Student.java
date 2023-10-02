@@ -11,7 +11,7 @@ public class Student{
         setLastNameM(data[4]);
         setDateBirth(data[5]);
         setGender(data[6]);
-        setStatus(data[7]); 
+        setStatus(data[7]);
     }
     
     public void setCUI(String c){

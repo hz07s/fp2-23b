@@ -33,7 +33,8 @@ public class StudentRegistration {
             listado[j] = new Student(dataS);
             j++;
         }
-        bubbleSortIterative(listado, 1);
+        insertionSort(listado, 2);
+        //bubbleSortIterative(listado, 2);
         for (int i = 0; i < listado.length; i++){
             System.out.println(listado[i]);
         }
@@ -53,7 +54,7 @@ public class StudentRegistration {
         initialTime = System.nanoTime();
         for (int i = 1; i < arr.length; i++){
             for (int j = 0; j < arr.length-1; j++){
-                if (comparacion(arr, j, (j+1), orden) > 0){
+                if (comparacion(arr[j], arr[j+1], orden) > 0){
                     Student temp;
                     temp = arr[j];
                     arr[j] = arr[j+1];
@@ -86,32 +87,32 @@ public class StudentRegistration {
     }
 
 
-    public static int comparacion(Student[] arr, int i, int j, int orden){
+    public static int comparacion(Student st1, Student st2, int orden){
         int result = 0;
         switch (orden){
             case 0:
-                if(arr[i].getCUI() > arr[j].getCUI()) result = 1;
+                if(st1.getCUI() > st2.getCUI()) result = 1;
                 break;
             case 1:
-                result = arr[i].getEmail().compareTo(arr[j].getEmail());
+                result = st1.getEmail().compareTo(st2.getEmail());
                 break;
             case 2:
-                result = arr[i].getName().compareTo(arr[j].getName());
+                result = st1.getName().compareTo(st2.getName());
                 break;
             case 3:
-                result = arr[i].getLastNameF().compareTo(arr[j].getLastNameF());
+                result = st1.getLastNameF().compareTo(st2.getLastNameF());
                 break;
             case 4:
-                result = arr[i].getLastNameM().compareTo(arr[j].getLastNameM());
+                result = st1.getLastNameM().compareTo(st2.getLastNameM());
                 break;
             case 5:
-                result = arr[i].getDateBirth().compareTo(arr[j].getDateBirth());
+                result = st1.getDateBirth().compareTo(st2.getDateBirth());
                 break;
             case 6:
-                result = arr[i].getGender().compareTo(arr[j].getGender());
+                result = st1.getGender().compareTo(st2.getGender());
                 break;
             case 7:
-                result = (arr[i].getStatus()?"a":"z").compareTo(arr[j].getStatus()?"a":"z"); //cambiar
+                result = (st1.getStatus()?"a":"z").compareTo(st2.getStatus()?"a":"z"); //cambiar
                 break; 
         }
         return result;
@@ -170,39 +171,26 @@ public class StudentRegistration {
             }
         }
     }
-
+*/
 
     //Insertion
-    public static void numericalInsertionSort(Student arr[], int orden){
+    public static void insertionSort(Student arr[], int orden){
         initialTime = System.nanoTime();
-        int key, j;
+        int j;
+        Student key;
         for (int i = 1; i < arr.length; i++) {
             key = arr[i];
-            j = i - 1;
-            while (j >= 0 && arr[j] > key) {
+            j = i - 1; 
+            while (j >= 0 && comparacion(arr[j], key, orden) > 0) {
                 arr[j + 1] = arr[j];
-                j = j - 1;
-            }
-            numeros[j + 1] = key;
-        }
-        currentTime = System.nanoTime();
-        timeDataNano[i] = currentTime - initialTime;
-    }
-    public static void alphabeticalInsertionSort(Student arr[], int orden){
-        initialTime = System.nanoTime();
-        for (int i = 1; i < arr.length; ++i) {
-            String key = arr[i];
-            int j = i - 1;
-            while (j >= 0 && arr[j].compareTo(key) > 0) {
-                arr[j + 1] = arr[j];
-                j = j - 1;
+                j--;
             }
             arr[j + 1] = key;
+            currentTime = System.nanoTime();
+            timeDataNano[i] = currentTime - initialTime;
         }
-        currentTime = System.nanoTime();
-        timeDataNano[i] = currentTime - initialTime;
     }
-    
+/*
     //Merge
     public static void merge(int[] arr, int l, int m, int r) {
         int n1 = m - l + 1;
