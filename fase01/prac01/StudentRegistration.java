@@ -33,7 +33,8 @@ public class StudentRegistration {
             listado[j] = new Student(dataS);
             j++;
         }
-        insertionSort(listado, 2);
+        selectionSort(listado, 2);
+        //insertionSort(listado, 2);
         //bubbleSortIterative(listado, 2);
         for (int i = 0; i < listado.length; i++){
             System.out.println(listado[i]);
@@ -157,21 +158,22 @@ public class StudentRegistration {
         frame.pack();
         frame.setVisible(true);
     }
-/*
+
     //Selection
-    public static void selectionSort(int arr[]){
+    public static void selectionSort(Student[] arr, int orden){
+        initialTime = System.nanoTime();
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i] > arr[j]) {
-                    // ...intercambiarlos, es decir, mover el actual a la derecha y el de la derecha al actual
-                    int temporal = arr[i];
+                if (comparacion(arr[i], arr[j], orden) > 0) {
+                    Student temporal = arr[i];
                     arr[i] = arr[j];
                     arr[j] = temporal;
                 }
             }
+            currentTime = System.nanoTime();
+            timeDataNano[i] = currentTime - initialTime;
         }
     }
-*/
 
     //Insertion
     public static void insertionSort(Student arr[], int orden){
@@ -191,6 +193,50 @@ public class StudentRegistration {
         }
     }
 /*
+    public static void insertionSortRecursive(int[] arr, int n) {
+        // Base case: If n is 1 or less, the array is already sorted.
+        if (n <= 1)
+            return;
+
+        // Sort first n-1 elements
+        insertionSortRecursive(arr, n - 1);
+
+        // Insert the nth element at the correct position in the sorted part
+        int lastElement = arr[n - 1];
+        int j = n - 2;
+
+        while (j >= 0 && arr[j] > lastElement) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+
+        arr[j + 1] = lastElement;
+    }
+
+static void insertionSortRecursive(int arr[], int n)
+    {
+        // Base case
+        if (n <= 1)
+            return;
+       
+        // Sort first n-1 elements
+        insertionSortRecursive( arr, n-1 );
+       
+        // Insert last element at its correct position
+        // in sorted array.
+        int last = arr[n-1];
+        int j = n-2;
+       
+        Move elements of arr[0..i-1], that are
+          greater than key, to one position ahead
+          of their current position
+        while (j >= 0 && arr[j] > last)
+        {
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = last;
+    }
     //Merge
     public static void merge(int[] arr, int l, int m, int r) {
         int n1 = m - l + 1;
@@ -244,6 +290,6 @@ public class StudentRegistration {
 
 
 
-
 */
+
 }
