@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -10,7 +11,6 @@ import javax.swing.*;
 
 public class StudentRegistration {
     static long initialTime, currentTime, timeElapsed;
-    static long[] timeDataNano;
     static double[] timeData;
 
     static double[][] timesSaved;
@@ -22,8 +22,7 @@ public class StudentRegistration {
         while (Lines.readLine() != null) {
             numLine++;
         }
-        timeDataNano = new long[numLine];
-        timeData = new double[numLine];
+        timesSaved = new double[3][numLine];
         //timesSaved = new double[][]; // colocar tamaño
         Student[] listado = new Student[numLine];
         BufferedReader data = new BufferedReader(new FileReader(file));
@@ -33,29 +32,24 @@ public class StudentRegistration {
             listado[j] = new Student(dataS);
             j++;
         }
-        selectionSort(listado, 2);
-        //insertionSort(listado, 2);
-        //bubbleSortIterative(listado, 2);
-        for (int i = 0; i < listado.length; i++){
-            System.out.println(listado[i]);
-        }
+        selectionSort(listado, 0);
+        bubbleSortIterative(listado, 0);
+        insertionSort(listado, 0);
         
-        for (int i = 0; i < timeDataNano.length; i++){
-          timeData[i] = timeDataNano[i];
-          System.out.println(i + ".-    " + timeData[i]);
-        }
-        graphic(timeData);
+        
+        
+        graphic(timesSaved);
     }
-
-
 
     //Bubble.
 
-    public static void bubbleSortIterative(Student[] arr, int orden){
+    public static void bubbleSortIterative(Student[] listado, int orden){
+        Student[] arr = new Student[listado.length];
+        System.arraycopy(listado, 0, arr, 0, listado.length);
         initialTime = System.nanoTime();
         for (int i = 1; i < arr.length; i++){
             for (int j = 0; j < arr.length-1; j++){
-                if (comparacion(arr[j], arr[j+1], orden) > 0){
+                if (arr[j].getCUI() > arr[j+1].getCUI()){
                     Student temp;
                     temp = arr[j];
                     arr[j] = arr[j+1];
@@ -63,8 +57,11 @@ public class StudentRegistration {
                 }
             }
             currentTime = System.nanoTime();
-            timeDataNano[i] = currentTime - initialTime;
+            timesSaved[0][i] = currentTime - initialTime;
         }
+        /*for (int i = 0; i < arr.length; i++){
+            System.out.println(arr[i]);
+        }*/
     }
 
     public static void bubbleSortRecursive(int arr[], int n){
@@ -119,22 +116,21 @@ public class StudentRegistration {
         return result;
     }
     
-    public static void graphic(double[] times) {
+    public static void graphic(double[][] times) {
         // Crear un conjunto de datos (Dataset) a partir de un arreglo de valores doubles
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
-        for (int i = 0; i < times.length; i++) {
+        /*for (int i = 0; i < times.length; i++) {
             dataset.addValue(times[i], "Serie 1", " "+ i );
-        }
+        }*/
 
-        /*
+        String[] series = {"Bubble", "Selection", "Insertion"};
         for (int i = 0; i < times.length; i++){
-            for (int k = 0; k < times[].length; k++){
-                dataset.addValue(times[i][j], "Name..." + i, " " + j);
+            for (int j = 0; j < times[i].length; j++){
+                dataset.addValue(times[i][j], series[i], " " + j);
             }
         }
-      
-         */
+         
 
         // Crear un gráfico de líneas
         JFreeChart chart = ChartFactory.createLineChart(
@@ -160,39 +156,71 @@ public class StudentRegistration {
     }
 
     //Selection
-    public static void selectionSort(Student[] arr, int orden){
+    public static void selectionSort(Student[] listado, int orden){
+        Student[] arr = new Student[listado.length];
+        System.arraycopy(listado, 0, arr, 0, listado.length);
+        initialTime = System.nanoTime();
+        int n = arr.length;
+        for (int i = 0; i < n-1; i++){
+            int min_idx = i;
+            for (int j = i+1; j < n; j++)
+                if (arr[min_idx].getCUI() > arr[j].getCUI())
+                    min_idx = j;
+            Student temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+            currentTime = System.nanoTime();
+            timesSaved[1][i] = currentTime - initialTime;
+        }
+        /*for (int i = 0; i < arr.length; i++){
+            System.out.println(arr[i]);
+        }*/
+    }
+
+    /*public static void selectionSort(Student[] listado, int orden){
+        Student[] arr = new Student[listado.length];
+        System.arraycopy(listado, 0, arr, 0, listado.length);
         initialTime = System.nanoTime();
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = i + 1; j < arr.length; j++) {
-                if (comparacion(arr[i], arr[j], orden) > 0) {
+                if (arr[i].getCUI() > arr[j].getCUI()) {
                     Student temporal = arr[i];
                     arr[i] = arr[j];
                     arr[j] = temporal;
                 }
             }
             currentTime = System.nanoTime();
-            timeDataNano[i] = currentTime - initialTime;
+            timesSaved[1][i] = currentTime - initialTime;
         }
-    }
+        for (int i = 0; i < arr.length; i++){
+            System.out.println(arr[i]);
+        }
+    }*/
 
     //Insertion
-    public static void insertionSort(Student arr[], int orden){
+    public static void insertionSort(Student[] listado, int orden){
+        Student[] arr = new Student[listado.length];
+        System.arraycopy(listado, 0, arr, 0, listado.length);
         initialTime = System.nanoTime();
         int j;
         Student key;
         for (int i = 1; i < arr.length; i++) {
             key = arr[i];
             j = i - 1; 
-            while (j >= 0 && comparacion(arr[j], key, orden) > 0) {
+            while (j >= 0 && arr[j].getCUI() > key.getCUI()) {
                 arr[j + 1] = arr[j];
                 j--;
             }
             arr[j + 1] = key;
             currentTime = System.nanoTime();
-            timeDataNano[i] = currentTime - initialTime;
+            timesSaved[2][i] = currentTime - initialTime;
         }
+        //for (int i = 0; i < arr.length; i++){
+           // System.out.println(arr[i]);
+        //}
     }
 /*
+    //InsertionRecursive
     public static void insertionSortRecursive(int[] arr, int n) {
         // Base case: If n is 1 or less, the array is already sorted.
         if (n <= 1)
@@ -237,8 +265,12 @@ static void insertionSortRecursive(int arr[], int n)
         }
         arr[j+1] = last;
     }
+
+
     //Merge
-    public static void merge(int[] arr, int l, int m, int r) {
+    public static void merge(int[] listado, int l, int m, int r) {
+        Student[] arr = new Student[listado.length];
+        System.arraycopy(listado, 0, arr, 0, listado.length);
         int n1 = m - l + 1;
         int n2 = r - m;
 
@@ -286,10 +318,5 @@ static void insertionSortRecursive(int arr[], int n)
             merge(arr, l, m, r);
         }
     }
-    
-
-
-
 */
-
 }
