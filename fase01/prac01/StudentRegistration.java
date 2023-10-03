@@ -10,15 +10,100 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class StudentRegistration {
     static long initialTime, currentTime, timeElapsed;
     static double[] timeData;
 
+    final static String[] date = {"CUI", "Email", "Nombre", "Apellido Materno", "Apellido Paterno", "Cumpleaños", "Género", "Estado"};
+    static int orden = -1;
+    final static String[] algorithm = {"BubbleSort", "InsertionSort", "MergeSort", "SelectionSort","BubbleSort (recursive)", "InsertionSort (recursive)", "MergeSort (recursive)", "SelectionSort (recursive)"};
+    static boolean[] algorithms = new boolean[8];
+
     static double[][] timesSaved;
     public static void main(String[] args) throws IOException{
+
+        JFrame ventana = new JFrame("Selección");
+        ventana.setSize(600, 250);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panelPrincipal = new JPanel(new BorderLayout());
+        JPanel panelSuperior = new JPanel(new GridBagLayout());
+        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        JLabel etiquetaDate = new JLabel("Seleccione una opción:");
+        JComboBox<String> comboBoxDate = new JComboBox<>(date);
+        JLabel etiquetaAlgorithm = new JLabel("Seleccione algoritmos:");
+
+        JCheckBox[] checkBoxes = new JCheckBox[algorithm.length];
+        for (int i = 0; i < algorithm.length; i++) {
+            checkBoxes[i] = new JCheckBox(algorithm[i]);
+            checkBoxes[i].setSelected(false);
+            checkBoxes[i].addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    JCheckBox checkBox = (JCheckBox) e.getSource();
+                    int index = Integer.parseInt(checkBox.getActionCommand());
+                    algorithms[index] = checkBox.isSelected();
+                }
+            });
+            checkBoxes[i].setActionCommand(Integer.toString(i));
+        }
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        panelSuperior.add(etiquetaDate, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panelSuperior.add(comboBoxDate, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panelSuperior.add(etiquetaAlgorithm, gbc);
+
+        JPanel panelCheckBoxes = new JPanel(new GridLayout(0, 2)); 
+        for (int i = 0; i < algorithm.length; i++) {
+            panelCheckBoxes.add(checkBoxes[i]);
+        }
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        panelSuperior.add(panelCheckBoxes, gbc);
+
+        JButton boton = new JButton("Aceptar");
+        boton.setPreferredSize(new Dimension(80, 30));
+
+        boton.addActionListener((ActionEvent x) -> {
+            int opcionSeleccionadaDate = comboBoxDate.getSelectedIndex();
+
+            for (boolean b : algorithms) {
+                System.out.println(b);
+            }
+
+            if (opcionSeleccionadaDate != -1) {
+                orden = opcionSeleccionadaDate;
+                System.out.println("orden: " + orden);
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una opción.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            ventana.dispose();
+        });
+
+      panelBoton.add(boton);
+      panelPrincipal.add(panelSuperior, BorderLayout.CENTER);
+      panelPrincipal.add(panelBoton, BorderLayout.SOUTH);
+
+      ventana.add(panelPrincipal);
+      ventana.setLocationRelativeTo(null);
+      ventana.setVisible(true); 
+
         int numLine = 0;
         String file = "pruebaCUI.csv";
         String line;
@@ -85,9 +170,6 @@ public class StudentRegistration {
                 }
             }
         }
-        /*for (int i = 0; i < arr.length; i++){
-            System.out.println(arr[i]);
-        }*/
     }
 
     public static void bubbleSortRecursive(int arr[], int n){
@@ -295,50 +377,23 @@ public class StudentRegistration {
         //}
     }
 /*
-    //InsertionRecursive
-    public static void insertionSortRecursive(int[] arr, int n) {
-        // Base case: If n is 1 or less, the array is already sorted.
+    //RecursiveInsertion
+    public static void recursiveInsertionSort(int[] listado, int n, int orden) {
+        int[] arr = new int[listado.length];
+        System.arraycopy(listado, 0, arr, 0, listado.length);
         if (n <= 1)
             return;
-
-        // Sort first n-1 elements
-        insertionSortRecursive(arr, n - 1);
-
-        // Insert the nth element at the correct position in the sorted part
-        int lastElement = arr[n - 1];
+        recursiveInsertionSort(listado, n - 1);
+    
+        Student key = listado[n - 1];
         int j = n - 2;
-
-        while (j >= 0 && arr[j] > lastElement) {
-            arr[j + 1] = arr[j];
+    
+        while (j >= 0 && listado[j].getCUI() > key.getCUI()) {
+            listado[j + 1] = listado[j];
             j--;
         }
+        listado[j + 1] = key;
 
-        arr[j + 1] = lastElement;
-    }
-
-static void insertionSortRecursive(int arr[], int n)
-    {
-        // Base case
-        if (n <= 1)
-            return;
-       
-        // Sort first n-1 elements
-        insertionSortRecursive( arr, n-1 );
-       
-        // Insert last element at its correct position
-        // in sorted array.
-        int last = arr[n-1];
-        int j = n-2;
-       
-        Move elements of arr[0..i-1], that are
-          greater than key, to one position ahead
-          of their current position
-        while (j >= 0 && arr[j] > last)
-        {
-            arr[j+1] = arr[j];
-            j--;
-        }
-        arr[j+1] = last;
     }
 */
 
