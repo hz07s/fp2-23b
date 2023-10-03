@@ -15,19 +15,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StudentRegistration {
-    static long initialTime, currentTime, timeElapsed;
-    static double[] timeData;
+  static long initialTime, currentTime, timeElapsed;
+  static double timesSearchBinary, timesSearchBinaryRc;
+  static double[] timeData;
+  static double[][] timesSaved;
+  static Student[] listado = new Student[0];
 
     final static String[] date = {"CUI", "Email", "Nombre", "Apellido Materno", "Apellido Paterno", "Cumpleaños", "Género", "Estado"};
     static int orden = -1;
     final static String[] algorithm = {"BubbleSort", "SelectionSort", "InsertionSort", "MergeSort", "BubbleSort (recursive)", "SelectionSort (recursive)", "InsertionSort (recursive)"};
     static boolean[] algorithms = new boolean[8];
 
-    static double[][] timesSaved;
     public static void main(String[] args) throws IOException{
 
         interfaz1();
-        ///////////////////////////////////////////////////////////////////////////////////////////////
+
     
         int numLine = 0;
         String file = "pruebaCUI.csv";
@@ -352,18 +354,61 @@ public class StudentRegistration {
 
     // Busqueda binaria recursiva
 
-    public static int binarySearchRecursive(Student arr, String x, int orden, int r){
-        
-        if (r >= 1){
+    public static int binarySearchRecursive(Student arr[], int l, int r, String x){
+        if (r >= l) {
             int mid = l + (r - l) / 2;
-            if (arr[mid] == x)
-            return mid;
 
+            if (comparisonSearch(arr[mid], x) == 0)
+                return mid;
+
+            if (comparisonSearch(arr[mid], x) > 0)
+                return binarySearchRecursive(arr, l, mid - 1, x);
+
+            return binarySearchRecursive(arr, mid + 1, r, x);
         }
 
         return -1;
-
     }
+    public static int comparisonSearch(Student st, String data){
+        int result = 0;
+        switch (orden){
+            case 0:
+                if(st.getCUI() > Integer.parseInt(data)){
+                    result = 1;
+                } else if (st.getCUI() < Integer.parseInt(data)){
+                    result = -1;
+                }
+                break;
+            case 1:
+                result = st.getEmail().compareTo(data);
+                break;
+            case 2:
+                result = st.getName().compareTo(data);
+                break;
+            case 3:
+                result = st.getLastNameF().compareTo(data);
+                break;
+            case 4:
+                result = st.getLastNameM().compareTo(data);
+                break;
+            case 5:
+                String cadena = data.substring(0, 4) + data.substring(5, 7) + data.substring(8);
+                if(st.getDateBirth() > Integer.parseInt(cadena)){
+                    result = 1;
+                } else if (st.getDateBirth() < Integer.parseInt(cadena)){
+                    result = -1;
+                }
+                break;
+            case 6:
+                result = (st.getGender()?"a":"z").compareTo((data.equals("1"))?"a":"z");
+                break;
+            case 7:
+                result = (st.getStatus()?"a":"z").compareTo((data.equals("1"))?"a":"z");
+                break; 
+        }
+        return result;
+    } 
+
     /*
     private static void recursiveInsertionSort(Student[] listado, int n, int orden) {
         Student[] arr = new Student[listado.length];
@@ -545,10 +590,6 @@ public class StudentRegistration {
     
 
     public static void Interfaz2(){
-        //por completar... 
-
-        /*
         
-         */
     }
 }
