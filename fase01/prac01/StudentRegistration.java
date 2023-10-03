@@ -25,6 +25,7 @@ public class StudentRegistration {
     static int orden = -1;
     final static String[] algorithm = {"BubbleSort", "SelectionSort", "InsertionSort", "MergeSort", "BubbleSort (recursive)", "SelectionSort (recursive)", "InsertionSort (recursive)"};
     static boolean[] algorithms = new boolean[8];
+    static String datoAbuscar = "";
 
     public static void main(String[] args) throws IOException{
         JFrame ventana = new JFrame("Selección");
@@ -208,15 +209,121 @@ public class StudentRegistration {
     }
 
     public static void Interfaz2(){
+        JFrame ventana = new JFrame("Interfaz 2");
+        ventana.setSize(400, 200);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        JPanel panelPrincipal = new JPanel(new BorderLayout());
+        JPanel panelSuperior = new JPanel(new GridBagLayout());
+        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        JLabel etiquetaDate = new JLabel("Seleccione una opción:");
+        JComboBox<String> comboBoxDate = new JComboBox<>(date);
+
+        JLabel etiquetaDato = new JLabel("Dato a buscar:");
+        JTextField campoDato = new JTextField(20); 
+
+        JButton boton = new JButton("Buscar");
+        boton.setPreferredSize(new Dimension(80, 30)); 
+
+        boton.addActionListener((ActionEvent x) -> {
+            int opcionSeleccionadaDate = comboBoxDate.getSelectedIndex();
+            datoAbuscar = campoDato.getText(); 
+            orden = opcionSeleccionadaDate;
+            mergeSort(listado, 0, listado.length-1);
+
+            initialTime = System.nanoTime();
+            iterativeBinarySearch(listado, datoAbuscar);
+            currentTime = System.nanoTime();
+            timesSearchBinary = currentTime - initialTime;
+            
+            initialTime = System.nanoTime();
+            int site = binarySearchRecursive(listado, 0, listado.length-1, datoAbuscar);
+            currentTime = System.nanoTime();
+            timesSearchBinaryRc = currentTime - initialTime;
+
+            String result;
+            if (site != -1){
+                result = "Estudiante encontrado:<br>"+listado[site];
+            } else {
+                result = "No existe el estudiante";
+            }
+
+            SwingUtilities.invokeLater(() -> {
+                crearVentana(result);
+            });
+            searchGraph();
+
+        });
+
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        panelSuperior.add(etiquetaDate, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panelSuperior.add(comboBoxDate, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panelSuperior.add(etiquetaDato, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        panelSuperior.add(campoDato, gbc);
+
+        panelBoton.add(boton);
+        panelPrincipal.add(panelSuperior, BorderLayout.CENTER);
+        panelPrincipal.add(panelBoton, BorderLayout.SOUTH);
+
+        ventana.add(panelPrincipal);
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
     }
 
     public static void crearVentana(String result) {
+        JFrame ventana = new JFrame("Resultados de busqueda");
+        ventana.setSize(400, 150);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        JLabel labelTexto = new JLabel("Texto a mostrar");
+        
+        ventana.add(labelTexto);
+
+        ventana.setVisible(true);
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                labelTexto.setText("<html>Tiempo de busqueda binaria<br>Busqueda iterativa: "+timesSearchBinary
+                                    +"   Busqueda recursiva: "+timesSearchBinaryRc+"<br><br>Resultado:<br>"+result);
+            }
+        });
     }
 
     public static void searchGraph() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(timesSearchBinary, "Busqueda iterativa", timesSearchBinary+"");
+        dataset.addValue(timesSearchBinaryRc, "Busqueda recursiva", timesSearchBinaryRc+"");
 
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Timepo de ejecucion (busqueda binaria)",
+                "Algoritmos",
+                "Tiempo",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false);
+
+        ChartPanel chartPanel = new ChartPanel(barChart);
+
+        JFrame ventana = new JFrame("Gráfica de Barras");
+        ventana.setSize(450, 350);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.add(chartPanel);
+
+        ventana.setVisible(true);
     }
 
     //Bubble
@@ -444,25 +551,6 @@ public class StudentRegistration {
         return result;
     }
 
-    /*
-    private static void recursiveInsertionSort(Student[] listado, int n, int orden) {
-        Student[] arr = new Student[listado.length];
-        System.arraycopy(listado, 0, arr, 0, listado.length);
-        if (n <= 1)
-            return;
-            
-        recursiveInsertionSort(arr, n - 1, orden);
-    
-        Student key = arr[n - 1];
-        int j = n - 2;
-        while (j >= 0 && comparacion(arr[j], key, orden) > 0) {
-            arr[j + 1] = arr[j];
-            j--;
-        }
-        arr[j + 1] = key;
-    }
-     */
-    
     
      public static int comparison(Student st1, Student st2, int orden){
         int result = 0;
