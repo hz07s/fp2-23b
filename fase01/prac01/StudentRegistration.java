@@ -286,7 +286,103 @@ public class StudentRegistration {
         }
     }
     
-    //
+
+    public static int iterativeBinarySearch(Student arr[], Student x, int orden) {
+        int l = 0, r = arr.length - 1;
+        Student left = arr[l], rigth = arr[r];
+
+        while (comparacion(left, rigth, orden) < 1) {
+            int m = l + (r - l) / 2;
+            Student half = arr[m];
+            if (comparacion(half, x, orden) == 0)
+                return m;
+ 
+            // Si x sale mayor, la parte de la mitad izquierda ya no cuenta
+            if (comparacion(half, x, orden) < 0)
+                l = m + 1;
+
+            // Pasa lo contrario del anterior
+            else
+                r = m - 1;
+            left = arr[l];
+            rigth = arr[r];
+        }
+        return -1;
+    }
+
+    // Busqueda binaria iterativo
+    /*
+    // Returns index of x if it is present in arr[].
+    public static int binarySearch(Student arr[], String x, orden) {
+        int l = 0, r = arr.length - 1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            // Check if x is present at mid
+            if (arr[m] == x)
+                return m;
+            // If x greater, ignore left half
+            if (arr[m] < x)
+                l = m + 1;
+            // If x is smaller, ignore right half
+            else
+                r = m - 1;
+        }
+        // If we reach here, then element was
+        // not present
+        return -1;
+    }
+ 
+    // Driver code
+    public static void main(String args[])
+    {
+        BinarySearch ob = new BinarySearch();
+        int arr[] = { 2, 3, 4, 10, 40 };
+        int n = arr.length;
+        int x = 10;
+        int result = ob.binarySearch(arr, x);
+        if (result == -1)
+            System.out.println(
+                "Element is not present in array");
+        else
+            System.out.println("Element is present at "
+                               + "index " + result);
+    }
+  
+     */
+
+    // Busqueda binaria recursiva
+
+    public static int binarySearchRecursive(Student arr, String x, int orden, int r){
+        
+        if (r >= 1){
+            int mid = l + (r - l) / 2;
+            if (arr[mid] == x)
+            return mid;
+
+        }
+
+        return -1;
+
+    }
+    /*
+    private static void recursiveInsertionSort(Student[] listado, int n, int orden) {
+        Student[] arr = new Student[listado.length];
+        System.arraycopy(listado, 0, arr, 0, listado.length);
+        if (n <= 1)
+            return;
+            
+        recursiveInsertionSort(arr, n - 1, orden);
+    
+        Student key = arr[n - 1];
+        int j = n - 2;
+        while (j >= 0 && comparacion(arr[j], key, orden) > 0) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+     */
+    
     
     public static int comparacion(Student st1, Student st2, int orden){
         int result = 0;
@@ -450,5 +546,9 @@ public class StudentRegistration {
 
     public static void Interfaz2(){
         //por completar... 
+
+        /*
+        
+         */
     }
 }
