@@ -28,8 +28,6 @@ public class StudentRegistration {
 
     public static void main(String[] args) throws IOException{
 
-        interfaz1();
-
     
         int numLine = 0;
         String file = "pruebaCUI.csv";
@@ -114,14 +112,111 @@ public class StudentRegistration {
         graphic(timesSaved);
 
     }
+    public static void sortingAlgorithms()throws IOException{
+        int numLine = 0;
+        String file = "StudentData.csv";
+        String line;
+        int numIntervals = 200;
+        BufferedReader Lines = new BufferedReader(new FileReader(file));
+        while (Lines.readLine() != null) {
+            numLine++;
+        }
+        timesSaved = new double[7][numIntervals];
+        //timesSaved = new double[][]; // colocar tamaño
+        listado = new Student[numLine];
+        BufferedReader data = new BufferedReader(new FileReader(file));
+        int j = 0;
+        while ((line = data.readLine()) != null){
+            String[] dataS = line.split(",");
+            listado[j] = new Student(dataS);
+            j++;
+        }
+        int rangeIntervals = listado.length/numIntervals;
+        //listado.length/5
+        for (int i = 0; i < (numIntervals); i++){
+            Student[] arr = new Student[rangeIntervals * (i + 1)];
+            System.arraycopy(listado, 0, arr, 0, rangeIntervals * (i + 1));
+            
+            //iterativeBubbleSort
+            if (algorithms[0]){
+                Student[] arr0 = new Student[arr.length];
+                System.arraycopy(arr, 0, arr0, 0, arr.length);
+                initialTime = System.nanoTime();
+                bubbleSortIterative(arr0);
+                currentTime = System.nanoTime();
+                timesSaved[0][i] = currentTime - initialTime;
+            }
+
+            //iterativeSelectionSort
+            if (algorithms[1]){
+                Student[] arr1 = new Student[arr.length];
+                System.arraycopy(arr, 0, arr1, 0, arr.length);
+                initialTime = System.nanoTime();
+                selectionSort(arr1);
+                currentTime = System.nanoTime();
+                timesSaved[1][i] = currentTime - initialTime;
+            }
+
+            //iterativeInsertionSort
+            if (algorithms[2]){
+                Student[] arr2 = new Student[arr.length];
+                System.arraycopy(arr, 0, arr2, 0, arr.length);
+                initialTime = System.nanoTime();
+                insertionSort(arr2);
+                currentTime = System.nanoTime();
+                timesSaved[2][i] = currentTime - initialTime;
+            }
+
+            //mergeSort
+            if (algorithms[3]){
+                Student[] arr3 = new Student[arr.length];
+                System.arraycopy(arr, 0, arr3, 0, arr.length);
+                initialTime = System.nanoTime();
+                mergeSort(arr3, 0, arr3.length - 1);
+                currentTime = System.nanoTime();
+                timesSaved[3][i] = currentTime - initialTime;
+            }
+
+            //recursiveBubbleSort
+            if (algorithms[4]){
+                Student[] arr4 = new Student[arr.length];
+                System.arraycopy(arr, 0, arr4, 0, arr.length);
+                initialTime = System.nanoTime();
+                recursiveBubbleSort(arr4, arr4.length);
+                currentTime = System.nanoTime();
+                timesSaved[4][i] = currentTime - initialTime;
+            }
+            
+            //recursiveSelectionSort
+            if (algorithms[5]){
+                Student[] arr5 = new Student[arr.length];
+                System.arraycopy(arr, 0, arr5, 0, arr.length);
+                initialTime = System.nanoTime();
+                recursiveSelectionSort(arr5, arr5.length, 0);
+                currentTime = System.nanoTime();
+                timesSaved[5][i] = currentTime - initialTime;
+            }
+
+            //recursiveInsertionSort
+            if (algorithms[6]){
+                Student[] arr6 = new Student[arr.length];
+                System.arraycopy(arr, 0, arr6, 0, arr.length);
+                initialTime = System.nanoTime();
+                recursiveInsertionSort(arr6, arr6.length);
+                currentTime = System.nanoTime();
+                timesSaved[6][i] = currentTime - initialTime;
+            }
+        }
+        
+        graphic(timesSaved);
+
+    }
 
     //Bubble
-    public static void bubbleSortIterative(Student[] listado, int orden){
-        Student[] arr = new Student[listado.length];
-        System.arraycopy(listado, 0, arr, 0, listado.length);
+    public static void bubbleSortIterative(Student[] arr){
         for (int i = 1; i < arr.length; i++){
             for (int j = 0; j < arr.length - 1; j++){
-                if (comparacion(arr[j], arr[j + 1], orden) > 0){
+                if (comparison(arr[j], arr[j + 1], orden) > 0){
                     Student temp;
                     temp = arr[j];
                     arr[j] = arr[j + 1];
@@ -132,16 +227,14 @@ public class StudentRegistration {
     }
 
     //Recursive Bubble
-    public static void recursiveBubbleSort(Student listado[], int n, int orden){
-        Student[] arr = new Student[listado.length];
-        System.arraycopy(listado, 0, arr, 0, listado.length);
+    public static void recursiveBubbleSort(Student arr[], int n){
         if (n == 1)
             return;
 
         int count = 0;
 
         for (int i = 0; i < n - 1; i++) {
-            if (comparacion(arr[i], arr[i + 1], orden) > 0) {
+            if (comparison(arr[i], arr[i + 1], orden) > 0) {
                 Student temp = arr[i];
                 arr[i] = arr[i + 1];
                 arr[i + 1] = temp;
@@ -150,65 +243,56 @@ public class StudentRegistration {
         }
         if (count == 0)
             return;
-        recursiveBubbleSort(arr, n - 1, orden);
+        recursiveBubbleSort(arr, n - 1);
     }
     
     //Selection
-    public static void selectionSort(Student[] listado, int orden){
-        Student[] arr = new Student[listado.length];
-        System.arraycopy(listado, 0, arr, 0, listado.length);
+    public static void selectionSort(Student[] arr){
         int n = arr.length;
         for (int i = 0; i < n-1; i++){
             int min_idx = i;
             for (int j = i + 1; j < n; j++)
-                if (comparacion(arr[min_idx], arr[j], orden) > 0)
+                if (comparison(arr[min_idx], arr[j], orden) > 0)
                     min_idx = j;
             Student temp = arr[min_idx];
             arr[min_idx] = arr[i];
             arr[i] = temp;
         }
-        /*for (int i = 0; i < arr.length; i++){
-            System.out.println(arr[i]);
-        }*/
     }
 
     //Recursive Selection 
-    public static int minIndex(Student arr[], int i, int j, int orden) {
+    public static int minIndex(Student arr[], int i, int j) {
         if (i == j)
             return i;
-        int k = minIndex(arr, i + 1, j, orden);
+        int k = minIndex(arr, i + 1, j);
 
-        if (comparacion(arr[i], arr[k], orden) < 0 || comparacion(arr[i], arr[k], orden) != 1) {
+        if (comparison(arr[i], arr[k], orden) < 0 || comparison(arr[i], arr[k], orden) != 1) {
             return i;
         } else {
             return k;
         }
     }
-    public static void recursiveSelectionSort(Student[] listado, int n, int idx, int orden) {
-        Student[] arr = new Student[listado.length];
-        System.arraycopy(listado, 0, arr, 0, listado.length);
+    public static void recursiveSelectionSort(Student[] arr, int n, int idx) {
         if (idx == n)
-           return;
+          return;
 
-        int k = minIndex(arr, idx, n - 1, orden);
+        int k = minIndex(arr, idx, n - 1);
         if (k != idx){
-           Student temp = arr[k];
-           arr[k] = arr[idx];
-           arr[idx] = temp;
+          Student temp = arr[k];
+          arr[k] = arr[idx];
+          arr[idx] = temp;
         }
-        recursiveSelectionSort(arr, n, idx + 1, orden);
+        recursiveSelectionSort(arr, n, idx + 1);
     }
 
     //Insertion
-    public static void insertionSort(Student[] listado, int orden){
-        Student[] arr = new Student[listado.length];
-        System.arraycopy(listado, 0, arr, 0, listado.length);
+    public static void insertionSort(Student[] arr){
         int j;
         Student key;
         for (int i = 1; i < arr.length; i++) {
             key = arr[i];
             j = i - 1; 
-            while (j >= 0 && comparacion(arr[j], key, orden) > 0) {
+            while (j >= 0 && comparison(arr[j], key, orden) > 0) {
                 arr[j + 1] = arr[j];
                 j--;
             }
@@ -217,17 +301,15 @@ public class StudentRegistration {
     }
 
     //Recursive Insertion
-    private static void recursiveInsertionSort(Student[] listado, int n, int orden) {
-        Student[] arr = new Student[listado.length];
-        System.arraycopy(listado, 0, arr, 0, listado.length);
+      private static void recursiveInsertionSort(Student[] arr, int n) {
         if (n <= 1)
             return;
             
-        recursiveInsertionSort(arr, n - 1, orden);
+        recursiveInsertionSort(arr, n - 1);
     
         Student key = arr[n - 1];
         int j = n - 2;
-        while (j >= 0 && comparacion(arr[j], key, orden) > 0) {
+        while (j >= 0 && comparison(arr[j], key, orden) > 0) {
             arr[j + 1] = arr[j];
             j--;
         }
@@ -235,8 +317,7 @@ public class StudentRegistration {
     }
 
     //Merge
-    public static void merge(Student[] arr, int l, int m, int r, int orden) {
-        
+    public static void merge(Student[] arr, int l, int m, int r) {
         int n1 = m - l + 1;
         int n2 = r - m;
 
@@ -252,7 +333,7 @@ public class StudentRegistration {
 
         int k = l;
         while (i < n1 && j < n2) {
-            if (comparacion(L[i], R[j], orden) <= 0) {
+            if (comparison(L[i], R[j], orden) <= 0) {
                 arr[k] = L[i];
                 i++;
             }
@@ -273,87 +354,34 @@ public class StudentRegistration {
             j++;
             k++;
         }
-    
     }
-    public static void mergeSort(Student listado[], int l, int r, int orden) {
-        Student[] arr = new Student[listado.length];
-        System.arraycopy(listado, 0, arr, 0, listado.length);
-        initialTime = System.nanoTime();
+
+    public static void mergeSort(Student arr[], int l, int r) {
         if (l < r){
             int m = l + (r - l) / 2;
-            mergeSort(arr, l, m, orden);
-            mergeSort(arr, m + 1, r, orden);
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
             
-            merge(arr, l, m, r, orden);
+            merge(arr, l, m, r);
         }
     }
     
 
-    public static int iterativeBinarySearch(Student arr[], Student x, int orden) {
-        int l = 0, r = arr.length - 1;
-        Student left = arr[l], rigth = arr[r];
-
-        while (comparacion(left, rigth, orden) < 1) {
-            int m = l + (r - l) / 2;
-            Student half = arr[m];
-            if (comparacion(half, x, orden) == 0)
-                return m;
- 
-            // Si x sale mayor, la parte de la mitad izquierda ya no cuenta
-            if (comparacion(half, x, orden) < 0)
-                l = m + 1;
-
-            // Pasa lo contrario del anterior
-            else
-                r = m - 1;
-            left = arr[l];
-            rigth = arr[r];
-        }
-        return -1;
-    }
-
-    // Busqueda binaria iterativo
-    /*
-    // Returns index of x if it is present in arr[].
-    public static int binarySearch(Student arr[], String x, orden) {
-        int l = 0, r = arr.length - 1;
-        while (l <= r) {
-            int m = l + (r - l) / 2;
-            // Check if x is present at mid
-            if (arr[m] == x)
-                return m;
-            // If x greater, ignore left half
-            if (arr[m] < x)
-                l = m + 1;
-            // If x is smaller, ignore right half
-            else
-                r = m - 1;
-        }
-        // If we reach here, then element was
-        // not present
-        return -1;
-    }
- 
-    // Driver code
-    public static void main(String args[])
-    {
-        BinarySearch ob = new BinarySearch();
-        int arr[] = { 2, 3, 4, 10, 40 };
-        int n = arr.length;
-        int x = 10;
-        int result = ob.binarySearch(arr, x);
-        if (result == -1)
-            System.out.println(
-                "Element is not present in array");
-        else
-            System.out.println("Element is present at "
-                               + "index " + result);
-    }
-  
-     */
+    public static int iterativeBinarySearch(Student arr[], String x) {
+      int l = 0, r = arr.length - 1;
+      while (l <= r) {
+          int m = l + (r - l) / 2;
+          if (comparisonSearch(arr[m], x) == 0)
+              return m;
+          if (comparisonSearch(arr[m], x) < 0)
+              l = m + 1;
+          else
+              r = m - 1;
+      }
+      return -1;
+  }
 
     // Busqueda binaria recursiva
-
     public static int binarySearchRecursive(Student arr[], int l, int r, String x){
         if (r >= l) {
             int mid = l + (r - l) / 2;
@@ -429,7 +457,7 @@ public class StudentRegistration {
      */
     
     
-    public static int comparacion(Student st1, Student st2, int orden){
+     public static int comparison(Student st1, Student st2, int orden){
         int result = 0;
         switch (orden){
             case 0:
