@@ -27,10 +27,87 @@ public class StudentRegistration {
     static boolean[] algorithms = new boolean[8];
 
     public static void main(String[] args) throws IOException{
+        JFrame ventana = new JFrame("Selección");
+        ventana.setSize(600, 250);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        JPanel panelPrincipal = new JPanel(new BorderLayout());
+        JPanel panelSuperior = new JPanel(new GridBagLayout());
+        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        JLabel etiquetaDate = new JLabel("Seleccione una opción:");
+        JComboBox<String> comboBoxDate = new JComboBox<>(date);
+        JLabel etiquetaAlgorithm = new JLabel("Seleccione algoritmos:");
+
+        JCheckBox[] checkBoxes = new JCheckBox[algorithm.length];
+        for (int i = 0; i < algorithm.length; i++) {
+            checkBoxes[i] = new JCheckBox(algorithm[i]);
+            checkBoxes[i].setSelected(false);
+            checkBoxes[i].addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    JCheckBox checkBox = (JCheckBox) e.getSource();
+                    int index = Integer.parseInt(checkBox.getActionCommand());
+                    algorithms[index] = checkBox.isSelected();
+                }
+            });
+            checkBoxes[i].setActionCommand(Integer.toString(i));
+        }
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        panelSuperior.add(etiquetaDate, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panelSuperior.add(comboBoxDate, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panelSuperior.add(etiquetaAlgorithm, gbc);
+
+        JPanel panelCheckBoxes = new JPanel(new GridLayout(0, 2)); 
+        for (int i = 0; i < algorithm.length; i++) {
+            panelCheckBoxes.add(checkBoxes[i]);
+        }
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        panelSuperior.add(panelCheckBoxes, gbc);
+        
+        JButton boton1 = new JButton("Graficar");
+        boton1.setPreferredSize(new Dimension(80, 30));
+
+        boton1.addActionListener((ActionEvent x) -> {
+            try {
+                orden = comboBoxDate.getSelectedIndex();
+                sortingAlgorithms();
+            } catch (IOException e) {
+                System.err.println("Se produjo un error de E/S: " + e.getMessage());
+            }
+
+        });
+        JButton boton2 = new JButton("Buscar");
+        boton2.setPreferredSize(new Dimension(80, 30));
+
+        boton2.addActionListener((ActionEvent x) -> {
+            Interfaz2();
+            
+            ventana.dispose();
+        });
+
+        panelBoton.add(boton1);
+        panelBoton.add(boton2);
+        panelPrincipal.add(panelSuperior, BorderLayout.CENTER);
+        panelPrincipal.add(panelBoton, BorderLayout.SOUTH);
+
+        ventana.add(panelPrincipal);
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
     
-
     }
+
     public static void sortingAlgorithms()throws IOException{
         int numLine = 0;
         String file = "StudentData.csv";
@@ -41,7 +118,6 @@ public class StudentRegistration {
             numLine++;
         }
         timesSaved = new double[7][numIntervals];
-        //timesSaved = new double[][]; // colocar tamaño
         listado = new Student[numLine];
         BufferedReader data = new BufferedReader(new FileReader(file));
         int j = 0;
@@ -50,8 +126,8 @@ public class StudentRegistration {
             listado[j] = new Student(dataS);
             j++;
         }
+
         int rangeIntervals = listado.length/numIntervals;
-        //listado.length/5
         for (int i = 0; i < (numIntervals); i++){
             Student[] arr = new Student[rangeIntervals * (i + 1)];
             System.arraycopy(listado, 0, arr, 0, rangeIntervals * (i + 1));
@@ -128,6 +204,18 @@ public class StudentRegistration {
         }
         
         graphic(timesSaved);
+
+    }
+
+    public static void Interfaz2(){
+
+    }
+
+    public static void crearVentana(String result) {
+
+    }
+
+    public static void searchGraph() {
 
     }
 
@@ -440,7 +528,6 @@ public class StudentRegistration {
         XYPlot plot = chart.getXYPlot();
         NumberAxis xAxis = (NumberAxis) plot.getDomainAxis();
 
-        // Define el intervalo de las etiquetas del eje X (cada 5 unidades)
         xAxis.setTickUnit(new NumberTickUnit(20.0));
 
         ChartPanel chartPanel = new ChartPanel(chart);
