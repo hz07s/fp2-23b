@@ -1,11 +1,15 @@
 import java.io.*;
-import java.util.Arrays;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 
@@ -16,13 +20,13 @@ public class StudentRegistration {
     static double[][] timesSaved;
     public static void main(String[] args) throws IOException{
         int numLine = 0;
-        String file = "DatosEstudiantes.csv";
+        String file = "pruebaCUI.csv";
         String line;
         BufferedReader Lines = new BufferedReader(new FileReader(file));
         while (Lines.readLine() != null) {
             numLine++;
         }
-        timesSaved = new double[3][numLine];
+        timesSaved = new double[4][200];
         //timesSaved = new double[][]; // colocar tamaño
         Student[] listado = new Student[numLine];
         BufferedReader data = new BufferedReader(new FileReader(file));
@@ -32,13 +36,38 @@ public class StudentRegistration {
             listado[j] = new Student(dataS);
             j++;
         }
-        selectionSort(listado, 0);
-        bubbleSortIterative(listado, 0);
-        insertionSort(listado, 0);
-        
+        //listado.length/5
+        for (int i = 0; i < (listado.length/5); i++){
+            Student[] arr = new Student[5*(i+1)];
+            System.arraycopy(listado, 0, arr, 0, 5*(i+1));
+            //for (int k = 0; k < arr.length; k++){
+              //  System.out.println(arr[k]);
+            //}
+
+            initialTime = System.nanoTime();
+            bubbleSortIterative(arr, 0);
+            currentTime = System.nanoTime();
+            timesSaved[0][i] = currentTime - initialTime;
+
+            initialTime = System.nanoTime();
+            selectionSort(arr, 0);
+            currentTime = System.nanoTime();
+            timesSaved[1][i] = currentTime - initialTime;
+
+            initialTime = System.nanoTime();
+            insertionSort(arr, 0);
+            currentTime = System.nanoTime();
+            timesSaved[2][i] = currentTime - initialTime;
+
+            initialTime = System.nanoTime();
+            mergeSort(arr, 0, arr.length-1, 0);
+            currentTime = System.nanoTime();
+            timesSaved[3][i] = currentTime - initialTime;
+        }
         
         
         graphic(timesSaved);
+
     }
 
     //Bubble.
@@ -46,7 +75,6 @@ public class StudentRegistration {
     public static void bubbleSortIterative(Student[] listado, int orden){
         Student[] arr = new Student[listado.length];
         System.arraycopy(listado, 0, arr, 0, listado.length);
-        initialTime = System.nanoTime();
         for (int i = 1; i < arr.length; i++){
             for (int j = 0; j < arr.length-1; j++){
                 if (arr[j].getCUI() > arr[j+1].getCUI()){
@@ -56,8 +84,6 @@ public class StudentRegistration {
                     arr[j+1] = temp;
                 }
             }
-            currentTime = System.nanoTime();
-            timesSaved[0][i] = currentTime - initialTime;
         }
         /*for (int i = 0; i < arr.length; i++){
             System.out.println(arr[i]);
@@ -116,7 +142,7 @@ public class StudentRegistration {
         return result;
     }
     
-    public static void graphic(double[][] times) {
+    public static void graphic1(double[][] times) {
         // Crear un conjunto de datos (Dataset) a partir de un arreglo de valores doubles
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
@@ -124,7 +150,7 @@ public class StudentRegistration {
             dataset.addValue(times[i], "Serie 1", " "+ i );
         }*/
 
-        String[] series = {"Bubble", "Selection", "Insertion"};
+        String[] series = {"Bubble", "Selection", "Insertion", "Merge"};
         for (int i = 0; i < times.length; i++){
             for (int j = 0; j < times[i].length; j++){
                 dataset.addValue(times[i][j], series[i], " " + j);
@@ -155,11 +181,65 @@ public class StudentRegistration {
         frame.setVisible(true);
     }
 
+    public static void graphic(double[][] times) {
+        XYSeries series1 = new XYSeries("Bubble");
+        XYSeries series2 = new XYSeries("Selection");
+        XYSeries series3 = new XYSeries("Insertion");
+        XYSeries series4 = new XYSeries("Merge");
+
+        /* Agrega datos de ejemplo con intervalo de 5 en el eje X
+        for (int i = 0; i <= 100; i += 1) {
+            series1.add(i, Math.random() * 100);
+            series2.add(i, Math.random() * 100);
+            series1.add(i, Math.random() * 100);
+            series2.add(i, Math.random() * 100);
+        }*/
+
+        for (int i = 0; i < times[0].length; i++){
+            series1.add(i, times[0][i]);
+            series2.add(i, times[1][i]);
+            series3.add(i, times[2][i]);
+            series4.add(i, times[3][i]);
+        }
+         
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(series1);
+        dataset.addSeries(series2);
+        dataset.addSeries(series3);
+        dataset.addSeries(series4);
+
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                "Gráfico de Líneas con Intervalo en Eje X",
+                "Eje X",
+                "Eje Y",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+
+        XYPlot plot = chart.getXYPlot();
+        NumberAxis xAxis = (NumberAxis) plot.getDomainAxis();
+
+        // Define el intervalo de las etiquetas del eje X (cada 5 unidades)
+        xAxis.setTickUnit(new NumberTickUnit(20.0));
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        JFrame frame = new JFrame("Gráfico de Líneas con Intervalo en Eje X");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(chartPanel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     //Selection
     public static void selectionSort(Student[] listado, int orden){
         Student[] arr = new Student[listado.length];
         System.arraycopy(listado, 0, arr, 0, listado.length);
-        initialTime = System.nanoTime();
         int n = arr.length;
         for (int i = 0; i < n-1; i++){
             int min_idx = i;
@@ -169,8 +249,6 @@ public class StudentRegistration {
             Student temp = arr[min_idx];
             arr[min_idx] = arr[i];
             arr[i] = temp;
-            currentTime = System.nanoTime();
-            timesSaved[1][i] = currentTime - initialTime;
         }
         /*for (int i = 0; i < arr.length; i++){
             System.out.println(arr[i]);
@@ -201,7 +279,6 @@ public class StudentRegistration {
     public static void insertionSort(Student[] listado, int orden){
         Student[] arr = new Student[listado.length];
         System.arraycopy(listado, 0, arr, 0, listado.length);
-        initialTime = System.nanoTime();
         int j;
         Student key;
         for (int i = 1; i < arr.length; i++) {
@@ -212,8 +289,6 @@ public class StudentRegistration {
                 j--;
             }
             arr[j + 1] = key;
-            currentTime = System.nanoTime();
-            timesSaved[2][i] = currentTime - initialTime;
         }
         //for (int i = 0; i < arr.length; i++){
            // System.out.println(arr[i]);
@@ -265,17 +340,16 @@ static void insertionSortRecursive(int arr[], int n)
         }
         arr[j+1] = last;
     }
-
+*/
 
     //Merge
-    public static void merge(int[] listado, int l, int m, int r) {
-        Student[] arr = new Student[listado.length];
-        System.arraycopy(listado, 0, arr, 0, listado.length);
+    public static void merge(Student[] arr, int l, int m, int r, int orden) {
+        
         int n1 = m - l + 1;
         int n2 = r - m;
 
-        int L[] = new int[n1];
-        int R[] = new int[n2];
+        Student L[] = new Student[n1];
+        Student R[] = new Student[n2];
 
         for (int i = 0; i < n1; ++i)
             L[i] = arr[l + i];
@@ -286,7 +360,7 @@ static void insertionSortRecursive(int arr[], int n)
 
         int k = l;
         while (i < n1 && j < n2) {
-            if (L[i] <= R[j]) {
+            if (comparacion(L[i], R[j], orden) <= 0) {
                 arr[k] = L[i];
                 i++;
             }
@@ -309,14 +383,16 @@ static void insertionSortRecursive(int arr[], int n)
         }
     
     }
-    public static void sort(int arr[], int l, int r ) {
+    public static void mergeSort(Student listado[], int l, int r, int orden) {
+        Student[] arr = new Student[listado.length];
+        System.arraycopy(listado, 0, arr, 0, listado.length);
+        initialTime = System.nanoTime();
         if (l < r){
             int m = l + (r - l) / 2;
-            sort(arr, l, m);
-            sort(arr, m + 1, r);
+            mergeSort(arr, l, m, orden);
+            mergeSort(arr, m + 1, r, orden);
             
-            merge(arr, l, m, r);
+            merge(arr, l, m, r, orden);
         }
     }
-*/
 }
