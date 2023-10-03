@@ -29,87 +29,6 @@ public class StudentRegistration {
     public static void main(String[] args) throws IOException{
 
     
-        int numLine = 0;
-        String file = "pruebaCUI.csv";
-        String line;
-        BufferedReader Lines = new BufferedReader(new FileReader(file));
-        while (Lines.readLine() != null) {
-            numLine++;
-        }
-        timesSaved = new double[4][200];
-        //timesSaved = new double[][]; // colocar tamaño
-        Student[] listado = new Student[numLine];
-        BufferedReader data = new BufferedReader(new FileReader(file));
-        int j = 0;
-        while ((line = data.readLine()) != null){
-            String[] dataS = line.split(";");
-            listado[j] = new Student(dataS);
-            j++;
-        }
-        
-        //listado.length/5
-        for (int i = 0; i < (listado.length/5); i++){
-            Student[] arr = new Student[5 * (i + 1)];
-            System.arraycopy(listado, 0, arr, 0, 5 * (i + 1));
-            
-            //iterativeBubbleSort
-            if (algorithms[0]){
-                initialTime = System.nanoTime();
-                bubbleSortIterative(arr, 0);
-                currentTime = System.nanoTime();
-                timesSaved[0][i] = currentTime - initialTime;
-            }
-
-            //iterativeSelectionSort
-            if (algorithms[1]){
-                initialTime = System.nanoTime();
-                selectionSort(arr, 0);
-                currentTime = System.nanoTime();
-                timesSaved[1][i] = currentTime - initialTime;
-            }
-
-            //iterativeInsertionSort
-            if (algorithms[2]){
-                initialTime = System.nanoTime();
-                insertionSort(arr, 0);
-                currentTime = System.nanoTime();
-                timesSaved[2][i] = currentTime - initialTime;
-            }
-
-            //mergeSort
-            if (algorithms[3]){
-                initialTime = System.nanoTime();
-                mergeSort(arr, 0, arr.length - 1, 0);
-                currentTime = System.nanoTime();
-                timesSaved[3][i] = currentTime - initialTime;
-            }
-
-            //recursiveBubbleSort
-            if (algorithms[4]){
-                initialTime = System.nanoTime();
-                recursiveBubbleSort(arr, arr.length, 0);
-                currentTime = System.nanoTime();
-                timesSaved[4][i] = currentTime - initialTime;
-            }
-            
-            //recursiveSelectionSort
-            if (algorithms[5]){
-                initialTime = System.nanoTime();
-                recursiveSelectionSort(arr, arr.length, 0, orden);
-                currentTime = System.nanoTime();
-                timesSaved[5][i] = currentTime - initialTime;
-            }
-
-            //recursiveInsertionSort
-            if (algorithms[6]){
-                initialTime = System.nanoTime();
-                recursiveInsertionSort(arr, arr.length, 0);
-                currentTime = System.nanoTime();
-                timesSaved[6][i] = currentTime - initialTime;
-            }
-        }
-        
-        graphic(timesSaved);
 
     }
     public static void sortingAlgorithms()throws IOException{
@@ -435,7 +354,7 @@ public class StudentRegistration {
                 break; 
         }
         return result;
-    } 
+    }
 
     /*
     private static void recursiveInsertionSort(Student[] listado, int n, int orden) {
@@ -616,8 +535,4 @@ public class StudentRegistration {
         ventana.setVisible(true); 
     } 
     
-
-    public static void Interfaz2(){
-        
-    }
 }

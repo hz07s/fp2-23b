@@ -79,6 +79,8 @@ public class Student{
     
     public String toString(){
         String birth = (dateBirth/10000) + "-" + ((dateBirth/100)%100) + "-" + (dateBirth%100);
-        return cui + "\t" + email + "\t" + name + "\t" + lastNameF + "\t" + lastNameM + "\t" + birth + "\t" + status;
+        String gn = gender?"Masculino":"Femenino";
+        String st = status?"activo":"inhabilitado";
+        return cui + "\t" + email + "\t" + name + "\t" + lastNameF + "\t" + lastNameM + "\t" + birth + "\t" + gn + "\t" + st;
     }
 }
