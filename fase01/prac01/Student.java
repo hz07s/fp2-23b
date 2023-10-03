@@ -1,7 +1,10 @@
 public class Student{
+    //Atributos del objeto Student
     private String email, name, lastNameF, lastNameM;
     private boolean gender, status;
     private int cui, dateBirth;
+
+    //Constructor
 
     public Student(String[] data){
         setCUI(data[0]);
@@ -14,6 +17,8 @@ public class Student{
         setStatus(data[7]);
     }
     
+    //Getters
+
     public void setCUI(String c){
         cui = Integer.parseInt(c.substring(c.length()-8));        
     }
@@ -49,6 +54,7 @@ public class Student{
         }
     }
     
+    //Getters
 
     public int getCUI(){
         return cui;
@@ -75,7 +81,7 @@ public class Student{
         return status;
     }
     
-    
+    //Método para la impresión de los datos del estudiante
     
     public String toString(){
         String birth = (dateBirth/10000) + "-" + ((dateBirth/100)%100) + "-" + (dateBirth%100);
