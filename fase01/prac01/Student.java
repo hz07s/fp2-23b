@@ -1,6 +1,6 @@
 public class Student{
-    private String email, name, lastNameF, lastNameM, gender;
-    private boolean status;
+    private String email, name, lastNameF, lastNameM;
+    private boolean gender, status;
     private int cui, dateBirth;
 
     public Student(String[] data){
@@ -35,10 +35,14 @@ public class Student{
         dateBirth = date;
     }
     public void setGender(String gn){
-        gender = gn;
+        if (gn.equals("1")){
+            gender = true; 
+        } else {
+            gender = false;
+        }
     }
     public void setStatus(String st){
-        if(st.equals("activo")){
+        if(st.equals("1")){
             status = true;
         } else {
             status = false;
@@ -61,10 +65,10 @@ public class Student{
     public String getLastNameM(){
         return lastNameM;
     }
-    public String getDateBirth(){
-        return (dateBirth/10000) + "/" + ((dateBirth/100)%100) + "/" + (dateBirth%100);
+    public int getDateBirth(){
+        return dateBirth;
     }
-    public String getGender(){
+    public boolean getGender(){
         return gender;
     }
     public boolean getStatus(){
@@ -74,6 +78,7 @@ public class Student{
     
     
     public String toString(){
-        return cui + "\t" + email + "\t" + name + "\t" + lastNameF + "\t" + lastNameM + "\t" + dateBirth + "\t" + status;
+        String birth = (dateBirth/10000) + "-" + ((dateBirth/100)%100) + "-" + (dateBirth%100);
+        return cui + "\t" + email + "\t" + name + "\t" + lastNameF + "\t" + lastNameM + "\t" + birth + "\t" + status;
     }
 }
