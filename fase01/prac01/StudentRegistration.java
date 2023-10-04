@@ -576,14 +576,18 @@ public class StudentRegistration {
                 Student[] arr = new Student[rangeIntervals * (i + 1)];
                 System.arraycopy(listado, 0, arr, 0, rangeIntervals * (i + 1));
                 initialTime = System.nanoTime();
-                iterativeBinarySearch(listado, datoAbuscar);
+                iterativeBinarySearch(arr, datoAbuscar);
                 currentTime = System.nanoTime();
-                timeDataAB[0][i] = currentTime - initialTime;
+                timesSearchBinary = currentTime - initialTime;
+                timeDataAB[0][i] = timesSearchBinary;
                 
+                Student[] arr1 = new Student[rangeIntervals * (i + 1)];
+                System.arraycopy(listado, 0, arr1, 0, rangeIntervals * (i + 1));
                 initialTime = System.nanoTime();
-                site = binarySearchRecursive(listado, 0, listado.length-1, datoAbuscar);
+                site = binarySearchRecursive(arr1, 0, arr1.length-1, datoAbuscar);
                 currentTime = System.nanoTime();
-                timeDataAB[1][i] = currentTime - initialTime;
+                timesSearchBinaryRc = currentTime - initialTime;
+                timeDataAB[1][i] = timesSearchBinaryRc;
             }
 
             String result;
