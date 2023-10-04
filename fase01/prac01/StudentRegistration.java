@@ -7,7 +7,6 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import javax.swing.*;
@@ -17,11 +16,11 @@ import java.awt.event.ActionListener;
 
 public class StudentRegistration {
   //Declarando variables globales
-  static long initialTime, currentTime, timeElapsed;
-  static double timesSearchBinary, timesSearchBinaryRc;
-  static double[] timeData;
-  static double[][] timesSaved;
-  static Student[] listado = new Student[0];
+    static int numIntervals = 200;
+    static long initialTime, currentTime;
+    static double[][] timesSaved, timeDataAB;
+    static double timesSearchBinary, timesSearchBinaryRc;
+    static Student[] listado = new Student[0];
 
     final static String[] date = {"CUI", "Email", "Nombre", "Apellido Materno", "Apellido Paterno", "Cumpleaños", "Género", "Estado"};
     static int orden = -1;
@@ -31,6 +30,7 @@ public class StudentRegistration {
 
     //Interfaz 1 para la seleccion de los atributos a ordenar y de los algoritmos a utilizar.
     public static void main(String[] args) throws IOException{
+        // Interfaz1 para la selección de los algoritmos de ordenamientos a usar
         JFrame ventana = new JFrame("Selección");
         ventana.setSize(600, 250);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,9 +119,8 @@ public class StudentRegistration {
         int numLine = 0;
         String file = "StudentData.csv";
         String line;
-        int numIntervals = 200;
-        BufferedReader Lines = new BufferedReader(new FileReader(file));
-        while (Lines.readLine() != null) {
+        BufferedReader lines = new BufferedReader(new FileReader(file));
+        while (lines.readLine() != null) {
             numLine++;
         }
         timesSaved = new double[7][numIntervals];
@@ -212,8 +211,9 @@ public class StudentRegistration {
             }
         }
         
-        graphic(timesSaved);
-
+        graphic(1);
+        lines.close();
+        data.close();
     }
     
     //ORDERING ALGORITHMS
@@ -477,37 +477,42 @@ public class StudentRegistration {
 
     ///////////////////////////////////////////////////////////////////////////
     
-    //Crea el grafico lineal donde se muestran los tiempos de ejecucion de los dos algoritmos de ordenamiento.
-    public static void graphic(double[][] times) {
-        XYSeries series1 = new XYSeries("Bubble");
-        XYSeries series2 = new XYSeries("Selection");
-        XYSeries series3 = new XYSeries("Insertion");
-        XYSeries series4 = new XYSeries("Merge");
-        XYSeries series5 = new XYSeries("rec_Bubble");
-        XYSeries series6 = new XYSeries("rec_Selection");
-        XYSeries series7 = new XYSeries("rec_Insertion");
-
-        for (int i = 0; i < times[0].length; i++){
-            series1.add(i, times[0][i]);
-            series2.add(i, times[1][i]);
-            series3.add(i, times[2][i]);
-            series4.add(i, times[3][i]);
-            series5.add(i, times[4][i]);
-            series6.add(i, times[5][i]);
-            series7.add(i, times[6][i]);
+    //Crea el grafico lineal donde se muestran los tiempos de ejecucion de los dos algoritmos de ordenamiento/busqueda.
+    public static void graphic(int num) {
+        String title;
+        XYSeries[] series;
+        int seriesT;
+        if (num == 1){
+            title = "ordenamiento";
+            seriesT = 7;
+            series = new XYSeries[seriesT];
+            for (int i = 0; i < seriesT; i++){
+                if (algorithms[i]){
+                    series[i] = new XYSeries(algorithm[i]);
+                    for (int j = 0; j < timesSaved[i].length; j++){
+                        series[i].add(j, timesSaved[i][j]);
+                    }
+               }
+            }
+        } else {
+            title = "busqueda";
+            seriesT = 2;
+            series = new XYSeries[seriesT];
+            series[0] = new XYSeries("Busqueda iterativa");
+            series[1] = new XYSeries("Busqueda recursiva");
+            for (int i = 0; i < seriesT; i++)
+                for (int j = 0; j < timeDataAB[i].length; j++)
+                    series[i].add(j, timeDataAB[i][j]);
         }
         
         XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(series1);
-        dataset.addSeries(series2);
-        dataset.addSeries(series3);
-        dataset.addSeries(series4);
-        dataset.addSeries(series5);
-        dataset.addSeries(series6);
-        dataset.addSeries(series7);
-
+        for (int i = 0; i < seriesT; i++){
+            if (series[i] != null){
+                dataset.addSeries(series[i]);
+            }
+        }
         JFreeChart chart = ChartFactory.createXYLineChart(
-            "Tiempo de ejecucion de los algoritmos de ordenamiento con respecto al tamaño",
+            "Tiempo de ejecucion de los algoritmos de "+ title +" con respecto al tamaño de datos",
             "Tamaño de datos",
             "Tiempo",
             dataset,
@@ -525,34 +530,11 @@ public class StudentRegistration {
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        JFrame frame = new JFrame("Gráfico de Líneas con Intervalo en Eje X");
+        JFrame frame = new JFrame("Gráfico Lineal");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(chartPanel);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    //Crea el grafico de barras donde se muestran los tiempos de ejecucion de los dos algoritmos de busqueda binaria (iterativo/recursivo).
-    public static void searchGraph() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(timesSearchBinary, "Busqueda iterativa", timesSearchBinary+"");
-        dataset.addValue(timesSearchBinaryRc, "Busqueda recursiva", timesSearchBinaryRc+"");
-
-        JFreeChart barChart = ChartFactory.createBarChart(
-                "Timepo de ejecucion (busqueda binaria)",
-                "Algoritmos",
-                "Tiempo",
-                dataset,
-                PlotOrientation.VERTICAL,
-                true, true, false);
-
-        ChartPanel chartPanel = new ChartPanel(barChart);
-
-        JFrame ventana = new JFrame("Gráfica de Barras");
-        ventana.setSize(450, 350);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.add(chartPanel);
-        ventana.setVisible(true);
     }
     
     ///////////////////////////////////////////////////////////////////////////
@@ -580,22 +562,29 @@ public class StudentRegistration {
         boton.setPreferredSize(new Dimension(80, 30)); 
 
         boton.addActionListener((ActionEvent x) -> {
-            //Se realiza el ordenamiento de los datos, segun el atributo especificado.
+            //Se realiza el ordenamiento de los datos en el arreglo principal, segun el atributo especificado.
             int opcionSeleccionadaDate = comboBoxDate.getSelectedIndex();
             datoAbuscar = campoDato.getText(); 
             orden = opcionSeleccionadaDate;
             mergeSort(listado, 0, listado.length-1);
 
             //Llama a los algoritmos de busqueda para encontrar el registro especificado.
-            initialTime = System.nanoTime();
-            iterativeBinarySearch(listado, datoAbuscar);
-            currentTime = System.nanoTime();
-            timesSearchBinary = currentTime - initialTime;
-            
-            initialTime = System.nanoTime();
-            int site = binarySearchRecursive(listado, 0, listado.length-1, datoAbuscar);
-            currentTime = System.nanoTime();
-            timesSearchBinaryRc = currentTime - initialTime;
+            int site = -1;
+            timeDataAB = new double[2][numIntervals];
+            int rangeIntervals = listado.length/numIntervals;
+            for (int i = 0; i < (numIntervals); i++){
+                Student[] arr = new Student[rangeIntervals * (i + 1)];
+                System.arraycopy(listado, 0, arr, 0, rangeIntervals * (i + 1));
+                initialTime = System.nanoTime();
+                iterativeBinarySearch(listado, datoAbuscar);
+                currentTime = System.nanoTime();
+                timeDataAB[0][i] = currentTime - initialTime;
+                
+                initialTime = System.nanoTime();
+                site = binarySearchRecursive(listado, 0, listado.length-1, datoAbuscar);
+                currentTime = System.nanoTime();
+                timeDataAB[1][i] = currentTime - initialTime;
+            }
 
             String result;
             if (site != -1){
@@ -608,7 +597,7 @@ public class StudentRegistration {
                 crearVentana(result);
             });
             //Llama al metodo para graficar los tiempos de los algoritmos de busqueda.
-            searchGraph();
+            graphic(2);
 
         });
 
