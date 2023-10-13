@@ -1,42 +1,42 @@
 public class Nave {
-  private String nombre;
-  private int fila;
-  private String columna;
-  private boolean estado;
-  private int puntos;
+  private String name;
+  private int row;
+  private String column;
+  private boolean status;
+  private int health;
 
   // Metodos mutadores
-  public void setNombre( String n){
-    nombre = n;
+  public void setName( String n){
+    name = n;
   }
-  public void setFila(int f){
-    fila = f;
+  public void setRow(int f){
+    row = f;
   }
-  public void setColumna(String c){
-    columna = c;
+  public void setColumn(String c){
+    column = c;
   }
-  public void setEstado(boolean e){
-    estado = e;
+  public void setStatus(boolean e){
+    status = e;
   }
-  public void setPuntos(int p){
-    puntos = p;
+  public void setHealth(int p){
+    health = p;
   }
 
   // Metodos accesores
-  public String getNombre(){
-    return nombre;
+  public String getName(){
+    return name;
   }
-  public int getFila(){
-    return fila;
+  public int getRow(){
+    return row;
   }
-  public String getColumna(){
-    return columna;
+  public String getColumn(){
+    return column;
   }
-  public boolean getEstado(){
-    return estado;
+  public boolean getStatus(){
+    return status;
   }
-  public int getPuntos(){
-    return puntos;
+  public int getHealth(){
+    return health;
   }
   
   // Completar con otros métodos necesarios
