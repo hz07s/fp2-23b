@@ -5,24 +5,22 @@ public class Nave {
   private boolean status;
   private int health;
 
-  // Metodos mutadores
-  public void setName( String n){
+  public void setName(String n){
     name = n;
   }
-  public void setRow(int f){
-    row = f;
+  public void setRow(int r){
+    row = r;
   }
   public void setColumn(String c){
     column = c;
   }
-  public void setStatus(boolean e){
-    status = e;
+  public void setStatus(boolean s){
+    status = s;
   }
-  public void setHealth(int p){
-    health = p;
+  public void setHealth(int h){
+    health = h;
   }
 
-  // Metodos accesores
   public String getName(){
     return name;
   }
@@ -39,6 +37,4 @@ public class Nave {
     return health;
   }
   
-  // Completar con otros métodos necesarios
-
 }
