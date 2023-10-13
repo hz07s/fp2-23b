@@ -1,4 +1,4 @@
-public class Nave {
+public class Soldado {
   private String name;
   private int row;
   private String column;
