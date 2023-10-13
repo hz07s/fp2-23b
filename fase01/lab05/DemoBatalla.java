@@ -4,6 +4,7 @@
 // Tiempo : -
 
 public class DemoBatalla {
+  static Nave[][] army;
   public static void main(String [] args){
   
   
