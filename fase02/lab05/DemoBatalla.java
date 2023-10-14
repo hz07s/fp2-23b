@@ -2,26 +2,34 @@
 // Autor : Hernan Andy
 // Colaboro : -
 // Tiempo : -
-
+import java.util.*;
 public class DemoBatalla {
-  static Soldado[][] army;
+  static Soldado[][] army = new Soldado[10][10];
   public static void main(String [] args){
-  
-  
-  
+  createArmy(army);
+  for (int i = 0; i < army.length; i++)
+    for (int k = 0; k < army[i].length; k++)
+      System.out.println(army[i][k]);
   }
 
   public static void createArmy(Soldado army[][]){
-    int numSoldiers = (int) (Math.random() * 10) + 1;
+    int numSoldiers = (int) (Math.random() * 10);
+    Soldado s = new Soldado();
     for (int i = 0; i < numSoldiers; i++){
-      Soldado s = new Soldado();
       s.setHealth((int) (Math.random() * 5) + 1);
+      int row = 0, column = 0;
       
+      do {
+        row = (int) (Math.random() * 9) + 1;
+        column = (int) (Math.random() * 9) + 1;
+      } while (army[row][column] == null);
+
+      army[row][column] = s;
+
     }
   }
-  
-  public static void locateSoldier(Soldado s){
 
-  }
+
+  
 
 }

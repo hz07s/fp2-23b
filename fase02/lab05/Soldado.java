@@ -36,5 +36,8 @@ public class Soldado {
   public int getHealth(){
     return health;
   }
-  
+  @Override
+  public String toString() {
+    return "Data{ \n name: " + name + "\n row: " + row + ", column:'" + column + '\'' + ", status:" + status + ", health: " + health + '}';
+  }
 }
