@@ -19,7 +19,7 @@ public class Soldado {
   public void setRow(int r){
     row = r;
   }
-  public void setColumn(String c){
+  public void setColumn(char c){
     column = c;
   }
   public void setStatus(boolean s){
@@ -35,7 +35,7 @@ public class Soldado {
   public int getRow(){
     return row;
   }
-  public String getColumn(){
+  public char getColumn(){
     return column;
   }
   public boolean getStatus(){
@@ -46,6 +46,12 @@ public class Soldado {
   }
   @Override
   public String toString() {  
-    return "Data{ \n name: " + name + "\n row: " + row + "\n column: " + column + "\n status: " + status + "\n health: " + health + "\n}";
+    return "Data { " + 
+              "\n Name:   " + name   + 
+              "\n Row:    " + row    + 
+              "\n Column: " + column + 
+              "\n Status: " + status + 
+              "\n Health: " + health + 
+              "\n}\n";
   }
 }
