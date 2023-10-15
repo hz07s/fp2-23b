@@ -14,17 +14,17 @@ public class DemoBatalla {
 
   public static void createArmy(Soldado army[][]){
     int numSoldiers = (int) (Math.random() * 10);
-    Soldado s = new Soldado();
+    
     for (int i = 0; i < numSoldiers; i++){
-      s.setHealth((int) (Math.random() * 5) + 1);
-      int row = 0, column = 0;
+      int row = 0, col = 0;
       
       do {
         row = (int) (Math.random() * 9) + 1;
-        column = (int) (Math.random() * 9) + 1;
-      } while (army[row][column] == null);
+        col = (int) (Math.random() * 9) + 1;
+      } while (army[row][col] == null);
 
-      army[row][column] = s;
+      Soldado s = new Soldado("Soldier" + i, row, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1);
+      army[row][col] = s;
 
     }
   }
