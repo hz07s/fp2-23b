@@ -14,6 +14,7 @@ public class DemoBatalla {
   showArmyData(army1D);
   showArmyTable(army);
   moreHelath(army1D);
+  System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
   }
 
   public static void createArmy(Soldado army[][]){
@@ -50,19 +51,6 @@ public class DemoBatalla {
       }
       System.out.println("\n" + linesDown);
     }
-
-    /*
-    Example:
-        A      B      C      D      E      F      G      H      I      J    
-     _______________________________________________________________________
-    |       |       |       |       |       |       |       |       |       |
-    |  S 1  |       |       |       |       |       |       |       |       |
-    |_______|_______|_______|_______|_______|_______|_______|_______|_______|
-
-
-
-
-     */
   }
 
   public static void showArmyData(Soldado[] army1D){
@@ -81,6 +69,14 @@ public class DemoBatalla {
     for (Soldado s : army1D) 
       if (s.getHealth() == maxHealth)
         System.out.println("Nombre: " + s.getName() + "Vida: " + s.getHealth());
+  }
+
+  public static double averageHealth(Soldado[] army1D){
+    int c = 0;
+    for (Soldado s : army1D)
+      if(s != null)
+        c++;
+    return sumHelth(army1D) / c;
   }
 
 }
