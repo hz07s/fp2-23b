@@ -3,6 +3,9 @@
 // Colaboro : -
 // Tiempo : -
 //import java.util.*;
+
+import javax.net.ssl.SSLSessionBindingListener;
+
 public class DemoBatalla {
   static Soldado[][] army = new Soldado[10][10];
   static Soldado[] army1D = new Soldado[10];
@@ -10,6 +13,7 @@ public class DemoBatalla {
   createArmy(army);
   showArmyData(army1D);
   showArmyTable(army);
+  moreHelath(army1D);
   }
 
   public static void createArmy(Soldado army[][]){
@@ -66,4 +70,17 @@ public class DemoBatalla {
       if (s != null)
         System.out.println(s);
   }
+
+  public static void moreHelath(Soldado[] army1D){
+    int maxHealth = -1;
+    for(Soldado s : army1D)
+      if (s.getHealth() > maxHealth)
+        maxHealth = s.getHealth();
+
+    System.out.println("Soldado(s) con mayor vida: ");
+    for (Soldado s : army1D) 
+      if (s.getHealth() == maxHealth)
+        System.out.println("Nombre: " + s.getName() + "Vida: " + s.getHealth());
+  }
+
 }
