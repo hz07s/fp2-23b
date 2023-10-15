@@ -63,6 +63,7 @@ public class DemoBatalla {
 
   public static void showArmyData(Soldado[] army1D){
     for (Soldado s : army1D)
-      System.out.println(s);
+      if (s != null)
+        System.out.println(s);
   }
 }
