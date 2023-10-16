@@ -30,20 +30,25 @@ public class DemoBatalla {
     System.out.println("La suma de la vida del Ejercito B es: " + sumHealth(army1DB));
     System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
 
-    System.out.println("\nEjercitos ordenado (bubbleSort) segun la vida: ");
+    System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
     System.out.println("EJERCITO  A: ");
     printArmyHealth(bubbleSort(army1DA));
     System.out.println("EJERCITO  B: ");
     printArmyHealth(bubbleSort(army1DB));
 
-    System.out.println("\nEjercito ordenado (insertionSort) segun la vida: ");
+    System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
     System.out.println("EJERCITO  A: ");
     printArmyHealth(insertionSort(army1DA));
-    System.out.println("EJERCITO  A: ");
+    System.out.println("EJERCITO  B: ");
     printArmyHealth(insertionSort(army1DB));
 
-    //System.out.println("\nEjercito ordenado (selectionSort) segun la vida: ");
-    //printArmyHealth(selectionSort(army1D));
+    System.out.println("\nEjercitos ordenados (selectionSort) segun la vida: ");
+    System.out.println("EJERCITO  A: ");
+    printArmyHealth(selectionSort(army1DA));
+    System.out.println("EJERCITO  B: ");
+    printArmyHealth(selectionSort(army1DB));
+
+    System.out.println();
   }
 
   public static void createArmy(){
@@ -169,26 +174,22 @@ public class DemoBatalla {
     return army1DCopyInsertion;
   }
 
-  public static Soldado[] selectionSort(Soldado[] army1D) {
-    int n = army1D.length;
-    Soldado[] army1DCopySelection = new Soldado[n];
-  
-    for (int i = 0; i < n; i++) {
-      army1DCopySelection[i] = army1D[i];
-    }
+  public static ArrayList <Soldado> selectionSort(ArrayList <Soldado> army1DSS) {
+    int n = army1DSS.size();
+    ArrayList <Soldado> army1DCopySelection = new ArrayList<>(army1DSS);
   
     for (int i = 0; i < n - 1; i++) {
       int min_idx = i;
   
       for (int j = i + 1; j < n; j++) {
-        if (army1DCopySelection[j].getHealth() > army1DCopySelection[min_idx].getHealth()) {
+        if (army1DCopySelection.get(j).getHealth() > army1DCopySelection.get(min_idx).getHealth()) {
           min_idx = j;
         }
       }
   
-      Soldado temp = army1DCopySelection[min_idx];
-      army1DCopySelection[min_idx] = army1DCopySelection[i];
-      army1DCopySelection[i] = temp;
+      Soldado temp = army1DCopySelection.get(min_idx);
+      army1DCopySelection.set(min_idx, army1DCopySelection.get(i));
+      army1DCopySelection.set(i, temp);
     }
   
     return army1DCopySelection;
