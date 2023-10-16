@@ -62,11 +62,11 @@ public class DemoBatalla {
         army.get(i).add(null);
     }
 
-    army1DA = createArmyTeam(numSoldiersA, army1DA);
-    army1DB = createArmyTeam(numSoldiersB, army1DB);
+    army1DA = createArmyTeam(numSoldiersA, army1DA, "A");
+    army1DB = createArmyTeam(numSoldiersB, army1DB, "B");
   }
 
-  public static ArrayList <Soldado> createArmyTeam(int numSoldiers, ArrayList <Soldado> army1D){
+  public static ArrayList <Soldado> createArmyTeam(int numSoldiers, ArrayList <Soldado> army1D, String t){
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
       
@@ -75,7 +75,7 @@ public class DemoBatalla {
         col = (int) (Math.random() * 9) + 1;
       } while (army.get(row).get(col) != null);
 
-      Soldado s = new Soldado("Soldier" + i, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1);
+      Soldado s = new Soldado("Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1);
       army1D.add(i, s);
       army.get(row).set(col, s);
     }
