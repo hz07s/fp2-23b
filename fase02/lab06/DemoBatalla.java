@@ -74,7 +74,7 @@ public class DemoBatalla {
     System.out.println();
   }
 
-  public static void showArmyData(Soldado[] army1D){
+  public static void showArmyData(ArrayList <Soldado> army1D){
     for (Soldado s : army1D)
       System.out.println(s);
   }
