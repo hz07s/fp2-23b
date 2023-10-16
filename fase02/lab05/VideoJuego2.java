@@ -3,7 +3,7 @@
 // Colaboro : null
 // Tiempo : 3 horas
 
-public class DemoBatalla {
+public class VideoJuego2 {
   static Soldado[][] army = new Soldado[10][10];
   static Soldado[] army1D;
   public static void main(String [] args){
