@@ -2,7 +2,6 @@
 // Autor : Hernan Andy
 // Colaboro : null
 // Tiempo : 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DemoBatalla {
@@ -197,8 +196,8 @@ public class DemoBatalla {
     return army1DCopySelection;
   }
 
-  public static void printArmyHealth(Soldado[] armyPrint){
-    for(int i = 0; i < armyPrint.length; i++)
-      System.out.println((i + 1) + ". " + armyPrint[i].getName() + "  Vida: " + armyPrint[i].getHealth());
+  public static void printArmyHealth(ArrayList <Soldado> armyPrint){
+    for(int i = 0; i < armyPrint.size(); i++)
+      System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getHealth());
   }
 }
