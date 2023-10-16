@@ -4,22 +4,21 @@
 // Tiempo : -
 //import java.util.*;
 
-import javax.net.ssl.SSLSessionBindingListener;
-
 public class DemoBatalla {
   static Soldado[][] army = new Soldado[10][10];
-  static Soldado[] army1D = new Soldado[10];
+  static Soldado[] army1D;
   public static void main(String [] args){
-  createArmy(army);
+  army1D = createArmy(army);
   showArmyData(army1D);
   showArmyTable(army);
   moreHelath(army1D);
   System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
+  System.out.println("La suma de la vida del ejercito es: " + sumHealth(army1D));
   }
 
-  public static void createArmy(Soldado army[][]){
+  public static Soldado[] createArmy(Soldado army[][]){
     int numSoldiers = (int) (Math.random() * 10) + 1;
-    
+    army1D = new Soldado[numSoldiers];
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
       
@@ -33,6 +32,7 @@ public class DemoBatalla {
       army[row][col] = s;
 
     }
+    return army1D;
   }
 
   public static void showArmyTable(Soldado[][] army){
@@ -55,8 +55,7 @@ public class DemoBatalla {
 
   public static void showArmyData(Soldado[] army1D){
     for (Soldado s : army1D)
-      if (s != null)
-        System.out.println(s);
+      System.out.println(s);
   }
 
   public static void moreHelath(Soldado[] army1D){
@@ -68,15 +67,17 @@ public class DemoBatalla {
     System.out.println("Soldado(s) con mayor vida: ");
     for (Soldado s : army1D) 
       if (s.getHealth() == maxHealth)
-        System.out.println("Nombre: " + s.getName() + "Vida: " + s.getHealth());
+        System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getHealth());
   }
 
   public static double averageHealth(Soldado[] army1D){
-    int c = 0;
-    for (Soldado s : army1D)
-      if(s != null)
-        c++;
-    return sumHelth(army1D) / c;
+    return sumHealth(army1D) / army1D.length;
   }
 
+  public static int sumHealth(Soldado[] army1D){
+    int sum = 0;
+    for (Soldado s : army1D)
+      sum += s.getHealth();
+    return sum;
+  }
 }
