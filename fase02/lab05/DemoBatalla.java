@@ -16,7 +16,8 @@ public class DemoBatalla {
     System.out.println("La suma de la vida del ejercito es: " + sumHealth(army1D));
     System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
 
-    printArmyHealth(army1D);
+    System.out.println("Ejercito ordenado (bubbleSort) segun la vida: ");
+    printArmyHealth(bubbleSort(army1D));
   }
 
   public static Soldado[] createArmy(Soldado army[][]){
@@ -105,5 +106,13 @@ public class DemoBatalla {
           break;
       }
     return army1DCopyBubble;
+  }
+
+
+
+
+  public static void printArmyHealth(Soldado[] armyPrint){
+    for(int i = 0; i < armyPrint.length; i++)
+      System.out.println((i + 1) + ". " + armyPrint[i].getName() + "  Vida: " + armyPrint[i].getHealth());
   }
 }
