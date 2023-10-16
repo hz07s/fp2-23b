@@ -36,8 +36,11 @@ public class DemoBatalla {
     System.out.println("EJERCITO  B: ");
     printArmyHealth(bubbleSort(army1DB));
 
-    //System.out.println("\nEjercito ordenado (insertionSort) segun la vida: ");
-    //printArmyHealth(insertionSort(army1D));
+    System.out.println("\nEjercito ordenado (insertionSort) segun la vida: ");
+    System.out.println("EJERCITO  A: ");
+    printArmyHealth(insertionSort(army1DA));
+    System.out.println("EJERCITO  A: ");
+    printArmyHealth(insertionSort(army1DB));
 
     //System.out.println("\nEjercito ordenado (selectionSort) segun la vida: ");
     //printArmyHealth(selectionSort(army1D));
@@ -149,24 +152,19 @@ public class DemoBatalla {
     return army1DCopyBubble;
   }
 
-  public static Soldado[] insertionSort(Soldado[] army1D) {
-    int n = army1D.length;
-    Soldado[] army1DCopyInsertion = new Soldado[n];
-
-    // Copia los elementos del arreglo original al arreglo de copia
-    for (int i = 0; i < n; i++) {
-        army1DCopyInsertion[i] = army1D[i];
-    }
+  public static ArrayList <Soldado> insertionSort(ArrayList <Soldado> army1DIS) {
+    int n = army1DIS.size();
+    ArrayList <Soldado> army1DCopyInsertion = new ArrayList<>(army1DIS);
 
     for (int i = 1; i < n; i++) {
-        Soldado key = army1DCopyInsertion[i];
+        Soldado key = army1DCopyInsertion.get(i);
         int j = i - 1;
 
-        while (j >= 0 && army1DCopyInsertion[j].getHealth() < key.getHealth()) {
-            army1DCopyInsertion[j + 1] = army1DCopyInsertion[j];
+        while (j >= 0 && army1DCopyInsertion.get(j).getHealth() < key.getHealth()) {
+            army1DCopyInsertion.set(j+1, army1DCopyInsertion.get(j));
             j = j - 1;
         }
-        army1DCopyInsertion[j + 1] = key;
+        army1DCopyInsertion.set(j+1, key);
     }
     return army1DCopyInsertion;
   }
