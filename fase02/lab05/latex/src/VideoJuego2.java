@@ -51,7 +51,7 @@ public class VideoJuego2 {
 
   public static void showArmyTable(Soldado[][] army){
     String linesUp = "   |       |       |       |       |       |       |       |       |       |       |";
-    
+
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
 
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
