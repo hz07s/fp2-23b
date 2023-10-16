@@ -31,20 +31,25 @@ public class DemoBatalla {
     printArmyHealth(selectionSort(army1D));
   }
 
-  public static Soldado[] createArmy(Soldado army[][]){
+  public static ArrayList <Soldado> createArmy(ArrayList <ArrayList <Soldado>> army){
     int numSoldiers = (int) (Math.random() * 10) + 1;
-    army1D = new Soldado[numSoldiers];
+    for (int i = 0; i < 10; i++){
+      army.add(new ArrayList<>());
+      for (int j = 0; j < 10; j++)
+        army.get(i).add(null);
+    }
+
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
       
       do {
         row = (int) (Math.random() * 9) + 1;
         col = (int) (Math.random() * 9) + 1;
-      } while (army[row][col] != null);
+      } while (army.get(row).get(col) != null);
 
       Soldado s = new Soldado("Soldier" + i, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1);
-      army1D[i] = s;
-      army[row][col] = s;
+      army1D.set(i, s);
+      army.get(row).set(col, s);
 
     }
     return army1D;
