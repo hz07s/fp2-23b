@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 public class DemoBatalla {
   static ArrayList<ArrayList<Soldado>> army = new ArrayList<>();
-  static ArrayList<Soldado> army1D = new ArrayList<>();
+  static ArrayList<Soldado> army1DA = new ArrayList<>();
+  static ArrayList<Soldado> army1DB = new ArrayList<>();
   public static void main(String [] args){
-    army1D = createArmy(army);
+    createArmy(army);
     
     System.out.println("DATOS DE LOS SOLDADOS CREADOS: \n");
     showArmyData(army1D);
@@ -31,14 +32,21 @@ public class DemoBatalla {
     printArmyHealth(selectionSort(army1D));
   }
 
-  public static ArrayList <Soldado> createArmy(ArrayList <ArrayList <Soldado>> army){
-    int numSoldiers = (int) (Math.random() * 10) + 1;
+  public static void createArmy(){
+    int numSoldiersA = (int) (Math.random() * 10) + 1;
+    int numSoldiersB = (int) (Math.random() * 10) + 1;
+
     for (int i = 0; i < 10; i++){
       army.add(new ArrayList<>());
       for (int j = 0; j < 10; j++)
         army.get(i).add(null);
     }
 
+    army1DA = createArmyTeam(numSoldiersA, army1DA);
+    army1DB = createArmyTeam(numSoldiersB, army1DB);
+  }
+
+  public static ArrayList <Soldado> createArmyTeam(int numSoldiers, ArrayList <Soldado> army1D){
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
       
@@ -50,7 +58,6 @@ public class DemoBatalla {
       Soldado s = new Soldado("Soldier" + i, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1);
       army1D.set(i, s);
       army.get(row).set(col, s);
-
     }
     return army1D;
   }
