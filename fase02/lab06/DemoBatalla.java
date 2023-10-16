@@ -20,7 +20,10 @@ public class DemoBatalla {
     System.out.println("                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     showArmyTable(army);
 
-    //moreHelath(army1D);
+    System.out.println("Soldado(s) con mayor vida del Ejercito A: ");
+    moreHelath(army1DA);
+    System.out.println("Soldado(s) con mayor vida del Ejercito B: ");
+    moreHelath(army1DB);
 
     //System.out.println("La suma de la vida del ejercito es: " + sumHealth(army1D));
     //System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
@@ -98,14 +101,13 @@ public class DemoBatalla {
       System.out.println(s);
   }
 
-  public static void moreHelath(Soldado[] army1D){
+  public static void moreHelath(ArrayList <Soldado> army1MH){
     int maxHealth = -1;
-    for(Soldado s : army1D)
+    for(Soldado s : army1MH)
       if (s.getHealth() > maxHealth)
         maxHealth = s.getHealth();
 
-    System.out.println("Soldado(s) con mayor vida: ");
-    for (Soldado s : army1D) 
+    for (Soldado s : army1MH) 
       if (s.getHealth() == maxHealth)
         System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getHealth());
     System.out.println();
