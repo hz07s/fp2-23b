@@ -8,12 +8,15 @@ public class DemoBatalla {
   static Soldado[][] army = new Soldado[10][10];
   static Soldado[] army1D;
   public static void main(String [] args){
-  army1D = createArmy(army);
-  showArmyData(army1D);
-  showArmyTable(army);
-  moreHelath(army1D);
-  System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
-  System.out.println("La suma de la vida del ejercito es: " + sumHealth(army1D));
+    army1D = createArmy(army);
+    showArmyData(army1D);
+    showArmyTable(army);
+    moreHelath(army1D);
+
+    System.out.println("La suma de la vida del ejercito es: " + sumHealth(army1D));
+    System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
+
+    printArmyHealth(army1D);
   }
 
   public static Soldado[] createArmy(Soldado army[][]){
@@ -51,6 +54,7 @@ public class DemoBatalla {
       }
       System.out.println("\n" + linesDown);
     }
+    System.out.println();
   }
 
   public static void showArmyData(Soldado[] army1D){
@@ -68,6 +72,7 @@ public class DemoBatalla {
     for (Soldado s : army1D) 
       if (s.getHealth() == maxHealth)
         System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getHealth());
+    System.out.println();
   }
 
   public static double averageHealth(Soldado[] army1D){
@@ -79,5 +84,26 @@ public class DemoBatalla {
     for (Soldado s : army1D)
       sum += s.getHealth();
     return sum;
+  }
+
+  public static Soldado[] bubbleSort(Soldado[] army1D){
+    Soldado[] army1DCopyBubble = new Soldado[army1D.length];
+    System.arraycopy(army1D, 0, army1DCopyBubble, 0, army1D.length);
+    int n = army1DCopyBubble.length;
+      boolean swapped;
+      for (int i = 0; i < n - 1; i++) {
+        swapped = false;
+        for (int j = 0; j < n - i - 1; j++) {
+          if (army1DCopyBubble[j].getHealth() < army1DCopyBubble[j + 1].getHealth()) {
+            Soldado temp = army1DCopyBubble[j];
+            army1DCopyBubble[j] = army1DCopyBubble[j + 1];
+            army1DCopyBubble[j + 1] = temp;
+            swapped = true;
+          }
+        }
+        if (!swapped)
+          break;
+      }
+    return army1DCopyBubble;
   }
 }
