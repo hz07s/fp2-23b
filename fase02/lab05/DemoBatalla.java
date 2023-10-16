@@ -25,6 +25,9 @@ public class DemoBatalla {
 
     System.out.println("\nEjercito ordenado (insertionSort) segun la vida: ");
     printArmyHealth(insertionSort(army1D));
+
+    System.out.println("\nEjercito ordenado (selectionSort) segun la vida: ");
+    printArmyHealth(selectionSort(army1D));
   }
 
   public static Soldado[] createArmy(Soldado army[][]){
@@ -137,7 +140,30 @@ public class DemoBatalla {
     return army1DCopyInsertion;
   }
 
+  public static Soldado[] selectionSort(Soldado[] army1D) {
+    int n = army1D.length;
+    Soldado[] army1DCopySelection = new Soldado[n];
   
+    for (int i = 0; i < n; i++) {
+      army1DCopySelection[i] = army1D[i];
+    }
+  
+    for (int i = 0; i < n - 1; i++) {
+      int min_idx = i;
+  
+      for (int j = i + 1; j < n; j++) {
+        if (army1DCopySelection[j].getHealth() > army1DCopySelection[min_idx].getHealth()) {
+          min_idx = j;
+        }
+      }
+  
+      Soldado temp = army1DCopySelection[min_idx];
+      army1DCopySelection[min_idx] = army1DCopySelection[i];
+      army1DCopySelection[i] = temp;
+    }
+  
+    return army1DCopySelection;
+  }
 
   public static void printArmyHealth(Soldado[] armyPrint){
     for(int i = 0; i < armyPrint.length; i++)
