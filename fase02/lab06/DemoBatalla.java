@@ -25,8 +25,10 @@ public class DemoBatalla {
     System.out.println("Soldado(s) con mayor vida del Ejercito B: ");
     moreHelath(army1DB);
 
-    //System.out.println("La suma de la vida del ejercito es: " + sumHealth(army1D));
-    //System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
+    System.out.println("La suma de la vida del Ejercito A es: " + sumHealth(army1DA));
+    System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
+    System.out.println("La suma de la vida del Ejercito B es: " + sumHealth(army1DB));
+    System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
 
     //System.out.println("\nEjercito ordenado (bubbleSort) segun la vida: ");
     //printArmyHealth(bubbleSort(army1D));
@@ -113,13 +115,13 @@ public class DemoBatalla {
     System.out.println();
   }
 
-  public static double averageHealth(Soldado[] army1D){
-    return sumHealth(army1D) / army1D.length;
+  public static double averageHealth(ArrayList <Soldado> army1DAH){
+    return sumHealth(army1DAH) / army1DAH.size();
   }
 
-  public static int sumHealth(Soldado[] army1D){
+  public static int sumHealth(ArrayList <Soldado> army1DSH){
     int sum = 0;
-    for (Soldado s : army1D)
+    for (Soldado s : army1DSH)
       sum += s.getHealth();
     return sum;
   }
