@@ -1,7 +1,7 @@
 // Laboratorio Nro 06 - Ejercicio01
 // Autor : Hernan Andy
 // Colaboro : null
-// Tiempo : 
+// Tiempo : 2 horas
 import java.util.ArrayList;
 
 public class DemoBatalla {
@@ -84,20 +84,18 @@ public class DemoBatalla {
 
   public static void showArmyTable(ArrayList <ArrayList <Soldado>> army){
     String linesUp = "   |       |       |       |       |       |       |       |       |       |       |";
-
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
-
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
                       +"    _______________________________________________________________________________");
+    
     for (int r = 0; r < army.size(); r++){
       System.out.println(linesUp);
       System.out.print(r+1 + ((r != 9) ? "  |" : " |"));
-      for (int c = 0; c < army.get(r).size(); c++){
+      for (int c = 0; c < army.get(r).size(); c++)
         System.out.print(" " + (isTeam(army.get(r).get(c), army1DA)? "\'A\'" : isTeam(army.get(r).get(c), army1DB)? "\'B\'" : "") 
         + ((army.get(r).get(c) != null) ?"S" 
         + army.get(r).get(c).getName().charAt(7) + " |" : "      |"));
         
-      }
       System.out.println("\n" + linesDown);
     }
     System.out.println();
@@ -141,20 +139,19 @@ public class DemoBatalla {
   public static ArrayList <Soldado> bubbleSort(ArrayList <Soldado> army1DBS){
     ArrayList <Soldado>army1DCopyBubble = new ArrayList<>(army1DBS);
     int n = army1DCopyBubble.size();
-      boolean swapped;
-      for (int i = 0; i < n - 1; i++) {
-        swapped = false;
-        for (int j = 0; j < n - i - 1; j++) {
-          if (army1DCopyBubble.get(j).getHealth() < army1DCopyBubble.get(j+1).getHealth()) {
-            Soldado temp = army1DCopyBubble.get(j);
-            army1DCopyBubble.set(j, army1DCopyBubble.get(j+1));
-            army1DCopyBubble.set(j+1, temp);
-            swapped = true;
-          }
+    boolean swapped;
+    for (int i = 0; i < n - 1; i++) {
+      swapped = false;
+      for (int j = 0; j < n - i - 1; j++)
+        if (army1DCopyBubble.get(j).getHealth() < army1DCopyBubble.get(j+1).getHealth()) {
+          Soldado temp = army1DCopyBubble.get(j);
+          army1DCopyBubble.set(j, army1DCopyBubble.get(j+1));
+          army1DCopyBubble.set(j+1, temp);
+          swapped = true;
         }
-        if (!swapped)
-          break;
-      }
+      if (!swapped)
+        break;
+    }
     return army1DCopyBubble;
   }
 
@@ -163,14 +160,14 @@ public class DemoBatalla {
     ArrayList <Soldado> army1DCopyInsertion = new ArrayList<>(army1DIS);
 
     for (int i = 1; i < n; i++) {
-        Soldado key = army1DCopyInsertion.get(i);
-        int j = i - 1;
+      Soldado key = army1DCopyInsertion.get(i);
+      int j = i - 1;
 
-        while (j >= 0 && army1DCopyInsertion.get(j).getHealth() < key.getHealth()) {
-            army1DCopyInsertion.set(j+1, army1DCopyInsertion.get(j));
-            j = j - 1;
-        }
-        army1DCopyInsertion.set(j+1, key);
+      while (j >= 0 && army1DCopyInsertion.get(j).getHealth() < key.getHealth()) {
+        army1DCopyInsertion.set(j+1, army1DCopyInsertion.get(j));
+        j = j - 1;
+      }
+      army1DCopyInsertion.set(j+1, key);
     }
     return army1DCopyInsertion;
   }
@@ -182,17 +179,14 @@ public class DemoBatalla {
     for (int i = 0; i < n - 1; i++) {
       int min_idx = i;
   
-      for (int j = i + 1; j < n; j++) {
-        if (army1DCopySelection.get(j).getHealth() > army1DCopySelection.get(min_idx).getHealth()) {
+      for (int j = i + 1; j < n; j++)
+        if (army1DCopySelection.get(j).getHealth() > army1DCopySelection.get(min_idx).getHealth()) 
           min_idx = j;
-        }
-      }
   
       Soldado temp = army1DCopySelection.get(min_idx);
       army1DCopySelection.set(min_idx, army1DCopySelection.get(i));
       army1DCopySelection.set(i, temp);
     }
-  
     return army1DCopySelection;
   }
 
