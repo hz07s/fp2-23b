@@ -1,23 +1,30 @@
 // Laboratorio Nro 05 - Ejercicio01
 // Autor : Hernan Andy
-// Colaboro : -
-// Tiempo : -
-//import java.util.*;
+// Colaboro : null
+// Tiempo : 3 horas
 
 public class DemoBatalla {
   static Soldado[][] army = new Soldado[10][10];
   static Soldado[] army1D;
   public static void main(String [] args){
     army1D = createArmy(army);
+    
+    System.out.println("DATOS DE LOS SOLDADOS CREADOS: \n");
     showArmyData(army1D);
+
+    System.out.println("                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     showArmyTable(army);
+
     moreHelath(army1D);
 
     System.out.println("La suma de la vida del ejercito es: " + sumHealth(army1D));
     System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
 
-    System.out.println("Ejercito ordenado (bubbleSort) segun la vida: ");
+    System.out.println("\nEjercito ordenado (bubbleSort) segun la vida: ");
     printArmyHealth(bubbleSort(army1D));
+
+    System.out.println("\nEjercito ordenado (insertionSort) segun la vida: ");
+    printArmyHealth(insertionSort(army1D));
   }
 
   public static Soldado[] createArmy(Soldado army[][]){
@@ -108,8 +115,29 @@ public class DemoBatalla {
     return army1DCopyBubble;
   }
 
+  public static Soldado[] insertionSort(Soldado[] army1D) {
+    int n = army1D.length;
+    Soldado[] army1DCopyInsertion = new Soldado[n];
 
+    // Copia los elementos del arreglo original al arreglo de copia
+    for (int i = 0; i < n; i++) {
+        army1DCopyInsertion[i] = army1D[i];
+    }
 
+    for (int i = 1; i < n; i++) {
+        Soldado key = army1DCopyInsertion[i];
+        int j = i - 1;
+
+        while (j >= 0 && army1DCopyInsertion[j].getHealth() < key.getHealth()) {
+            army1DCopyInsertion[j + 1] = army1DCopyInsertion[j];
+            j = j - 1;
+        }
+        army1DCopyInsertion[j + 1] = key;
+    }
+    return army1DCopyInsertion;
+  }
+
+  
 
   public static void printArmyHealth(Soldado[] armyPrint){
     for(int i = 0; i < armyPrint.length; i++)
