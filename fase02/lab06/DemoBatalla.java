@@ -9,27 +9,30 @@ public class DemoBatalla {
   static ArrayList<Soldado> army1DA = new ArrayList<>();
   static ArrayList<Soldado> army1DB = new ArrayList<>();
   public static void main(String [] args){
-    createArmy(army);
+    createArmy();
     
     System.out.println("DATOS DE LOS SOLDADOS CREADOS: \n");
-    showArmyData(army1D);
+    System.out.println("EJERCITO \"A\"");
+    showArmyData(army1DA);
+    System.out.println("\nEJERCITO \"B\"");
+    showArmyData(army1DB);
 
     System.out.println("                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     showArmyTable(army);
 
-    moreHelath(army1D);
+    //moreHelath(army1D);
 
-    System.out.println("La suma de la vida del ejercito es: " + sumHealth(army1D));
-    System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
+    //System.out.println("La suma de la vida del ejercito es: " + sumHealth(army1D));
+    //System.out.println("El promedio de vida del ejercito es: " + averageHealth(army1D));
 
-    System.out.println("\nEjercito ordenado (bubbleSort) segun la vida: ");
-    printArmyHealth(bubbleSort(army1D));
+    //System.out.println("\nEjercito ordenado (bubbleSort) segun la vida: ");
+    //printArmyHealth(bubbleSort(army1D));
 
-    System.out.println("\nEjercito ordenado (insertionSort) segun la vida: ");
-    printArmyHealth(insertionSort(army1D));
+    //System.out.println("\nEjercito ordenado (insertionSort) segun la vida: ");
+    //printArmyHealth(insertionSort(army1D));
 
-    System.out.println("\nEjercito ordenado (selectionSort) segun la vida: ");
-    printArmyHealth(selectionSort(army1D));
+    //System.out.println("\nEjercito ordenado (selectionSort) segun la vida: ");
+    //printArmyHealth(selectionSort(army1D));
   }
 
   public static void createArmy(){
@@ -56,24 +59,24 @@ public class DemoBatalla {
       } while (army.get(row).get(col) != null);
 
       Soldado s = new Soldado("Soldier" + i, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1);
-      army1D.set(i, s);
+      army1D.add(i, s);
       army.get(row).set(col, s);
     }
     return army1D;
   }
 
-  public static void showArmyTable(Soldado[][] army){
+  public static void showArmyTable(ArrayList <ArrayList <Soldado>> army){
     String linesUp = "   |       |       |       |       |       |       |       |       |       |       |";
 
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
 
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
                       +"    _______________________________________________________________________________");
-    for (int r = 0; r < army.length; r++){
+    for (int r = 0; r < army.size(); r++){
       System.out.println(linesUp);
       System.out.print(r+1 + ((r != 9) ? "  |" : " |"));
-      for (int c = 0; c < army[r].length; c++){
-        System.out.print((army[r][c] != null) ?" Sold" + army[r][c].getName().charAt(7) + " |" : "       |");
+      for (int c = 0; c < army.get(r).size(); c++){
+        System.out.print((army.get(r).get(c) != null) ?" Sold" + army.get(r).get(c).getName().charAt(7) + " |" : "       |");
         
       }
       System.out.println("\n" + linesDown);
