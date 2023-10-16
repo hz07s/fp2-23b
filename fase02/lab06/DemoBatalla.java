@@ -2,6 +2,7 @@
 // Autor : Hernan Andy
 // Colaboro : null
 // Tiempo : 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DemoBatalla {
@@ -30,8 +31,11 @@ public class DemoBatalla {
     System.out.println("La suma de la vida del Ejercito B es: " + sumHealth(army1DB));
     System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
 
-    //System.out.println("\nEjercito ordenado (bubbleSort) segun la vida: ");
-    //printArmyHealth(bubbleSort(army1D));
+    System.out.println("\nEjercitos ordenado (bubbleSort) segun la vida: ");
+    System.out.println("EJERCITO  A: ");
+    printArmyHealth(bubbleSort(army1DA));
+    System.out.println("EJERCITO  B: ");
+    printArmyHealth(bubbleSort(army1DB));
 
     //System.out.println("\nEjercito ordenado (insertionSort) segun la vida: ");
     //printArmyHealth(insertionSort(army1D));
@@ -126,18 +130,17 @@ public class DemoBatalla {
     return sum;
   }
 
-  public static Soldado[] bubbleSort(Soldado[] army1D){
-    Soldado[] army1DCopyBubble = new Soldado[army1D.length];
-    System.arraycopy(army1D, 0, army1DCopyBubble, 0, army1D.length);
-    int n = army1DCopyBubble.length;
+  public static ArrayList <Soldado> bubbleSort(ArrayList <Soldado> army1DBS){
+    ArrayList <Soldado>army1DCopyBubble = new ArrayList<>(army1DBS);
+    int n = army1DCopyBubble.size();
       boolean swapped;
       for (int i = 0; i < n - 1; i++) {
         swapped = false;
         for (int j = 0; j < n - i - 1; j++) {
-          if (army1DCopyBubble[j].getHealth() < army1DCopyBubble[j + 1].getHealth()) {
-            Soldado temp = army1DCopyBubble[j];
-            army1DCopyBubble[j] = army1DCopyBubble[j + 1];
-            army1DCopyBubble[j + 1] = temp;
+          if (army1DCopyBubble.get(j).getHealth() < army1DCopyBubble.get(j+1).getHealth()) {
+            Soldado temp = army1DCopyBubble.get(j);
+            army1DCopyBubble.set(j, army1DCopyBubble.get(j+1));
+            army1DCopyBubble.set(j+1, temp);
             swapped = true;
           }
         }
