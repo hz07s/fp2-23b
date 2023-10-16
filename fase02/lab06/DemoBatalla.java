@@ -49,6 +49,7 @@ public class DemoBatalla {
     printArmyHealth(selectionSort(army1DB));
 
     System.out.println();
+    armyWinnerHealth();
   }
 
   public static void createArmy(){
@@ -198,5 +199,16 @@ public class DemoBatalla {
   public static void printArmyHealth(ArrayList <Soldado> armyPrint){
     for(int i = 0; i < armyPrint.size(); i++)
       System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getHealth());
+  }
+
+  public static void armyWinnerHealth(){
+    System.out.println("(Segun la vida)");
+    if (sumHealth(army1DA) > sumHealth(army1DB))
+      System.out.println("El ejercito ganador es: \'A\'");
+      else if (sumHealth(army1DB) > sumHealth(army1DA))
+        System.out.println("El ejercito ganador es: \'B\'");
+        else
+          System.out.println("La batalla quedo en empate");
+    System.out.println();
   }
 }
