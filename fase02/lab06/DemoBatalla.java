@@ -76,12 +76,21 @@ public class DemoBatalla {
       System.out.println(linesUp);
       System.out.print(r+1 + ((r != 9) ? "  |" : " |"));
       for (int c = 0; c < army.get(r).size(); c++){
-        System.out.print((army.get(r).get(c) != null) ?" Sold" + army.get(r).get(c).getName().charAt(7) + " |" : "       |");
+        System.out.print(" " + (isTeam(army.get(r).get(c), army1DA)? "\'A\'" : isTeam(army.get(r).get(c), army1DB)? "\'B\'" : "") 
+        + ((army.get(r).get(c) != null) ?"S" 
+        + army.get(r).get(c).getName().charAt(7) + " |" : "      |"));
         
       }
       System.out.println("\n" + linesDown);
     }
     System.out.println();
+  }
+
+  public static boolean isTeam(Soldado s, ArrayList <Soldado> army1DT){
+    for (Soldado sA : army1DT)
+      if (sA.equals(s))
+        return true;
+    return false;
   }
 
   public static void showArmyData(ArrayList <Soldado> army1D){
