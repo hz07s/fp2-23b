@@ -2,10 +2,11 @@
 // Autor : Hernan Andy
 // Colaboro : null
 // Tiempo : 
+import java.util.ArrayList;
 
 public class DemoBatalla {
-  static Soldado[][] army = new Soldado[10][10];
-  static Soldado[] army1D;
+  static ArrayList<ArrayList<Soldado>> army = new ArrayList<>();
+  static ArrayList<Soldado> army1D = new ArrayList<>();
   public static void main(String [] args){
     army1D = createArmy(army);
     
