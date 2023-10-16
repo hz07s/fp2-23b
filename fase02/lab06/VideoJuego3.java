@@ -4,7 +4,7 @@
 // Tiempo : 2 horas
 import java.util.ArrayList;
 
-public class DemoBatalla {
+public class VideoJuego3 {
   static ArrayList<ArrayList<Soldado>> army = new ArrayList<>();
   static ArrayList<Soldado> army1DA = new ArrayList<>();
   static ArrayList<Soldado> army1DB = new ArrayList<>();
