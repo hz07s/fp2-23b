@@ -11,45 +11,44 @@ public class VideoJuego4 {
   public static void main(String [] args){
     createArmy();
     
-    System.out.println("DATOS DE LOS SOLDADOS CREADOS: \n");
-    System.out.println("EJERCITO \"A\"");
-    showArmyData(army1DA);
-    System.out.println("\nEJERCITO \"B\"");
-    showArmyData(army1DB);
+    //System.out.println("DATOS DE LOS SOLDADOS CREADOS: \n");
+    //System.out.println("EJERCITO \"A\"");
+    //showArmyData(army1DA);
+    //System.out.println("\nEJERCITO \"B\"");
+    //showArmyData(army1DB);
 
-    System.out.println("                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     showArmyTable(army);
 
-    System.out.println("Soldado(s) con mayor vida del Ejercito A: ");
-    moreHelath(army1DA);
-    System.out.println("Soldado(s) con mayor vida del Ejercito B: ");
-    moreHelath(army1DB);
+    //System.out.println("Soldado(s) con mayor vida del Ejercito A: ");
+    //moreHelath(army1DA);
+    //System.out.println("Soldado(s) con mayor vida del Ejercito B: ");
+    //moreHelath(army1DB);
 
-    System.out.println("La suma de la vida del Ejercito A es: " + sumHealth(army1DA));
-    System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
-    System.out.println("La suma de la vida del Ejercito B es: " + sumHealth(army1DB));
-    System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
+    //System.out.println("La suma de la vida del Ejercito A es: " + sumHealth(army1DA));
+    //System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
+    //System.out.println("La suma de la vida del Ejercito B es: " + sumHealth(army1DB));
+    //System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
 
-    System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
-    System.out.println("EJERCITO  A: ");
-    printArmyHealth(bubbleSort(army1DA));
-    System.out.println("EJERCITO  B: ");
-    printArmyHealth(bubbleSort(army1DB));
+    //System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
+    //System.out.println("EJERCITO  A: ");
+    //printArmyHealth(bubbleSort(army1DA));
+    //System.out.println("EJERCITO  B: ");
+    //printArmyHealth(bubbleSort(army1DB));
 
-    System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
-    System.out.println("EJERCITO  A: ");
-    printArmyHealth(insertionSort(army1DA));
-    System.out.println("EJERCITO  B: ");
-    printArmyHealth(insertionSort(army1DB));
+    //System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
+    //System.out.println("EJERCITO  A: ");
+    //printArmyHealth(insertionSort(army1DA));
+    //System.out.println("EJERCITO  B: ");
+    //printArmyHealth(insertionSort(army1DB));
 
-    System.out.println("\nEjercitos ordenados (selectionSort) segun la vida: ");
-    System.out.println("EJERCITO  A: ");
-    printArmyHealth(selectionSort(army1DA));
-    System.out.println("EJERCITO  B: ");
-    printArmyHealth(selectionSort(army1DB));
+    //System.out.println("\nEjercitos ordenados (selectionSort) segun la vida: ");
+    //System.out.println("EJERCITO  A: ");
+    //printArmyHealth(selectionSort(army1DA));
+    //System.out.println("EJERCITO  B: ");
+    //printArmyHealth(selectionSort(army1DB));
 
-    System.out.println();
-    armyWinnerHealth();
+    //System.out.println();
+    //armyWinnerHealth();
   }
 
   public static void createArmy(){
@@ -77,29 +76,24 @@ public class VideoJuego4 {
   }
 
   public static void showArmyTable(Soldado[][] army){
-    String linesUp = "   |       |       |       |       |       |       |       |       |       |       |";
+    System.out.println("\n                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
                       +"    _______________________________________________________________________________");
     
     for (int r = 0; r < army.length; r++){
-      System.out.println(linesUp);
-      System.out.print(r+1 + ((r != 9) ? "  |" : " |"));
+      System.out.print("   |");
       for (int c = 0; c < army[r].length; c++)
-        System.out.print(" " + (isTeam(army[r][c], army1DA)? "\'A\'" : isTeam(army[r][c], army1DB)? "\'B\'" : "")
-        + ((army[r][c] != null) ?"S" 
-        + army[r][c].getName().charAt(7) + " |" : "      |"));
+        System.out.print(" " + (army[r][c] != null ? ("\'" + army[r][c].getTeam() + "\'" 
+        + "S" + army[r][c].getName().charAt(7) + " |") : "      |"));
+
+      System.out.print("\n" + (r+1) + ((r != 9) ? "  |" : " |"));
+      for (int c = 0; c < army[r].length; c++)
+        System.out.print(" " + (army[r][c] != null ? "HP: " + army[r][c].getHealth() : "     ") + " |");
         
       System.out.println("\n" + linesDown);
     }
     System.out.println();
-  }
-
-  public static boolean isTeam(Soldado s, ArrayList <Soldado> army1DT){
-    for (Soldado sA : army1DT)
-      if (sA.equals(s))
-        return true;
-    return false;
   }
 
   public static void showArmyData(ArrayList <Soldado> army1D){
