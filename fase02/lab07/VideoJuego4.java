@@ -35,8 +35,7 @@ public class VideoJuego4 {
     printArmyHealth(selectionSort(army1DA), 'A');
     printArmyHealth(selectionSort(army1DB), 'B');
 
-    //System.out.println();
-    //armyWinnerHealth();
+    armyWinnerHealth();
   }
 
   public static void createArmy(){
@@ -175,13 +174,13 @@ public class VideoJuego4 {
   }
 
   public static void armyWinnerHealth(){
-    System.out.println("(Segun la vida)");
+    System.out.print("\nSegun la suma de vida de los soldados, ");
     if (sumHealth(army1DA) > sumHealth(army1DB))
-      System.out.println("El ejercito ganador es: \'A\'");
+      System.out.println("el ejercito ganador es el: \'A\'");
       else if (sumHealth(army1DB) > sumHealth(army1DA))
-        System.out.println("El ejercito ganador es: \'B\'");
+        System.out.println("el ejercito ganador es el: \'B\'");
         else
-          System.out.println("La batalla quedo en empate");
+          System.out.println("la batalla quedo en empate");
     System.out.println();
   }
 }
