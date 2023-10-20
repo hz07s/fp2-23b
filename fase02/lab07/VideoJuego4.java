@@ -17,10 +17,8 @@ public class VideoJuego4 {
 
     showArmyTable(army);
 
-    //System.out.println("Soldado(s) con mayor vida del Ejercito A: ");
-    //moreHelath(army1DA);
-    //System.out.println("Soldado(s) con mayor vida del Ejercito B: ");
-    //moreHelath(army1DB);
+    moreHelath(army1DA, 'A');
+    moreHelath(army1DB, 'B');
 
     //System.out.println("La suma de la vida del Ejercito A es: " + sumHealth(army1DA));
     //System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
@@ -100,12 +98,13 @@ public class VideoJuego4 {
       System.out.println(s);
   }
 
-  public static void moreHelath(ArrayList <Soldado> army1MH){
+  public static void moreHelath(ArrayList <Soldado> army1MH, char t){
     int maxHealth = -1;
     for(Soldado s : army1MH)
       if (s.getHealth() > maxHealth)
         maxHealth = s.getHealth();
 
+    System.out.println("Soldado(s) con mayor vida del Ejercito " + t + ": ");
     for (Soldado s : army1MH) 
       if (s.getHealth() == maxHealth)
         System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getHealth());
