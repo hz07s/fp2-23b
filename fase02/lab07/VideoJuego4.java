@@ -20,10 +20,8 @@ public class VideoJuego4 {
     moreHelath(army1DA, 'A');
     moreHelath(army1DB, 'B');
 
-    //System.out.println("La suma de la vida del Ejercito A es: " + sumHealth(army1DA));
-    //System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
-    //System.out.println("La suma de la vida del Ejercito B es: " + sumHealth(army1DB));
-    //System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
+    System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
+    System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
 
     //System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
     //System.out.println("EJERCITO  A: ");
