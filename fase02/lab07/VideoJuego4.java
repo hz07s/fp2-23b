@@ -56,12 +56,6 @@ public class VideoJuego4 {
     int numSoldiersA = (int) (Math.random() * 10) + 1;
     int numSoldiersB = (int) (Math.random() * 10) + 1;
 
-    for (int i = 0; i < 10; i++){
-      army.add(new ArrayList<>());
-      for (int j = 0; j < 10; j++)
-        army.get(i).add(null);
-    }
-
     army1DA = createArmyTeam(numSoldiersA, army1DA, "A");
     army1DB = createArmyTeam(numSoldiersB, army1DB, "B");
   }
@@ -73,11 +67,11 @@ public class VideoJuego4 {
       do {
         row = (int) (Math.random() * 9) + 1;
         col = (int) (Math.random() * 9) + 1;
-      } while (army.get(row).get(col) != null);
+      } while (army[row][col] != null);
 
       Soldado s = new Soldado("Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1);
       army1D.add(i, s);
-      army.get(row).set(col, s);
+      army[row][col] = s;
     }
     return army1D;
   }
