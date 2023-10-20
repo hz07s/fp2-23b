@@ -3,6 +3,7 @@
 // Colaboro : null
 // Tiempo : 2 horas
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class VideoJuego4 {
   static Soldado[][] army = new Soldado[10][10];
@@ -37,7 +38,8 @@ public class VideoJuego4 {
 
     armyWinnerHealth();
   }
-  public static void interfaz(){
+  public static void mainInterfaz(){
+    Scanner sc = new Scanner(System.in);
     System.out.println("Bienvenido...");
 
     System.out.println("1. Crear un nuevo ejercito" 
@@ -45,8 +47,35 @@ public class VideoJuego4 {
                       +"3. Mostrar la tabla con los ejercitos" 
                       +"4. Mostrar el promedio de vida de los ejercitos" 
                       +"5. Ordenar los soldados de ejercitos segun la vida" 
-                      +"6. Mostrar ejercito ganador");
-                      
+                      +"6. Mostrar ejercito ganador"
+                      +"7. Salir del juego");
+    int action = sc.nextInt();
+
+    switch (action){
+      case 1 -> { // Crear un nuevo ejercito
+
+      }
+      case 2 -> { // Mostrar los datos de los ejercitos
+        
+      }
+      case 3 -> { // Mostrar la tabla con los ejercitos
+        
+      }
+      case 4 -> { // Mostrar el promedio de vida de los ejercitos
+        
+      }
+      case 5 -> { // Ordenar los soldados de ejercitos segun la vida
+        
+      }
+      case 6 -> { // Mostrar ejercito ganador
+        
+      }
+      case 7 -> { // Salir del juego
+        
+      }
+    }
+
+    sc.close();
   }
 
   public static void createArmy(){
