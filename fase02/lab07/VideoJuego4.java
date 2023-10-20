@@ -5,7 +5,7 @@
 import java.util.ArrayList;
 
 public class VideoJuego4 {
-  static ArrayList<ArrayList<Soldado>> army = new ArrayList<>();
+  static Soldado[][] army = new Soldado[10][10];
   static ArrayList<Soldado> army1DA = new ArrayList<>();
   static ArrayList<Soldado> army1DB = new ArrayList<>();
   public static void main(String [] args){
