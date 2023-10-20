@@ -4,13 +4,15 @@ public class Soldado {
   private char column;
   private boolean status;
   private int health;
+  private char team;
 
-  public Soldado(String name, int row, char column, boolean status, int health) {
+  public Soldado(String name, int row, char column, boolean status, int health, char team) {
     this.name = name;
     this.row = row;
     this.column = column;
     this.status = status;
     this.health = health;
+    this.team = team;
   }
 
   public void setName(String n){
@@ -28,6 +30,9 @@ public class Soldado {
   public void setHealth(int h){
     health = h;
   }
+  public void setTeam(char t){
+    team = t;
+  }
 
   public String getName(){
     return name;
@@ -43,6 +48,9 @@ public class Soldado {
   }
   public int getHealth(){
     return health;
+  }
+  public char getTeam(){
+    return team;
   }
   @Override
   public String toString() {  

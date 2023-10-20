@@ -56,11 +56,11 @@ public class VideoJuego4 {
     int numSoldiersA = (int) (Math.random() * 10) + 1;
     int numSoldiersB = (int) (Math.random() * 10) + 1;
 
-    army1DA = createArmyTeam(numSoldiersA, army1DA, "A");
-    army1DB = createArmyTeam(numSoldiersB, army1DB, "B");
+    army1DA = createArmyTeam(numSoldiersA, army1DA, 'A');
+    army1DB = createArmyTeam(numSoldiersB, army1DB, 'B');
   }
 
-  public static ArrayList <Soldado> createArmyTeam(int numSoldiers, ArrayList <Soldado> army1D, String t){
+  public static ArrayList <Soldado> createArmyTeam(int numSoldiers, ArrayList <Soldado> army1D, char t){
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
       
@@ -69,7 +69,7 @@ public class VideoJuego4 {
         col = (int) (Math.random() * 9) + 1;
       } while (army[row][col] != null);
 
-      Soldado s = new Soldado("Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1);
+      Soldado s = new Soldado("Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1, t);
       army1D.add(i, s);
       army[row][col] = s;
     }
