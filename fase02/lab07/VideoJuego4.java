@@ -37,6 +37,17 @@ public class VideoJuego4 {
 
     armyWinnerHealth();
   }
+  public static void interfaz(){
+    System.out.println("Bienvenido...");
+
+    System.out.println("1. Crear un nuevo ejercito" 
+                      +"2. Mostrar los datos de los ejercitos" 
+                      +"3. Mostrar la tabla con los ejercitos" 
+                      +"4. Mostrar el promedio de vida de los ejercitos" 
+                      +"5. Ordenar los soldados de ejercitos segun la vida" 
+                      +"6. Mostrar ejercito ganador");
+                      
+  }
 
   public static void createArmy(){
     int numSoldiersA = (int) (Math.random() * 10) + 1;
