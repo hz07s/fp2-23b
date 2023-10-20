@@ -82,19 +82,19 @@ public class VideoJuego4 {
     return army1D;
   }
 
-  public static void showArmyTable(ArrayList <ArrayList <Soldado>> army){
+  public static void showArmyTable(Soldado[][] army){
     String linesUp = "   |       |       |       |       |       |       |       |       |       |       |";
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
                       +"    _______________________________________________________________________________");
     
-    for (int r = 0; r < army.size(); r++){
+    for (int r = 0; r < army.length; r++){
       System.out.println(linesUp);
       System.out.print(r+1 + ((r != 9) ? "  |" : " |"));
-      for (int c = 0; c < army.get(r).size(); c++)
-        System.out.print(" " + (isTeam(army.get(r).get(c), army1DA)? "\'A\'" : isTeam(army.get(r).get(c), army1DB)? "\'B\'" : "") 
-        + ((army.get(r).get(c) != null) ?"S" 
-        + army.get(r).get(c).getName().charAt(7) + " |" : "      |"));
+      for (int c = 0; c < army[r].length; c++)
+        System.out.print(" " + (isTeam(army[r][c], army1DA)? "\'A\'" : isTeam(army[r][c], army1DB)? "\'B\'" : "")
+        + ((army[r][c] != null) ?"S" 
+        + army[r][c].getName().charAt(7) + " |" : "      |"));
         
       System.out.println("\n" + linesDown);
     }
