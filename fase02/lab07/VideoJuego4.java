@@ -11,11 +11,9 @@ public class VideoJuego4 {
   public static void main(String [] args){
     createArmy();
     
-    //System.out.println("DATOS DE LOS SOLDADOS CREADOS: \n");
-    //System.out.println("EJERCITO \"A\"");
-    //showArmyData(army1DA);
-    //System.out.println("\nEJERCITO \"B\"");
-    //showArmyData(army1DB);
+    System.out.println("DATOS DE LOS SOLDADOS CREADOS: \n");
+    showArmyData(army1DA, 'A');
+    showArmyData(army1DB, 'B');
 
     showArmyTable(army);
 
@@ -96,7 +94,8 @@ public class VideoJuego4 {
     System.out.println();
   }
 
-  public static void showArmyData(ArrayList <Soldado> army1D){
+  public static void showArmyData(ArrayList <Soldado> army1D, char t){
+    System.out.println("EJERCITO \"" + t + "\"");
     for (Soldado s : army1D)
       System.out.println(s);
   }
