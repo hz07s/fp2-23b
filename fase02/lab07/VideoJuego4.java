@@ -23,23 +23,17 @@ public class VideoJuego4 {
     System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
     System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
 
-    //System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
-    //System.out.println("EJERCITO  A: ");
-    //printArmyHealth(bubbleSort(army1DA));
-    //System.out.println("EJERCITO  B: ");
-    //printArmyHealth(bubbleSort(army1DB));
+    System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
+    printArmyHealth(bubbleSort(army1DA), 'A');
+    printArmyHealth(bubbleSort(army1DB), 'B');
 
-    //System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
-    //System.out.println("EJERCITO  A: ");
-    //printArmyHealth(insertionSort(army1DA));
-    //System.out.println("EJERCITO  B: ");
-    //printArmyHealth(insertionSort(army1DB));
+    System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
+    printArmyHealth(insertionSort(army1DA), 'A');
+    printArmyHealth(insertionSort(army1DB), 'B');
 
-    //System.out.println("\nEjercitos ordenados (selectionSort) segun la vida: ");
-    //System.out.println("EJERCITO  A: ");
-    //printArmyHealth(selectionSort(army1DA));
-    //System.out.println("EJERCITO  B: ");
-    //printArmyHealth(selectionSort(army1DB));
+    System.out.println("\nEjercitos ordenados (selectionSort) segun la vida: ");
+    printArmyHealth(selectionSort(army1DA), 'A');
+    printArmyHealth(selectionSort(army1DB), 'B');
 
     //System.out.println();
     //armyWinnerHealth();
@@ -174,7 +168,8 @@ public class VideoJuego4 {
     return army1DCopySelection;
   }
 
-  public static void printArmyHealth(ArrayList <Soldado> armyPrint){
+  public static void printArmyHealth(ArrayList <Soldado> armyPrint, char t){
+    System.out.println("EJERCITO " + t + " : ");
     for(int i = 0; i < armyPrint.size(); i++)
       System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getHealth());
   }
