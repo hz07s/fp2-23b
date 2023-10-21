@@ -11,19 +11,20 @@ public class VideoJuego4 {
   static ArrayList<Soldado> army1DB = new ArrayList<>();
   public static void main(String [] args){
     createArmy();
-
+    mainInterfaz();
   }
   public static void mainInterfaz(){
     Scanner sc = new Scanner(System.in);
     System.out.println("Bienvenido...");
 
     System.out.println("1. Crear un nuevo ejercito" 
-                      +"2. Mostrar los datos de los ejercitos" 
-                      +"3. Mostrar la tabla con los ejercitos" 
-                      +"4. Mostrar el promedio de vida de los ejercitos" 
-                      +"5. Ordenar los soldados de ejercitos segun la vida" 
-                      +"6. Mostrar ejercito ganador"
-                      +"7. Salir del juego");
+                      +"\n2. Mostrar los datos de los ejercitos" 
+                      +"\n3. Mostrar la tabla con los ejercitos" 
+                      +"\n4. Mostrar el promedio de vida de los ejercitos" 
+                      +"\n5. Mostrar los soldados de ejercitos con mayor vida" 
+                      +"\n6. Ordenar los soldados de ejercitos segun la vida" 
+                      +"\n7. Mostrar ejercito ganador"
+                      +"\n8. Salir del juego");
     int action = sc.nextInt();
 
     switch (action){
@@ -31,24 +32,28 @@ public class VideoJuego4 {
         army.clear();
         army1DA.clear();
         army1DB.clear();
-          
         createArmy();
+        mainInterfaz();
       }
       case 2 -> { // Mostrar los datos de los ejercitos
         System.out.println("DATOS DE LOS SOLDADOS CREADOS:\n");
         showArmyData(army1DA, 'A');
         showArmyData(army1DB, 'B');
+        mainInterfaz();
       }
       case 3 -> { // Mostrar la tabla con los ejercitos
         showArmyTable(army);
+        mainInterfaz();
       }
       case 4 -> { // Mostrar el promedio de vida de los ejercitos
         System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
         System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
+        mainInterfaz();
       }
       case 5 -> { // Mostrar los soldados de ejercitos con mayor vida
         moreHelath(army1DA, 'A');
         moreHelath(army1DB, 'B');
+        mainInterfaz();
       }
       case 6 -> { // Ordenar los soldados de ejercitos segun la vida
         System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
@@ -62,12 +67,18 @@ public class VideoJuego4 {
         System.out.println("\nEjercitos ordenados (selectionSort) segun la vida: ");
         printArmyHealth(selectionSort(army1DA), 'A');
         printArmyHealth(selectionSort(army1DB), 'B');
+        mainInterfaz();
       }
       case 7 -> { // Mostrar ejercito ganador
         armyWinnerHealth();
+        mainInterfaz();
       }
       case 8 -> { // Salir del juego
-        
+        System.out.println("Fin.");
+      }
+      default -> {
+        System.out.println("Selecciona una opcion valida");
+        mainInterfaz();
       }
     }
 
