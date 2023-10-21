@@ -11,10 +11,6 @@ public class VideoJuego4 {
   static ArrayList<Soldado> army1DB = new ArrayList<>();
   public static void main(String [] args){
     createArmy();
-    
-    System.out.println("DATOS DE LOS SOLDADOS CREADOS: \n");
-    showArmyData(army1DA, 'A');
-    showArmyData(army1DB, 'B');
 
     showArmyTable(army);
 
@@ -60,7 +56,9 @@ public class VideoJuego4 {
         createArmy();
       }
       case 2 -> { // Mostrar los datos de los ejercitos
-        
+        System.out.println("DATOS DE LOS SOLDADOS CREADOS:\n");
+        showArmyData(army1DA, 'A');
+        showArmyData(army1DB, 'B');
       }
       case 3 -> { // Mostrar la tabla con los ejercitos
         
