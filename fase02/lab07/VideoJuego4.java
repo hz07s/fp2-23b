@@ -12,8 +12,6 @@ public class VideoJuego4 {
   public static void main(String [] args){
     createArmy();
 
-    showArmyTable(army);
-
     moreHelath(army1DA, 'A');
     moreHelath(army1DB, 'B');
 
@@ -61,7 +59,7 @@ public class VideoJuego4 {
         showArmyData(army1DB, 'B');
       }
       case 3 -> { // Mostrar la tabla con los ejercitos
-        
+        showArmyTable(army);
       }
       case 4 -> { // Mostrar el promedio de vida de los ejercitos
         
