@@ -1,12 +1,12 @@
 // Laboratorio Nro 06 - Ejercicio01
 // Autor : Hernan Andy
 // Colaboro : null
-// Tiempo : 2 horas
+// Tiempo : 3 horas
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class VideoJuego4 {
-  static Soldado[][] army = new Soldado[10][10];
+  static ArrayList<ArrayList<Soldado>> army = new ArrayList<>();
   static ArrayList<Soldado> army1DA = new ArrayList<>();
   static ArrayList<Soldado> army1DB = new ArrayList<>();
   public static void main(String [] args){
@@ -53,7 +53,11 @@ public class VideoJuego4 {
 
     switch (action){
       case 1 -> { // Crear un nuevo ejercito
-
+        army.clear();
+        army1DA.clear();
+        army1DB.clear();
+          
+        createArmy();
       }
       case 2 -> { // Mostrar los datos de los ejercitos
         
@@ -82,6 +86,12 @@ public class VideoJuego4 {
     int numSoldiersA = (int) (Math.random() * 10) + 1;
     int numSoldiersB = (int) (Math.random() * 10) + 1;
 
+    for (int i = 0; i < 10; i++){
+      army.add(new ArrayList<>());
+      for (int j = 0; j < 10; j++)
+        army.get(i).add(null);
+    }
+
     army1DA = createArmyTeam(numSoldiersA, army1DA, 'A');
     army1DB = createArmyTeam(numSoldiersB, army1DB, 'B');
   }
@@ -93,32 +103,32 @@ public class VideoJuego4 {
       do {
         row = (int) (Math.random() * 9) + 1;
         col = (int) (Math.random() * 9) + 1;
-      } while (army[row][col] != null);
+      } while (army.get(row).get(col) != null);
 
       Soldado s = new Soldado("Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1, t);
       army1D.add(i, s);
-      army[row][col] = s;
+      army.get(row).set(col, s);
     }
     return army1D;
   }
 
-  public static void showArmyTable(Soldado[][] army){
+  public static void showArmyTable(ArrayList <ArrayList <Soldado>> army){
     System.out.println("\n                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
                       +"    _______________________________________________________________________________");
     
-    for (int r = 0; r < army.length; r++){
+    for (int r = 0; r < army.size(); r++){
       System.out.print("   |");
-      for (int c = 0; c < army[r].length; c++)
-        System.out.print(" " + (army[r][c] != null ? ("\'" + army[r][c].getTeam() + "\'" 
-        + "S" + army[r][c].getName().charAt(7) + " |") : "      |"));
+      for (int c = 0; c < army.get(r).size(); c++)
+        System.out.print(" " + (army.get(r).get(c) != null ? ("\'" + army.get(r).get(c).getTeam() + "\'" 
+        + "S" + army.get(r).get(c).getName().charAt(7) + " |") : "      |"));
 
       System.out.print("\n" + (r+1) + ((r != 9) ? "  |" : " |"));
-      for (int c = 0; c < army[r].length; c++)
-        System.out.print(" " + (army[r][c] != null ? "HP: " + army[r][c].getHealth() : "     ") + " |");
+      for (int c = 0; c < army.get(r).size(); c++)
+        System.out.print(" " + (army.get(r).get(c) != null ? "HP: " + army.get(r).get(c).getHealth() : "     ") + " |");
         
-      System.out.println("\n" + linesDown);
+      System.out.println("\n" + linesDown );
     }
     System.out.println();
   }
