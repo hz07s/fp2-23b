@@ -12,7 +12,6 @@ public class VideoJuego4 {
   public static void main(String [] args){
     createArmy();
 
-    armyWinnerHealth();
   }
   public static void mainInterfaz(){
     Scanner sc = new Scanner(System.in);
@@ -65,7 +64,7 @@ public class VideoJuego4 {
         printArmyHealth(selectionSort(army1DB), 'B');
       }
       case 7 -> { // Mostrar ejercito ganador
-        
+        armyWinnerHealth();
       }
       case 8 -> { // Salir del juego
         
