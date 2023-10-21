@@ -15,9 +15,6 @@ public class VideoJuego4 {
     moreHelath(army1DA, 'A');
     moreHelath(army1DB, 'B');
 
-    System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
-    System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
-
     System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
     printArmyHealth(bubbleSort(army1DA), 'A');
     printArmyHealth(bubbleSort(army1DB), 'B');
@@ -62,7 +59,8 @@ public class VideoJuego4 {
         showArmyTable(army);
       }
       case 4 -> { // Mostrar el promedio de vida de los ejercitos
-        
+        System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
+        System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
       }
       case 5 -> { // Ordenar los soldados de ejercitos segun la vida
         
