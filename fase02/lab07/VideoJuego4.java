@@ -12,18 +12,6 @@ public class VideoJuego4 {
   public static void main(String [] args){
     createArmy();
 
-    System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
-    printArmyHealth(bubbleSort(army1DA), 'A');
-    printArmyHealth(bubbleSort(army1DB), 'B');
-
-    System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
-    printArmyHealth(insertionSort(army1DA), 'A');
-    printArmyHealth(insertionSort(army1DB), 'B');
-
-    System.out.println("\nEjercitos ordenados (selectionSort) segun la vida: ");
-    printArmyHealth(selectionSort(army1DA), 'A');
-    printArmyHealth(selectionSort(army1DB), 'B');
-
     armyWinnerHealth();
   }
   public static void mainInterfaz(){
@@ -64,7 +52,17 @@ public class VideoJuego4 {
         moreHelath(army1DB, 'B');
       }
       case 6 -> { // Ordenar los soldados de ejercitos segun la vida
-        
+        System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
+        printArmyHealth(bubbleSort(army1DA), 'A');
+        printArmyHealth(bubbleSort(army1DB), 'B');
+
+        System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
+        printArmyHealth(insertionSort(army1DA), 'A');
+        printArmyHealth(insertionSort(army1DB), 'B');
+
+        System.out.println("\nEjercitos ordenados (selectionSort) segun la vida: ");
+        printArmyHealth(selectionSort(army1DA), 'A');
+        printArmyHealth(selectionSort(army1DB), 'B');
       }
       case 7 -> { // Mostrar ejercito ganador
         
