@@ -1,14 +1,15 @@
-// Laboratorio Nro 06 - Ejercicio01
+// Laboratorio Nro 08 - Ejercicio01
 // Autor : Hernan Andy
 // Colaboro : null
 // Tiempo : 3 horas
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class VideoJuego5 {
-  static ArrayList<ArrayList<Soldado>> army = new ArrayList<>();
-  static ArrayList<Soldado> army1DA = new ArrayList<>();
-  static ArrayList<Soldado> army1DB = new ArrayList<>();
+  static HashMap <Integer, Soldado> army = new HashMap<>();
+  static HashMap <Integer, Soldado> army1DA = new HashMap<>();
+  static HashMap <Integer, Soldado> army1DB = new HashMap<>();
   public static void main(String [] args){
     createArmy();
     mainInterfaz();
@@ -89,28 +90,22 @@ public class VideoJuego5 {
     int numSoldiersA = (int) (Math.random() * 10) + 1;
     int numSoldiersB = (int) (Math.random() * 10) + 1;
 
-    for (int i = 0; i < 10; i++){
-      army.add(new ArrayList<>());
-      for (int j = 0; j < 10; j++)
-        army.get(i).add(null);
-    }
-
     army1DA = createArmyTeam(numSoldiersA, army1DA, 'A');
     army1DB = createArmyTeam(numSoldiersB, army1DB, 'B');
   }
 
-  public static ArrayList <Soldado> createArmyTeam(int numSoldiers, ArrayList <Soldado> army1D, char t){
+  public static HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t){
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
       
       do {
         row = (int) (Math.random() * 9) + 1;
         col = (int) (Math.random() * 9) + 1;
-      } while (army.get(row).get(col) != null);
+      } while (army.containsKey(row * 10 + col));
 
       Soldado s = new Soldado("Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1, t);
-      army1D.add(i, s);
-      army.get(row).set(col, s);
+      army1D.put(i, s);
+      army.put(row * 10 + col, s);
     }
     return army1D;
   }
