@@ -197,9 +197,9 @@ public class VideoJuego5 {
     return army1DCopyInsertion;
   }
 
-  public static ArrayList <Soldado> selectionSort(ArrayList <Soldado> army1DSS) {
+  public static HashMap <Integer, Soldado> selectionSort(HashMap <Integer, Soldado> army1DSS) {
     int n = army1DSS.size();
-    ArrayList <Soldado> army1DCopySelection = new ArrayList<>(army1DSS);
+    HashMap<Integer, Soldado> army1DCopySelection = new HashMap<>(army1DSS);
   
     for (int i = 0; i < n - 1; i++) {
       int min_idx = i;
@@ -209,8 +209,8 @@ public class VideoJuego5 {
           min_idx = j;
   
       Soldado temp = army1DCopySelection.get(min_idx);
-      army1DCopySelection.set(min_idx, army1DCopySelection.get(i));
-      army1DCopySelection.set(i, temp);
+      army1DCopySelection.put(min_idx, army1DCopySelection.get(i));
+      army1DCopySelection.put(i, temp);
     }
     return army1DCopySelection;
   }
