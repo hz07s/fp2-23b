@@ -137,14 +137,14 @@ public class VideoJuego5 {
       System.out.println(s);
   }
 
-  public static void moreHelath(ArrayList <Soldado> army1MH, char t){
+  public static void moreHelath(HashMap <Integer, Soldado> army1MH, char t){
     int maxHealth = -1;
-    for(Soldado s : army1MH)
+    for(Soldado s : army1MH.values())
       if (s.getHealth() > maxHealth)
         maxHealth = s.getHealth();
 
     System.out.println("Soldado(s) con mayor vida del Ejercito " + t + ": ");
-    for (Soldado s : army1MH) 
+    for (Soldado s : army1MH.values()) 
       if (s.getHealth() == maxHealth)
         System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getHealth());
     System.out.println();
