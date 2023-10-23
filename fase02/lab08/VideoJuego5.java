@@ -161,8 +161,8 @@ public class VideoJuego5 {
     return sum;
   }
 
-  public static ArrayList <Soldado> bubbleSort(ArrayList <Soldado> army1DBS){
-    ArrayList <Soldado>army1DCopyBubble = new ArrayList<>(army1DBS);
+  public static HashMap <Integer, Soldado> bubbleSort(HashMap <Integer, Soldado> army1DBS){
+    HashMap<Integer, Soldado> army1DCopyBubble = new HashMap<>(army1DBS);
     int n = army1DCopyBubble.size();
     boolean swapped;
     for (int i = 0; i < n - 1; i++) {
@@ -170,8 +170,8 @@ public class VideoJuego5 {
       for (int j = 0; j < n - i - 1; j++)
         if (army1DCopyBubble.get(j).getHealth() < army1DCopyBubble.get(j+1).getHealth()) {
           Soldado temp = army1DCopyBubble.get(j);
-          army1DCopyBubble.set(j, army1DCopyBubble.get(j+1));
-          army1DCopyBubble.set(j+1, temp);
+          army1DCopyBubble.put(j, army1DCopyBubble.get(j+1));
+          army1DCopyBubble.put(j+1, temp);
           swapped = true;
         }
       if (!swapped)
