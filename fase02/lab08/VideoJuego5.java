@@ -180,19 +180,19 @@ public class VideoJuego5 {
     return army1DCopyBubble;
   }
 
-  public static ArrayList <Soldado> insertionSort(ArrayList <Soldado> army1DIS) {
+  public static HashMap <Integer, Soldado> insertionSort(HashMap <Integer, Soldado> army1DIS) {
     int n = army1DIS.size();
-    ArrayList <Soldado> army1DCopyInsertion = new ArrayList<>(army1DIS);
+    HashMap<Integer, Soldado> army1DCopyInsertion = new HashMap<>(army1DIS);
 
     for (int i = 1; i < n; i++) {
       Soldado key = army1DCopyInsertion.get(i);
       int j = i - 1;
 
       while (j >= 0 && army1DCopyInsertion.get(j).getHealth() < key.getHealth()) {
-        army1DCopyInsertion.set(j+1, army1DCopyInsertion.get(j));
+        army1DCopyInsertion.put(j+1, army1DCopyInsertion.get(j));
         j = j - 1;
       }
-      army1DCopyInsertion.set(j+1, key);
+      army1DCopyInsertion.put(j+1, key);
     }
     return army1DCopyInsertion;
   }
