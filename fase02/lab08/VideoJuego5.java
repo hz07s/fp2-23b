@@ -131,9 +131,9 @@ public class VideoJuego5 {
     System.out.println();
   }
 
-  public static void showArmyData(ArrayList <Soldado> army1D, char t){
+  public static void showArmyData(HashMap <Integer, Soldado> army1D, char t){
     System.out.println("EJERCITO \"" + t + "\"");
-    for (Soldado s : army1D)
+    for (Soldado s : army1D.values())
       System.out.println(s);
   }
 
