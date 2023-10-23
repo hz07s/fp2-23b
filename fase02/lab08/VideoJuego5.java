@@ -110,21 +110,21 @@ public class VideoJuego5 {
     return army1D;
   }
 
-  public static void showArmyTable(ArrayList <ArrayList <Soldado>> army){
+  public static void showArmyTable(HashMap <Integer, Soldado> army){
     System.out.println("\n                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
                       +"    _______________________________________________________________________________");
     
-    for (int r = 0; r < army.size(); r++){
+    for (int r = 0; r < 10; r++){
       System.out.print("   |");
-      for (int c = 0; c < army.get(r).size(); c++)
-        System.out.print(" " + (army.get(r).get(c) != null ? ("\'" + army.get(r).get(c).getTeam() + "\'" 
-        + "S" + army.get(r).get(c).getName().charAt(7) + " |") : "      |"));
+      for (int c = 0; c < 10; c++)
+        System.out.print(" " + (army.get(r*10+c) != null ? ("\'" + army.get(r*10+c).getTeam() + "\'" 
+        + "S" + army.get(r*10+c).getName().charAt(7) + " |") : "      |"));
 
       System.out.print("\n" + (r+1) + ((r != 9) ? "  |" : " |"));
-      for (int c = 0; c < army.get(r).size(); c++)
-        System.out.print(" " + (army.get(r).get(c) != null ? "HP: " + army.get(r).get(c).getHealth() : "     ") + " |");
+      for (int c = 0; c < 10; c++)
+        System.out.print(" " + (army.get(r*10+c) != null ? "HP: " + army.get(r*10+c).getHealth() : "     ") + " |");
         
       System.out.println("\n" + linesDown );
     }
