@@ -150,7 +150,7 @@ public class VideoJuego5 {
     System.out.println();
   }
 
-  public static double averageHealth(ArrayList <Soldado> army1DAH){
+  public static double averageHealth(HashMap <Integer, Soldado> army1DAH){
     return sumHealth(army1DAH) / army1DAH.size();
   }
 
