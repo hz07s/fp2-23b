@@ -215,7 +215,7 @@ public class VideoJuego5 {
     return army1DCopySelection;
   }
 
-  public static void printArmyHealth(ArrayList <Soldado> armyPrint, char t){
+  public static void printArmyHealth(HashMap <Integer, Soldado> armyPrint, char t){
     System.out.println("EJERCITO " + t + " : ");
     for(int i = 0; i < armyPrint.size(); i++)
       System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getHealth());
