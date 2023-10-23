@@ -154,9 +154,9 @@ public class VideoJuego5 {
     return sumHealth(army1DAH) / army1DAH.size();
   }
 
-  public static int sumHealth(ArrayList <Soldado> army1DSH){
+  public static int sumHealth(HashMap <Integer, Soldado> army1DSH){
     int sum = 0;
-    for (Soldado s : army1DSH)
+    for (Soldado s : army1DSH.values())
       sum += s.getHealth();
     return sum;
   }
