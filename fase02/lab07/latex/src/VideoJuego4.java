@@ -1,14 +1,14 @@
-// Laboratorio Nro 08 - Ejercicio01
+// Laboratorio Nro 06 - Ejercicio01
 // Autor : Hernan Andy
 // Colaboro : null
-// Tiempo : 1 horas
-import java.util.HashMap;
+// Tiempo : 3 horas
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class VideoJuego5 {
-  static HashMap <Integer, Soldado> army = new HashMap<>();
-  static HashMap <Integer, Soldado> army1DA = new HashMap<>();
-  static HashMap <Integer, Soldado> army1DB = new HashMap<>();
+public class VideoJuego4 {
+  static ArrayList<ArrayList<Soldado>> army = new ArrayList<>();
+  static ArrayList<Soldado> army1DA = new ArrayList<>();
+  static ArrayList<Soldado> army1DB = new ArrayList<>();
   public static void main(String [] args){
     createArmy();
     mainInterfaz();
@@ -89,79 +89,85 @@ public class VideoJuego5 {
     int numSoldiersA = (int) (Math.random() * 10) + 1;
     int numSoldiersB = (int) (Math.random() * 10) + 1;
 
+    for (int i = 0; i < 10; i++){
+      army.add(new ArrayList<>());
+      for (int j = 0; j < 10; j++)
+        army.get(i).add(null);
+    }
+
     army1DA = createArmyTeam(numSoldiersA, army1DA, 'A');
     army1DB = createArmyTeam(numSoldiersB, army1DB, 'B');
   }
 
-  public static HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t){
+  public static ArrayList <Soldado> createArmyTeam(int numSoldiers, ArrayList <Soldado> army1D, char t){
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
       
       do {
         row = (int) (Math.random() * 9) + 1;
         col = (int) (Math.random() * 9) + 1;
-      } while (army.containsKey(row * 10 + col));
+      } while (army.get(row).get(col) != null);
 
       Soldado s = new Soldado("Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1, t);
-      army1D.put(i, s);
-      army.put(row * 10 + col, s);
+      army1D.add(i, s);
+      army.get(row).set(col, s);
     }
     return army1D;
   }
 
-  public static void showArmyTable(HashMap <Integer, Soldado> army){
+  public static void showArmyTable(ArrayList <ArrayList <Soldado>> army){
     System.out.println("\n                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
                       +"    _______________________________________________________________________________");
     
-    for (int r = 0; r < 10; r++){
+    for (int r = 0; r < army.size(); r++){
       System.out.print("   |");
-      for (int c = 0; c < 10; c++)
-        System.out.print(" " + (army.get(r*10+c) != null ? ("\'" + army.get(r*10+c).getTeam() + "\'" 
-        + "S" + army.get(r*10+c).getName().charAt(7) + " |") : "      |"));
+      for (int c = 0; c < army.get(r).size(); c++)
+        System.out.print(" " + (army.get(r).get(c) != null ? ("\'" + army.get(r).get(c).getTeam() + "\'" 
+        + "S" + army.get(r).get(c).getName().charAt(7) + " |") : "      |"));
 
       System.out.print("\n" + (r+1) + ((r != 9) ? "  |" : " |"));
-      for (int c = 0; c < 10; c++)
-        System.out.print(" " + (army.get(r*10+c) != null ? "HP: " + army.get(r*10+c).getHealth() : "     ") + " |");
+      for (int c = 0; c < army.get(r).size(); c++)
+        System.out.print(" " + (army.get(r).get(c) != null ? "HP: " + army.get(r).get(c).getHealth() : "     ") + " |");
         
       System.out.println("\n" + linesDown );
     }
     System.out.println();
   }
 
-  public static void showArmyData(HashMap <Integer, Soldado> army1D, char t){
+  public static void showArmyData(ArrayList <Soldado> army1D, char t){
     System.out.println("EJERCITO \"" + t + "\"");
-    for (Soldado s : army1D.values())
+    for (Soldado s : army1D)
       System.out.println(s);
   }
 
-  public static void moreHelath(HashMap <Integer, Soldado> army1MH, char t){
+  public static void moreHelath(ArrayList <Soldado> army1MH, char t){
     int maxHealth = -1;
-    for(Soldado s : army1MH.values())
+    for(Soldado s : army1MH)
       if (s.getHealth() > maxHealth)
         maxHealth = s.getHealth();
 
     System.out.println("Soldado(s) con mayor vida del Ejercito " + t + ": ");
-    for (Soldado s : army1MH.values()) 
+    for (Soldado s : army1MH) 
       if (s.getHealth() == maxHealth)
         System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getHealth());
     System.out.println();
   }
 
-  public static double averageHealth(HashMap <Integer, Soldado> army1DAH){
+  public static double averageHealth(ArrayList <Soldado> army1DAH){
     return sumHealth(army1DAH) / army1DAH.size();
   }
 
-  public static int sumHealth(HashMap <Integer, Soldado> army1DSH){
+  public static int sumHealth(ArrayList <Soldado> army1DSH){
     int sum = 0;
-    for (Soldado s : army1DSH.values())
+    for (Soldado s : army1DSH)
       sum += s.getHealth();
     return sum;
   }
 
-  public static HashMap <Integer, Soldado> bubbleSort(HashMap <Integer, Soldado> army1DBS){
-    HashMap<Integer, Soldado> army1DCopyBubble = new HashMap<>(army1DBS);
+  public static ArrayList <Soldado> bubbleSort(ArrayList <Soldado> army1DBS){
+    ArrayList <Soldado>army1DCopyBubble = new ArrayList<>(army1DBS);
     int n = army1DCopyBubble.size();
     boolean swapped;
     for (int i = 0; i < n - 1; i++) {
@@ -169,8 +175,8 @@ public class VideoJuego5 {
       for (int j = 0; j < n - i - 1; j++)
         if (army1DCopyBubble.get(j).getHealth() < army1DCopyBubble.get(j+1).getHealth()) {
           Soldado temp = army1DCopyBubble.get(j);
-          army1DCopyBubble.put(j, army1DCopyBubble.get(j+1));
-          army1DCopyBubble.put(j+1, temp);
+          army1DCopyBubble.set(j, army1DCopyBubble.get(j+1));
+          army1DCopyBubble.set(j+1, temp);
           swapped = true;
         }
       if (!swapped)
@@ -179,26 +185,26 @@ public class VideoJuego5 {
     return army1DCopyBubble;
   }
 
-  public static HashMap <Integer, Soldado> insertionSort(HashMap <Integer, Soldado> army1DIS) {
+  public static ArrayList <Soldado> insertionSort(ArrayList <Soldado> army1DIS) {
     int n = army1DIS.size();
-    HashMap<Integer, Soldado> army1DCopyInsertion = new HashMap<>(army1DIS);
+    ArrayList <Soldado> army1DCopyInsertion = new ArrayList<>(army1DIS);
 
     for (int i = 1; i < n; i++) {
       Soldado key = army1DCopyInsertion.get(i);
       int j = i - 1;
 
       while (j >= 0 && army1DCopyInsertion.get(j).getHealth() < key.getHealth()) {
-        army1DCopyInsertion.put(j+1, army1DCopyInsertion.get(j));
+        army1DCopyInsertion.set(j+1, army1DCopyInsertion.get(j));
         j = j - 1;
       }
-      army1DCopyInsertion.put(j+1, key);
+      army1DCopyInsertion.set(j+1, key);
     }
     return army1DCopyInsertion;
   }
 
-  public static HashMap <Integer, Soldado> selectionSort(HashMap <Integer, Soldado> army1DSS) {
+  public static ArrayList <Soldado> selectionSort(ArrayList <Soldado> army1DSS) {
     int n = army1DSS.size();
-    HashMap<Integer, Soldado> army1DCopySelection = new HashMap<>(army1DSS);
+    ArrayList <Soldado> army1DCopySelection = new ArrayList<>(army1DSS);
   
     for (int i = 0; i < n - 1; i++) {
       int min_idx = i;
@@ -208,13 +214,13 @@ public class VideoJuego5 {
           min_idx = j;
   
       Soldado temp = army1DCopySelection.get(min_idx);
-      army1DCopySelection.put(min_idx, army1DCopySelection.get(i));
-      army1DCopySelection.put(i, temp);
+      army1DCopySelection.set(min_idx, army1DCopySelection.get(i));
+      army1DCopySelection.set(i, temp);
     }
     return army1DCopySelection;
   }
 
-  public static void printArmyHealth(HashMap <Integer, Soldado> armyPrint, char t){
+  public static void printArmyHealth(ArrayList <Soldado> armyPrint, char t){
     System.out.println("EJERCITO " + t + " : ");
     for(int i = 0; i < armyPrint.size(); i++)
       System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getHealth());

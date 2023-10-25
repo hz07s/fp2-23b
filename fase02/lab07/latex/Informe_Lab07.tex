@@ -49,8 +49,8 @@
 \newcommand{\itemAcademic}{2023 - B}
 \newcommand{\itemInput}{Del 18 Octubre 2023}
 \newcommand{\itemOutput}{Al 23 Octubre 2023}
-\newcommand{\itemPracticeNumber}{08}
-\newcommand{\itemTheme}{HashMap}
+\newcommand{\itemPracticeNumber}{07}
+\newcommand{\itemTheme}{Combinando Arreglos Estandar y ArrayList}
 
 %------------------------------  ------------------------------
 
@@ -165,11 +165,21 @@
 
 	\section{Tarea}
 	\begin{itemize}		
-        \item Cree un Proyecto llamado Laboratorio8
-        \item Usted deberá crear las dos clases Soldado.java y VideoJuego5.java. Puede reutilizar lo desarrollado en Laboratorios anteriores.
+        \item Cree un Proyecto llamado Laboratorio7
+        \item Usted deberá crear las dos clases Soldado.java y VideoJuego4.java. Puede reutilizar lo
+        desarrollado en Laboratorios anteriores.
         \item Del Soldado nos importa el nombre, puntos de vida, fila y columna (posición en el tablero).
-        \item El juego se desarrollará en el mismo tablero de los laboratorios anteriores. Para crear el tablero utilice la estructura de datos más adecuada.
-        \item Tendrá 2 Ejércitos (usar HashMaps). Inicializar el tablero con n soldados aleatorios entre 1 y 10 para cada Ejército. Cada soldado tendrá un nombre autogenerado: Soldado0X1, Soldado1X1, etc., un valor de puntos de vida autogenerado aleatoriamente [1..5], la fila y columna también autogenerados aleatoriamente (no puede haber 2 soldados en el mismo cuadrado). Se debe mostrar el tablero con todos los soldados creados (distinguir los de un ejército de los del otro ejército). Además de los datos del Soldado con mayor vida de cada ejército, el promedio de puntos de vida de todos los soldados creados por ejército, los datos de todos los soldados por ejército en el orden que fueron creados y un ranking de poder de todos los soldados creados por ejército (del que tiene más nivel de vida al que tiene menos) usando 2 diferentes algoritmos de ordenamiento (indicar conclusiones respecto a este ordenamiento de HashMaps). Finalmente, que muestre qué ejército ganará la batalla (indicar la métrica usada para decidir al ganador de la batalla). Hacerlo como programa iterativo.
+        \item El juego se desarrollará en el mismo tablero de los laboratorios anteriores. Para el tablero
+        utilizar la estructura de datos más adecuada.
+        \item Tendrá 2 Ejércitos (utilizar la estructura de datos más adecuada). Inicializar el tablero con n
+        soldados aleatorios entre 1 y 10 para cada Ejército. Cada soldado tendrá un nombre
+        autogenerado: Soldado0X1, Soldado1X1, etc., un valor de puntos de vida autogenerado
+        aleatoriamente [1..5], la fila y columna también autogenerados aleatoriamente (no puede
+        haber 2 soldados en el mismo cuadrado). Se debe mostrar el tablero con todos los soldados
+        creados y sus puntos de vida. Además de los datos del Soldado con mayor vida de cada ejército, el
+        promedio de puntos de vida de todos los soldados creados por ejército, los datos de todos los
+        soldados por ejército en el orden que fueron creados y un ranking de poder de todos los
+        soldados creados por ejército (del que tiene más nivel de vida al que tiene menos) usando 2 diferentes algoritmos de ordenamiento. Finalmente, que muestre qué ejército ganará la batalla (indicar la métrica usada para decidir al ganador de la batalla). Hacer el programa iterativo.
 
 	\end{itemize}
 		
@@ -183,7 +193,8 @@
         \item Variables Simples
         \item Métodos.
         \item Métodos de Búsqueda y Ordenamiento.
-        \item HashMap
+        \item Arreglos Estándar y Bidimensionales.
+        \item ArrayList
         
         
 	\end{itemize}
@@ -193,10 +204,10 @@
 		\item URL del Repositorio GitHub para clonar o recuperar.
         \item \url{https://github.com/hernanchoquehuanca/fp2-23b.git}
 		\item URL para el laboratorio 07 en el Repositorio GitHub.
-		\item \url{https://github.com/hernanchoquehuanca/fp2-23b/tree/main/fase02/lab08}
+		\item \url{https://github.com/hernanchoquehuanca/fp2-23b/tree/main/fase02/lab07}
 	\end{itemize}
 	
-	\section{Trabajo del Laboratorio 08}
+	\section{Trabajo del Laboratorio 07}
         
         
 %-----------------------------------------------------------------------------------
@@ -209,15 +220,15 @@
     
         \subsubsection{Clase Soldado.java}
         \begin{itemize}	
-            \item Haciendo uso de la clase Soldado.java del laboratorio anterior (lab07), se adaptó al ejercicio actual.
+            \item Haciendo uso de la clase Soldado.java del laboratorio anterior (lab06), se adaptó al ejercicio actual.
             \begin{itemize}
-                \item Primero copiamos el código tal cual a la carpeta del laboratorio actual (lab08).
+                \item Primero copiamos el código tal cual a la carpeta del laboratorio actual (lab07).
             \end{itemize}
         \end{itemize}
 
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/995eebff1a78185ffbdcbd551ebabeb7f6127f68}{995eebf}: En el primer commit se reutilizaba la clase Soldado.java del laboratorio anterior (lab07)}][H]
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/88096212a7228ae8637f2b46b77eee9abe96f443}{8809621}: En el primer commit se reutilizaba la clase Soldado.java del laboratorio anterior (lab06)}][H]
     		$ git add .
-    		$ git commit -m "Se reutilizo las clases del laboratorio anterior, para en este caso realizarlo con hashmap"
+    		$ git commit -m "Reutilizando las clases Soldado.java y VideoJuego3.java del Lab06"
     		$ git push -u origin main
     	\end{lstlisting}
         \newpage
@@ -261,6 +272,13 @@
 
         \lstinputlisting[language=Java, firstline=37, lastline=54,firstnumber=37,numbers=left]{src/Soldado.java}
 
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/a43020e7ffdcd7aca45a9bd5bcc58bf90ce02059}{a43020e} - \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/598a62d5d65db6832192e50b6ef383709a550043}{61b7b8e}: Se concluía la clase Soldado.java agregando su atributo team, que en el lab06 no se tomaba en cuentat}][H]
+    		$ git add .
+    		$ git commit -m "Agregando el atributo team a la clase Soldado.java, esto servira para usarlo al momento de mostrar la tabla y sea mas funcional, ademas se adapto el codigo para trabajar con este atributo"			
+    		$ git push -u origin main
+    	\end{lstlisting
+        \end{lstlisting}
+
         \begin{itemize}
             \item Y finalizando con esta clase, se creo el método toString().
             \begin{itemize}
@@ -271,7 +289,7 @@
         \end{itemize}
 
         \lstinputlisting[language=Java, firstline=55, lastline=64,firstnumber=55,numbers=left]{src/Soldado.java}
-
+\newpage
         \begin{itemize}
             \begin{itemize}
                 \item Un ejemplo de como se muestra en la siguiente imagen:
@@ -280,7 +298,7 @@
             
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.45\textwidth,keepaspectratio]{img/toString.png}
+            \includegraphics[width=0.42\textwidth,keepaspectratio]{img/toString.png}
             \caption{}
         \end{figure}
      
@@ -292,16 +310,16 @@
             \item Primero se comenzó con la creación de la clase. 
             \item Posterior a ello se crearon dos variables de clase: 
             \begin{itemize}
-                \item Un HashMap bidimensional, el cual contendrá a los soldados del ejército.
-                \item Además de un HashMap unidimensional que nos servirá para contener a los soldados creados previamente.
+                \item Un ArrayList bidimensional, el cual contendrá a los soldados del ejército.
+                \item Además de un ArrayList unidimensional que nos servirá para contener a los soldados creados previamente, de esta manera será más fácil trabajar con ellos en los futuros métodos.
             \end{itemize}
         \end{itemize}
 
-        \lstinputlisting[language=Java, firstline=8, lastline=11,firstnumber=8,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=8, lastline=11,firstnumber=8,numbers=left]{src/VideoJuego4.java}
 
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/49a014ba00f3309647cc37d3e4b67ab62dcf8642}{49a014b}: En el commit se modificaba las variables de la clase VideoJuego5.java para utilizar HashMap}][H]
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/a43020e7ffdcd7aca45a9bd5bcc58bf90ce02059}{a43020e} - \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/a9e7076e698a58a62ad7f89cd6c64a6f778b95e7}{a9e7076}: En el segundo commit se modificaba las variables de la clase VideoJuego4.java para utilizar las más adecuadas, luego más adelante se optó por utilizar ArrayList}][H]
     		$ git add .
-    		$ git commit -m "Redefiniendo los metodos createArmy y createArmyTeam para ahora trabajar con HashMap, ademas se cambiaron las variables de clase que almacenan el tablero y los ejercitos"			
+    		$ git commit -m "Cambiando la estructura de datos para el tablero, se utilizara un arreglo bidimensional de soldados, el cual sera una variable de la clase VideoJuego4.java"			
     		$ git push -u origin main
     	\end{lstlisting}
      
@@ -311,14 +329,16 @@
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{createArmy()}.
             \item Primero se define el número de soldados que contendrá cada ejército, haciendo uso de \textcolor{blue}{Math.random}.
+            \item Luego utilizando un doble bucle for, se inicializa el ArrayList bidimensional de soldados en \textcolor{blue}{null}.
             \item Ahora se llama dos veces al método \textcolor{blue}{createArmyTeam} para realizar la creación de los dos ejércitos a partir de los tamaños ya establecidos anteriormente y además el argumento tipo char para el identificador de cada equipo.
         \end{itemize}
 
-        \lstinputlisting[language=Java, firstline=88, lastline=94,firstnumber=88,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=88, lastline=100,firstnumber=88,numbers=left]
+        {src/VideoJuego4.java}
         
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/49a014ba00f3309647cc37d3e4b67ab62dcf8642}{49a014b}: En el commit se modificaba los métodos para trabajar con HashMap dentro del método createArmy eliminando un bucle que anteriormente trabajaba con HashMap}][H]
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/598a62d5d65db6832192e50b6ef383709a550043}{598a62d}: Se implementó el método createArmy()}][H]
     		$ git add .
-    		$ git commit -m "Redefiniendo los metodos createArmy y createArmyTeam para ahora trabajar con HashMap, ademas se cambiaron las variables de clase que almacenan el tablero y los ejercitos"			
+    		$ git commit -m "Adaptando los metodos createArmy y CreateArmyTeam para que trabajen ahora con los arreglos bidimensionales de soldados que es la estructura de datos de nuestro tablero"			
     		$ git push -u origin main
     	\end{lstlisting}
         
@@ -327,18 +347,18 @@
 
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{createArmyTeam()}.
-            \item Recibe como parámetros un entero que es el número de soldados del ejército, el HashMap de soldados a utilizar y un String que es el char que va al final del nombre de los soldados, esto último nos ayuda a identificarlos mejor.
-            \item Utilizando un do while se crean posiciones aleatorias en el HashMap bidimensional, tomando como condición que dicha posición sea distinta de \textcolor{blue}{null}.
-            \item Finalmente se crea el soldado asignando su posición como clave \textcolor{blue}{Integer}(el valor de la fila se guarda multiplicado por 10 sumándole el valor de la columna), el valor es el soldado y se almacena en cada HashMap y retorna el HashMap unidimensional con los soldados creados.
+            \item Recibe como parámetros un entero que es el número de soldados del ejército, el ArrayList de soldados a utilizar y un String que es el char que va al final del nombre de los soldados, esto último nos ayuda a identificarlos mejor.
+            \item Utilizando un do while se crean posiciones aleatorias en el ArrayList bidimensional, tomando como condición que dicha posición sea distinta de \textcolor{blue}{null}.
+            \item Finalmente se crea el soldado, se almacena en ambos arreglos y retorna el ArrayList unidimensional con los soldados creados.
 
         \end{itemize}
         \newpage
-        \lstinputlisting[language=Java, firstline=96, lastline=110,firstnumber=96,numbers=left]
-        {src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=102, lastline=116,firstnumber=102,numbers=left]
+        {src/VideoJuego4.java}
 
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/49a014ba00f3309647cc37d3e4b67ab62dcf8642}{49a014b}: En el commit se modificaba los métodos para trabajar con HashMap dentro del método createArmyTeam}][H]
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/598a62d5d65db6832192e50b6ef383709a550043}{598a62d} - \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/a9e7076e698a58a62ad7f89cd6c64a6f778b95e7}{a9e7076}: Se modificó el tipo de estructura para el tablero}][H]
     		$ git add .
-    		$ git commit -m "Redefiniendo los metodos createArmy y createArmyTeam para ahora trabajar con HashMap, ademas se cambiaron las variables de clase que almacenan el tablero y los ejercitos"			
+    		$ git commit -m "Cambiando la estructura de datos del tablero principal, se volvio a utilizar ArrayList de ArrayList de soldados, esto para facilitar que el programa sea iterativo y la opcion de crear nuevos ejercitos sea optima"			
     		$ git push -u origin main
     	\end{lstlisting}
      
@@ -359,7 +379,7 @@
             \end{itemize}
         \end{itemize}
 \newpage
-        \lstinputlisting[language=Java, firstline=112, lastline=131,firstnumber=112,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=118, lastline=137,firstnumber=118,numbers=left]{src/VideoJuego4.java}
         
         \begin{itemize}
             \begin{itemize}
@@ -373,9 +393,9 @@
             \caption{}
         \end{figure}
 
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/7bfe7cc6bb3d6b25f4d3794ddb84aee53d21d7d0}{7bfe7cc}: Se adaptó e implementó el método para mostrar la tabla con los soldados de ambos ejércitos incluyendo su vida}][H]
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/4b6ccf86d403513981c5975cadb841d6cd541e61}{4b6ccf8}: Se adaptó e implementó el método para mostrar la tabla con los soldados de ambos ejércitos incluyendo su vida}][H]
     		$ git add .
-    		$ git commit -m "Redefiniendo el metodo showArmyTable para ahora trabajar con HashMap, simplemente se adaptaron los metodos para acceder a los soldados y los limites de interaciones en cada for"
+    		$ git commit -m "Redefiniendo el metodo showTable para que ahora muestre el tablero con soldados incluyendo su vida, la cual esta representada por HP: n, siendo n el nivel de vida"
     		$ git push -u origin main
     	\end{lstlisting}
         
@@ -385,15 +405,15 @@
 
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{showArmyData()}.
-            \item Este usa un for each para recorrer el HashMap unidimensional de Soldado, y luego mostrar sus datos con el System.out.println, que a su vez este sigue el formato que se estableció en el método \textcolor{blue}{toString()} de la clase Soldado.java.
+            \item Este usa un for each para recorrer el ArrayList unidimensional de Soldado, y luego mostrar sus datos con el System.out.println, que a su vez este sigue el formato que se estableció en el método \textcolor{blue}{toString()} de la clase Soldado.java.
             \item La impresión en consola será la misma que la figura 1.
         \end{itemize}
 
-        \lstinputlisting[language=Java, firstline=133, lastline=137,firstnumber=133,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=139, lastline=143,firstnumber=139,numbers=left]{src/VideoJuego4.java}
 
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/c610a499e3472cb91a7248e11a0ba44403be5b2c}{c610a49}: Se adaptó e implementó el método para mostrar los datos de los soldados de un ejército}][H]
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/95583b4c0a9e2a11153bc0ea2c34bf933799eaf0}{95583b4}: Se adaptó e implementó el método para mostrar los datos de los soldados de un ejército}][H]
     		$ git add .
-    		$ git commit -m "Redefiniendo el metodo showArmyData para ahora trabajar con HashMap, se cambio el metodo para acceder a los valores del HashMap en el for each"
+    		$ git commit -m "Redefiniendo el metodo showArmyData, el cual nos servira para mostrara los soldados de los ejercitos segun el orden de su creacion"
     		$ git push -u origin main
     	\end{lstlisting}
         
@@ -403,14 +423,14 @@
         
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{moreHealt()}.
-            \item Este recibe el HashMap con los soldados de un ejército, además de un char que indica el nombre del equipo.
-            \item Primero recorre el HashMap unidimensional de soldados haciendo uso de un bucle for, de esta manera obtendrá el máximo de vida del ejército, el cual será almacenado en un entero maxHealth.
+            \item Este recibe el ArrayList con los soldados de un ejército, además de un char que indica el nombre del equipo.
+            \item Primero recorre el ArrayList unidimensional de soldados haciendo uso de un bucle for, de esta manera obtendrá el máximo de vida del ejército, el cual será almacenado en un entero maxHealth.
             \item Finalmente imprimirá aquellos soldados que tengan la vida igual a maxHealth, con un for y un if que controlará aquello.
             \item En la impresión se incluye el nombre del ejército antes de mostrar a los soldados.
 
         \end{itemize}
         \newpage
-        \lstinputlisting[language=Java, firstline=139, lastline=150,firstnumber=139,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=145, lastline=156,firstnumber=145,numbers=left]{src/VideoJuego4.java}
 
         \begin{itemize}
             \begin{itemize}
@@ -424,9 +444,9 @@
             \caption{}
         \end{figure}
 
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/9c29bbd8bd39e301bed91579d079d5545a899d0e}{9c29bbd}: Se agregó el método moreHealt() que imprimirá aquellos soldados que tengan la mayor vida dentro de su ejército}][H]
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/ba455c468a7dbaa2b26c2391aac7c93c0020d5f6}{ba455c4}: Se agregó el método moreHealt() que imprimirá aquellos soldados que tengan la mayor vida dentro de su ejército}][H]
     		$ git add .
-    		$ git commit -m "Redefiniendo el metodo moreHealth para ahora trabajar con HashMap, se cambio el metodo para acceder a los valores del HashMap en el for each"
+    		$ git commit -m "Redefiniendo el metodo moreHealth, el cual mostrara aquellos soldados o soldado con mas vida dentro del ejercito que reciba como parametro"
     		$ git push -u origin main
     	\end{lstlisting}
         
@@ -436,11 +456,11 @@
 
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{sumHealth()}.
-            \item Se utiliza un entero inicializado en 0 para mientras que se recorre el HashMap unidimensional de Soldado con un bucle for each, este entero (sum) va almacenando la vida de todos los soldados.
+            \item Se utiliza un entero inicializado en 0 para mientras que se recorre el ArrayList unidimensional de Soldado con un bucle for each, este entero (sum) va almacenando la vida de todos los soldados.
             \item Finalmente se retorna el entero \textcolor{blue}{sum}.
         \end{itemize}
 
-        \lstinputlisting[language=Java, firstline=156, lastline=161,firstnumber=156,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=162, lastline=167,firstnumber=162,numbers=left]{src/VideoJuego4.java}
         \newpage
         \begin{itemize}
             \begin{itemize}
@@ -469,7 +489,7 @@
             \item De manera breve como el método, este retorna una división entre la suma de la vida del ejército, haciendo uso del método \textcolor{blue}{sumHealth()} y dividiendo entre el tamaño del ejército.
         \end{itemize}
 
-        \lstinputlisting[language=Java, firstline=152, lastline=154,firstnumber=152,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=158, lastline=160,firstnumber=158,numbers=left]{src/VideoJuego4.java}
 
         \begin{itemize}
             \begin{itemize}
@@ -489,9 +509,9 @@
             \caption{}
         \end{figure}
 
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/56d85759e5cc3a495151cbcfdc5e9a5e96a60f0d}{56d8575} - \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/4cec82f07dd2b540f0c3acfd6313f3565ec252a2}{4cec82f}: Se agregó el método averageHealth y sumHealth, siendo el segundo de utilidad para el primero}][H]
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/422d59ae905d11466ef8011ef054ded358973c34}{422d59a}: Se agregó el método averageHealth y sumHealth, siendo el segundo de utilidad para el primero}][H]
     		$ git add .
-    		$ git commit -m "Redefiniendo el metodo averageHealth para ahora trabajar con HashMap, cambiando solamente el parametro del mismo"
+    		$ git commit -m "Redefiniendo el metodo averageHealth, el cual calcula el promedio de vida de soldados en un ejercito, hace uso de un metodo llamado sumHealth que calcula la suma de la vida en un ejercito"
     		$ git push -u origin main
     	\end{lstlisting}
         
@@ -501,89 +521,50 @@
 
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{bubbleSort()}.
-            \item El método tiene como finalidad ordenar el HashMap unidimensional de Soldado haciendo uso del algoritmo BubbleSort, tomando en cuenta la vida de los soldados que contiene cada soldado de dicho HashMap. Este algoritmo se extrajo de Geeksforgeeks y fue adaptado a este proyecto.
-            \item \href{https://www.geeksforgeeks.org/bubble-sort/}{https://www.geeksforgeeks.org/bubble-sort/}
-            \item CONCLUSIONES:
-            \begin{itemize}
-                \item El algoritmo itera a través de los elementos del HashMap, comparando la salud de los soldados y realizando intercambios si es necesario.
-                \item El proceso se ejecuta hasta que no se realicen más intercambios, lo que indica que los elementos están ordenados.
-                \item El algoritmo de ordenamiento burbuja es simple, pero no eficiente, ya que su complejidad es de O($n^2$) y si se trabajase con más datos la ejecución tardaría demasiado.
-            \end{itemize}
+            \item El método tiene como finalidad ordenar el ArrayList unidimensional de Soldado haciendo uso del algoritmo BubbleSort, tomando en cuenta la vida de los soldados que contiene cada soldado de dicho ArrayList. Este algoritmo se extrajo de Geeksforgeeks y fue adaptado a este proyecto. \textcolor{red}{Extraído tal cual del laboratorio anterior (lab06)}
         \end{itemize}
 
-        \lstinputlisting[language=Java, firstline=163, lastline=180,firstnumber=163,numbers=left]{src/VideoJuego5.java}
-
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/4310e7724c6d73de0a56027fbbc79df0cbc99e13}{4310e77}: Se agregó el método que contiene el algoritmo de ordenamiento bubbleSort, reutilizándola del laboratorio anterior y adaptándola a los nuevos ejércitos en HashMap}][H]
-    		$ git add .
-    		$ git commit -m "Adaptando el metodo bubbleSort para ahora trabajar con HashMap, cambiando el parametro del mismo y adaptando el metodo para colocar valores dentro del HashMap"
-    		$ git push -u origin main
-    	\end{lstlisting}
+        \lstinputlisting[language=Java, firstline=169, lastline=186,firstnumber=169,numbers=left]{src/VideoJuego4.java}
         
         %%%%%%%%%%%%%%%%
-\newpage
+        
         \subsubsection{Método de ordenamiento InsertionSort}
         
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{insertionSort()}.
-            \item El método tiene como finalidad ordenar el HashMap unidimensional de Soldado haciendo uso del algoritmo InsertionSort, tomando en cuenta la vida de los soldados que contiene cada soldado de dicho HashMap. Este algoritmo se extrajo de Geeksforgeeks y fue adaptado a este proyecto.
-            \item \href{https://www.geeksforgeeks.org/insertion-sort/}{https://www.geeksforgeeks.org/insertion-sort/}
-            \item CONCLUSIONES:
-            \begin{itemize}
-                \item El algoritmo recorre el HashMap desde el segundo soldado hasta el último, considerando cada vez al soldado como una "llave" y compara su salud con la de los soldados anteriores.
-                \item Los soldaos son recorridos hacia la derecha en el HashMap hasta que se encuentren en la posición correcta según la vida del soldado "llave" actual. 
-                \item El algoritmo de ordenamiento por inserción es más eficiente que el burbuja, pero a pesar de ello su complejidad sigue siendo de O($n^2$).
-            \end{itemize}
+            \item El método tiene como finalidad ordenar el ArrayList unidimensional de Soldado haciendo uso del algoritmo InsertionSort, tomando en cuenta la vida de los soldados que contiene cada soldado de dicho ArrayList. Este algoritmo se extrajo de Geeksforgeeks y fue adaptado a este proyecto. \textcolor{red}{Extraído tal cual del laboratorio anterior (lab06)}
         \end{itemize}
         
-        \lstinputlisting[language=Java, firstline=182, lastline=197,firstnumber=182,numbers=left]{src/VideoJuego5.java}
-
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/e569a5fef9e70634058575c10446d584e7002e56}{e569a5f}: Se agregó el método que contiene el algoritmo de ordenamiento insertionSort, reutilizándola del laboratorio anterior y adaptándola a los nuevos ejércitos en HashMap}][H]
-    		$ git add .
-    		$ git commit -m "Adaptando el metodo insertionSort para ahora trabajar con HashMap, cambiando el parametro del mismo y adaptando el metodo para colocar valores dentro del HashMap"
-    		$ git push -u origin main
-    	\end{lstlisting}
-\newpage
+        \lstinputlisting[language=Java, firstline=188, lastline=203,firstnumber=188,numbers=left]{src/VideoJuego4.java}
+        
         %%%%%%%%%%%%%%%%
 
         \subsubsection{Método de ordenamiento SelectionSort}
 
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{selectionSort()}.
-            \item El método tiene como finalidad ordenar el HashMap unidimensional de Soldado haciendo uso del algoritmo SelectionSort, tomando en cuenta la vida de los soldados que contiene cada soldado de dicho HashMap. Este algoritmo se extrajo de Geeksforgeeks y fue adaptado a este proyecto.
-            \item \href{https://www.geeksforgeeks.org/selection-sort/}{https://www.geeksforgeeks.org/selection-sort/}
-            \item CONCLUSIONES:
-            \begin{itemize}
-                \item El algoritmo recorre el HashMap, dividiendo el ejército en dos partes (la ordenada y la no ordenada).
-                \item En cada iteración, se busca el soldado con la salud máxima en la parte no ordenada y se intercambia con el soldado en la parte ordenada.
-                \item El algoritmo de ordenamiento por selección tiene una complejidad de tiempo O($n^2$), pero puede ser más rápido que el burbuja o la inserción en algunos casos debido al número de soldados dentro de un ejército.
-            \end{itemize}
+            \item El método tiene como finalidad ordenar el ArrayList unidimensional de Soldado haciendo uso del algoritmo SelectionSort, tomando en cuenta la vida de los soldados que contiene cada soldado de dicho ArrayList. Este algoritmo se extrajo de Geeksforgeeks y fue adaptado a este proyecto. \textcolor{red}{Extraído tal cual del laboratorio anterior (lab06)}
         \end{itemize}
 
-        \lstinputlisting[language=Java, firstline=199, lastline=215,firstnumber=199,numbers=left]{src/VideoJuego5.java}
-
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/4fdc5dfbea940b0655be4e44b4cdce5b992c34dc}{4fdc5df}: Se agregó el método que contiene el algoritmo de ordenamiento selectionSort, reutilizándola del laboratorio anterior y adaptándola a los nuevos ejércitos en HashMap}][H]
-    		$ git add .
-    		$ git commit -m "Adaptando el metodo selectionSort para ahora trabajar con HashMap, cambiando el parametro del mismo y adaptando el metodo para colocar valores dentro del HashMap"
-    		$ git push -u origin main
-    	\end{lstlisting}
+        \lstinputlisting[language=Java, firstline=205, lastline=221,firstnumber=205,numbers=left]{src/VideoJuego4.java}
         
         %%%%%%%%%%%%%%%%
-\newpage
+
         \subsubsection{Método para imprimir los soldados de un ejército, ordenados según su vida}
         
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{printArmyHealth()}.
-            \item Este método recibirá un HashMap unidimensional de Soldado (previamente ordenado), lo recorrerá usando un bucle for y mostrará los soldados, teniendo en cuenta que primero se mostrarán los de mayor vida hasta los de menor.
+            \item Este método recibirá un ArrayList unidimensional de Soldado (previamente ordenado), lo recorrerá usando un bucle for y mostrará los soldados, teniendo en cuenta que primero se mostrarán los de mayor vida hasta los de menor.
         \end{itemize}
         
-        \lstinputlisting[language=Java, firstline=217, lastline=221,firstnumber=217,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=223, lastline=227,firstnumber=223,numbers=left]{src/VideoJuego4.java}
 
-        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/a08c08765eda919b4a65ead07a2e215f09b756fd}{a08c087}: Se implementaró el método printArmyHealth}][H]
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/fdb8f2cc3b507c74a19f0d255425c3a92b8a8206}{fdb8f2c}: Se implementaró el método printArmyHealth}][H]
     		$ git add .
-    		$ git commit -m "Redefiniendo el metodo printArmyHealth para ahora trabajar con HashMap, cambiando solamente el parametro del mismo)"	
+    		$ git commit -m "Redefiniendo el metodo printArmyHealth, el cual nos muestra los ArrayList de ejercitos ya ordenados segun el nivel de vida (mayor a menor)"	
     		$ git push -u origin main
     	\end{lstlisting}
-%\newpage
+        \newpage
         \begin{itemize}
             \begin{itemize}
                 \item Un ejemplo de como se muestra utilizando los 3 algoritmos de ordenamiento en la siguiente imagen:
@@ -592,20 +573,26 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.55\textwidth,keepaspectratio]{img/printArmyHealth.png}
+            \includegraphics[width=0.6\textwidth,keepaspectratio]{img/printArmyHealth.png}
             \caption{}
         \end{figure}
         
         %%%%%%%%%%%%%%%%
-\newpage
+        
         \subsubsection{Método para mostrar al ejército ganador según la vida de sus soldados}
         
         \begin{itemize}
             \item El método tiene como nombre \textcolor{blue}{armyWinnerHealth()}.
-            \item Este método utilizará la suma de vida de cada ejército, hará comparaciones y si uno de los dos es superior en número de vida, se imprimirá que ganó, en caso de ser iguales mostrará aquello. \textcolor{red}{Extraído tal cual del laboratorio anterior (lab07) ya que no requiere modificaciones, por ende no hay un commit en el laboratorio 08 en esta sección}
+            \item Este método utilizará la suma de vida de cada ejército, hará comparaciones y si uno de los dos es superior en número de vida, se imprimirá que ganó, en caso de ser iguales mostrará aquello.
         \end{itemize}
         
-        \lstinputlisting[language=Java, firstline=223, lastline=232,firstnumber=223,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=229, lastline=238,firstnumber=229,numbers=left]{src/VideoJuego4.java}
+
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/e0d05ce1a7a50488f6f458c373a614a107d65489}{e0d05ce}: Se implementó el método armyWinnerHealth}][H]
+    		$ git add .
+    		$ git commit -m "Redefiniendo el metodo armyWinnerHealth, el cual muestra un ejercito ganador o empate dependiendo de la suma de vida de los ejercitos"	
+    		$ git push -u origin main
+    	\end{lstlisting}
         
         %%%%%%%%%%%%%%%%
         
@@ -625,7 +612,7 @@
             \item Y por último en caso de no ser ningún número anteriormente mencionado, se muestra un mensaje indicando que se debe seleccionar una opción válida, y se hace un llamado nuevamente a la función.
         \end{itemize}
 \newpage
-        \lstinputlisting[language=Java, firstline=16, lastline=86,firstnumber=16,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=16, lastline=86,firstnumber=16,numbers=left]{src/VideoJuego4.java}
 
         \begin{itemize}
             \begin{itemize}
@@ -638,37 +625,37 @@
             \includegraphics[width=0.8\textwidth,keepaspectratio]{img/mainInterfaz.png}
             \caption{}
         \end{figure}
+    
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/64fd210c75ca969277690eb4a062c3b393467098}{64fd210}: Se implementó el método mainInterfaz (PRIMER COMMIT)}][H]
+    		$ git add .
+    		$ git commit -m "Agregando el metodo interfaz, el cual sera utilizado para hacer nuestro programa iterativo"	
+    		$ git push -u origin main
+    	\end{lstlisting}
 
-        \begin{itemize}
-            \item \textcolor{red}{Extraído tal cual del laboratorio anterior (lab07) ya que no requiere modificaciones, por ende no hay un commit en el laboratorio 08 en esta sección}
-            
-            \item \textcolor{red}{Commit del lab07}
-        \end{itemize}
-        
+        \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/390a95eba10e059c7a9662cba4fa90fcd0b0edf9}{390a95e}: Se implementó el switch dentro del método mainInterfaz (SEGUNDO COMMIT)}][H]
+    		$ git add .
+    		$ git commit -m "Implementando en el metodo mainInterfaz un switch para recibir la accion a realizar"	
+    		$ git push -u origin main
+    	\end{lstlisting}
+
         \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/170f535a54c97bdb0ce65ff868320be5f5546e35}{170f535}: Se concluyó el switch dentro del método mainInterfaz tomando en cuenta todos los casos (ÚLTIMO COMMIT)}][H]
     		$ git add .
     		$ git commit -m "Implementando el caso 7 donde se muestra un ejercito ganador o empate, ya teniendo en cuenta la suma de vida de los soldados, esot dentro de la funcion mainInterfaz"	
     		$ git push -u origin main
     	\end{lstlisting}
         %%%%%%%%%%%%%%%%
-\newpage
+        
         \subsubsection{Método main, utilización de los métodos creados}
         
         \begin{itemize}
             \item En el método principal (main) se utilizará simplemente dos métodos.
-            \item Primero llamaremos al método \textcolor{blue}{createArmy()} que inicializará los ejércitos, quiere decir sus HashMap y el tablero.
+            \item Primero llamaremos al método \textcolor{blue}{createArmy()} que inicializará los ejércitos, quiere decir sus ArrayList y el tablero.
             \item Finalmente haciendo uso del método \textcolor{blue}{mainInterfaz()} se inicia el programa, ya que llamará a este y se ejecutarán los métodos según el usuario solicite y acabará hasta que este lo decida.
-            \item \textcolor{red}{Extraído tal cual del laboratorio anterior (lab07) ya que no requiere modificaciones, por ende no hay un commit en el laboratorio 08 en esta sección}
         \end{itemize}
         
-        \lstinputlisting[language=Java, firstline=12, lastline=15,firstnumber=12,numbers=left]{src/VideoJuego5.java}
+        \lstinputlisting[language=Java, firstline=12, lastline=15,firstnumber=12,numbers=left]{src/VideoJuego4.java}
         
         %%%%%%%%%%%%%%%%
-
-        \begin{itemize}
-            \item 
-            \textcolor{red}{Commit del lab07}
-        \end{itemize}
         
         \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/5410f630dc5c356dbbbf0e370259d000622a6ea7}{5410f63}: Último commit, donde se implementó el método de la interfaz, sobre el cual está puesto los métodos del programa}][H]
     		$ git add .
@@ -683,7 +670,7 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.9\textwidth,keepaspectratio]{img/diagrama08.png}
+            \includegraphics[width=0.75\textwidth,keepaspectratio]{img/diagrama07.png}
             \caption{}
         \end{figure}
 
@@ -691,7 +678,7 @@
 %------------------------------ ESTRUCTURA DE LABORATORIO --------------------------
 %-----------------------------------------------------------------------------------
     \newpage
-	\subsection{Estructura de laboratorio 08}
+	\subsection{Estructura de laboratorio 07}
     \begin{itemize}	
 		\item El contenido que se entrega en este laboratorio es el siguiente:
 	\end{itemize}
@@ -700,16 +687,16 @@
 
     lab07
     |   Soldado.java
-    |   VideoJuego5.java
+    |   VideoJuego4.java
     |
     |───latex
-        |   Informe_Lab08.pdf
-        |   Informe_Lab08.tex
+        |   Informe_Lab07.pdf
+        |   Informe_Lab07.tex
         |
         |───img
         |       averageHealth.png
         |       averageHealth2.png
-        |       diagrama08.png
+        |       diagrama07.png
         |       logo_abet.png
         |       logo_episunsa.png
         |       logo_unsa.jpg
@@ -723,7 +710,7 @@
         |
         |───src
                 Soldado.java
-                VideoJuego5.java
+                VideoJuego4.java
 
 \end{lstlisting}    
 
@@ -814,7 +801,7 @@
 \section{Referencias}
 \begin{itemize}			
     \item \url{https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html}
-    \item \url{https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html}
+    \item \url{https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html}
     \item \url{https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html}
     \item \url{https://www.geeksforgeeks.org/selection-sort/}
     \item \url{https://www.geeksforgeeks.org/bubble-sort/}
