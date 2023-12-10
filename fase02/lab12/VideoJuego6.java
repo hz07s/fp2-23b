@@ -17,7 +17,6 @@ public class VideoJuego6 {
   }
   public void mainInterfaz(){
     Scanner sc = new Scanner(System.in);
-    System.out.println("Bienvenido...");
 
     System.out.println("1. Crear un nuevo ejercito" 
                       +"\n2. Mostrar los datos de los ejercitos" 
@@ -227,15 +226,19 @@ public class VideoJuego6 {
   public static void armyWinner(){
     if(army1DA.size() > army1DB.size())
       System.out.print("A");
-    else
+    else if( army1DB.size() > army1DA.size())
       System.out.print("B");
+    else 
+      System.out.println("Draw");
     System.out.println();
   }
   
   public void removeSoldier(Soldado s){
-    if(s.getTeam() == 'A')
-      army1DA.remove((s.getRow()-1)*10 + s.getColumn()-'A');
-      army.remove((s.getRow()-1)*10 + s.getColumn()-'A');
+    if (s.getTeam() == 'A')
+      army1DA.remove(s.getName().charAt(7) - '0');
+    else 
+      army1DB.remove(s.getName().charAt(7) - '0');
+    army.remove((s.getRow()-1)*10 + (s.getColumn() -'A'));
   }
   public void gameIntefaz(){
     Scanner sc = new Scanner(System.in);
@@ -306,9 +309,7 @@ public class VideoJuego6 {
       case 3 ->{
         System.out.println("--SOLDIERS FIGHT--");
         System.out.println(army.get(row1*10 + col1).getName() + " vs " + army.get(row2*10 + col2).getName());
-        Soldado sW = soldiersFight(army.get(row1*10 + col1), army.get(row2*10 + col2));
-        if(sW != null)
-          moveSoldier(sW.getRow(), sW.getColumn(), row2, col2);
+        Soldado sW = soldiersFight(army.get(row1*10 + col1), army.get(row2*10 + col2), row2, col2, row1, col1);
       }
       case 4 ->{
         System.out.println("Invalid position, try again");
@@ -318,30 +319,34 @@ public class VideoJuego6 {
      
   }
   public void moveSoldier(int row1, int col1, int row2, int col2){
-    Soldado s = army.get(row1*10 + col1);
+    army.put(row2*10 + col2, army.get(row1*10 + col1));
     army.remove(row1*10 + col1);
-    army.put(row2*10 + col2, s);
   }
-  public Soldado soldiersFight(Soldado a, Soldado b){
+  public void moveSoldier(Soldado s,int row1, int col1, int rowD, int colD){
+    army.remove(rowD*10 + colD);
+    army.put(row1*10 + col1, s);
+  }
+  public Soldado soldiersFight(Soldado a, Soldado b, int rowP, int colP, int rowD, int colD){
     if (a.getActualLife() == b.getActualLife()){
-      a.die();
-      b.die();
-      army.remove((a.getRow()-1)*10 + (a.getColumn()-'A'));
-      army.remove((b.getRow()-1)*10 + (a.getColumn()-'A'));
-      System.out.println("Both soldiers die");
-      return null;
+        a.die();
+        b.die();
+        removeSoldier(a);
+        removeSoldier(b);
+        System.out.println("Both soldiers die");
+        return null;
     }
     System.out.print("The soldier won: ");
+    Soldado winner;
     if (a.getActualLife() > b.getActualLife()){
-      b.die();
-      army.remove((b.getRow()-1)*10 + (b.getColumn()-'A'));
-      System.out.println(a.getName());
-      
-      return a;
+        b.die();
+        winner = a;
+    } else {
+        a.die();
+        winner = b;
     }
-    a.die();
-    army.remove((a.getRow()-1)*10 + (a.getColumn()-'A'));
-    System.out.println(b.getName());
-    return b;
+
+    System.out.println(winner.getName());
+    moveSoldier(winner, rowP, colP, rowD, colD);
+    return winner;
   }
 }
