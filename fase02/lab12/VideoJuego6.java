@@ -231,4 +231,8 @@ public class VideoJuego6 {
           System.out.println("la batalla quedo en empate");
     System.out.println();
   }
+  
+  public void removeSoldier(Soldado s){
+    //Por llenar
+  }
 }

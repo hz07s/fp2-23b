@@ -1,4 +1,5 @@
 public class Soldado {
+  private VideoJuego6 VideoJuego6;
   private String name;
   private int row;
   private char column;
@@ -12,8 +13,9 @@ public class Soldado {
   private String attitude;
   private boolean lives;
   
-  public Soldado(String name, int row, char column, char team, int attackLevel, int attackDefense,
-                int lifeLevel, int actualLife, int speed, String attitude, boolean lives) {
+  public Soldado(VideoJuego6 VideoJuego6,String name, int row, char column, char team, 
+                int attackLevel, int attackDefense, int lifeLevel, int actualLife, int speed, 
+                String attitude, boolean lives){
     this.name = name;
     this.row = row;
     this.column = column;
@@ -25,6 +27,7 @@ public class Soldado {
     this.speed = speed;
     this.attitude = attitude;
     this.lives = lives;
+    this.VideoJuego6 = VideoJuego6;
   }
 
   //Setters
@@ -141,6 +144,6 @@ public class Soldado {
     speed += 2;
   }
   public void die(){
-
+    VideoJuego6.removeSoldier(this);
   }
 }
