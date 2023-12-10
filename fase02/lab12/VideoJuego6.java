@@ -99,8 +99,8 @@ public class VideoJuego6 {
       int row, col;
       
       do {
-        row = (int) (Math.random() * 9) + 1;
-        col = (int) (Math.random() * 9) + 1;
+        row = (int) (Math.random() * 10);
+        col = (int) (Math.random() * 10);
       } while (army.containsKey(row * 10 + col));
 
       Soldado s = new Soldado("Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1, t);
