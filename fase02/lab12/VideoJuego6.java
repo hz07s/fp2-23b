@@ -6,8 +6,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-import javax.xml.stream.events.Characters;
-
 public class VideoJuego6 {
   static HashMap <Integer, Soldado> army = new HashMap<>();
   static HashMap <Integer, Soldado> army1DA = new HashMap<>();
