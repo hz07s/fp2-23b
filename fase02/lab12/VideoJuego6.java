@@ -2,7 +2,7 @@
 // Autor : Hernan Andy
 // Colaboro : null
 // Tiempo : 3 horas
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -110,11 +110,6 @@ public class VideoJuego6 {
       army1D.put(i, s);
       army.put(row * 10 + col, s);
     }
-    /*
-     * (VideoJuego6 VideoJuego6,String name, int row, char column, char team, 
-                int attackLevel, int attackDefense, int lifeLevel, int actualLife, int speed, 
-                String attitude, boolean lives){
-     */
     return army1D;
   }
 
@@ -242,5 +237,54 @@ public class VideoJuego6 {
   
   public void removeSoldier(Soldado s){
     //Por llenar
+  }
+  public void gameIntefaz(){
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Starting Game...");
+    boolean noEnd = true;
+    while (noEnd) {
+      turn('A');
+      turn('B');
+      
+    }
+  }
+  public void turn(char teamT){
+    System.out.println("Team" + teamT + " Turn");
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Indicate the coordinates of the soldier to move. Ej: 1 A (put the space in the middle)");
+    int row = sc.nextInt() - 1;
+    char l = sc.next().charAt(0);
+    int col = l - 'A';
+    if (checkSoldier1(row, col, teamT))
+      turn(teamT);
+    else {
+    System.out.println("Indicate the coordinates where you want to move the soldier. Ej: 1 A (put the space in the middle)");
+      int row2 = sc.nextInt() - 1;
+      char l2 = sc.next().charAt(0);
+      int col2 = l2 - 'A';
+      if(!checkSoldier2(row2, col2))
+
+    }
+
+    
+  }
+  public boolean checkSoldier1(int row, int col, char team){
+    if (army.get(row * 10 + col) != null){
+      if(army.get(row * 10 + col).getTeam() == team)
+        return true;
+      else{
+        System.out.println("Choose a soldier from your team");
+        return false;
+      }
+    }
+    return false;
+  }
+  public boolean checkSoldier2(int row, int col){
+    if (army.get(row * 10 + col) != null)
+      return true;
+    return false;
+  }
+  public void moveSoldier(int row, int col, char team){
+
   }
 }
