@@ -12,11 +12,19 @@ public class Soldado {
   private String attitude;
   private boolean lives;
   
-  public Soldado(String name, int row, char column, boolean status, int health, char team) {
+  public Soldado(String name, int row, char column, char team, int attackLevel, int attackDefense,
+                int lifeLevel, int actualLife, int speed, String attitude, boolean lives) {
     this.name = name;
     this.row = row;
     this.column = column;
     this.team = team;
+    this.attackLevel = attackLevel;
+    this.attackDefense = attackDefense;
+    this.lifeLevel = lifeLevel;
+    this.actualLife = actualLife;
+    this.speed = speed;
+    this.attitude = attitude;
+    this.lives = lives;
   }
 
   //Setters
@@ -110,22 +118,27 @@ public class Soldado {
   }
 
   public void attack(){
-
+    advance();
   }
   public void defend(){
-
+    speed = 0;
   }
   public void advance(){
-
+    speed++;
   }
   public void back(){
-
+    if (speed > 0)
+      defend();
+    else
+      speed--;
   }
   public void beAttacked(){
-
+    actualLife--;
+    if (actualLife == 0)
+      die();
   }
   public void flee(){
-    
+    speed += 2;
   }
   public void die(){
 
