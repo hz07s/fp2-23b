@@ -6,6 +6,8 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
+import javax.xml.stream.events.Characters;
+
 public class VideoJuego6 {
   static HashMap <Integer, Soldado> army = new HashMap<>();
   static HashMap <Integer, Soldado> army1DA = new HashMap<>();
@@ -25,7 +27,7 @@ public class VideoJuego6 {
                       +"\n4. Mostrar el promedio de vida de los ejercitos" 
                       +"\n5. Mostrar los soldados de ejercitos con mayor vida" 
                       +"\n6. Ordenar los soldados de ejercitos segun la vida" 
-                      +"\n7. Mostrar ejercito ganador"
+                      +"\n7. 1v1 battle"
                       +"\n8. Salir del juego");
     int action = sc.nextInt();
 
@@ -71,8 +73,8 @@ public class VideoJuego6 {
         printArmyHealth(selectionSort(army1DB), 'B');
         mainInterfaz();
       }
-      case 7 -> { // Mostrar ejercito ganador
-        armyWinnerHealth();
+      case 7 -> { // Jugar de 2
+        gameIntefaz();
         mainInterfaz();
       }
       case 8 -> { // Salir del juego
@@ -84,7 +86,7 @@ public class VideoJuego6 {
       }
     }
 
-    sc.close();
+     
   }
 
   public void createArmy(){
@@ -224,19 +226,18 @@ public class VideoJuego6 {
       System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getActualLife());
   }
 
-  public static void armyWinnerHealth(){
-    System.out.print("\nSegun la suma de vida de los soldados, ");
-    if (sumHealth(army1DA) > sumHealth(army1DB))
-      System.out.println("el ejercito ganador es el: \'A\'");
-      else if (sumHealth(army1DB) > sumHealth(army1DA))
-        System.out.println("el ejercito ganador es el: \'B\'");
-        else
-          System.out.println("la batalla quedo en empate");
+  public static void armyWinner(){
+    if(army1DA.size() > army1DB.size())
+      System.out.print("A");
+    else
+      System.out.print("B");
     System.out.println();
   }
   
   public void removeSoldier(Soldado s){
-    //Por llenar
+    if(s.getTeam() == 'A')
+      army1DA.remove((s.getRow()-1)*10 + s.getColumn()-'A');
+      army.remove((s.getRow()-1)*10 + s.getColumn()-'A');
   }
   public void gameIntefaz(){
     Scanner sc = new Scanner(System.in);
@@ -245,28 +246,33 @@ public class VideoJuego6 {
     while (noEnd) {
       System.out.println("Team A Turn");
       turn('A');
-
+      if(army1DA.size() == 0)
+        break;
       System.out.println("Team B Turn");
       turn('B');
+      if(army1DB.size() == 0)
+        break;
     }
-    sc.close();
+     
+    System.out.println("Winning team: ");
+    armyWinner();
   }
   public void turn(char teamT){
+    showArmyTable(army);
     Scanner sc = new Scanner(System.in);
     System.out.println("Indicate the coordinates of the soldier to move. Ej: 1 A (put the space in the middle)");
     int row1 = sc.nextInt() - 1;
     char l1 = sc.next().charAt(0);
-    int col1 = l1 - 'A';
+    int col1 = Character.toUpperCase(l1) - 'A';
     if (checkSoldier1(row1, col1, teamT))
       turn2(row1, col1, teamT);
     else 
       turn(teamT);
-    sc.close();
+     
   }
   public boolean checkSoldier1(int row, int col, char team){
-    if(row > 9 || col > 9){
-      return false;
-    }
+    if(row > 9 || col > 9)
+      return false;   
     if (army.get(row*10 + col) != null){
       if(army.get(row*10 + col).getTeam() == team)
         return true;
@@ -278,6 +284,8 @@ public class VideoJuego6 {
     return false;
   }
   public int checkSoldier2(int row, int col, char team){
+    if(row > 9 || col > 9)
+      return 4;   
     if (army.get(row*10 + col) == null)
       return 1;
     else if (army.get(row*10 + col).getTeam() != team)
@@ -289,26 +297,53 @@ public class VideoJuego6 {
     System.out.println("Indicate the coordinates where you want to move the soldier. Ej: 1 A (put the space in the middle)");
     int row2 = sc.nextInt() - 1;
     char l2 = sc.next().charAt(0);
-    int col2 = l2 - 'A';
+    int col2 = Character.toUpperCase(l2) - 'A';
 
     switch(checkSoldier2(row2, col2, teamT)){
-      case 1 -> moveSoldier(row1, col1, row2, col2, teamT);
+      case 1 -> moveSoldier(row1, col1, row2, col2);
       case 2 -> {
         System.out.println("There cannot be two soldiers in the same position, try again");
         turn2(row1, col1, teamT);
       }
       case 3 ->{
         System.out.println("--SOLDIERS FIGHT--");
-        //fight
+        System.out.println(army.get(row1*10 + col1).getName() + " vs " + army.get(row2*10 + col2).getName());
+        Soldado sW = soldiersFight(army.get(row1*10 + col1), army.get(row2*10 + col2));
+        if(sW != null)
+          moveSoldier(sW.getRow(), sW.getColumn(), row2, col2);
+      }
+      case 4 ->{
+        System.out.println("Invalid position, try again");
+        turn2(row1, col1, teamT);
       }
     }
-    sc.close();
+     
   }
-  public void moveSoldier(int row1, int col1, int row2, int col2, char team){
-    army.get(row1*10 + col1).setRow(row2 + 1);
-    army.get(row1*10 + col1).setColumn((char)(col2 +'A'));
+  public void moveSoldier(int row1, int col1, int row2, int col2){
     Soldado s = army.get(row1*10 + col1);
     army.remove(row1*10 + col1);
     army.put(row2*10 + col2, s);
+  }
+  public Soldado soldiersFight(Soldado a, Soldado b){
+    if (a.getActualLife() == b.getActualLife()){
+      a.die();
+      b.die();
+      army.remove((a.getRow()-1)*10 + (a.getColumn()-'A'));
+      army.remove((b.getRow()-1)*10 + (a.getColumn()-'A'));
+      System.out.println("Both soldiers die");
+      return null;
+    }
+    System.out.print("The soldier won: ");
+    if (a.getActualLife() > b.getActualLife()){
+      b.die();
+      army.remove((b.getRow()-1)*10 + (b.getColumn()-'A'));
+      System.out.println(a.getName());
+      
+      return a;
+    }
+    a.die();
+    army.remove((a.getRow()-1)*10 + (a.getColumn()-'A'));
+    System.out.println(b.getName());
+    return b;
   }
 }
