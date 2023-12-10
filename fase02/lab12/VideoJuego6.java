@@ -264,9 +264,8 @@ public class VideoJuego6 {
     sc.close();
   }
   public boolean checkSoldier1(int row, int col, char team){
-    if(row > 9 || col > 9){
-      return false;
-    }
+    if(row > 9 || col > 9)
+      return false;   
     if (army.get(row*10 + col) != null){
       if(army.get(row*10 + col).getTeam() == team)
         return true;
@@ -278,6 +277,8 @@ public class VideoJuego6 {
     return false;
   }
   public int checkSoldier2(int row, int col, char team){
+    if(row > 9 || col > 9)
+      return 4;   
     if (army.get(row*10 + col) == null)
       return 1;
     else if (army.get(row*10 + col).getTeam() != team)
@@ -292,23 +293,46 @@ public class VideoJuego6 {
     int col2 = l2 - 'A';
 
     switch(checkSoldier2(row2, col2, teamT)){
-      case 1 -> moveSoldier(row1, col1, row2, col2, teamT);
+      case 1 -> moveSoldier(row1, col1, row2, col2);
       case 2 -> {
         System.out.println("There cannot be two soldiers in the same position, try again");
         turn2(row1, col1, teamT);
       }
       case 3 ->{
         System.out.println("--SOLDIERS FIGHT--");
-        //fight
+        System.out.println(army.get(row1*10 + col1).getName() + "vs" + army.get(row2*10 + col2).getName());
+        Soldado sW = soldiersFight(army.get(row1*10 + col1), army.get(row2*10 + col2));
+        moveSoldier(sW.getRow(), sW.getColumn(), row2, col2);
+      }
+      case 4 ->{
+        System.out.println("Invalid position, try again");
+        turn2(row1, col1, teamT);
       }
     }
     sc.close();
   }
-  public void moveSoldier(int row1, int col1, int row2, int col2, char team){
+  public void moveSoldier(int row1, int col1, int row2, int col2){
     army.get(row1*10 + col1).setRow(row2 + 1);
     army.get(row1*10 + col1).setColumn((char)(col2 +'A'));
     Soldado s = army.get(row1*10 + col1);
     army.remove(row1*10 + col1);
     army.put(row2*10 + col2, s);
+  }
+  public Soldado soldiersFight(Soldado a, Soldado b){
+    if (a.getActualLife() == b.getActualLife()){
+      a.die();
+      b.die();
+      System.out.println("Both soldiers die");
+      return null;
+    }
+    System.out.print("The soldier won: ");
+    if (a.getActualLife() > b.getActualLife()){
+      b.die();
+      System.out.println(a.getName());
+      return a;
+    }
+    a.die();
+    System.out.println(b.getName());
+    return b;
   }
 }
