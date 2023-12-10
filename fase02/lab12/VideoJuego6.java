@@ -252,10 +252,10 @@ public class VideoJuego6 {
     System.out.println("Team" + teamT + " Turn");
     Scanner sc = new Scanner(System.in);
     System.out.println("Indicate the coordinates of the soldier to move. Ej: 1 A (put the space in the middle)");
-    int row = sc.nextInt() - 1;
-    char l = sc.next().charAt(0);
-    int col = l - 'A';
-    if (checkSoldier1(row, col, teamT))
+    int row1 = sc.nextInt() - 1;
+    char l1 = sc.next().charAt(0);
+    int col1 = l1 - 'A';
+    if (checkSoldier1(row1, col1, teamT))
       turn(teamT);
     else {
     System.out.println("Indicate the coordinates where you want to move the soldier. Ej: 1 A (put the space in the middle)");
@@ -263,14 +263,14 @@ public class VideoJuego6 {
       char l2 = sc.next().charAt(0);
       int col2 = l2 - 'A';
       if(!checkSoldier2(row2, col2))
-
+        moveSoldier(row1, col1, row2, col2, teamT);
     }
 
     
   }
   public boolean checkSoldier1(int row, int col, char team){
-    if (army.get(row * 10 + col) != null){
-      if(army.get(row * 10 + col).getTeam() == team)
+    if (army.get(row*10 + col) != null){
+      if(army.get(row*10 + col).getTeam() == team)
         return true;
       else{
         System.out.println("Choose a soldier from your team");
@@ -284,7 +284,13 @@ public class VideoJuego6 {
       return true;
     return false;
   }
-  public void moveSoldier(int row, int col, char team){
+  public void moveSoldier(int row1, int col1, int row2, int col2, char team){
+    army.get(row1*10 + col1).setRow(row2 + 1);
+    army.get(row1*10 + col1).setColumn((char)(col2 +'A'));
+    Soldado s = army.get(row1*10 + col1);
+    army.remove(row1*10 + col1);
+    army.put(row2*10 + col2, s);
+    
 
   }
 }
