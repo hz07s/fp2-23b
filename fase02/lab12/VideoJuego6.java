@@ -5,6 +5,7 @@
 //import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Random;
 
 public class VideoJuego6 {
   static HashMap <Integer, Soldado> army = new HashMap<>();
@@ -57,17 +58,9 @@ public class VideoJuego6 {
         mainInterfaz();
       }
       case 6 -> { // Ordenar los soldados de ejercitos segun la vida
-        System.out.println("\nEjercitos ordenados (bubbleSort) segun la vida: ");
-        printArmyHealth(bubbleSort(army1DA), 'A');
-        printArmyHealth(bubbleSort(army1DB), 'B');
-
         System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
         printArmyHealth(insertionSort(army1DA), 'A');
         printArmyHealth(insertionSort(army1DB), 'B');
-
-        System.out.println("\nEjercitos ordenados (selectionSort) segun la vida: ");
-        printArmyHealth(selectionSort(army1DA), 'A');
-        printArmyHealth(selectionSort(army1DB), 'B');
         mainInterfaz();
       }
       case 7 -> { // Jugar de 2
@@ -162,26 +155,6 @@ public class VideoJuego6 {
       sum += s.getActualLife();
     return sum;
   }
-
-  public static HashMap <Integer, Soldado> bubbleSort(HashMap <Integer, Soldado> army1DBS){
-    HashMap<Integer, Soldado> army1DCopyBubble = new HashMap<>(army1DBS);
-    int n = army1DCopyBubble.size();
-    boolean swapped;
-    for (int i = 0; i < n - 1; i++) {
-      swapped = false;
-      for (int j = 0; j < n - i - 1; j++)
-        if (army1DCopyBubble.get(j).getActualLife() < army1DCopyBubble.get(j+1).getActualLife()) {
-          Soldado temp = army1DCopyBubble.get(j);
-          army1DCopyBubble.put(j, army1DCopyBubble.get(j+1));
-          army1DCopyBubble.put(j+1, temp);
-          swapped = true;
-        }
-      if (!swapped)
-        break;
-    }
-    return army1DCopyBubble;
-  }
-
   public static HashMap <Integer, Soldado> insertionSort(HashMap <Integer, Soldado> army1DIS) {
     int n = army1DIS.size();
     HashMap<Integer, Soldado> army1DCopyInsertion = new HashMap<>(army1DIS);
@@ -198,25 +171,6 @@ public class VideoJuego6 {
     }
     return army1DCopyInsertion;
   }
-
-  public static HashMap <Integer, Soldado> selectionSort(HashMap <Integer, Soldado> army1DSS) {
-    int n = army1DSS.size();
-    HashMap<Integer, Soldado> army1DCopySelection = new HashMap<>(army1DSS);
-  
-    for (int i = 0; i < n - 1; i++) {
-      int min_idx = i;
-  
-      for (int j = i + 1; j < n; j++)
-        if (army1DCopySelection.get(j).getActualLife() > army1DCopySelection.get(min_idx).getActualLife()) 
-          min_idx = j;
-  
-      Soldado temp = army1DCopySelection.get(min_idx);
-      army1DCopySelection.put(min_idx, army1DCopySelection.get(i));
-      army1DCopySelection.put(i, temp);
-    }
-    return army1DCopySelection;
-  }
-
   public static void printArmyHealth(HashMap <Integer, Soldado> armyPrint, char t){
     System.out.println("EJERCITO " + t + " : ");
     for(int i = 0; i < armyPrint.size(); i++)
@@ -226,11 +180,8 @@ public class VideoJuego6 {
   public static void armyWinner(){
     if(army1DA.size() > army1DB.size())
       System.out.print("A");
-    else if( army1DB.size() > army1DA.size())
+    else
       System.out.print("B");
-    else 
-      System.out.println("Draw");
-    System.out.println();
   }
   
   public void removeSoldier(Soldado s){
@@ -327,25 +278,27 @@ public class VideoJuego6 {
     army.put(row1*10 + col1, s);
   }
   public Soldado soldiersFight(Soldado a, Soldado b, int rowP, int colP, int rowD, int colD){
-    if (a.getActualLife() == b.getActualLife()){
-        a.die();
-        b.die();
-        removeSoldier(a);
-        removeSoldier(b);
-        System.out.println("Both soldiers die");
-        return null;
-    }
-    System.out.print("The soldier won: ");
+    double probabilityA = (double) a.getActualLife() / (a.getActualLife() + b.getActualLife()) * 100;
+    double probabilityB = (double) b.getActualLife() / (a.getActualLife() + b.getActualLife()) * 100;
+
+    System.out.println("Probability of " + a.getName() + ": " + probabilityA + "%");
+    System.out.println("Probability of " + b.getName() + ": " + probabilityB + "%");
+
+    Random random = new Random();
+    double probabilityT = probabilityA + probabilityB;
+    double randomValue = random.nextDouble() * probabilityT;
+
     Soldado winner;
-    if (a.getActualLife() > b.getActualLife()){
+    if (randomValue < probabilityA) {
+        System.out.println("The winner is: " + a.getName());
         b.die();
         winner = a;
     } else {
+        System.out.println("The winner is: " + b.getName());
         a.die();
         winner = b;
     }
-
-    System.out.println(winner.getName());
+    winner.setActualLife(winner.getActualLife() + 1);
     moveSoldier(winner, rowP, colP, rowD, colD);
     return winner;
   }
