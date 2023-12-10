@@ -243,32 +243,30 @@ public class VideoJuego6 {
     System.out.println("Starting Game...");
     boolean noEnd = true;
     while (noEnd) {
+      System.out.println("Team A Turn");
       turn('A');
+
+      System.out.println("Team B Turn");
       turn('B');
-      
     }
+    sc.close();
   }
   public void turn(char teamT){
-    System.out.println("Team" + teamT + " Turn");
     Scanner sc = new Scanner(System.in);
     System.out.println("Indicate the coordinates of the soldier to move. Ej: 1 A (put the space in the middle)");
     int row1 = sc.nextInt() - 1;
     char l1 = sc.next().charAt(0);
     int col1 = l1 - 'A';
     if (checkSoldier1(row1, col1, teamT))
+      turn2(row1, col1, teamT);
+    else 
       turn(teamT);
-    else {
-    System.out.println("Indicate the coordinates where you want to move the soldier. Ej: 1 A (put the space in the middle)");
-      int row2 = sc.nextInt() - 1;
-      char l2 = sc.next().charAt(0);
-      int col2 = l2 - 'A';
-      if(!checkSoldier2(row2, col2))
-        moveSoldier(row1, col1, row2, col2, teamT);
-    }
-
-    
+    sc.close();
   }
   public boolean checkSoldier1(int row, int col, char team){
+    if(row > 9 || col > 9){
+      return false;
+    }
     if (army.get(row*10 + col) != null){
       if(army.get(row*10 + col).getTeam() == team)
         return true;
@@ -279,10 +277,32 @@ public class VideoJuego6 {
     }
     return false;
   }
-  public boolean checkSoldier2(int row, int col){
-    if (army.get(row * 10 + col) != null)
-      return true;
-    return false;
+  public int checkSoldier2(int row, int col, char team){
+    if (army.get(row*10 + col) == null)
+      return 1;
+    else if (army.get(row*10 + col).getTeam() != team)
+      return 3;
+    return 2;
+  }
+  public void turn2(int row1, int col1, char teamT){
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Indicate the coordinates where you want to move the soldier. Ej: 1 A (put the space in the middle)");
+    int row2 = sc.nextInt() - 1;
+    char l2 = sc.next().charAt(0);
+    int col2 = l2 - 'A';
+
+    switch(checkSoldier2(row2, col2, teamT)){
+      case 1 -> moveSoldier(row1, col1, row2, col2, teamT);
+      case 2 -> {
+        System.out.println("There cannot be two soldiers in the same position, try again");
+        turn2(row1, col1, teamT);
+      }
+      case 3 ->{
+        System.out.println("--SOLDIERS FIGHT--");
+        //fight
+      }
+    }
+    sc.close();
   }
   public void moveSoldier(int row1, int col1, int row2, int col2, char team){
     army.get(row1*10 + col1).setRow(row2 + 1);
@@ -290,7 +310,5 @@ public class VideoJuego6 {
     Soldado s = army.get(row1*10 + col1);
     army.remove(row1*10 + col1);
     army.put(row2*10 + col2, s);
-    
-
   }
 }
