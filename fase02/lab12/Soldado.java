@@ -108,4 +108,26 @@ public class Soldado {
               "\n}\n";
               
   }
+
+  public void attack(){
+
+  }
+  public void defend(){
+
+  }
+  public void advance(){
+
+  }
+  public void back(){
+
+  }
+  public void beAttacked(){
+
+  }
+  public void flee(){
+    
+  }
+  public void die(){
+
+  }
 }
