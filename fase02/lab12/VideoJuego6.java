@@ -11,10 +11,11 @@ public class VideoJuego6 {
   static HashMap <Integer, Soldado> army1DA = new HashMap<>();
   static HashMap <Integer, Soldado> army1DB = new HashMap<>();
   public static void main(String [] args){
-    createArmy();
-    mainInterfaz();
+    VideoJuego6 videoJuego = new VideoJuego6();
+    videoJuego.createArmy();
+    videoJuego.mainInterfaz();
   }
-  public static void mainInterfaz(){
+  public void mainInterfaz(){
     Scanner sc = new Scanner(System.in);
     System.out.println("Bienvenido...");
 
@@ -86,7 +87,7 @@ public class VideoJuego6 {
     sc.close();
   }
 
-  public static void createArmy(){
+  public void createArmy(){
     int numSoldiersA = (int) (Math.random() * 10) + 1;
     int numSoldiersB = (int) (Math.random() * 10) + 1;
 
@@ -94,7 +95,7 @@ public class VideoJuego6 {
     army1DB = createArmyTeam(numSoldiersB, army1DB, 'B');
   }
 
-  public static HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t){
+  public HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t){
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
       
@@ -103,10 +104,17 @@ public class VideoJuego6 {
         col = (int) (Math.random() * 10);
       } while (army.containsKey(row * 10 + col));
 
-      Soldado s = new Soldado("Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), true, (int) (Math.random() * 5) + 1, t);
+      Soldado s = new Soldado(VideoJuego6.this,"Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+                            (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1,
+                            0, "Defensiva", true);
       army1D.put(i, s);
       army.put(row * 10 + col, s);
     }
+    /*
+     * (VideoJuego6 VideoJuego6,String name, int row, char column, char team, 
+                int attackLevel, int attackDefense, int lifeLevel, int actualLife, int speed, 
+                String attitude, boolean lives){
+     */
     return army1D;
   }
 
@@ -124,7 +132,7 @@ public class VideoJuego6 {
 
       System.out.print("\n" + (r+1) + ((r != 9) ? "  |" : " |"));
       for (int c = 0; c < 10; c++)
-        System.out.print(" " + (army.get(r*10+c) != null ? "HP: " + army.get(r*10+c).getHealth() : "     ") + " |");
+        System.out.print(" " + (army.get(r*10+c) != null ? "HP: " + army.get(r*10+c).getActualLife() : "     ") + " |");
         
       System.out.println("\n" + linesDown );
     }
@@ -140,13 +148,13 @@ public class VideoJuego6 {
   public static void moreHelath(HashMap <Integer, Soldado> army1MH, char t){
     int maxHealth = -1;
     for(Soldado s : army1MH.values())
-      if (s.getHealth() > maxHealth)
-        maxHealth = s.getHealth();
+      if (s.getActualLife() > maxHealth)
+        maxHealth = s.getActualLife();
 
     System.out.println("Soldado(s) con mayor vida del Ejercito " + t + ": ");
     for (Soldado s : army1MH.values()) 
-      if (s.getHealth() == maxHealth)
-        System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getHealth());
+      if (s.getActualLife() == maxHealth)
+        System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getActualLife());
     System.out.println();
   }
 
@@ -157,7 +165,7 @@ public class VideoJuego6 {
   public static int sumHealth(HashMap <Integer, Soldado> army1DSH){
     int sum = 0;
     for (Soldado s : army1DSH.values())
-      sum += s.getHealth();
+      sum += s.getActualLife();
     return sum;
   }
 
@@ -168,7 +176,7 @@ public class VideoJuego6 {
     for (int i = 0; i < n - 1; i++) {
       swapped = false;
       for (int j = 0; j < n - i - 1; j++)
-        if (army1DCopyBubble.get(j).getHealth() < army1DCopyBubble.get(j+1).getHealth()) {
+        if (army1DCopyBubble.get(j).getActualLife() < army1DCopyBubble.get(j+1).getActualLife()) {
           Soldado temp = army1DCopyBubble.get(j);
           army1DCopyBubble.put(j, army1DCopyBubble.get(j+1));
           army1DCopyBubble.put(j+1, temp);
@@ -188,7 +196,7 @@ public class VideoJuego6 {
       Soldado key = army1DCopyInsertion.get(i);
       int j = i - 1;
 
-      while (j >= 0 && army1DCopyInsertion.get(j).getHealth() < key.getHealth()) {
+      while (j >= 0 && army1DCopyInsertion.get(j).getActualLife() < key.getActualLife()) {
         army1DCopyInsertion.put(j+1, army1DCopyInsertion.get(j));
         j = j - 1;
       }
@@ -205,7 +213,7 @@ public class VideoJuego6 {
       int min_idx = i;
   
       for (int j = i + 1; j < n; j++)
-        if (army1DCopySelection.get(j).getHealth() > army1DCopySelection.get(min_idx).getHealth()) 
+        if (army1DCopySelection.get(j).getActualLife() > army1DCopySelection.get(min_idx).getActualLife()) 
           min_idx = j;
   
       Soldado temp = army1DCopySelection.get(min_idx);
@@ -218,7 +226,7 @@ public class VideoJuego6 {
   public static void printArmyHealth(HashMap <Integer, Soldado> armyPrint, char t){
     System.out.println("EJERCITO " + t + " : ");
     for(int i = 0; i < armyPrint.size(); i++)
-      System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getHealth());
+      System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getActualLife());
   }
 
   public static void armyWinnerHealth(){

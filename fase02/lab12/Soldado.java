@@ -1,33 +1,33 @@
 public class Soldado {
-  private VideoJuego6 VideoJuego6;
+  private VideoJuego6 videoJuego6;
   private String name;
   private int row;
   private char column;
   private char team;
 
   private int attackLevel;
-  private int attackDefense;
-  private int lifeLevel;
+  private int levelDefense;
+  private int levelLife;
   private int actualLife;
   private int speed;
   private String attitude;
   private boolean lives;
   
-  public Soldado(VideoJuego6 VideoJuego6,String name, int row, char column, char team, 
-                int attackLevel, int attackDefense, int lifeLevel, int actualLife, int speed, 
+  public Soldado(VideoJuego6 videoJuego6,String name, int row, char column, char team, 
+                int attackLevel, int levelDefense, int levelLife, int speed, 
                 String attitude, boolean lives){
     this.name = name;
     this.row = row;
     this.column = column;
     this.team = team;
     this.attackLevel = attackLevel;
-    this.attackDefense = attackDefense;
-    this.lifeLevel = lifeLevel;
-    this.actualLife = actualLife;
+    this.levelDefense = levelDefense;
+    this.levelLife = levelLife;
+    this.actualLife = levelLife;
     this.speed = speed;
     this.attitude = attitude;
     this.lives = lives;
-    this.VideoJuego6 = VideoJuego6;
+    this.videoJuego6 = videoJuego6;
   }
 
   //Setters
@@ -47,11 +47,11 @@ public class Soldado {
   public void setAttackLevel(int al){
     attackLevel = al;
   }
-  public void setAttackDefense(int ad){
-    attackDefense = ad;
+  public void setLevelDefense(int ad){
+    levelDefense = ad;
   }
-  public void setLifeLevel(int af){
-    lifeLevel = af;
+  public void setLevelLife(int ll){
+    levelLife = ll;
   }
   public void setActualLife(int al){
     actualLife = al;
@@ -83,11 +83,11 @@ public class Soldado {
   public int getAttackLevel(){
     return attackLevel;
   }
-  public int getAttackDefense(){
-    return attackDefense;
+  public int getLevelDefense(){
+    return levelDefense;
   }
-  public int getLifeLevel(){
-    return lifeLevel;
+  public int getLevelLife(){
+    return levelLife;
   }
   public int getActualLife(){
     return actualLife;
@@ -110,8 +110,8 @@ public class Soldado {
               "\n Column: "        + column        + 
               "\n Team: "          + team          + 
               "\n AttackLevel: "   + attackLevel   + 
-              "\n AttackDefense: " + attackDefense + 
-              "\n LifeLevel: "     + lifeLevel     + 
+              "\n LevelDefense: "  + levelDefense  + 
+              "\n LevelLife: "     + levelLife     + 
               "\n ActualLife: "    + actualLife    + 
               "\n Speed: "         + speed         + 
               "\n Attitude: "      + attitude      + 
@@ -144,6 +144,6 @@ public class Soldado {
     speed += 2;
   }
   public void die(){
-    VideoJuego6.removeSoldier(this);
+    videoJuego6.removeSoldier(this);
   }
 }
