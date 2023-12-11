@@ -283,10 +283,39 @@ public boolean compareSoldadoAttributes(Soldado s1, Soldado s2) {
          s1.getLives() == s2.getLives();
 }
 
-  public void swapSoldiers(HashMap <Integer, Soldado> armyMod, char t){
-    Scanner sc = new Scanner(System.in);
+public void swapSoldiers(HashMap<Integer, Soldado> armyMod, char t) {
+  Scanner sc = new Scanner(System.in);
 
+  System.out.println("ARMY \"" + t + "\"");
+  for (Soldado soldado : armyMod.values()) {
+    System.out.println(soldado.getName());
   }
+
+  System.out.println("Enter the name of the first soldier to swap:");
+  String sName1 = sc.next();
+  Soldado soldier1 = findSoldado(armyMod, sName1);
+
+  System.out.println("Enter the name of the second soldier to swap:");
+  String sName2 = sc.next();
+  Soldado soldier2 = findSoldado(armyMod, sName2);
+
+  if (soldier1 != null && soldier2 != null) {
+    System.out.println("Swapping Soldiers - " + soldier1.getName() + " and " + soldier2.getName());
+    int position1 = (soldier1.getRow() - 1) * 10 + (soldier1.getColumn() - 'A');
+    int position2 = (soldier2.getRow() - 1) * 10 + (soldier2.getColumn() - 'A');
+
+    armyMod.remove(position1);
+    armyMod.remove(position2);
+
+    armyMod.put(position1, soldier2);
+    armyMod.put(position2, soldier1);
+
+    System.out.println("Soldiers swapped successfully.");
+  } else {
+    System.out.println("One or both soldiers not found. Try again.");
+    swapSoldiers(armyMod, t);
+  }
+}
   public void viewSoldier(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
 
