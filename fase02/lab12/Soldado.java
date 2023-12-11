@@ -4,6 +4,7 @@ public class Soldado {
   private int row;
   private char column;
   private char team;
+  private int position;
 
   private int attackLevel;
   private int levelDefense;
@@ -58,6 +59,9 @@ public class Soldado {
   public void setTeam(char t){
     team = t;
   }
+  public void setPosition(char p){
+    position = p;
+  }
 
   public void setAttackLevel(int al){
     attackLevel = al;
@@ -93,6 +97,9 @@ public class Soldado {
   }
   public char getTeam(){
     return team;
+  }
+  public int getPosition(){
+    return position;
   }
 
   public int getAttackLevel(){

@@ -190,11 +190,59 @@ public class VideoJuego6 {
         System.out.println("The army reached the limit of allowed soldiers.");
     assignModification(armyMod, t);
 }
+public void modifySoldier(HashMap<Integer, Soldado> armyMod, char t) {
+  Scanner sc = new Scanner(System.in);
+  System.out.println("ARMY \"" + t + "\"");
+  for (Soldado s : armyMod.values())
+    System.out.println(s.getName());
 
-  public void modifySoldier(HashMap <Integer, Soldado> armyMod, char t){
-    Scanner sc = new Scanner(System.in);
+  System.out.println("Enter the name of the soldier to modify:");
+  String soldierName = sc.next();
 
+  Soldado soldierToModify = null;
+  for (Soldado s : armyMod.values()) 
+    if (s.getName().equals(soldierName)) {
+      soldierToModify = s;
+      break;
+    }
+
+  if (soldierToModify != null) {
+    System.out.println("Modify Soldier - " + soldierToModify.getName());
+    System.out.println("1. Modify Attack Level");
+    System.out.println("2. Modify Defense Level");
+    System.out.println("3. Modify Life Level");
+    System.out.println("4. Return");
+
+    int choice = sc.nextInt();
+
+    switch (choice) {
+      case 1 -> {
+        System.out.print("Enter new Attack Level (1 - 5): ");
+        int newAttackLevel = sc.nextInt();
+        soldierToModify.setAttackLevel(newAttackLevel);
+      }
+      case 2 -> {
+        System.out.print("Enter new Defense Level (1 - 5): ");
+        int newDefenseLevel = sc.nextInt();
+        soldierToModify.setLevelDefense(newDefenseLevel);
+      }
+      case 3 -> {
+        System.out.print("Enter new Life Level (1 - 5): ");
+        int newLifeLevel = sc.nextInt();
+        soldierToModify.setLevelLife(newLifeLevel);
+      }
+      case 4 -> System.out.println("Returning to the menu");
+      default -> {
+        System.out.println("Invalid choice. Returning to the menu.");
+      }
+    }
+  } else {
+    System.out.println("Soldier not found. Try again.");
+    modifySoldier(armyMod, t);
   }
+}
+
+
   public void compareSoldiers(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
 
