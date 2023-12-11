@@ -18,6 +18,109 @@ public class VideoJuego6 {
   }
   public void mainInterfaz(){
     Scanner sc = new Scanner(System.in);
+    System.out.println(  "1. Quick game" 
+                      +"\n2. Custom game" 
+                      +"\n3. Exit");
+    int action = sc.nextInt();
+    switch (action){
+      case 1 -> quickGame();
+      case 2 -> customGame();
+      case 3 -> System.out.println("End of the game");
+      default -> {
+        System.out.println("Choose a valid option");
+        mainInterfaz();
+      }
+    }
+  }
+  public void customGame(){
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Select army to customize:\n  1. A\n  2. B");
+    int actionTeam = sc.nextInt();
+    if (actionTeam  == 1) // A
+      customGameArmy(army1DA, "A");
+    else if(actionTeam  == 2) // B
+      customGameArmy(army1DB, "B");
+    else{
+      System.out.println("Invalid army, try again");
+      customGame();
+    }
+  }
+  public void customGameArmy(HashMap <Integer, Soldado> armyA, String t){
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Selected " + t + "army");
+    System.out.println(  " 1. Create Soldier" 
+                      +"\n 2. Delete Soldier"
+                      +"\n 3. Clone Soldier" 
+                      +"\n 4. Modify Soldier" 
+                      +"\n 5. Compare Soldiers" 
+                      +"\n 6. Swap Soldiers" 
+                      +"\n 7. View Soldier" 
+                      +"\n 8. See Army" 
+                      +"\n 9. Add Levels" 
+                      +"\n10. Play" 
+                      +"\n11. Return");
+    int action = sc.nextInt();
+    switch (action){
+      case 1 -> createSoldier(armyA);
+      case 2 -> deleteSoldier(armyA);
+      case 3 -> cloneSoldier(armyA);
+      case 4 -> modifySoldier(armyA);
+      case 5 -> compareSoldiers(armyA);
+      case 6 -> swapSoldiers(armyA);
+      case 7 -> viewSoldier(armyA);
+      case 8 -> seeArmy(armyA);
+      case 9 -> addLevels(armyA);
+      case 10 -> play(armyA);
+      case 11 -> back(armyA);
+      default -> {
+        System.out.println("Choose a valid option");
+        customGameArmy(armyA, t);
+      }
+    }
+    customGameArmy(armyA, t);
+  }
+  public void createSoldier(HashMap <Integer, Soldado> armyMod){
+    Scanner sc = new Scanner(System.in);
+
+  }
+  public void deleteSoldier(HashMap <Integer, Soldado> armyMod){
+    Scanner sc = new Scanner(System.in);
+
+  }
+  public void cloneSoldier(HashMap <Integer, Soldado> armyMod){
+    Scanner sc = new Scanner(System.in);
+
+  }
+  public void modifySoldier(HashMap <Integer, Soldado> armyMod){
+    Scanner sc = new Scanner(System.in);
+
+  }
+  public void compareSoldiers(HashMap <Integer, Soldado> armyMod){
+    Scanner sc = new Scanner(System.in);
+
+  }
+  public void swapSoldiers(HashMap <Integer, Soldado> armyMod){
+    Scanner sc = new Scanner(System.in);
+
+  }
+  public void viewSoldier(HashMap <Integer, Soldado> armyMod){
+    Scanner sc = new Scanner(System.in);
+
+  }
+  public void seeArmy(HashMap <Integer, Soldado> armyMod){
+
+  }
+  public void addLevels(HashMap <Integer, Soldado> armyMod){
+
+  }
+  public void play(HashMap <Integer, Soldado> armyMod){
+
+  }
+  public void back(HashMap <Integer, Soldado> armyMod){
+
+  }
+    public void quickGame(){
+    Scanner sc = new Scanner(System.in);
 
     System.out.println("1. Crear un nuevo ejercito" 
                       +"\n2. Mostrar los datos de los ejercitos" 
@@ -35,44 +138,44 @@ public class VideoJuego6 {
         army1DA.clear();
         army1DB.clear();
         createArmy();
-        mainInterfaz();
+        quickGame();
       }
       case 2 -> { // Mostrar los datos de los ejercitos
         System.out.println("DATOS DE LOS SOLDADOS CREADOS:\n");
         showArmyData(army1DA, 'A');
         showArmyData(army1DB, 'B');
-        mainInterfaz();
+        quickGame();
       }
       case 3 -> { // Mostrar la tabla con los ejercitos
         showArmyTable(army);
-        mainInterfaz();
+        quickGame();
       }
       case 4 -> { // Mostrar el promedio de vida de los ejercitos
         System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
         System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
-        mainInterfaz();
+        quickGame();
       }
       case 5 -> { // Mostrar los soldados de ejercitos con mayor vida
         moreHelath(army1DA, 'A');
         moreHelath(army1DB, 'B');
-        mainInterfaz();
+        quickGame();
       }
       case 6 -> { // Ordenar los soldados de ejercitos segun la vida
         System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
         printArmyHealth(insertionSort(army1DA), 'A');
         printArmyHealth(insertionSort(army1DB), 'B');
-        mainInterfaz();
+        quickGame();
       }
       case 7 -> { // Jugar de 2
         gameIntefaz();
-        mainInterfaz();
+        quickGame();
       }
       case 8 -> { // Salir del juego
-        System.out.println("Fin.");
+        mainInterfaz();
       }
       default -> {
         System.out.println("Selecciona una opcion valida");
-        mainInterfaz();
+        quickGame();
       }
     }
 
