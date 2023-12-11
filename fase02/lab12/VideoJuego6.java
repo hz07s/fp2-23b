@@ -353,8 +353,23 @@ public class VideoJuego6 {
     }
     customGameArmy(armyMod, t);
   }  
-  public void addLevels(HashMap <Integer, Soldado> armyMod, char t){
+  public void addLevels(HashMap<Integer, Soldado> armyMod, char t) {
+    int totalAttackLevel = 0;
+    int totalDefenseLevel = 0;
+    int totalLifeLevel = 0;
+    int totalSpeed = 0;
 
+    for (Soldado soldier : armyMod.values()) {
+        totalAttackLevel += soldier.getAttackLevel();
+        totalDefenseLevel += soldier.getLevelDefense();
+        totalLifeLevel += soldier.getLevelLife();
+        totalSpeed += soldier.getSpeed();
+    }
+    System.out.println("Sumatoria de niveles del Ejercito " + t + ":");
+    System.out.println("Sumatoria de Nivel de Ataque: " + totalAttackLevel);
+    System.out.println("Sumatoria de Nivel de Defensa: " + totalDefenseLevel);
+    System.out.println("Sumatoria de Nivel de Vida: " + totalLifeLevel);
+    System.out.println("Sumatoria de Velocidad: " + totalSpeed);
   }
   public void play(HashMap <Integer, Soldado> armyMod, char t){
 
