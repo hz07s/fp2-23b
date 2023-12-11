@@ -25,7 +25,7 @@ public class VideoJuego6 {
     switch (action){
       case 1 -> quickGame();
       case 2 -> customGame();
-      case 3 -> System.out.println("End of the game");
+      case 3 -> System.out.println("Exiting the program.");
       default -> {
         System.out.println("Choose a valid option");
         mainInterfaz();
@@ -70,8 +70,8 @@ public class VideoJuego6 {
       case 7 -> viewSoldier(armyA, t);
       case 8 -> seeArmy(armyA, t);
       case 9 -> addLevels(armyA, t);
-      case 10 -> play(armyA, t);
-      case 11 -> back(armyA, t);
+      case 10 -> play();
+      case 11 -> mainInterfaz();
       default -> {
         System.out.println("Choose a valid option");
         customGameArmy(armyA, t);
@@ -241,8 +241,6 @@ public class VideoJuego6 {
       modifySoldier(armyMod, t);
     }
   }
-
-
   public void compareSoldiers(HashMap<Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
     for (Soldado s : armyMod.values())
@@ -267,14 +265,12 @@ public class VideoJuego6 {
       compareSoldiers(armyMod, t);
     }
   }
-
   public Soldado findSoldado(HashMap<Integer, Soldado> armyMod, String soldierName) {
     for (Soldado s : armyMod.values()) 
       if (s.getName().equals(soldierName)) 
         return s;
     return null;
   }
-
   public boolean compareSoldadoAttributes(Soldado s1, Soldado s2) {
     return s1.getName().equals(s2.getName()) &&
           s1.getAttackLevel() == s2.getAttackLevel() &&
@@ -282,7 +278,6 @@ public class VideoJuego6 {
           s1.getActualLife() == s2.getActualLife() &&
           s1.getLives() == s2.getLives();
   }
-
   public void swapSoldiers(HashMap<Integer, Soldado> armyMod, char t) {
     Scanner sc = new Scanner(System.in);
 
@@ -371,11 +366,8 @@ public class VideoJuego6 {
     System.out.println("Sumatoria de Nivel de Vida: " + totalLifeLevel);
     System.out.println("Sumatoria de Velocidad: " + totalSpeed);
   }
-  public void play(HashMap <Integer, Soldado> armyMod, char t){
-
-  }
-  public void back(HashMap <Integer, Soldado> armyMod, char t){
-    mainInterfaz();
+  public void play(){
+    gameIntefaz();
   }
     public void quickGame(){
     Scanner sc = new Scanner(System.in);
