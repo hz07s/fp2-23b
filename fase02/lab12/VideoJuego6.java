@@ -313,7 +313,7 @@ public class VideoJuego6 {
     } else {
       System.out.println("One or both soldiers not found. Try again.");
       swapSoldiers(armyMod, t);
-    }
+    } 
   }
   public void viewSoldier(HashMap<Integer, Soldado> armyMod, char t) {
     Scanner sc = new Scanner(System.in);
@@ -338,10 +338,21 @@ public class VideoJuego6 {
       viewSoldier(armyMod, t);
     }
   }
-
-  public void seeArmy(HashMap <Integer, Soldado> armyMod, char t){
-
-  }
+  public void seeArmy(HashMap<Integer, Soldado> armyMod, char t) {
+    System.out.println("EJERCITO \"" + t + "\"");
+    for (Soldado s : armyMod.values()) {
+      System.out.println("Soldier Details:");
+      System.out.println("Name: " + s.getName());
+      System.out.println("Team: " + s.getTeam());
+      System.out.println("Position: " + s.getRow() + " " + s.getColumn());
+      System.out.println("Attack Level: " + s.getAttackLevel());
+      System.out.println("Defense Level: " + s.getLevelDefense());
+      System.out.println("Life Level: " + s.getLevelLife());
+      System.out.println("Speed: " + s.getSpeed());
+      System.out.println();
+    }
+    customGameArmy(armyMod, t);
+  }  
   public void addLevels(HashMap <Integer, Soldado> armyMod, char t){
 
   }
