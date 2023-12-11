@@ -315,29 +315,29 @@ public void swapSoldiers(HashMap<Integer, Soldado> armyMod, char t) {
     swapSoldiers(armyMod, t);
   }
 }
-public void viewSoldier(HashMap<Integer, Soldado> armyMod, char t) {
-  Scanner sc = new Scanner(System.in);
-  for (Soldado soldado : armyMod.values()) 
-    System.out.println(soldado.getName());
-  System.out.println("Enter the name of the soldier to view:");
-  String soldierName = sc.next();
+  public void viewSoldier(HashMap<Integer, Soldado> armyMod, char t) {
+    Scanner sc = new Scanner(System.in);
+    for (Soldado soldado : armyMod.values()) 
+      System.out.println(soldado.getName());
+    System.out.println("Enter the name of the soldier to view:");
+    String soldierName = sc.next();
 
-  Soldado soldierToView = findSoldado(armyMod, soldierName);
+    Soldado soldierToView = findSoldado(armyMod, soldierName);
 
-  if (soldierToView != null) {
-    System.out.println("Soldier Details:");
-    System.out.println("Name: " + soldierToView.getName());
-    System.out.println("Team: " + soldierToView.getTeam());
-    System.out.println("Position: " + soldierToView.getRow() + " " + soldierToView.getColumn());
-    System.out.println("Attack Level: " + soldierToView.getAttackLevel());
-    System.out.println("Defense Level: " + soldierToView.getLevelDefense());
-    System.out.println("Life Level: " + soldierToView.getLevelLife());
-    System.out.println("Speed: " + soldierToView.getSpeed());
-  } else {
-    System.out.println("Soldier not found. Try again.");
-    viewSoldier(armyMod, t);
+    if (soldierToView != null) {
+      System.out.println("Soldier Details:");
+      System.out.println("Name: " + soldierToView.getName());
+      System.out.println("Team: " + soldierToView.getTeam());
+      System.out.println("Position: " + soldierToView.getRow() + " " + soldierToView.getColumn());
+      System.out.println("Attack Level: " + soldierToView.getAttackLevel());
+      System.out.println("Defense Level: " + soldierToView.getLevelDefense());
+      System.out.println("Life Level: " + soldierToView.getLevelLife());
+      System.out.println("Speed: " + soldierToView.getSpeed());
+    } else {
+      System.out.println("Soldier not found. Try again.");
+      viewSoldier(armyMod, t);
+    }
   }
-}
 
   public void seeArmy(HashMap <Integer, Soldado> armyMod, char t){
 
