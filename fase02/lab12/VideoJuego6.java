@@ -190,131 +190,131 @@ public class VideoJuego6 {
         System.out.println("The army reached the limit of allowed soldiers.");
     assignModification(armyMod, t);
 }
-public void modifySoldier(HashMap<Integer, Soldado> armyMod, char t) {
-  Scanner sc = new Scanner(System.in);
-  System.out.println("ARMY \"" + t + "\"");
-  for (Soldado s : armyMod.values())
-    System.out.println(s.getName());
+  public void modifySoldier(HashMap<Integer, Soldado> armyMod, char t) {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("ARMY \"" + t + "\"");
+    for (Soldado s : armyMod.values())
+      System.out.println(s.getName());
 
-  System.out.println("Enter the name of the soldier to modify:");
-  String soldierName = sc.next();
+    System.out.println("Enter the name of the soldier to modify:");
+    String soldierName = sc.next();
 
-  Soldado soldierToModify = null;
-  for (Soldado s : armyMod.values()) 
-    if (s.getName().equals(soldierName)) {
-      soldierToModify = s;
-      break;
+    Soldado soldierToModify = null;
+    for (Soldado s : armyMod.values()) 
+      if (s.getName().equals(soldierName)) {
+        soldierToModify = s;
+        break;
+      }
+
+    if (soldierToModify != null) {
+      System.out.println("Modify Soldier - " + soldierToModify.getName());
+      System.out.println("1. Modify Attack Level");
+      System.out.println("2. Modify Defense Level");
+      System.out.println("3. Modify Life Level");
+      System.out.println("4. Return");
+
+      int choice = sc.nextInt();
+
+      switch (choice) {
+        case 1 -> {
+          System.out.print("Enter new Attack Level (1 - 5): ");
+          int newAttackLevel = sc.nextInt();
+          soldierToModify.setAttackLevel(newAttackLevel);
+        }
+        case 2 -> {
+          System.out.print("Enter new Defense Level (1 - 5): ");
+          int newDefenseLevel = sc.nextInt();
+          soldierToModify.setLevelDefense(newDefenseLevel);
+        }
+        case 3 -> {
+          System.out.print("Enter new Life Level (1 - 5): ");
+          int newLifeLevel = sc.nextInt();
+          soldierToModify.setLevelLife(newLifeLevel);
+        }
+        case 4 -> System.out.println("Returning to the menu");
+        default -> {
+          System.out.println("Invalid choice. Returning to the menu.");
+        }
+      }
+    } else {
+      System.out.println("Soldier not found. Try again.");
+      modifySoldier(armyMod, t);
     }
+  }
 
-  if (soldierToModify != null) {
-    System.out.println("Modify Soldier - " + soldierToModify.getName());
-    System.out.println("1. Modify Attack Level");
-    System.out.println("2. Modify Defense Level");
-    System.out.println("3. Modify Life Level");
-    System.out.println("4. Return");
 
-    int choice = sc.nextInt();
+  public void compareSoldiers(HashMap<Integer, Soldado> armyMod, char t){
+    Scanner sc = new Scanner(System.in);
+    for (Soldado s : armyMod.values())
+      System.out.println(s.getName());
+    
+    System.out.println("Enter the name of the first soldier:");
+    String soldierName1 = sc.next();
+    System.out.println("Enter the name of the second soldier:");
+    String soldierName2 = sc.next();
 
-    switch (choice) {
-      case 1 -> {
-        System.out.print("Enter new Attack Level (1 - 5): ");
-        int newAttackLevel = sc.nextInt();
-        soldierToModify.setAttackLevel(newAttackLevel);
-      }
-      case 2 -> {
-        System.out.print("Enter new Defense Level (1 - 5): ");
-        int newDefenseLevel = sc.nextInt();
-        soldierToModify.setLevelDefense(newDefenseLevel);
-      }
-      case 3 -> {
-        System.out.print("Enter new Life Level (1 - 5): ");
-        int newLifeLevel = sc.nextInt();
-        soldierToModify.setLevelLife(newLifeLevel);
-      }
-      case 4 -> System.out.println("Returning to the menu");
-      default -> {
-        System.out.println("Invalid choice. Returning to the menu.");
-      }
+    Soldado soldier1 = findSoldado(armyMod, soldierName1);
+    Soldado soldier2 = findSoldado(armyMod, soldierName2);
+
+    if (soldier1 != null && soldier2 != null){
+      if (compareSoldadoAttributes(soldier1, soldier2)) 
+        System.out.println("Soldiers are identical.");
+      else 
+        System.out.println("Soldiers are different.");
+    } 
+    else{
+      System.out.println("Soldier not found. Try again.");
+      compareSoldiers(armyMod, t);
     }
-  } else {
-    System.out.println("Soldier not found. Try again.");
-    modifySoldier(armyMod, t);
   }
-}
 
-
-public void compareSoldiers(HashMap<Integer, Soldado> armyMod, char t){
-  Scanner sc = new Scanner(System.in);
-  for (Soldado s : armyMod.values())
-    System.out.println(s.getName());
-  
-  System.out.println("Enter the name of the first soldier:");
-  String soldierName1 = sc.next();
-  System.out.println("Enter the name of the second soldier:");
-  String soldierName2 = sc.next();
-
-  Soldado soldier1 = findSoldado(armyMod, soldierName1);
-  Soldado soldier2 = findSoldado(armyMod, soldierName2);
-
-  if (soldier1 != null && soldier2 != null){
-    if (compareSoldadoAttributes(soldier1, soldier2)) 
-      System.out.println("Soldiers are identical.");
-    else 
-      System.out.println("Soldiers are different.");
-  } 
-  else{
-    System.out.println("Soldier not found. Try again.");
-    compareSoldiers(armyMod, t);
+  public Soldado findSoldado(HashMap<Integer, Soldado> armyMod, String soldierName) {
+    for (Soldado s : armyMod.values()) 
+      if (s.getName().equals(soldierName)) 
+        return s;
+    return null;
   }
-}
 
-public Soldado findSoldado(HashMap<Integer, Soldado> armyMod, String soldierName) {
-  for (Soldado s : armyMod.values()) 
-    if (s.getName().equals(soldierName)) 
-      return s;
-  return null;
-}
-
-public boolean compareSoldadoAttributes(Soldado s1, Soldado s2) {
-  return s1.getName().equals(s2.getName()) &&
-         s1.getAttackLevel() == s2.getAttackLevel() &&
-         s1.getLevelDefense() == s2.getLevelDefense() &&
-         s1.getActualLife() == s2.getActualLife() &&
-         s1.getLives() == s2.getLives();
-}
-
-public void swapSoldiers(HashMap<Integer, Soldado> armyMod, char t) {
-  Scanner sc = new Scanner(System.in);
-
-  System.out.println("ARMY \"" + t + "\"");
-  for (Soldado soldado : armyMod.values()) 
-    System.out.println(soldado.getName());
-
-  System.out.println("Enter the name of the first soldier to swap:");
-  String sName1 = sc.next();
-  Soldado soldier1 = findSoldado(armyMod, sName1);
-
-  System.out.println("Enter the name of the second soldier to swap:");
-  String sName2 = sc.next();
-  Soldado soldier2 = findSoldado(armyMod, sName2);
-
-  if (soldier1 != null && soldier2 != null) {
-    System.out.println("Swapping Soldiers - " + soldier1.getName() + " and " + soldier2.getName());
-    int position1 = (soldier1.getRow() - 1) * 10 + (soldier1.getColumn() - 'A');
-    int position2 = (soldier2.getRow() - 1) * 10 + (soldier2.getColumn() - 'A');
-
-    armyMod.remove(position1);
-    armyMod.remove(position2);
-
-    armyMod.put(position1, soldier2);
-    armyMod.put(position2, soldier1);
-
-    System.out.println("Soldiers swapped successfully.");
-  } else {
-    System.out.println("One or both soldiers not found. Try again.");
-    swapSoldiers(armyMod, t);
+  public boolean compareSoldadoAttributes(Soldado s1, Soldado s2) {
+    return s1.getName().equals(s2.getName()) &&
+          s1.getAttackLevel() == s2.getAttackLevel() &&
+          s1.getLevelDefense() == s2.getLevelDefense() &&
+          s1.getActualLife() == s2.getActualLife() &&
+          s1.getLives() == s2.getLives();
   }
-}
+
+  public void swapSoldiers(HashMap<Integer, Soldado> armyMod, char t) {
+    Scanner sc = new Scanner(System.in);
+
+    System.out.println("ARMY \"" + t + "\"");
+    for (Soldado soldado : armyMod.values()) 
+      System.out.println(soldado.getName());
+
+    System.out.println("Enter the name of the first soldier to swap:");
+    String sName1 = sc.next();
+    Soldado soldier1 = findSoldado(armyMod, sName1);
+
+    System.out.println("Enter the name of the second soldier to swap:");
+    String sName2 = sc.next();
+    Soldado soldier2 = findSoldado(armyMod, sName2);
+
+    if (soldier1 != null && soldier2 != null) {
+      System.out.println("Swapping Soldiers - " + soldier1.getName() + " and " + soldier2.getName());
+      int position1 = (soldier1.getRow() - 1) * 10 + (soldier1.getColumn() - 'A');
+      int position2 = (soldier2.getRow() - 1) * 10 + (soldier2.getColumn() - 'A');
+
+      armyMod.remove(position1);
+      armyMod.remove(position2);
+
+      armyMod.put(position1, soldier2);
+      armyMod.put(position2, soldier1);
+
+      System.out.println("Soldiers swapped successfully.");
+    } else {
+      System.out.println("One or both soldiers not found. Try again.");
+      swapSoldiers(armyMod, t);
+    }
+  }
   public void viewSoldier(HashMap<Integer, Soldado> armyMod, char t) {
     Scanner sc = new Scanner(System.in);
     for (Soldado soldado : armyMod.values()) 
