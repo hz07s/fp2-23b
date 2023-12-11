@@ -32,6 +32,167 @@ public class VideoJuego6 {
       }
     }
   }
+  public void quickGame(){
+    Scanner sc = new Scanner(System.in);
+
+    System.out.println("1. Crear un nuevo ejercito" 
+                      +"\n2. Mostrar los datos de los ejercitos" 
+                      +"\n3. Mostrar la tabla con los ejercitos" 
+                      +"\n4. Mostrar el promedio de vida de los ejercitos" 
+                      +"\n5. Mostrar los soldados de ejercitos con mayor vida" 
+                      +"\n6. Ordenar los soldados de ejercitos segun la vida" 
+                      +"\n7. 1v1 battle"
+                      +"\n8. Salir del juego");
+    int action = sc.nextInt();
+
+    switch (action){
+      case 1 -> { // Crear un nuevo ejercito
+        army.clear();
+        army1DA.clear();
+        army1DB.clear();
+        createArmy();
+        quickGame();
+      }
+      case 2 -> { // Mostrar los datos de los ejercitos
+        System.out.println("DATOS DE LOS SOLDADOS CREADOS:\n");
+        showArmyData(army1DA, 'A');
+        showArmyData(army1DB, 'B');
+        quickGame();
+      }
+      case 3 -> { // Mostrar la tabla con los ejercitos
+        showArmyTable(army);
+        quickGame();
+      }
+      case 4 -> { // Mostrar el promedio de vida de los ejercitos
+        System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
+        System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
+        quickGame();
+      }
+      case 5 -> { // Mostrar los soldados de ejercitos con mayor vida
+        moreHelath(army1DA, 'A');
+        moreHelath(army1DB, 'B');
+        quickGame();
+      }
+      case 6 -> { // Ordenar los soldados de ejercitos segun la vida
+        System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
+        printArmyHealth(insertionSort(army1DA), 'A');
+        printArmyHealth(insertionSort(army1DB), 'B');
+        quickGame();
+      }
+      case 7 -> { // Jugar de 2
+        gameIntefaz();
+        quickGame();
+      }
+      case 8 -> { // Salir del juego
+        mainInterfaz();
+      }
+      default -> {
+        System.out.println("Selecciona una opcion valida");
+        quickGame();
+      }
+    }
+
+     
+  }
+
+  public void createArmy(){
+    int numSoldiersA = (int) (Math.random() * 10) + 1;
+    int numSoldiersB = (int) (Math.random() * 10) + 1;
+
+    army1DA = createArmyTeam(numSoldiersA, army1DA, 'A');
+    army1DB = createArmyTeam(numSoldiersB, army1DB, 'B');
+  }
+
+  public HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t){
+    for (int i = 0; i < numSoldiers; i++){
+      int row, col;
+      
+      do {
+        row = (int) (Math.random() * 10);
+        col = (int) (Math.random() * 10);
+      } while (army.containsKey(row * 10 + col));
+
+      Soldado s = new Soldado(VideoJuego6.this,"Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+                            (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1,
+                            0, "Defensiva", true);
+      army1D.put(i, s);
+      army.put(row * 10 + col, s);
+    }
+    return army1D;
+  }
+
+  public void showArmyTable(HashMap <Integer, Soldado> army){
+    System.out.println("\n                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
+    String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
+    System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
+                      +"    _______________________________________________________________________________");
+    
+    for (int r = 0; r < 10; r++){
+      System.out.print("   |");
+      for (int c = 0; c < 10; c++)
+        System.out.print(" " + (army.get(r*10+c) != null ? ("\'" + army.get(r*10+c).getTeam() + "\'" 
+        + "S" + army.get(r*10+c).getName().charAt(7) + " |") : "      |"));
+
+      System.out.print("\n" + (r+1) + ((r != 9) ? "  |" : " |"));
+      for (int c = 0; c < 10; c++)
+        System.out.print(" " + (army.get(r*10+c) != null ? "HP: " + army.get(r*10+c).getActualLife() : "     ") + " |");
+        
+      System.out.println("\n" + linesDown );
+    }
+    System.out.println();
+  }
+
+  public void showArmyData(HashMap <Integer, Soldado> army1D, char t){
+    System.out.println("EJERCITO \"" + t + "\"");
+    for (Soldado s : army1D.values())
+      System.out.println(s);
+  }
+
+  public void moreHelath(HashMap <Integer, Soldado> army1MH, char t){
+    int maxHealth = -1;
+    for(Soldado s : army1MH.values())
+      if (s.getActualLife() > maxHealth)
+        maxHealth = s.getActualLife();
+
+    System.out.println("Soldado(s) con mayor vida del Ejercito " + t + ": ");
+    for (Soldado s : army1MH.values()) 
+      if (s.getActualLife() == maxHealth)
+        System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getActualLife());
+    System.out.println();
+  }
+
+  public double averageHealth(HashMap <Integer, Soldado> army1DAH){
+    return sumHealth(army1DAH) / army1DAH.size();
+  }
+
+  public int sumHealth(HashMap <Integer, Soldado> army1DSH){
+    int sum = 0;
+    for (Soldado s : army1DSH.values())
+      sum += s.getActualLife();
+    return sum;
+  }
+  public HashMap <Integer, Soldado> insertionSort(HashMap <Integer, Soldado> army1DIS) {
+    int n = army1DIS.size();
+    HashMap<Integer, Soldado> army1DCopyInsertion = new HashMap<>(army1DIS);
+
+    for (int i = 1; i < n; i++) {
+      Soldado key = army1DCopyInsertion.get(i);
+      int j = i - 1;
+
+      while (j >= 0 && army1DCopyInsertion.get(j).getActualLife() < key.getActualLife()) {
+        army1DCopyInsertion.put(j+1, army1DCopyInsertion.get(j));
+        j = j - 1;
+      }
+      army1DCopyInsertion.put(j+1, key);
+    }
+    return army1DCopyInsertion;
+  }
+  public void printArmyHealth(HashMap <Integer, Soldado> armyPrint, char t){
+    System.out.println("EJERCITO " + t + " : ");
+    for(int i = 0; i < armyPrint.size(); i++)
+      System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getActualLife());
+  }
+
   public void customGame(){
     Scanner sc = new Scanner(System.in);
     System.out.println("Select army to customize:\n  1. A\n  2. B");
@@ -369,168 +530,9 @@ public class VideoJuego6 {
   public void play(){
     gameIntefaz();
   }
-    public void quickGame(){
-    Scanner sc = new Scanner(System.in);
+  
 
-    System.out.println("1. Crear un nuevo ejercito" 
-                      +"\n2. Mostrar los datos de los ejercitos" 
-                      +"\n3. Mostrar la tabla con los ejercitos" 
-                      +"\n4. Mostrar el promedio de vida de los ejercitos" 
-                      +"\n5. Mostrar los soldados de ejercitos con mayor vida" 
-                      +"\n6. Ordenar los soldados de ejercitos segun la vida" 
-                      +"\n7. 1v1 battle"
-                      +"\n8. Salir del juego");
-    int action = sc.nextInt();
-
-    switch (action){
-      case 1 -> { // Crear un nuevo ejercito
-        army.clear();
-        army1DA.clear();
-        army1DB.clear();
-        createArmy();
-        quickGame();
-      }
-      case 2 -> { // Mostrar los datos de los ejercitos
-        System.out.println("DATOS DE LOS SOLDADOS CREADOS:\n");
-        showArmyData(army1DA, 'A');
-        showArmyData(army1DB, 'B');
-        quickGame();
-      }
-      case 3 -> { // Mostrar la tabla con los ejercitos
-        showArmyTable(army);
-        quickGame();
-      }
-      case 4 -> { // Mostrar el promedio de vida de los ejercitos
-        System.out.println("El promedio de vida del Ejercito A es: " + averageHealth(army1DA));
-        System.out.println("El promedio de vida del Ejercito B es: " + averageHealth(army1DB));
-        quickGame();
-      }
-      case 5 -> { // Mostrar los soldados de ejercitos con mayor vida
-        moreHelath(army1DA, 'A');
-        moreHelath(army1DB, 'B');
-        quickGame();
-      }
-      case 6 -> { // Ordenar los soldados de ejercitos segun la vida
-        System.out.println("\nEjercitos ordenados (insertionSort) segun la vida: ");
-        printArmyHealth(insertionSort(army1DA), 'A');
-        printArmyHealth(insertionSort(army1DB), 'B');
-        quickGame();
-      }
-      case 7 -> { // Jugar de 2
-        gameIntefaz();
-        quickGame();
-      }
-      case 8 -> { // Salir del juego
-        mainInterfaz();
-      }
-      default -> {
-        System.out.println("Selecciona una opcion valida");
-        quickGame();
-      }
-    }
-
-     
-  }
-
-  public void createArmy(){
-    int numSoldiersA = (int) (Math.random() * 10) + 1;
-    int numSoldiersB = (int) (Math.random() * 10) + 1;
-
-    army1DA = createArmyTeam(numSoldiersA, army1DA, 'A');
-    army1DB = createArmyTeam(numSoldiersB, army1DB, 'B');
-  }
-
-  public HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t){
-    for (int i = 0; i < numSoldiers; i++){
-      int row, col;
-      
-      do {
-        row = (int) (Math.random() * 10);
-        col = (int) (Math.random() * 10);
-      } while (army.containsKey(row * 10 + col));
-
-      Soldado s = new Soldado(VideoJuego6.this,"Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
-                            (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1,
-                            0, "Defensiva", true);
-      army1D.put(i, s);
-      army.put(row * 10 + col, s);
-    }
-    return army1D;
-  }
-
-  public static void showArmyTable(HashMap <Integer, Soldado> army){
-    System.out.println("\n                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
-    String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
-    System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
-                      +"    _______________________________________________________________________________");
-    
-    for (int r = 0; r < 10; r++){
-      System.out.print("   |");
-      for (int c = 0; c < 10; c++)
-        System.out.print(" " + (army.get(r*10+c) != null ? ("\'" + army.get(r*10+c).getTeam() + "\'" 
-        + "S" + army.get(r*10+c).getName().charAt(7) + " |") : "      |"));
-
-      System.out.print("\n" + (r+1) + ((r != 9) ? "  |" : " |"));
-      for (int c = 0; c < 10; c++)
-        System.out.print(" " + (army.get(r*10+c) != null ? "HP: " + army.get(r*10+c).getActualLife() : "     ") + " |");
-        
-      System.out.println("\n" + linesDown );
-    }
-    System.out.println();
-  }
-
-  public static void showArmyData(HashMap <Integer, Soldado> army1D, char t){
-    System.out.println("EJERCITO \"" + t + "\"");
-    for (Soldado s : army1D.values())
-      System.out.println(s);
-  }
-
-  public static void moreHelath(HashMap <Integer, Soldado> army1MH, char t){
-    int maxHealth = -1;
-    for(Soldado s : army1MH.values())
-      if (s.getActualLife() > maxHealth)
-        maxHealth = s.getActualLife();
-
-    System.out.println("Soldado(s) con mayor vida del Ejercito " + t + ": ");
-    for (Soldado s : army1MH.values()) 
-      if (s.getActualLife() == maxHealth)
-        System.out.println("Nombre: " + s.getName() + "  Vida: " + s.getActualLife());
-    System.out.println();
-  }
-
-  public static double averageHealth(HashMap <Integer, Soldado> army1DAH){
-    return sumHealth(army1DAH) / army1DAH.size();
-  }
-
-  public static int sumHealth(HashMap <Integer, Soldado> army1DSH){
-    int sum = 0;
-    for (Soldado s : army1DSH.values())
-      sum += s.getActualLife();
-    return sum;
-  }
-  public static HashMap <Integer, Soldado> insertionSort(HashMap <Integer, Soldado> army1DIS) {
-    int n = army1DIS.size();
-    HashMap<Integer, Soldado> army1DCopyInsertion = new HashMap<>(army1DIS);
-
-    for (int i = 1; i < n; i++) {
-      Soldado key = army1DCopyInsertion.get(i);
-      int j = i - 1;
-
-      while (j >= 0 && army1DCopyInsertion.get(j).getActualLife() < key.getActualLife()) {
-        army1DCopyInsertion.put(j+1, army1DCopyInsertion.get(j));
-        j = j - 1;
-      }
-      army1DCopyInsertion.put(j+1, key);
-    }
-    return army1DCopyInsertion;
-  }
-  public static void printArmyHealth(HashMap <Integer, Soldado> armyPrint, char t){
-    System.out.println("EJERCITO " + t + " : ");
-    for(int i = 0; i < armyPrint.size(); i++)
-      System.out.println((i + 1) + ". " + armyPrint.get(i).getName() + "  Vida: " + armyPrint.get(i).getActualLife());
-  }
-
-  public static void armyWinner(){
+  public void armyWinner(){
     if(army1DA.size() > army1DB.size())
       System.out.print("A");
     else
