@@ -243,10 +243,46 @@ public void modifySoldier(HashMap<Integer, Soldado> armyMod, char t) {
 }
 
 
-  public void compareSoldiers(HashMap <Integer, Soldado> armyMod, char t){
-    Scanner sc = new Scanner(System.in);
+public void compareSoldiers(HashMap<Integer, Soldado> armyMod, char t){
+  Scanner sc = new Scanner(System.in);
+  for (Soldado s : armyMod.values())
+    System.out.println(s.getName());
+  
+  System.out.println("Enter the name of the first soldier:");
+  String soldierName1 = sc.next();
+  System.out.println("Enter the name of the second soldier:");
+  String soldierName2 = sc.next();
 
+  Soldado soldier1 = findSoldado(armyMod, soldierName1);
+  Soldado soldier2 = findSoldado(armyMod, soldierName2);
+
+  if (soldier1 != null && soldier2 != null){
+    if (compareSoldadoAttributes(soldier1, soldier2)) 
+      System.out.println("Soldiers are identical.");
+    else 
+      System.out.println("Soldiers are different.");
+  } 
+  else{
+    System.out.println("Soldier not found. Try again.");
+    compareSoldiers(armyMod, t);
   }
+}
+
+public Soldado findSoldado(HashMap<Integer, Soldado> armyMod, String soldierName) {
+  for (Soldado s : armyMod.values()) 
+    if (s.getName().equals(soldierName)) 
+      return s;
+  return null;
+}
+
+public boolean compareSoldadoAttributes(Soldado s1, Soldado s2) {
+  return s1.getName().equals(s2.getName()) &&
+         s1.getAttackLevel() == s2.getAttackLevel() &&
+         s1.getLevelDefense() == s2.getLevelDefense() &&
+         s1.getActualLife() == s2.getActualLife() &&
+         s1.getLives() == s2.getLives();
+}
+
   public void swapSoldiers(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
 
