@@ -29,6 +29,21 @@ public class Soldado {
     this.lives = lives;
     this.videoJuego6 = videoJuego6;
   }
+  //Soldado s = new Soldado(VideoJuego6.this,name, row + 1, column, t, attackLevel, levelDefense, levelLife, speed);
+  public Soldado(VideoJuego6 videoJuego6,String name, int row, char column, char team, 
+                int attackLevel, int levelDefense, int levelLife, int speed){
+    this.name = name;
+    this.row = row;
+    this.column = column;
+    this.team = team;
+    this.attackLevel = attackLevel;
+    this.levelDefense = levelDefense;
+    this.levelLife = levelLife;
+    this.actualLife = levelLife;
+    this.speed = speed;
+    this.lives = true;
+    this.videoJuego6 = videoJuego6;
+  }
 
   //Setters
   public void setName(String n){

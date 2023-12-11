@@ -37,17 +37,17 @@ public class VideoJuego6 {
     System.out.println("Select army to customize:\n  1. A\n  2. B");
     int actionTeam = sc.nextInt();
     if (actionTeam  == 1) // A
-      customGameArmy(army1DA, "A");
+      customGameArmy(army1DA, 'A');
     else if(actionTeam  == 2) // B
-      customGameArmy(army1DB, "B");
+      customGameArmy(army1DB, 'B');
     else{
       System.out.println("Invalid army, try again");
       customGame();
     }
   }
-  public void customGameArmy(HashMap <Integer, Soldado> armyA, String t){
+  public void customGameArmy(HashMap <Integer, Soldado> armyA, char t){
     Scanner sc = new Scanner(System.in);
-    System.out.println("Selected " + t + "army");
+    System.out.println("Selected " + t + " army");
     System.out.println(  " 1. Create Soldier" 
                       +"\n 2. Delete Soldier"
                       +"\n 3. Clone Soldier" 
@@ -61,63 +61,126 @@ public class VideoJuego6 {
                       +"\n11. Return");
     int action = sc.nextInt();
     switch (action){
-      case 1 -> createSoldier(armyA);
-      case 2 -> deleteSoldier(armyA);
-      case 3 -> cloneSoldier(armyA);
-      case 4 -> modifySoldier(armyA);
-      case 5 -> compareSoldiers(armyA);
-      case 6 -> swapSoldiers(armyA);
-      case 7 -> viewSoldier(armyA);
-      case 8 -> seeArmy(armyA);
-      case 9 -> addLevels(armyA);
-      case 10 -> play(armyA);
-      case 11 -> back(armyA);
+      case 1 -> createSoldier(armyA, t);
+      case 2 -> deleteSoldier(armyA, t);
+      case 3 -> cloneSoldier(armyA, t);
+      case 4 -> modifySoldier(armyA, t);
+      case 5 -> compareSoldiers(armyA, t);
+      case 6 -> swapSoldiers(armyA, t);
+      case 7 -> viewSoldier(armyA, t);
+      case 8 -> seeArmy(armyA, t);
+      case 9 -> addLevels(armyA, t);
+      case 10 -> play(armyA, t);
+      case 11 -> back(armyA, t);
       default -> {
         System.out.println("Choose a valid option");
         customGameArmy(armyA, t);
       }
     }
+    System.out.println("Returning to the menu");
     customGameArmy(armyA, t);
   }
-  public void createSoldier(HashMap <Integer, Soldado> armyMod){
+  public void assignModification(HashMap <Integer, Soldado> armyMod, char t){
+    if (t == 'A')
+      army1DA = armyMod;
+    else
+      army1DB = armyMod;
+  }
+  public void createSoldier(HashMap <Integer, Soldado> armyMod, char t){
+    Scanner sc = new Scanner(System.in);
+    if (armyMod.size() <= 10){
+      System.out.print("ENTER THE DATA: ");
+
+      System.out.print("Enter name: ");
+      String name = sc.next();
+      int position = createPosition(armyMod);
+      System.out.print("Enter attack level (1 - 5): ");
+      int attackLevel = sc.nextInt();
+      System.out.print("Enter level deffense (1 - 5): ");
+      int levelDefense = sc.nextInt();
+      System.out.print("Enter level life (1 - 5): ");
+      int levelLife = sc.nextInt();
+      System.out.print("Enter speed: ");
+      int speed = sc.nextInt();
+      Soldado s = new Soldado(VideoJuego6.this,name, position / 10 + 1, (char)(position % 10 + 'A'), t, attackLevel, levelDefense, levelLife, speed);
+      armyMod.put(armyMod.size(), s);
+      army.put(position / 10 + position % 10, s);
+    }
+    else
+      System.out.println("The army reached the limit of allowed soldiers");
+    assignModification(armyMod, t);
+  }
+  public int createPosition(HashMap <Integer, Soldado> armyMod){
+    Scanner sc = new Scanner(System.in);
+    int row;
+    char column;
+    do{
+      System.out.print("Enter row (1 - 10): ");
+      row = sc.nextInt();
+      System.out.print("Enter column (A - J): ");
+      column = sc.next().charAt(0);
+    } while(armyMod.get((row-1)*10 + (column - 'A')) != null);
+    return (row-1)*10 + (column - 'A');
+  }
+  public void deleteSoldier(HashMap <Integer, Soldado> armyMod, char t){
+    Scanner sc = new Scanner(System.in);
+    if (armyMod.size() > 1){
+      System.out.println("ARMY \"" + t + "\"");
+      for (Soldado s : armyMod.values())
+        System.out.println(s.getName());
+      
+      System.out.println("Enter the name of the soldier to be eliminated");
+      String sName = sc.next();
+      Soldado soldierToDelete = null;
+      for (Soldado s : armyMod.values())
+        if (s.getName().equals(sName)){
+          soldierToDelete = s;
+          break;
+        }
+      if (soldierToDelete != null) {
+        armyMod.remove(Integer.parseInt(soldierToDelete.getName().substring(7,8)));
+        army.remove((soldierToDelete.getRow() - 1) * 10 + (soldierToDelete.getColumn() - 'A'));
+        System.out.println("Soldier successfully eliminated: " + soldierToDelete.getName());
+      } else {
+        System.out.println("Soldier not found. Try again.");
+        deleteSoldier(armyMod, t);
+      }
+    } else {
+      System.out.println("No soldiers in the " + t + " army.");
+    }
+    assignModification(armyMod, t);
+  }
+  public void cloneSoldier(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
 
   }
-  public void deleteSoldier(HashMap <Integer, Soldado> armyMod){
+  public void modifySoldier(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
 
   }
-  public void cloneSoldier(HashMap <Integer, Soldado> armyMod){
+  public void compareSoldiers(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
 
   }
-  public void modifySoldier(HashMap <Integer, Soldado> armyMod){
+  public void swapSoldiers(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
 
   }
-  public void compareSoldiers(HashMap <Integer, Soldado> armyMod){
+  public void viewSoldier(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
 
   }
-  public void swapSoldiers(HashMap <Integer, Soldado> armyMod){
-    Scanner sc = new Scanner(System.in);
+  public void seeArmy(HashMap <Integer, Soldado> armyMod, char t){
 
   }
-  public void viewSoldier(HashMap <Integer, Soldado> armyMod){
-    Scanner sc = new Scanner(System.in);
+  public void addLevels(HashMap <Integer, Soldado> armyMod, char t){
 
   }
-  public void seeArmy(HashMap <Integer, Soldado> armyMod){
+  public void play(HashMap <Integer, Soldado> armyMod, char t){
 
   }
-  public void addLevels(HashMap <Integer, Soldado> armyMod){
-
-  }
-  public void play(HashMap <Integer, Soldado> armyMod){
-
-  }
-  public void back(HashMap <Integer, Soldado> armyMod){
-
+  public void back(HashMap <Integer, Soldado> armyMod, char t){
+    mainInterfaz();
   }
     public void quickGame(){
     Scanner sc = new Scanner(System.in);
