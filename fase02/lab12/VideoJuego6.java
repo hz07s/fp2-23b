@@ -88,7 +88,7 @@ public class VideoJuego6 {
   }
   public void createSoldier(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
-    if (armyMod.size() <= 10){
+    if (armyMod.size() < 10){
       System.out.print("ENTER THE DATA: ");
 
       System.out.print("Enter name: ");
@@ -150,10 +150,47 @@ public class VideoJuego6 {
     }
     assignModification(armyMod, t);
   }
-  public void cloneSoldier(HashMap <Integer, Soldado> armyMod, char t){
+  public void cloneSoldier(HashMap<Integer, Soldado> armyMod, char t) {
     Scanner sc = new Scanner(System.in);
+    if (armyMod.size() < 10) {
+      for (Soldado s : armyMod.values())
+        System.out.println(s.getName());
 
-  }
+      System.out.println("Enter the name of the soldier to clone:");
+      String originalSoldierName = sc.next();
+
+      Soldado originalSoldado = null;
+      for (Soldado s : armyMod.values())
+        if (s.getName().equals(originalSoldierName)) {
+          originalSoldado = s;
+          break;
+        }
+      if (originalSoldado != null){
+        int row, col;
+        do {
+          System.out.print("Enter the row (1 - 10) for the cloned soldier: ");
+          row = sc.nextInt();
+          System.out.print("Enter the column (A - J) for the cloned soldier: ");
+          col = Character.toUpperCase(sc.next().charAt(0)) - 'A';
+        } while (armyMod.get(row * 10 + col) != null);
+        
+        Soldado clonedSoldado = new Soldado(originalSoldado.getVideoJuego6(),"Soldier" + armyMod.size() + "X" + t,
+                      row + 1, (char) (col + 'A'), t, originalSoldado.getAttackLevel(), originalSoldado.getLevelDefense(),
+                      originalSoldado.getLevelLife(), originalSoldado.getSpeed(),"Defensiva",true);
+        armyMod.put(armyMod.size(), clonedSoldado);
+        army.put(row * 10 + col, clonedSoldado);
+
+        System.out.println("Soldier cloned successfully: " + clonedSoldado.getName());
+      } 
+      else {
+        System.out.println("Soldier not found. Try again.");
+        cloneSoldier(armyMod, t);
+      }
+    } else 
+        System.out.println("The army reached the limit of allowed soldiers.");
+    assignModification(armyMod, t);
+}
+
   public void modifySoldier(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
 

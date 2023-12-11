@@ -116,6 +116,9 @@ public class Soldado {
   public boolean getLives(){
     return lives;
   }
+  public VideoJuego6 getVideoJuego6() {
+    return videoJuego6;
+  }
   
   @Override
   public String toString() {  
@@ -160,5 +163,6 @@ public class Soldado {
   }
   public void die(){
     videoJuego6.removeSoldier(this);
+    this.lives = false;
   }
 }
