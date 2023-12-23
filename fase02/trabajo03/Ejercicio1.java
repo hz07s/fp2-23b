@@ -43,5 +43,19 @@ class Circulo {
   protected double centro;
   protected double radio;
 
+  public void setCentro(double centro) {
+    this.centro = centro;
+  }
 
+  public double getCentro() {
+    return centro;
+  }
+
+  public void setRadio(double radio) {
+    this.radio = radio;
+  }
+
+  public double getRadio() {
+    return radio;
+  }
 }
