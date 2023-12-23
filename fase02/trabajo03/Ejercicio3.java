@@ -1,10 +1,13 @@
 public class Ejercicio3 {
   public static void main(String[] args) {
+    // Crear una instancia de Hidroavion
     Hidroavion hidroavion = new Hidroavion();
 
+    // Configurar el modelo y la velocidad del hidroavión
     hidroavion.setModelo("Hidro-3000");
     hidroavion.setVelocidad(3000);
 
+    // Invocar métodos relacionados con la navegación y vuelo
     hidroavion.navegar();
     hidroavion.detenerse();
     hidroavion.sonarSirena();
@@ -13,15 +16,18 @@ public class Ejercicio3 {
     hidroavion.hacerAnuncio();
     hidroavion.mostrarInformacion();
 
+    // Invocar métodos específicos de la interfaz Barco
     hidroavion.gestionarTripulacion();
     hidroavion.tirarAncla();
     hidroavion.comunicarTorreControlMaritima();
+
+    // Invocar métodos específicos de la interfaz Avion
     hidroavion.gestionarPasajeros();
     hidroavion.desplegarTrenAterrizaje();
     hidroavion.comunicarTorreControlAerea();
   }
 }
-
+// Definir la interfaz Barco con métodos relacionados con la navegación marítima
 interface Barco {
   void navegar();
   void detenerse();
@@ -30,7 +36,7 @@ interface Barco {
   void tirarAncla();
   void comunicarTorreControlMaritima();
 }
-
+// Definir la interfaz Avion con métodos relacionados con la aviación
 interface Avion {
   void volar();
   void aterrizar();
@@ -39,14 +45,14 @@ interface Avion {
   void desplegarTrenAterrizaje();
   void comunicarTorreControlAerea();
 }
-
+// Definir la clase Hidroavion que implementa ambas interfaces
 class Hidroavion implements Barco, Avion {
   private String modelo;
   private int velocidad;
   private int pasajeros;
   private String ubicacion;
   private boolean estado;
-
+  // Métodos getter y setter para los atributos de la clase
   public void setModelo(String modelo) {
     this.modelo = modelo;
   }
@@ -78,7 +84,7 @@ class Hidroavion implements Barco, Avion {
   public String getUbicacion() {
     return ubicacion;
   }
-
+  //Métodos de la interfaces barco y avion
   @Override
   public void navegar() {
     System.out.println("El hidroavión está navegando en " + ubicacion);
