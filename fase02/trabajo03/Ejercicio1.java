@@ -39,7 +39,7 @@ class Punto {
   }
 }
 
-class Circulo extends Punto{
+class Circulo {
   private double centro;
   private double radio;
 }
