@@ -20,10 +20,7 @@ class Punto {
   }
 
   public double distancia(Punto p) {
-    double x2 = p.getX();
-    double y2 = p.getY();
-    
-    return ;
+    return Math.pow((p.getX() - x),2) + Math.pow(Math.pow((p.getY() - y),2),1/2);
   }
 }
 
