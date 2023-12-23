@@ -11,7 +11,7 @@ public class Ejercicio2 {
   }
 }
 class Cilindro extends Circulo{
-  private double longitud;
+  protected double longitud;
 
   public void setLongitud(double longitud) {
     this.longitud = longitud;
