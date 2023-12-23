@@ -15,8 +15,8 @@ class Ejercicio1 {
 }
 
 class Punto {
-  private double x;
-  private double y;
+  protected double x;
+  protected double y;
   
   public void setX(double x) {
     this.x = x;
@@ -40,6 +40,8 @@ class Punto {
 }
 
 class Circulo {
-  private double centro;
-  private double radio;
+  protected double centro;
+  protected double radio;
+
+
 }
