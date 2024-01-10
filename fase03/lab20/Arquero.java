@@ -10,4 +10,10 @@ public class Arquero extends Soldado{
     setActualLife(getLevelLife());
     setType('A');
   }
+
+  public void disparar(){
+    if (numFlechas > 0)
+      attack(1);
+      numFlechas--;
+  }
 }

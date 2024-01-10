@@ -20,7 +20,6 @@ public class Caballero extends Soldado{
       arma = "lanza";
     else
       arma = "espada";
-      attack();
   }
 
   public void desmontar(){
@@ -35,7 +34,13 @@ public class Caballero extends Soldado{
       montado = true;
       arma = "lanza";
     }
-      
+  }
+
+  public void envestir(){
+    if(montado)
+      attack(3);
+    else
+      attack(2);
   }
 
 }

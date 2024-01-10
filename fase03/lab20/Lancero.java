@@ -1,4 +1,5 @@
 public class Lancero extends Soldado{
+  private int longLanza;
 
   public Lancero(VideoJuego7 VideoJuego7,String name, int row, char column, char team, 
   int speed, String attitude, boolean lives, String reino){
@@ -8,5 +9,9 @@ public class Lancero extends Soldado{
     setLevelLife((int)(Math.random() * 4) + 5);
     setActualLife(getLevelLife());
     setType('L');
+  }
+
+  public void schiltrom(){
+    setLevelDefense(getLevelDefense() + 1);
   }
 }

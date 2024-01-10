@@ -4,6 +4,7 @@
 // Tiempo : 3 horas
 //import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -160,9 +161,9 @@ public class VideoJuego7 {
   }
 
   public void showArmyTable(HashMap <Integer, Soldado> army){
-    String colorAzul = "\u001B[34m";
-    String colorRojo = "\u001B[31m";
-    String resetColor = "\u001B[0m";
+    String azul = "\u001B[34m";
+    String rojo = "\u001B[31m";
+    String reset = "\u001B[0m";
 
     System.out.println("\n                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
@@ -172,16 +173,43 @@ public class VideoJuego7 {
     for (int r = 0; r < 10; r++){
       System.out.print("   |");
       for (int c = 0; c < 10; c++)
-        System.out.print(" " + (army.get(r*10+c) != null ? ("\'" + army.get(r*10+c).getTeam() + "\'" 
-        + army.get(r*10+c).getType() + army.get(r*10+c).getName().charAt(7) + " |") : "      |"));
+        System.out.print(" " + (army.get(r*10+c) != null ? ((army.get(r*10+c).getTeam() == 'A' ? azul: rojo) + "\'" + army.get(r*10+c).getTeam() + "\'" 
+        + army.get(r*10+c).getType() + army.get(r*10+c).getName().charAt(7)+ reset + " |") : "      |"));
 
       System.out.print("\n" + (r+1) + ((r != 9) ? "  |" : " |"));
       for (int c = 0; c < 10; c++)
-        System.out.print(" " + (army.get(r*10+c) != null ? "HP: " + army.get(r*10+c).getActualLife() : "     ") + " |");
-        
+        System.out.print(" " + (army.get(r*10+c) != null ? (army.get(r*10+c).getTeam() == 'A' ? azul: rojo) + "HP: " + army.get(r*10+c).getActualLife() + reset + ((army.get(r*10+c).getActualLife() >= 10) ? "|": " |"): "      |") 
+        );
+      
       System.out.println("\n" + linesDown );
     }
+    mostrarData(army1DA, "A");
+    mostrarData(army1DB, "B"); 
     System.out.println();
+    mostrarInfo(army1DA, army1DB);
+  }
+
+  public void mostrarData(HashMap<Integer, Soldado> arm, String t){
+    System.out.println("\nEjercito " + t + ": " + arm.get(0).getReino());
+    System.out.println("Cantidad de Soldados creados: " + arm.size());
+    int es = 0;
+    int ar = 0;
+    int ca = 0;
+    int la = 0;
+    for(Map.Entry<Integer, Soldado> e : arm.entrySet()){
+      es += e.getValue().getType() == 'E' ? 1 : 0;
+      ar += e.getValue().getType() == 'A' ? 1 : 0;
+      ca += e.getValue().getType() == 'C' ? 1 : 0;
+      la += e.getValue().getType() == 'L' ? 1 : 0;
+    }
+    System.out.println("Espadachines: " + es);
+    System.out.println("Arqueros: " + ar);
+    System.out.println("Caballeros: " + ca);
+    System.out.println("Lanceros: " + la);
+  }
+
+  public void mostrarInfo(HashMap<Integer, Soldado> a1, HashMap<Integer, Soldado> a2){
+
   }
 
   public void showArmyData(HashMap <Integer, Soldado> army1D, char t){

@@ -172,7 +172,7 @@ public class Soldado {
               
   }
 
-  public void attack(){
+  public void attack(int i){
     advance();
   }
   public void defend(){
