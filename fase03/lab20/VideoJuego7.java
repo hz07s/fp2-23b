@@ -11,6 +11,7 @@ public class VideoJuego7 {
   static HashMap <Integer, Soldado> army = new HashMap<>();
   static HashMap <Integer, Soldado> army1DA = new HashMap<>();
   static HashMap <Integer, Soldado> army1DB = new HashMap<>();
+  static String map;
   public static void main(String [] args){
     VideoJuego7 videoJuego = new VideoJuego7();
     videoJuego.createArmy();
@@ -96,14 +97,19 @@ public class VideoJuego7 {
   }
 
   public void createArmy(){
+    Mapa m = new Mapa();
+    map = m.randomMapa();
     int numSoldiersA = (int) (Math.random() * 10) + 1;
     int numSoldiersB = (int) (Math.random() * 10) + 1;
+
+    String[] reinos = {"Castilla", "Aragon", "Moros", "Sacro Imperio Romano", "Germanico"};
 
     army1DA = createArmyTeam(numSoldiersA, army1DA, 'A');
     army1DB = createArmyTeam(numSoldiersB, army1DB, 'B');
   }
 
   public HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t){
+    String[] typeSoldier = {"Espadachin", "Caballero", "Arquero", "Lancero"};
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
       
@@ -122,6 +128,10 @@ public class VideoJuego7 {
   }
 
   public void showArmyTable(HashMap <Integer, Soldado> army){
+    String colorAzul = "\u001B[34m";
+    String colorRojo = "\u001B[31m";
+    String resetColor = "\u001B[0m";
+
     System.out.println("\n                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"

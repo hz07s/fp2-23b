@@ -4,9 +4,9 @@ public class Mapa {
 
   String[] typesTerritory ={"bosque","campoAbierto", "montaña", "desierto", "playa"};
 
-  public Mapa (){
+  public String randomMapa (){
     this.territory =  typesTerritory[(int) (Math.random() * typesTerritory.length)];
-
+    return territory;
   }
   
   public void setTerritory(String territory) {

@@ -13,6 +13,7 @@ public class Soldado {
   private int speed;
   private String attitude;
   private boolean lives;
+  private char type;
   
   public Soldado(VideoJuego7 VideoJuego7,String name, int row, char column, char team, 
                 int attackLevel, int levelDefense, int levelLife, int speed, 
@@ -84,6 +85,9 @@ public class Soldado {
   public void setLives(boolean l){
     lives = l;
   }
+  public void setType(char ty){
+    type = ty;
+  }
 
   //Getters
   public String getName(){
@@ -126,6 +130,9 @@ public class Soldado {
   public VideoJuego7 getVideoJuego7() {
     return VideoJuego7;
   }
+  public char getType(){
+    return type;
+  }
   
   @Override
   public String toString() {  
@@ -141,6 +148,7 @@ public class Soldado {
               "\n Speed: "         + speed         + 
               "\n Attitude: "      + attitude      + 
               "\n Lives: "         + lives         + 
+              "\n Type: "          + type          +               
               "\n}\n";
               
   }
