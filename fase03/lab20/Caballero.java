@@ -2,8 +2,6 @@ public class Caballero extends Soldado{
   private String arma; 
   private boolean montado;
 
-
-
   public Caballero(VideoJuego7 VideoJuego7,String name, int row, char column, char team, 
   int speed, String attitude, boolean lives, String reino){
     super(VideoJuego7, name, row, column, team, speed, attitude, lives, reino);
@@ -13,7 +11,6 @@ public class Caballero extends Soldado{
     setActualLife(getLevelLife());
     setType('C');
   }
-
 
   public void alternarArma(){
     if (arma.equals("espada"))
@@ -42,5 +39,4 @@ public class Caballero extends Soldado{
     else
       attack(2);
   }
-
 }

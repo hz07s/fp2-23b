@@ -37,7 +37,6 @@ public class VideoJuego7 {
   }
   public void quickGame(){
     Scanner sc = new Scanner(System.in);
-
     System.out.println("1. Crear un nuevo ejercito" 
                       +"\n2. Mostrar los datos de los ejercitos" 
                       +"\n3. Mostrar la tabla con los ejercitos" 
@@ -47,7 +46,6 @@ public class VideoJuego7 {
                       +"\n7. 1v1 battle"
                       +"\n8. Salir del juego");
     int action = sc.nextInt();
-
     switch (action){
       case 1 -> { // Crear un nuevo ejercito
         army.clear();
@@ -94,8 +92,6 @@ public class VideoJuego7 {
         quickGame();
       }
     }
-
-     
   }
 
   public void createArmy(){
@@ -105,10 +101,8 @@ public class VideoJuego7 {
     int numSoldiersB = (int) (Math.random() * 10) + 1;
 
     String[] reinos = {"Castilla", "Aragon", "Moros", "Sacro Imperio Romano", "Germanico"};
-
     army1DA = createArmyTeam(numSoldiersA, army1DA, 'A', reinos[(int) (Math.random() * reinos.length)], map);
     army1DB = createArmyTeam(numSoldiersB, army1DB, 'B', reinos[(int) (Math.random() * reinos.length)], map);
-
   }
 
   public HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t, String r, String mapp){
@@ -119,14 +113,12 @@ public class VideoJuego7 {
     String[] typeSoldier = {"Espadachin", "Caballero", "Arquero", "Lancero"};
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
-      
       do {
         row = (int) (Math.random() * 10);
         col = (int) (Math.random() * 10);
       } while (army.containsKey(row * 10 + col));
 
       int typ = (int) (Math.random() * typeSoldier.length);
-
       switch (typ) {
         case 1 -> {
           Espadachin e = new Espadachin(VideoJuego7.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
@@ -170,12 +162,10 @@ public class VideoJuego7 {
     String azul = "\u001B[34m";
     String rojo = "\u001B[31m";
     String reset = "\u001B[0m";
-
     System.out.println("\n                  TABLA CON LAS UBICACIONES DE LOS SOLDADOS CREADOS: \n");
     String linesDown = "   |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|";
     System.out.println("       A       B       C       D       E       F       G       H       I       J\n"
                       +"    _______________________________________________________________________________");
-    
     for (int r = 0; r < 10; r++){
       System.out.print("   |");
       for (int c = 0; c < 10; c++)
@@ -186,7 +176,6 @@ public class VideoJuego7 {
       for (int c = 0; c < 10; c++)
         System.out.print(" " + (army.get(r*10+c) != null ? (army.get(r*10+c).getTeam() == 'A' ? azul: rojo) + "HP: " + army.get(r*10+c).getActualLife() + reset + ((army.get(r*10+c).getActualLife() >= 10) ? "|": " |"): "      |") 
         );
-      
       System.out.println("\n" + linesDown );
     }
     mostrarData(army1DA, "A");
@@ -214,7 +203,7 @@ public class VideoJuego7 {
     System.out.println("Lanceros: " + la);
   }
 
-  public void mostrarInfo(HashMap<Integer, Soldado> a1, HashMap<Integer, Soldado> a2){
+  public void mostrarInfo(HashMap<Integer, Soldado> a1, HashMap<Integer, Soldado> a2){        
     int sumA = 0;
     int sumB = 0;
     for(Map.Entry<Integer, Soldado> e : a1.entrySet())
@@ -235,11 +224,9 @@ public class VideoJuego7 {
       } else {
         win = tB;
       }
-
       System.out.println("El ganador es el ejercito " + win + "Ya que al generar los porcentajes " + 
       "de probabilidad de victoria basada en los niveles de vida de sus soldados y aplicando un " + 
       "experimento aleatorio salió vencedor. (Aleatorio generado: )" + rand + "\n");
-      
   }
 
   public void showArmyData(HashMap <Integer, Soldado> army1D, char t){
@@ -271,10 +258,10 @@ public class VideoJuego7 {
       sum += s.getActualLife();
     return sum;
   }
+
   public HashMap <Integer, Soldado> insertionSort(HashMap <Integer, Soldado> army1DIS) {
     int n = army1DIS.size();
     HashMap<Integer, Soldado> army1DCopyInsertion = new HashMap<>(army1DIS);
-
     for (int i = 1; i < n; i++) {
       Soldado key = army1DCopyInsertion.get(i);
       int j = i - 1;
@@ -287,6 +274,7 @@ public class VideoJuego7 {
     }
     return army1DCopyInsertion;
   }
+
   public void printArmyHealth(HashMap <Integer, Soldado> armyPrint, char t){
     System.out.println("EJERCITO " + t + " : ");
     for(int i = 0; i < armyPrint.size(); i++)
@@ -306,6 +294,7 @@ public class VideoJuego7 {
       customGame();
     }
   }
+
   public void customGameArmy(HashMap <Integer, Soldado> armyA, char t){
     Scanner sc = new Scanner(System.in);
     System.out.println("Selected " + t + " army");
@@ -341,17 +330,18 @@ public class VideoJuego7 {
     System.out.println("Returning to the menu");
     customGameArmy(armyA, t);
   }
+
   public void assignModification(HashMap <Integer, Soldado> armyMod, char t){
     if (t == 'A')
       army1DA = armyMod;
     else
       army1DB = armyMod;
   }
+
   public void createSoldier(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
     if (armyMod.size() < 10){
       System.out.print("ENTER THE DATA: ");
-
       System.out.print("Enter name: ");
       String name = sc.next();
       int position = createPosition(armyMod);
@@ -371,6 +361,7 @@ public class VideoJuego7 {
       System.out.println("The army reached the limit of allowed soldiers");
     assignModification(armyMod, t);
   }
+
   public int createPosition(HashMap <Integer, Soldado> armyMod){
     Scanner sc = new Scanner(System.in);
     int row;
@@ -383,6 +374,7 @@ public class VideoJuego7 {
     } while(armyMod.get((row-1)*10 + (column - 'A')) != null);
     return (row-1)*10 + (column - 'A');
   }
+
   public void deleteSoldier(HashMap <Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
     if (armyMod.size() > 1){
@@ -411,6 +403,7 @@ public class VideoJuego7 {
     }
     assignModification(armyMod, t);
   }
+
   public void cloneSoldier(HashMap<Integer, Soldado> armyMod, char t) {
     Scanner sc = new Scanner(System.in);
     if (armyMod.size() < 10) {
@@ -450,7 +443,8 @@ public class VideoJuego7 {
     } else 
         System.out.println("The army reached the limit of allowed soldiers.");
     assignModification(armyMod, t);
-}
+  }
+
   public void modifySoldier(HashMap<Integer, Soldado> armyMod, char t) {
     Scanner sc = new Scanner(System.in);
     System.out.println("ARMY \"" + t + "\"");
@@ -459,7 +453,6 @@ public class VideoJuego7 {
 
     System.out.println("Enter the name of the soldier to modify:");
     String soldierName = sc.next();
-
     Soldado soldierToModify = null;
     for (Soldado s : armyMod.values()) 
       if (s.getName().equals(soldierName)) {
@@ -473,9 +466,7 @@ public class VideoJuego7 {
       System.out.println("2. Modify Defense Level");
       System.out.println("3. Modify Life Level");
       System.out.println("4. Return");
-
       int choice = sc.nextInt();
-
       switch (choice) {
         case 1 -> {
           System.out.print("Enter new Attack Level (1 - 5): ");
@@ -502,6 +493,7 @@ public class VideoJuego7 {
       modifySoldier(armyMod, t);
     }
   }
+
   public void compareSoldiers(HashMap<Integer, Soldado> armyMod, char t){
     Scanner sc = new Scanner(System.in);
     for (Soldado s : armyMod.values())
@@ -526,12 +518,14 @@ public class VideoJuego7 {
       compareSoldiers(armyMod, t);
     }
   }
+
   public Soldado findSoldado(HashMap<Integer, Soldado> armyMod, String soldierName) {
     for (Soldado s : armyMod.values()) 
       if (s.getName().equals(soldierName)) 
         return s;
     return null;
   }
+
   public boolean compareSoldadoAttributes(Soldado s1, Soldado s2) {
     return s1.getName().equals(s2.getName()) &&
           s1.getAttackLevel() == s2.getAttackLevel() &&
@@ -539,6 +533,7 @@ public class VideoJuego7 {
           s1.getActualLife() == s2.getActualLife() &&
           s1.getLives() == s2.getLives();
   }
+
   public void swapSoldiers(HashMap<Integer, Soldado> armyMod, char t) {
     Scanner sc = new Scanner(System.in);
 
@@ -571,15 +566,14 @@ public class VideoJuego7 {
       swapSoldiers(armyMod, t);
     } 
   }
+
   public void viewSoldier(HashMap<Integer, Soldado> armyMod, char t) {
     Scanner sc = new Scanner(System.in);
     for (Soldado soldado : armyMod.values()) 
       System.out.println(soldado.getName());
     System.out.println("Enter the name of the soldier to view:");
     String soldierName = sc.next();
-
     Soldado soldierToView = findSoldado(armyMod, soldierName);
-
     if (soldierToView != null) {
       System.out.println("Soldier Details:");
       System.out.println("Name: " + soldierToView.getName());
@@ -594,6 +588,7 @@ public class VideoJuego7 {
       viewSoldier(armyMod, t);
     }
   }
+
   public void seeArmy(HashMap<Integer, Soldado> armyMod, char t) {
     System.out.println("EJERCITO \"" + t + "\"");
     for (Soldado s : armyMod.values()) {
@@ -608,13 +603,13 @@ public class VideoJuego7 {
       System.out.println();
     }
     customGameArmy(armyMod, t);
-  }  
+  }
+
   public void addLevels(HashMap<Integer, Soldado> armyMod, char t) {
     int totalAttackLevel = 0;
     int totalDefenseLevel = 0;
     int totalLifeLevel = 0;
     int totalSpeed = 0;
-
     for (Soldado soldier : armyMod.values()) {
         totalAttackLevel += soldier.getAttackLevel();
         totalDefenseLevel += soldier.getLevelDefense();
@@ -627,10 +622,10 @@ public class VideoJuego7 {
     System.out.println("Sumatoria de Nivel de Vida: " + totalLifeLevel);
     System.out.println("Sumatoria de Velocidad: " + totalSpeed);
   }
+  
   public void play(){
     gameIntefaz();
   }
-  
 
   public void armyWinner(){
     if(army1DA.size() > army1DB.size())
@@ -646,6 +641,7 @@ public class VideoJuego7 {
       army1DB.remove(s.getName().charAt(7) - '0');
     army.remove((s.getRow()-1)*10 + (s.getColumn() -'A'));
   }
+
   public void gameIntefaz(){
     Scanner sc = new Scanner(System.in);
     System.out.println("Starting Game...");
@@ -660,10 +656,10 @@ public class VideoJuego7 {
       if(army1DB.size() == 0)
         break;
     }
-     
     System.out.println("Winning team: ");
     armyWinner();
   }
+
   public void turn(char teamT){
     showArmyTable(army);
     Scanner sc = new Scanner(System.in);
@@ -675,8 +671,8 @@ public class VideoJuego7 {
       turn2(row1, col1, teamT);
     else 
       turn(teamT);
-     
   }
+
   public boolean checkSoldier1(int row, int col, char team){
     if(row > 9 || col > 9)
       return false;   
@@ -690,6 +686,7 @@ public class VideoJuego7 {
     }
     return false;
   }
+
   public int checkSoldier2(int row, int col, char team){
     if(row > 9 || col > 9)
       return 4;   
@@ -699,13 +696,13 @@ public class VideoJuego7 {
       return 3;
     return 2;
   }
+
   public void turn2(int row1, int col1, char teamT){
     Scanner sc = new Scanner(System.in);
     System.out.println("Indicate the coordinates where you want to move the soldier. Ej: 1 A (put the space in the middle)");
     int row2 = sc.nextInt() - 1;
     char l2 = sc.next().charAt(0);
     int col2 = Character.toUpperCase(l2) - 'A';
-
     switch(checkSoldier2(row2, col2, teamT)){
       case 1 -> moveSoldier(row1, col1, row2, col2);
       case 2 -> {
@@ -722,27 +719,27 @@ public class VideoJuego7 {
         turn2(row1, col1, teamT);
       }
     }
-     
   }
+
   public void moveSoldier(int row1, int col1, int row2, int col2){
     army.put(row2*10 + col2, army.get(row1*10 + col1));
     army.remove(row1*10 + col1);
   }
+
   public void moveSoldier(Soldado s,int row1, int col1, int rowD, int colD){
     army.remove(rowD*10 + colD);
     army.put(row1*10 + col1, s);
   }
+
   public Soldado soldiersFight(Soldado a, Soldado b, int rowP, int colP, int rowD, int colD){
     double probabilityA = (double) a.getActualLife() / (a.getActualLife() + b.getActualLife()) * 100;
     double probabilityB = (double) b.getActualLife() / (a.getActualLife() + b.getActualLife()) * 100;
-
     System.out.println("Probability of " + a.getName() + ": " + probabilityA + "%");
     System.out.println("Probability of " + b.getName() + ": " + probabilityB + "%");
 
     Random random = new Random();
     double probabilityT = probabilityA + probabilityB;
     double randomValue = random.nextDouble() * probabilityT;
-
     Soldado winner;
     if (randomValue < probabilityA) {
         System.out.println("The winner is: " + a.getName());

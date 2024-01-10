@@ -121,7 +121,6 @@ public class Soldado {
   public int getPosition(){
     return position;
   }
-
   public int getAttackLevel(){
     return attackLevel;
   }
@@ -168,8 +167,7 @@ public class Soldado {
               "\n Attitude: "      + attitude      + 
               "\n Lives: "         + lives         + 
               "\n Type: "          + type          +               
-              "\n}\n";
-              
+              "\n}\n";    
   }
 
   public void attack(int i){

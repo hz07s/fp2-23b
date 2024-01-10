@@ -1,7 +1,5 @@
 public class Mapa {
   private String territory;
-
-
   String[] typesTerritory ={"bosque","campoAbierto", "montaña", "desierto", "playa"};
 
   public String randomMapa (){
@@ -16,15 +14,4 @@ public class Mapa {
   public String getTerritory() {
     return territory;
   }
-
-
-  
 }
-
-
-/*
-
-metodo para verificar el territorio y aplicar bonos
-
-
- */
