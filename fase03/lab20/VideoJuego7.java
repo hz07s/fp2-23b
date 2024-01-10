@@ -1,8 +1,7 @@
-// Laboratorio Nro 12 - Ejercicio01
+// Laboratorio Nro 20 - Ejercicio01
 // Autor : Hernan Andy
 // Colaboro : null
-// Tiempo : 3 horas
-//import java.util.ArrayList;
+// Tiempo : 6 horas
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -167,6 +166,7 @@ public class VideoJuego7 {
   }
 
   public void showArmyTable(HashMap <Integer, Soldado> army){
+    System.out.println("\t"+ map + "\n");
     String azul = "\u001B[34m";
     String rojo = "\u001B[31m";
     String reset = "\u001B[0m";
