@@ -13,6 +13,8 @@ public class VideoJuego7 {
   static HashMap <Integer, Soldado> army1DA = new HashMap<>();
   static HashMap <Integer, Soldado> army1DB = new HashMap<>();
   static String map;
+  static String tA;
+  static String tB;
   public static void main(String [] args){
     VideoJuego7 videoJuego = new VideoJuego7();
     videoJuego.createArmy();
@@ -111,6 +113,10 @@ public class VideoJuego7 {
   }
 
   public HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t, String r, String mapp){
+    if ('A' == t)
+      tA = r;
+    if ('B' == t)
+      tB = r;
     String[] typeSoldier = {"Espadachin", "Caballero", "Arquero", "Lancero"};
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
@@ -189,14 +195,14 @@ public class VideoJuego7 {
     mostrarInfo(army1DA, army1DB);
   }
 
-  public void mostrarData(HashMap<Integer, Soldado> arm, String t){
-    System.out.println("\nEjercito " + t + ": " + arm.get(0).getReino());
-    System.out.println("Cantidad de Soldados creados: " + arm.size());
+  public void mostrarData(HashMap<Integer, Soldado> am, String t){
+    System.out.println("\nEjercito " + t + ": " + (t == "A" ? tA : tB));
+    System.out.println("Cantidad de Soldados creados: " + am.size());
     int es = 0;
     int ar = 0;
     int ca = 0;
     int la = 0;
-    for(Map.Entry<Integer, Soldado> e : arm.entrySet()){
+    for(Map.Entry<Integer, Soldado> e : am.entrySet()){
       es += e.getValue().getType() == 'E' ? 1 : 0;
       ar += e.getValue().getType() == 'A' ? 1 : 0;
       ca += e.getValue().getType() == 'C' ? 1 : 0;
@@ -209,7 +215,31 @@ public class VideoJuego7 {
   }
 
   public void mostrarInfo(HashMap<Integer, Soldado> a1, HashMap<Integer, Soldado> a2){
+    int sumA = 0;
+    int sumB = 0;
+    for(Map.Entry<Integer, Soldado> e : a1.entrySet())
+      sumA += e.getValue().getLevelLife();
+    for(Map.Entry<Integer, Soldado> e : a2.entrySet())
+      sumB += e.getValue().getLevelLife();
+      
+      double probA = ((double) sumA / (sumA + sumB)) * 100;
+      double probB = ((double) sumB / (sumA + sumB)) * 100;
+      System.out.println("Ejercito A :" + sumA + "\t " + probA + "% de probabilidad de victoria");
+      System.out.println("Ejercito B :" + sumB + "\t " + probB + "% de probabilidad de victoria\n");
 
+      Random random = new Random();
+      double rand = random.nextDouble() * (probA + probB);
+      String win;
+      if (rand < probA) {
+        win = tA;
+      } else {
+        win = tB;
+      }
+
+      System.out.println("El ganador es el ejercito " + win + "Ya que al generar los porcentajes " + 
+      "de probabilidad de victoria basada en los niveles de vida de sus soldados y aplicando un " + 
+      "experimento aleatorio salió vencedor. (Aleatorio generado: )" + rand + "\n");
+      
   }
 
   public void showArmyData(HashMap <Integer, Soldado> army1D, char t){
