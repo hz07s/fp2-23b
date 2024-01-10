@@ -4,27 +4,38 @@ public class Caballero extends Soldado{
 
 
 
-  public Caballero(){
+  public Caballero(VideoJuego7 VideoJuego7,String name, int row, char column, char team, 
+  int speed, String attitude, boolean lives, String reino){
+    super(VideoJuego7, name, row, column, team, speed, attitude, lives, reino);
     setAttackLevel(13);
     setLevelDefense(7);
     setLevelLife((int)(Math.random() * 3) + 10);
     setActualLife(getLevelLife());
+    setType('C');
   }
 
 
-  public void alternarArma(String arma){
-    this.arma = arma;
+  public void alternarArma(){
+    if (arma.equals("espada"))
+      arma = "lanza";
+    else
+      arma = "espada";
+      attack();
   }
 
   public void desmontar(){
-    if (montado)
+    if (montado){
       montado = false;
-
+      arma = "espada";
+    }
   }
 
   public void montar(){
-    if (!montado)
-      montado = true;  
+    if (!montado){
+      montado = true;
+      arma = "lanza";
+    }
+      
   }
 
 }

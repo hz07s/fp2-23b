@@ -104,11 +104,12 @@ public class VideoJuego7 {
 
     String[] reinos = {"Castilla", "Aragon", "Moros", "Sacro Imperio Romano", "Germanico"};
 
-    army1DA = createArmyTeam(numSoldiersA, army1DA, 'A');
-    army1DB = createArmyTeam(numSoldiersB, army1DB, 'B');
+    army1DA = createArmyTeam(numSoldiersA, army1DA, 'A', reinos[(int) (Math.random() * reinos.length)], map);
+    army1DB = createArmyTeam(numSoldiersB, army1DB, 'B', reinos[(int) (Math.random() * reinos.length)], map);
+
   }
 
-  public HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t){
+  public HashMap <Integer, Soldado> createArmyTeam(int numSoldiers, HashMap <Integer, Soldado> army1D, char t, String r, String mapp){
     String[] typeSoldier = {"Espadachin", "Caballero", "Arquero", "Lancero"};
     for (int i = 0; i < numSoldiers; i++){
       int row, col;
@@ -118,11 +119,42 @@ public class VideoJuego7 {
         col = (int) (Math.random() * 10);
       } while (army.containsKey(row * 10 + col));
 
-      Soldado s = new Soldado(VideoJuego7.this,"Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
-                            (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1,
-                            0, "Defensiva", true);
-      army1D.put(i, s);
-      army.put(row * 10 + col, s);
+      int typ = (int) (Math.random() * typeSoldier.length);
+
+      switch (typ) {
+        case 1 -> {
+          Espadachin e = new Espadachin(VideoJuego7.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+          (int)(Math.random() * 5) + 1, "Defensiva", true, r);
+          if (e.getReino().equals(mapp))
+            e.setActualLife(e.getActualLife() + 1);
+          army1D.put(i, e);
+          army.put(row * 10 + col, e);
+        }
+        case 2 -> {
+          Caballero c = new Caballero(VideoJuego7.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+          (int)(Math.random() * 5) + 1, "Defensiva", true, r);
+          if (c.getReino().equals(mapp))
+            c.setActualLife(c.getActualLife() + 1);
+          army1D.put(i, c);
+          army.put(row * 10 + col, c);
+        }
+        case 3 -> {
+          Arquero a = new Arquero(VideoJuego7.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+          (int)(Math.random() * 5) + 1, "Defensiva", true, r);
+          if (a.getReino().equals(mapp))
+            a.setActualLife(a.getActualLife() + 1);
+          army1D.put(i, a);
+          army.put(row * 10 + col, a);
+        }
+        case 4 -> {
+          Lancero l = new Lancero(VideoJuego7.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+          (int)(Math.random() * 5) + 1, "Defensiva", true, r);
+          if (l.getReino().equals(mapp))
+            l.setActualLife(l.getActualLife() + 1);
+          army1D.put(i, l);
+          army.put(row * 10 + col, l);
+        }
+      }
     }
     return army1D;
   }
@@ -141,7 +173,7 @@ public class VideoJuego7 {
       System.out.print("   |");
       for (int c = 0; c < 10; c++)
         System.out.print(" " + (army.get(r*10+c) != null ? ("\'" + army.get(r*10+c).getTeam() + "\'" 
-        + "S" + army.get(r*10+c).getName().charAt(7) + " |") : "      |"));
+        + army.get(r*10+c).getType() + army.get(r*10+c).getName().charAt(7) + " |") : "      |"));
 
       System.out.print("\n" + (r+1) + ((r != 9) ? "  |" : " |"));
       for (int c = 0; c < 10; c++)

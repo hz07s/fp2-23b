@@ -14,6 +14,7 @@ public class Soldado {
   private String attitude;
   private boolean lives;
   private char type;
+  private String reino;
   
   public Soldado(VideoJuego7 VideoJuego7,String name, int row, char column, char team, 
                 int attackLevel, int levelDefense, int levelLife, int speed, 
@@ -45,6 +46,18 @@ public class Soldado {
     this.speed = speed;
     this.lives = true;
     this.VideoJuego7 = VideoJuego7;
+  }
+  public Soldado(VideoJuego7 VideoJuego7,String name, int row, char column, char team, 
+                int speed, String attitude, boolean lives, String reino){
+    this.name = name;
+    this.row = row;
+    this.column = column;
+    this.team = team;
+    this.actualLife = levelLife;
+    this.speed = speed;
+    this.lives = true;
+    this.VideoJuego7 = VideoJuego7;
+    this.reino = reino;
   }
 
   //Setters
@@ -87,6 +100,9 @@ public class Soldado {
   }
   public void setType(char ty){
     type = ty;
+  }
+  public void setReino(char re){
+    type = re;
   }
 
   //Getters
@@ -132,6 +148,9 @@ public class Soldado {
   }
   public char getType(){
     return type;
+  }
+  public String getReino(){
+    return reino;
   }
   
   @Override
