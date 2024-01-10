@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Random;
 
-public class VideoJuego6 {
+public class VideoJuego7 {
   static HashMap <Integer, Soldado> army = new HashMap<>();
   static HashMap <Integer, Soldado> army1DA = new HashMap<>();
   static HashMap <Integer, Soldado> army1DB = new HashMap<>();
   public static void main(String [] args){
-    VideoJuego6 videoJuego = new VideoJuego6();
+    VideoJuego7 videoJuego = new VideoJuego7();
     videoJuego.createArmy();
     videoJuego.mainInterfaz();
   }
@@ -112,7 +112,7 @@ public class VideoJuego6 {
         col = (int) (Math.random() * 10);
       } while (army.containsKey(row * 10 + col));
 
-      Soldado s = new Soldado(VideoJuego6.this,"Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+      Soldado s = new Soldado(VideoJuego7.this,"Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
                             (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1, (int)(Math.random() * 5) + 1,
                             0, "Defensiva", true);
       army1D.put(i, s);
@@ -263,7 +263,7 @@ public class VideoJuego6 {
       int levelLife = sc.nextInt();
       System.out.print("Enter speed: ");
       int speed = sc.nextInt();
-      Soldado s = new Soldado(VideoJuego6.this,name, position / 10 + 1, (char)(position % 10 + 'A'), t, attackLevel, levelDefense, levelLife, speed);
+      Soldado s = new Soldado(VideoJuego7.this,name, position / 10 + 1, (char)(position % 10 + 'A'), t, attackLevel, levelDefense, levelLife, speed);
       armyMod.put(armyMod.size(), s);
       army.put(position / 10 + position % 10, s);
     }
@@ -335,7 +335,7 @@ public class VideoJuego6 {
           col = Character.toUpperCase(sc.next().charAt(0)) - 'A';
         } while (armyMod.get(row * 10 + col) != null);
         
-        Soldado clonedSoldado = new Soldado(originalSoldado.getVideoJuego6(),"Soldier" + armyMod.size() + "X" + t,
+        Soldado clonedSoldado = new Soldado(originalSoldado.getVideoJuego7(),"Soldier" + armyMod.size() + "X" + t,
                       row + 1, (char) (col + 'A'), t, originalSoldado.getAttackLevel(), originalSoldado.getLevelDefense(),
                       originalSoldado.getLevelLife(), originalSoldado.getSpeed(),"Defensiva",true);
         armyMod.put(armyMod.size(), clonedSoldado);

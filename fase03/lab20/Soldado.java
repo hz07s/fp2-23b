@@ -1,5 +1,5 @@
 public class Soldado {
-  private VideoJuego6 videoJuego6;
+  private VideoJuego7 VideoJuego7;
   private String name;
   private int row;
   private char column;
@@ -14,7 +14,7 @@ public class Soldado {
   private String attitude;
   private boolean lives;
   
-  public Soldado(VideoJuego6 videoJuego6,String name, int row, char column, char team, 
+  public Soldado(VideoJuego7 VideoJuego7,String name, int row, char column, char team, 
                 int attackLevel, int levelDefense, int levelLife, int speed, 
                 String attitude, boolean lives){
     this.name = name;
@@ -28,10 +28,10 @@ public class Soldado {
     this.speed = speed;
     this.attitude = attitude;
     this.lives = lives;
-    this.videoJuego6 = videoJuego6;
+    this.VideoJuego7 = VideoJuego7;
   }
-  //Soldado s = new Soldado(VideoJuego6.this,name, row + 1, column, t, attackLevel, levelDefense, levelLife, speed);
-  public Soldado(VideoJuego6 videoJuego6,String name, int row, char column, char team, 
+  //Soldado s = new Soldado(VideoJuego7.this,name, row + 1, column, t, attackLevel, levelDefense, levelLife, speed);
+  public Soldado(VideoJuego7 VideoJuego7,String name, int row, char column, char team, 
                 int attackLevel, int levelDefense, int levelLife, int speed){
     this.name = name;
     this.row = row;
@@ -43,7 +43,7 @@ public class Soldado {
     this.actualLife = levelLife;
     this.speed = speed;
     this.lives = true;
-    this.videoJuego6 = videoJuego6;
+    this.VideoJuego7 = VideoJuego7;
   }
 
   //Setters
@@ -123,8 +123,8 @@ public class Soldado {
   public boolean getLives(){
     return lives;
   }
-  public VideoJuego6 getVideoJuego6() {
-    return videoJuego6;
+  public VideoJuego7 getVideoJuego7() {
+    return VideoJuego7;
   }
   
   @Override
@@ -169,7 +169,7 @@ public class Soldado {
     speed += 2;
   }
   public void die(){
-    videoJuego6.removeSoldier(this);
+    VideoJuego7.removeSoldier(this);
     this.lives = false;
   }
 }
