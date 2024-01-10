@@ -20,3 +20,11 @@ public class Mapa {
 
   
 }
+
+
+/*
+
+metodo para verificar el territorio y aplicar bonos
+
+
+ */

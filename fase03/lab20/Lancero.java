@@ -1,3 +1,3 @@
-public class Lancero {
+public class Lancero extends Soldado{
   
 }
