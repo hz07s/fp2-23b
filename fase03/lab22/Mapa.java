@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 public class Mapa {
   private static Mapa instanciaSingleton;
-  private String[] typesTerritory ={"bosque","campoAbierto", "montaña", "desierto", "playa"};
+  private String[] typesTerritory ={"Bosque","CampoAbierto", "Montaña", "Desierto", "Playa"};
   private String territory;
   private Soldado[][] board;
   
