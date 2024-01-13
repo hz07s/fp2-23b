@@ -1,5 +1,5 @@
 public class Arquero extends Soldado{
-  private int numFlechas;
+  private Flechas flechas;
 
   public Arquero(){
     
@@ -15,8 +15,8 @@ public class Arquero extends Soldado{
   }
 
   public void disparar(){
-    if (numFlechas > 0)
+    if (flechas.getCantidad() > 0)
       //attack(1);
-      numFlechas--;
+      flechas.setCantidad(flechas.getCantidad() - 1);
   }
 }

@@ -14,6 +14,14 @@ public class Lancero extends Soldado{
     setType("A-");
   }
 
+  public void setLongLanza(int longLanza){
+    this.longLanza = longLanza;
+  }
+
+  public int getLongLanza() {
+    return longLanza;
+  }
+
   public void schiltrom(){
     setDefenseLevel(getDefenseLevel() + 1);
   }

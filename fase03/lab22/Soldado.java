@@ -158,4 +158,8 @@ public class Soldado {
               "\n Type: "          + type          +               
               "\n}\n";    
   }
+
+  public void attack(){
+    
+  }
 }

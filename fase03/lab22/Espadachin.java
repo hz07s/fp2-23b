@@ -1,5 +1,5 @@
 public class Espadachin extends Soldado{
-  private int longitudEspada;
+  private int longEspada;
 
   //personalizado
   public Espadachin(){
@@ -8,6 +8,9 @@ public class Espadachin extends Soldado{
 
   //aleatorio 
   public Espadachin(Mapa map, Ejercito ej) {
+    setAttackLevel(10);
+    setDefenseLevel(8);
+    
     switch (ej.getKingdom()) {
       case ("Inglaterra") -> { //Espadachin Real
         new EspadachinReal();
@@ -19,14 +22,20 @@ public class Espadachin extends Soldado{
         new EspadachinTeutonico();
       }
       default -> {
-        setAttackLevel(10);
-        setDefenseLevel(8);
         int life = (int) (Math.random() * (10 - 8 + 1) + 8);
         setLifeLevel(life);
         setActualLife(life);
         setType("E-");
       }
     }
+  }
+
+  public void setLongEspada(int longEspada){
+    this.longEspada = longEspada;
+  }
+
+  public int getLongEspada() {
+    return longEspada;
   }
 
   public void crearMuroEscudo(){
