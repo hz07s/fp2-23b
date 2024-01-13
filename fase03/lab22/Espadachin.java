@@ -1,19 +1,35 @@
 public class Espadachin extends Soldado{
   private int longitudEspada;
 
-  public Espadachin(VideoJuego8 VideoJuego8,String name, int row, char column, char team, 
-  int speed, String attitude, boolean lives, String reino){
-    super(VideoJuego8, name, row, column, team, speed, attitude, lives, reino);
-    setAttackLevel(10);
-    setLevelDefense(8);
-    setLevelLife((int) (Math.random() * 3) + 8);
-    setActualLife(getLevelLife());
-    setType('E');
+  //personalizado
+  public Espadachin(){
+    
   }
-  public Espadachin(Mapa map, Ejercito ej, int row, int col) {
-    super();
-  }
-  public void crearMuroEscudo(){
 
+  //aleatorio 
+  public Espadachin(Mapa map, Ejercito ej) {
+    switch (ej.getKingdom()) {
+      case ("Inglaterra") -> { //Espadachin Real
+        new EspadachinReal();
+      }
+      case ("Castilla-Aragon") -> { //Espadachin Teutonico
+        new EspadachinConquistador();
+      }
+      case ("Sacro Imperio Romano-Germanico") -> { //Espadachin Conquistador
+        new EspadachinTeutonico();
+      }
+      default -> {
+        setAttackLevel(10);
+        setDefenseLevel(8);
+        int life = (int) (Math.random() * (10 - 8 + 1) + 8);
+        setLifeLevel(life);
+        setActualLife(life);
+        setType("E-");
+      }
+    }
+  }
+
+  public void crearMuroEscudo(){
+    
   }
 }

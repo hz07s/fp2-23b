@@ -2,18 +2,27 @@ public class Caballero extends Soldado{
   private String arma; 
   private boolean montado;
 
-  public Caballero(VideoJuego8 VideoJuego8,String name, int row, char column, char team, 
-  int speed, String attitude, boolean lives, String reino){
-    super(VideoJuego8, name, row, column, team, speed, attitude, lives, reino);
-    setAttackLevel(13);
-    setLevelDefense(7);
-    setLevelLife((int)(Math.random() * 3) + 10);
-    setActualLife(getLevelLife());
-    setType('C');
+  public Caballero(){
+
   }
 
-  public Caballero(Mapa map, Ejercito ej, int row, int col) {
-    super();
+  public Caballero(Mapa map, Ejercito ej) {
+    switch (ej.getKingdom()) {
+      case ("Francia") -> { //Caballero Franco
+        new CaballeroFranco();
+      }
+      case ("Moros") -> { //Caballero Moro
+        new CaballeroMoro();
+      }
+      default -> {
+        setAttackLevel(13);
+        setDefenseLevel(7);
+        int life = (int) (Math.random() * (12 - 10 + 1) + 10);
+        setLifeLevel(life);
+        setActualLife(life);
+        setType("C-");
+      }
+    }
   }
   public void alternarArma(){
     if (arma.equals("espada"))
@@ -37,9 +46,9 @@ public class Caballero extends Soldado{
   }
 
   public void envestir(){
-    if(montado)
-      attack(3);
-    else
-      attack(2);
+    //if(montado)
+      //attack(3);
+    //else
+      //attack(2);
   }
 }
