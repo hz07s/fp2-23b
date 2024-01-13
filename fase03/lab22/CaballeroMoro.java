@@ -1,3 +1,3 @@
-public class CaballeroMoro {
+public class CaballeroMoro extends Caballero{
   
 }

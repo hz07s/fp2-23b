@@ -1,3 +1,3 @@
-public class EspadachinConquistador {
+public class EspadachinConquistador extends Espadachin{
   
 }
