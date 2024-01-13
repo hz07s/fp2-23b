@@ -12,7 +12,7 @@ public class VideoJuego8 {
   static String tA;
   static String tB;
   public static void main(String [] args){
-    VideoJuego8 videoJuego = new VideoJuego8();
+    VideoJuego videoJuego = new VideoJuego();
     videoJuego.createArmy();
     videoJuego.mainInterfaz();
   }
@@ -118,7 +118,7 @@ public class VideoJuego8 {
       int typ = (int) (Math.random() * typeSoldier.length);
       switch (typ) {
         case 1 -> {
-          Espadachin e = new Espadachin(VideoJuego8.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+          Espadachin e = new Espadachin(VideoJuego.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
           (int)(Math.random() * 5) + 1, "Defensiva", true, r);
           if (e.getReino().equals(mapp))
             e.setActualLife(e.getActualLife() + 1);
@@ -126,7 +126,7 @@ public class VideoJuego8 {
           army.put(row * 10 + col, e);
         }
         case 2 -> {
-          Caballero c = new Caballero(VideoJuego8.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+          Caballero c = new Caballero(VideoJuego.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
           (int)(Math.random() * 5) + 1, "Defensiva", true, r);
           if (c.getReino().equals(mapp))
             c.setActualLife(c.getActualLife() + 1);
@@ -134,7 +134,7 @@ public class VideoJuego8 {
           army.put(row * 10 + col, c);
         }
         case 3 -> {
-          Arquero a = new Arquero(VideoJuego8.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+          Arquero a = new Arquero(VideoJuego.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
           (int)(Math.random() * 5) + 1, "Defensiva", true, r);
           if (a.getReino().equals(mapp))
             a.setActualLife(a.getActualLife() + 1);
@@ -142,7 +142,7 @@ public class VideoJuego8 {
           army.put(row * 10 + col, a);
         }
         case 4 -> {
-          Lancero l = new Lancero(VideoJuego8.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
+          Lancero l = new Lancero(VideoJuego.this, "Soldier" + i + "X" + t, row + 1, (char) (col + 'A'), t, 
           (int)(Math.random() * 5) + 1, "Defensiva", true, r);
           if (l.getReino().equals(mapp))
             l.setActualLife(l.getActualLife() + 1);
@@ -350,7 +350,7 @@ public class VideoJuego8 {
       int levelLife = sc.nextInt();
       System.out.print("Enter speed: ");
       int speed = sc.nextInt();
-      Soldado s = new Soldado(VideoJuego8.this,name, position / 10 + 1, (char)(position % 10 + 'A'), t, attackLevel, levelDefense, levelLife, speed);
+      Soldado s = new Soldado(VideoJuego.this,name, position / 10 + 1, (char)(position % 10 + 'A'), t, attackLevel, levelDefense, levelLife, speed);
       armyMod.put(armyMod.size(), s);
       army.put(position / 10 + position % 10, s);
     }
