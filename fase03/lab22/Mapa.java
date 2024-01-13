@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 public class Mapa {
   private static Mapa instanciaSingleton;
   private String[] typesTerritory ={"bosque","campoAbierto", "montaña", "desierto", "playa"};
@@ -13,7 +15,12 @@ public class Mapa {
   }
   
   public void setTerritory(String territory) {
-    this.territory = territory;
+    List<String> typesTerritory2 = Arrays.asList(typesTerritory);
+    if (typesTerritory2.contains(territory))
+      this.territory = territory;
+    else{
+      //Mensaje error
+    } 
   }
   
   public String getTerritory() {
