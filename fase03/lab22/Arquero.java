@@ -11,6 +11,10 @@ public class Arquero extends Soldado{
     setType('A');
   }
 
+  public Arquero(Mapa map, Ejercito ej) {
+    super();
+  }
+
   public void disparar(){
     if (numFlechas > 0)
       attack(1);

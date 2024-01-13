@@ -15,6 +15,24 @@ public class Soldado {
   private boolean lives;
   private char type;
   private String reino;
+
+  public Soldado(Mapa map, Ejercito ej) {
+    int row, col;
+    do {
+      row = (int) (Math.random() * 10);
+      col = (int) (Math.random() * 10);
+    } while (map.board[row][col] != null);
+
+    String[] typeSoldier = {"Espadachin", "Caballero", "Arquero", "Lancero"};
+    int typ = (int) (Math.random() * typeSoldier.length);
+    Soldado s;
+    switch (typ) {
+      case 0 -> s = new Espadachin(map, ej);
+      case 1 -> s = new Caballero(map, ej);
+      case 2 -> s = new Arquero(map, ej);
+      case 3 -> s = new Lancero(map, ej);
+    }
+  }
   
   public Soldado(VideoJuego8 VideoJuego8,String name, int row, char column, char team, 
                 int attackLevel, int levelDefense, int levelLife, int speed, 

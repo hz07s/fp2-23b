@@ -10,6 +10,9 @@ public class Espadachin extends Soldado{
     setActualLife(getLevelLife());
     setType('E');
   }
+  public Espadachin(Mapa map, Ejercito ej) {
+    super();
+  }
   public void crearMuroEscudo(){
 
   }

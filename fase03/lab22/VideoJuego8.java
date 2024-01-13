@@ -1,11 +1,8 @@
-// Laboratorio Nro 20 - Ejercicio01
+// Laboratorio Nro 22 - Ejercicio01
 // Autor : Hernan Andy
 // Colaboro : null
-// Tiempo : 6 horas
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Random;
+// Tiempo : 7 horas
+import java.util.*;
 
 public class VideoJuego8 {
   static HashMap <Integer, Soldado> army = new HashMap<>();

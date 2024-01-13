@@ -11,6 +11,10 @@ public class Lancero extends Soldado{
     setType('L');
   }
 
+  public Lancero(Mapa map, Ejercito ej) {
+    super();
+  }
+
   public void schiltrom(){
     setLevelDefense(getLevelDefense() + 1);
   }

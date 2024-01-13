@@ -1,7 +1,7 @@
 public class Mapa {
   private String territory;
-  String[] typesTerritory ={"bosque","campoAbierto", "montaña", "desierto", "playa"};
-
+  private String[] typesTerritory ={"bosque","campoAbierto", "montaña", "desierto", "playa"};
+  public Soldado[][] board;
   public String randomMapa (){
     this.territory =  typesTerritory[(int) (Math.random() * typesTerritory.length)];
     return territory;

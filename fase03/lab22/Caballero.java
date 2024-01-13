@@ -12,6 +12,9 @@ public class Caballero extends Soldado{
     setType('C');
   }
 
+  public Caballero(Mapa map, Ejercito ej) {
+    super();
+  }
   public void alternarArma(){
     if (arma.equals("espada"))
       arma = "lanza";
