@@ -11,7 +11,7 @@ public class Lancero extends Soldado{
     setType('L');
   }
 
-  public Lancero(Mapa map, Ejercito ej) {
+  public Lancero(Mapa map, Ejercito ej, int row, int col) {
     super();
   }
 

@@ -11,7 +11,7 @@ public class Arquero extends Soldado{
     setType('A');
   }
 
-  public Arquero(Mapa map, Ejercito ej) {
+  public Arquero(Mapa map, Ejercito ej, int row, int col) {
     super();
   }
 

@@ -12,7 +12,7 @@ public class Caballero extends Soldado{
     setType('C');
   }
 
-  public Caballero(Mapa map, Ejercito ej) {
+  public Caballero(Mapa map, Ejercito ej, int row, int col) {
     super();
   }
   public void alternarArma(){

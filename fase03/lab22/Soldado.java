@@ -2,7 +2,8 @@ public class Soldado {
   private VideoJuego8 VideoJuego8;
   private String name;
   private int row;
-  private char column;
+  private char columnC;
+  private int columnI;
   private char team;
   private int position;
 
@@ -14,23 +15,28 @@ public class Soldado {
   private String attitude;
   private boolean lives;
   private char type;
-  private String reino;
+  private String kingdom; //
 
   public Soldado(Mapa map, Ejercito ej) {
+    this.kingdom = ej.getKingdom();
+    this.lives = true;
+
     int row, col;
     do {
       row = (int) (Math.random() * 10);
       col = (int) (Math.random() * 10);
     } while (map.board[row][col] != null);
+    this.row = row;
+    this.columnI = col;
+    this.columnC = (char) (col + 'A');
 
     String[] typeSoldier = {"Espadachin", "Caballero", "Arquero", "Lancero"};
     int typ = (int) (Math.random() * typeSoldier.length);
-    Soldado s;
     switch (typ) {
-      case 0 -> s = new Espadachin(map, ej);
-      case 1 -> s = new Caballero(map, ej);
-      case 2 -> s = new Arquero(map, ej);
-      case 3 -> s = new Lancero(map, ej);
+      case 0 -> new Espadachin(map, ej, row, col);
+      case 1 -> new Caballero(map, ej, row, col);
+      case 2 -> new Arquero(map, ej, row, col);
+      case 3 -> new Lancero(map, ej, row, col);
     }
   }
   
@@ -39,7 +45,7 @@ public class Soldado {
                 String attitude, boolean lives){
     this.name = name;
     this.row = row;
-    this.column = column;
+    this.columnC = column;
     this.team = team;
     this.attackLevel = attackLevel;
     this.levelDefense = levelDefense;
@@ -55,7 +61,7 @@ public class Soldado {
                 int attackLevel, int levelDefense, int levelLife, int speed){
     this.name = name;
     this.row = row;
-    this.column = column;
+    this.columnC = column;
     this.team = team;
     this.attackLevel = attackLevel;
     this.levelDefense = levelDefense;
@@ -66,16 +72,16 @@ public class Soldado {
     this.VideoJuego8 = VideoJuego8;
   }
   public Soldado(VideoJuego8 VideoJuego8,String name, int row, char column, char team, 
-                int speed, String attitude, boolean lives, String reino){
+                int speed, String attitude, boolean lives, String kingdom){
     this.name = name;
     this.row = row;
-    this.column = column;
+    this.columnC = column;
     this.team = team;
     this.actualLife = levelLife;
     this.speed = speed;
     this.lives = true;
     this.VideoJuego8 = VideoJuego8;
-    this.reino = reino;
+    this.kingdom = kingdom;
   }
 
   //Setters
@@ -86,7 +92,7 @@ public class Soldado {
     row = r;
   }
   public void setColumn(char c){
-    column = c;
+    columnC = c;
   }
   public void setTeam(char t){
     team = t;
@@ -119,7 +125,7 @@ public class Soldado {
   public void setType(char ty){
     type = ty;
   }
-  public void setReino(char re){
+  public void setkingdom(char re){
     type = re;
   }
 
@@ -131,7 +137,7 @@ public class Soldado {
     return row;
   }
   public char getColumn(){
-    return column;
+    return columnC;
   }
   public char getTeam(){
     return team;
@@ -166,8 +172,8 @@ public class Soldado {
   public char getType(){
     return type;
   }
-  public String getReino(){
-    return reino;
+  public String getkingdom(){
+    return kingdom;
   }
   
   @Override
@@ -175,7 +181,7 @@ public class Soldado {
     return "Data { " + 
               "\n Name:   "        + name          + 
               "\n Row:    "        + row           + 
-              "\n Column: "        + column        + 
+              "\n Column: "        + columnC        + 
               "\n Team: "          + team          + 
               "\n AttackLevel: "   + attackLevel   + 
               "\n LevelDefense: "  + levelDefense  + 

@@ -7,6 +7,10 @@ public class Mapa {
     return territory;
   }
   
+
+
+
+  
   public void setTerritory(String territory) {
     this.territory = territory;
   }
