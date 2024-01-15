@@ -1,10 +1,12 @@
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class VideoJuego { 
+public class VideoJuego {
+  static boolean turnA = true;
   public static void main(String[] args) {
     startGame();
   }
@@ -88,44 +90,93 @@ public class VideoJuego {
     //Create objects
     Mapa map = Mapa.getInstance();
     map.setRandomMapa();
-    Ejercito ejA = new Ejercito(map);
-    Ejercito ejB= new Ejercito(map);
-    
-    // Window center (board)
-    JPanel w2JPanel01 = createJPanel(map.getBoard());
-    window2.add(w2JPanel01, BorderLayout.CENTER);
-    
+    Ejercito ejA = new Ejercito(map, 'A');
+    Ejercito ejB= new Ejercito(map, 'B');
 
+    //Window North
+    JPanel w2JPanel01 = new JPanel(new FlowLayout());
+    w2JPanel01.setPreferredSize(new Dimension(1280,50));
+    JLabel w2JLabel01 = new JLabel("Turno: A");
+    w2JLabel01.setFont(new Font("Courier New", Font.BOLD, 30));
+    JButton w2Button01 = new JButton("Cambiar Turno");
+    w2Button01.setBackground(Color.WHITE);
+    w2Button01.addActionListener(e -> {
+      turnA = changeTurn(turnA);
+      // Add Threads 
+      w2JLabel01.setText(turnA ? "Turno: A" : "Turno: B");
+    });
+    w2JPanel01.add(w2JLabel01);
+    w2JPanel01.add(Box.createHorizontalStrut(20)); 
+    w2JPanel01.add(w2Button01);
+    window2.add(w2JPanel01, BorderLayout.NORTH);
+  
+    // Window Center (board)
+    JPanel w2JPanel02 = createJPanelC(map.getBoard());
+    window2.add(w2JPanel02, BorderLayout.CENTER);
 
     // Window West
+    JPanel w2JPanel03 = creatPanelWE(ejA.getArmy());
+    w2JPanel03.setPreferredSize(new Dimension(265,800));
+    window2.add(w2JPanel03, BorderLayout.WEST);
 
+    // Window East
+    JPanel w2JPanel04 = creatPanelWE(ejB.getArmy());
+    w2JPanel04.setPreferredSize(new Dimension(265,800));
+    window2.add(w2JPanel04, BorderLayout.EAST);
 
+    // Window South
+    JPanel w2JPanel05 = new JPanel();
+    w2JPanel05.setPreferredSize(new Dimension(1280,50));
+    window2.add(w2JPanel05, BorderLayout.SOUTH);
 
-
-    // window East
-
-
-
-
-
+    // Show Window2
     window2.setVisible(true);
   }
 
-  public static JPanel createJPanel(Soldado[][] ejS){
+  public static JPanel createJPanelC(Soldado[][] ejS){
     JPanel xxJPanel01 = new JPanel(new GridLayout(10, 10, 5, 5));
     for (int r = 0; r < 10; r++) {
       for (int c = 0; c < 10; c++) {
+        Soldado sP = ejS[r][c];
         JButton xxButton01 = new JButton();
         xxButton01.setPreferredSize(new Dimension(5, 5));
-        if (ejS[r][c] != null) {
+        if (sP != null) {
           //xxButton01.addActionListener();
-          xxButton01.putClientProperty(ejS[r][c].getName(), ejS[r][c]);
-        }
+          xxButton01.putClientProperty(sP.getName(), sP);
+          xxButton01.setText("S" + sP.getName().substring(7));
+          if (sP.getTeam() == 'A'){
+            xxButton01.setBackground(new Color(173, 216, 230));
+          }
+          else if (sP.getTeam() == 'B'){
+            xxButton01.setBackground(new Color(255, 182, 193));
+          }
+        } else 
+          xxButton01.setBackground(Color.WHITE);
         xxJPanel01.add(xxButton01);
       }
     }
     return xxJPanel01;
   }
+
+  public static JPanel creatPanelWE(ArrayList <Soldado> ej){
+    JPanel xxJPanel01 = new JPanel();
+    //xxJPanel01.setLayout(new BoxLayout(xxJPanel01, BoxLayout.Y_AXIS));
+    //for (Soldado s : ej) {
+    //  JLabel xxJLabel01 = new JLabel(s.getType() + "HP" + s.getActualLife());
+    //  xxJPanel01.add(xxJLabel01);
+    //}
+    return xxJPanel01;
+  }
+
+  public static boolean changeTurn(boolean turnA){
+    return !turnA;
+  }
+
+
+
+
+
+
   
   // Game custom
   public static void gameCustom(JFrame w1) {
