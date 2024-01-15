@@ -2,11 +2,21 @@ public class CaballeroMoro extends Caballero{
   private Flechas flechas;
   private byte nivelEvolucion;
 
-  public CaballeroMoro() {
+  public CaballeroMoro(Mapa map, Ejercito ej, int row, int col, char columnC, int position, 
+                       int i, String kingdom, char team) {
+    setRow(row);
+    setCol(col);
+    setColumnC(columnC);
+    setPosition(position);
+    setName("Soldado" + team + i);
+    setkingdom(kingdom);
+    setTeam(team);
+    setLives(true);
+
     flechas = new Flechas();
     setActualLife(12);
     setLifeLevel(12);
-    setType("E+");
+    setType("Caballero Moro");
   }
 
   public void evolucion() {

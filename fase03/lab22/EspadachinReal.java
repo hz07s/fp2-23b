@@ -2,11 +2,21 @@ public class EspadachinReal extends Espadachin{
   private Cuchillos cuchillos;
   private byte nivelEvolucion;
 
-  public EspadachinReal() {
+  public EspadachinReal(Mapa map, Ejercito ej, int row, int col, char columnC, int position, 
+                        int i, String kingdom, char team) {
+    setRow(row);
+    setCol(col);
+    setColumnC(columnC);
+    setPosition(position);
+    setName("Soldado" + team + i);
+    setkingdom(kingdom);
+    setTeam(team);
+    setLives(true);
+
     cuchillos = new Cuchillos();
     setActualLife(12);
     setLifeLevel(12);
-    setType("E+");
+    setType("Espadachin Real");
   }
 
   public void evolucion() {

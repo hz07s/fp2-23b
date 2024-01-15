@@ -2,11 +2,21 @@ public class EspadachinConquistador extends Espadachin{
   private Hachas hachas;
   private byte nivelEvolucion;
 
-  public EspadachinConquistador() {
+  public EspadachinConquistador(Mapa map, Ejercito ej, int row, int col, char columnC, int position, 
+                                int i, String kingdom, char team) {
+    setRow(row);
+    setCol(col);
+    setColumnC(columnC);
+    setPosition(position);
+    setName("Soldado" + team + i);
+    setkingdom(kingdom);
+    setTeam(team);
+    setLives(true);
+
     hachas = new Hachas();
     setActualLife(14);
     setLifeLevel(14);
-    setType("E+");
+    setType("Espadachin Conquistador");
   }
 
   public void evolucion() {
