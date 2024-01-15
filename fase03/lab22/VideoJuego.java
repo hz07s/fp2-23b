@@ -1,13 +1,10 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class VideoJuego { 
-  static private JFrame window;
-
   public static void main(String[] args) {
     startGame();
   }
@@ -15,14 +12,14 @@ public class VideoJuego {
   // Iniciar programa
   public static void startGame() {
 
-    // Window 1vs1 settings
+    // Window menu settings
     JFrame window1 = new JFrame("Medieval War Game");
     window1.setSize(600, 720);
     window1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     window1.setLocationRelativeTo(null);
     window1.setResizable(false);
 
-    // Window 1vs1 content
+    // Window menu content
 
       // Top
     JLabel w1Label01 = new JLabel("Bienvenido al Juego");
@@ -78,9 +75,58 @@ public class VideoJuego {
 
   // Game 1vs1
   public static void game1vs1(JFrame w1) {
+    // Window 1 dispose
+    w1.dispose();
+
+    // Window 1vs1 settings
+    JFrame window2 = new JFrame("Medieval War Game 1 vs 1");
+    window2.setSize(1280, 800);
+    window2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    window2.setLocationRelativeTo(null);
+    window2.setResizable(false);
     
+    //Create objects
+    Mapa map = Mapa.getInstance();
+    map.setRandomMapa();
+    Ejercito ejA = new Ejercito(map);
+    Ejercito ejB= new Ejercito(map);
+    
+    // Window center (board)
+    JPanel w2JPanel01 = createJPanel(map.getBoard());
+    window2.add(w2JPanel01, BorderLayout.CENTER);
+    
+
+
+    // Window West
+
+
+
+
+    // window East
+
+
+
+
+
+    window2.setVisible(true);
   }
 
+  public static JPanel createJPanel(Soldado[][] ejS){
+    JPanel xxJPanel01 = new JPanel(new GridLayout(10, 10, 5, 5));
+    for (int r = 0; r < 10; r++) {
+      for (int c = 0; c < 10; c++) {
+        JButton xxButton01 = new JButton();
+        xxButton01.setPreferredSize(new Dimension(5, 5));
+        if (ejS[r][c] != null) {
+          //xxButton01.addActionListener();
+          xxButton01.putClientProperty(ejS[r][c].getName(), ejS[r][c]);
+        }
+        xxJPanel01.add(xxButton01);
+      }
+    }
+    return xxJPanel01;
+  }
+  
   // Game custom
   public static void gameCustom(JFrame w1) {
     //Empty for now
