@@ -7,27 +7,24 @@ public class Espadachin extends Soldado{
   }
 
   //aleatorio 
-  public Espadachin(Mapa map, Ejercito ej) {
+  public Espadachin(Mapa map, Ejercito ej, int row, int col, char columnC, int position, 
+                    int i, String kingdom, char team) {
+    setRow(row);
+    setCol(col);
+    setColumnC(columnC);
+    setPosition(position);
+    setName("Soldado" + team + i);
+    setkingdom(kingdom);
+    setTeam(team);
+    setLives(true);
+    
     setAttackLevel(10);
     setDefenseLevel(8);
     
-    switch (ej.getKingdom()) {
-      case ("Inglaterra") -> { //Espadachin Real
-        new EspadachinReal();
-      }
-      case ("Castilla-Aragon") -> { //Espadachin Teutonico
-        new EspadachinConquistador();
-      }
-      case ("Sacro Imperio Romano-Germanico") -> { //Espadachin Conquistador
-        new EspadachinTeutonico();
-      }
-      default -> {
-        int life = (int) (Math.random() * (10 - 8 + 1) + 8);
-        setLifeLevel(life);
-        setActualLife(life);
-        setType("E-");
-      }
-    }
+    int life = (int) (Math.random() * (10 - 8 + 1) + 8);
+    setLifeLevel(life);
+    setActualLife(life);
+    setType("Espadachin");
   }
 
   public void setLongEspada(int longEspada){

@@ -5,13 +5,23 @@ public class Lancero extends Soldado{
     
   }
 
-  public Lancero(Mapa map, Ejercito ej) {
+  public Lancero(Mapa map, Ejercito ej, int row, int col, char columnC, int position, 
+                 int i, String kingdom, char team) {
+    setRow(row);
+    setCol(col);
+    setColumnC(columnC);
+    setPosition(position);
+    setName("Soldado" + team + i);
+    setkingdom(kingdom);
+    setTeam(team);
+    setLives(true);
+
     setAttackLevel(5);
     setDefenseLevel(10);
     int life = (int) (Math.random() * (8 - 5 + 1) + 5);
     setLifeLevel(life);
     setActualLife(life);
-    setType("A-");
+    setType("Lancero");
   }
 
   public void setLongLanza(int longLanza){

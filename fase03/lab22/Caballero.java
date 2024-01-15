@@ -6,23 +6,23 @@ public class Caballero extends Soldado{
 
   }
 
-  public Caballero(Mapa map, Ejercito ej) {
-    switch (ej.getKingdom()) {
-      case ("Francia") -> { //Caballero Franco
-        new CaballeroFranco();
-      }
-      case ("Moros") -> { //Caballero Moro
-        new CaballeroMoro();
-      }
-      default -> {
-        setAttackLevel(13);
-        setDefenseLevel(7);
-        int life = (int) (Math.random() * (12 - 10 + 1) + 10);
-        setLifeLevel(life);
-        setActualLife(life);
-        setType("C-");
-      }
-    }
+  public Caballero(Mapa map, Ejercito ej, int row, int col, char columnC, int position, 
+                   int i, String kingdom, char team) {
+    setRow(row);
+    setCol(col);
+    setColumnC(columnC);
+    setPosition(position);
+    setName("Soldado" + team + i);
+    setkingdom(kingdom);
+    setTeam(team);
+    setLives(true);
+    
+    setAttackLevel(13);
+    setDefenseLevel(7);
+    int life = (int) (Math.random() * (12 - 10 + 1) + 10);
+    setLifeLevel(life);
+    setActualLife(life);
+    setType("Caballero");
   }
   public void alternarArma(){
     if (arma.equals("espada"))
