@@ -15,33 +15,6 @@ public class Soldado {
   private boolean lives; //this
   private String type;
   private String kingdom; //this
-
-  public Soldado(Mapa map, Ejercito ej, char nameEj) {
-    this.name = "Soldado" + nameEj;
-    this.kingdom = ej.getKingdom();
-    this.lives = true;
-    this.team = nameEj;
-    this.kingdom = ej.getKingdom();
-    
-    int row, col;
-    do {
-      row = (int) (Math.random() * 10);
-      col = (int) (Math.random() * 10);
-    } while (map.getBoard()[row][col] != null);
-    this.row = row;
-    this.col = col;
-    this.columnC = (char) (col + 'A');
-    this.position = row * 10 + col;
-
-    String[] typeSoldier = {"Espadachin", "Caballero", "Arquero", "Lancero"};
-    int typ = (int) (Math.random() * typeSoldier.length);
-    switch (typ) {
-      case 0 -> new Espadachin(map, ej);
-      case 1 -> new Caballero(map, ej);
-      case 2 -> new Arquero(map, ej);
-      case 3 -> new Lancero(map, ej);
-    }
-  }
   
   public Soldado() {
 
@@ -63,7 +36,7 @@ public class Soldado {
   public void setTeam(char t){
     team = t;
   }
-  public void setPosition(char p){
+  public void setPosition(int p){
     position = p;
   }
   public void setAttackLevel(int al){
