@@ -23,6 +23,7 @@ public class Caballero extends Soldado{
     setLifeLevel(life);
     setActualLife(life);
     setType("Caballero");
+    setId(" C" + getActualLife());
   }
   public void alternarArma(){
     if (arma.equals("espada"))

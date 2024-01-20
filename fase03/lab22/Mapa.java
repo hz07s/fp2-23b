@@ -4,7 +4,7 @@ public class Mapa {
   private static Mapa instanciaSingleton;
   private String[] typesTerritory ={"Bosque","CampoAbierto", "Montaña", "Desierto", "Playa"};
   private String territory;
-  private Soldado[][] board = new Soldado[10][10];
+  private Ejercito[][] board = new Ejercito[10][10];
   
   private Mapa(){}
 
@@ -27,11 +27,11 @@ public class Mapa {
     return territory;
   }
 
-  public void setBoard(Soldado[][] board){
+  public void setBoard(Ejercito[][] board){
     this.board = board;
   }
 
-  public Soldado[][] getBoard(){
+  public Ejercito[][] getBoard(){
     return board;
   }
 
@@ -39,11 +39,11 @@ public class Mapa {
     this.territory =  typesTerritory[(int) (Math.random() * typesTerritory.length)];
   }
 
-  public void addSoldier(Soldado s, int r, int c){
-    board[r][c] = s;
+  public void addArmy(Ejercito t, int r, int c){
+    board[r][c] = t;
   }
 
-  public boolean checkSoldier(int r, int c){
+  public boolean checkArmy(int r, int c){
     return board[r][c] != null;
   }
   

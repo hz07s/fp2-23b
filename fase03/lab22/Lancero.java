@@ -22,6 +22,7 @@ public class Lancero extends Soldado{
     setLifeLevel(life);
     setActualLife(life);
     setType("Lancero");
+    setId(" L" + getLifeLevel() + " ");
   }
 
   public void setLongLanza(int longLanza){

@@ -17,6 +17,7 @@ public class CaballeroFranco extends Caballero{
     setActualLife(15);
     setLifeLevel(15);
     setType("Caballero Franco");
+    setId("CF" + getActualLife());
   }
 
   public void evolucion() {

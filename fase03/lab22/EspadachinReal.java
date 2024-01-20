@@ -17,6 +17,7 @@ public class EspadachinReal extends Espadachin{
     setActualLife(12);
     setLifeLevel(12);
     setType("Espadachin Real");
+    setId("ER" + getActualLife());
   }
 
   public void evolucion() {

@@ -25,6 +25,7 @@ public class Espadachin extends Soldado{
     setLifeLevel(life);
     setActualLife(life);
     setType("Espadachin");
+    setId(" E" + getActualLife() + (life > 10 ? " ": ""));
   }
 
   public void setLongEspada(int longEspada){

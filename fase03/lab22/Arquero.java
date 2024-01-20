@@ -22,6 +22,8 @@ public class Arquero extends Soldado{
     setLifeLevel(life);
     setActualLife(life);
     setType("Arquero");
+    setId(" A"+ getLifeLevel() + " ");
+    setId(" A" + getActualLife());
   }
 
   public void disparar(){

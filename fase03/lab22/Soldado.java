@@ -15,6 +15,7 @@ public class Soldado {
   private boolean lives; //this
   private String type;
   private String kingdom; //this
+  private String id;
   
   public Soldado() {
 
@@ -51,12 +52,6 @@ public class Soldado {
   public void setActualLife(int al){
     actualLife = al;
   }
-  //public void setSpeed(int s){
-  //  speed = s;
-  //}
-  //public void setAttitude(String a){
-  //  attitude = a;
-  //}
   public void setLives(boolean l){
     lives = l;
   }
@@ -65,6 +60,9 @@ public class Soldado {
   }
   public void setkingdom(String re){
     type = re;
+  }
+  public void setId(String id){
+    this.id = id;
   }
 
   //Getters
@@ -98,12 +96,6 @@ public class Soldado {
   public int getActualLife(){
     return actualLife;
   }
-  //public int getSpeed(){
-  //  return speed;
-  //}
-  //public String getAttitude(){
-  //  return attitude;
-  //}
   public boolean getLives(){
     return lives;
   }
@@ -112,6 +104,9 @@ public class Soldado {
   }
   public String getkingdom(){
     return kingdom;
+  }
+  public String getId(){
+    return id;
   }
   
   @Override

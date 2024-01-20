@@ -17,6 +17,7 @@ public class EspadachinConquistador extends Espadachin{
     setActualLife(14);
     setLifeLevel(14);
     setType("Espadachin Conquistador");
+    setId("EC" + getActualLife());
   }
 
   public void evolucion() {

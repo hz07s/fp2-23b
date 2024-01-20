@@ -17,6 +17,7 @@ public class EspadachinTeutonico extends Espadachin{
     setActualLife(13);
     setLifeLevel(13);
     setType("Espadachin Teutonico");
+    setId("ET" + getLifeLevel());
   }
 
   public void evolucion() {
