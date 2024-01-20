@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
-
+import java.util.Random;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -41,26 +41,26 @@ public class VideoJuego {
     w1JPanel01.setLayout(new BoxLayout(w1JPanel01, BoxLayout.Y_AXIS));
     w1JPanel01.setBorder(new EmptyBorder(20, 10, 20, 10));
     JButton w1Button01 = new JButton("   Juego 1 vs 1    ");
-    JButton w1Button02 = new JButton("Juego Personalizado");
+    //JButton w1Button02 = new JButton("Juego Personalizado");
     JButton w1Button03 = new JButton("       Salir       ");
     Font w1Font01 = new Font("Courier New", Font.BOLD, 14);
     w1Button01.setFont(w1Font01);
-    w1Button02.setFont(w1Font01);
+    //w1Button02.setFont(w1Font01);
     w1Button03.setFont(w1Font01);
     Dimension w1Dimension01 = new Dimension(200, 50);
     w1Button01.setPreferredSize(w1Dimension01);
-    w1Button02.setPreferredSize(w1Dimension01);
+    //w1Button02.setPreferredSize(w1Dimension01);
     w1Button03.setPreferredSize(w1Dimension01);
     w1Button01.setHorizontalAlignment(SwingConstants.CENTER);
-    w1Button02.setHorizontalAlignment(SwingConstants.CENTER);
+    //w1Button02.setHorizontalAlignment(SwingConstants.CENTER);
     w1Button03.setHorizontalAlignment(SwingConstants.CENTER);
     w1Button01.addActionListener(e -> game1vs1(window1));
-    w1Button02.addActionListener(e -> gameCustom(window1));
+    //w1Button02.addActionListener(e -> gameCustom(window1));
     w1Button03.addActionListener(e -> System.exit(0));
     w1JPanel01.add(Box.createRigidArea(new Dimension(0, 10)));
     w1JPanel01.add(w1Button01);
     w1JPanel01.add(Box.createRigidArea(new Dimension(0, 10)));
-    w1JPanel01.add(w1Button02);
+    //w1JPanel01.add(w1Button02);
     w1JPanel01.add(Box.createRigidArea(new Dimension(0, 10)));
     w1JPanel01.add(w1Button03);
     w1JPanel01.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -90,8 +90,8 @@ public class VideoJuego {
     //Create objects
     Mapa map = Mapa.getInstance();
     map.setRandomMapa();
-    Ejercito ejA = new Ejercito(map, 'A');
-    Ejercito ejB= new Ejercito(map, 'B');
+    Team tA = new Team(map, 'A');
+    Team tB= new Team(map, 'B');
 
     //Window North
     JPanel w2JPanel01 = new JPanel(new FlowLayout());
@@ -111,16 +111,16 @@ public class VideoJuego {
     window2.add(w2JPanel01, BorderLayout.NORTH);
   
     // Window Center (board)
-    JPanel w2JPanel02 = createJPanelC(map.getBoard(), ejA, ejB, map);
+    JPanel w2JPanel02 = createJPanelC(map.getBoard(), tA, tB, map);
     window2.add(w2JPanel02, BorderLayout.CENTER);
 
     // Window West
-    JPanel w2JPanel03 = creatPanelWE(ejA.getArmy());
+    JPanel w2JPanel03 = creatPanelWE(tA.getTeams());
     w2JPanel03.setPreferredSize(new Dimension(265,800));
     window2.add(w2JPanel03, BorderLayout.WEST);
 
     // Window East
-    JPanel w2JPanel04 = creatPanelWE(ejB.getArmy());
+    JPanel w2JPanel04 = creatPanelWE(tB.getTeams());
     w2JPanel04.setPreferredSize(new Dimension(265,800));
     window2.add(w2JPanel04, BorderLayout.EAST);
 
@@ -133,22 +133,22 @@ public class VideoJuego {
     window2.setVisible(true);
   }
 
-  public static JPanel createJPanelC(Soldado[][] ejS, Ejercito a, Ejercito b, Mapa map){
+  public static JPanel createJPanelC(Ejercito[][] ejS, Team a, Team b, Mapa map){
     JPanel xxJPanel01 = new JPanel(new GridLayout(10, 10, 5, 5));
     for (int r = 0; r < 10; r++) {
       for (int c = 0; c < 10; c++) {
-        Soldado sP = ejS[r][c];
+        Ejercito sP = ejS[r][c];
         JButton xxButton01 = new JButton();
         xxButton01.setPreferredSize(new Dimension(5, 5));
         if (sP != null) {
-          xxButton01.putClientProperty("s", sP.getActualLife());
+          xxButton01.putClientProperty("s", sP.getSumLifeLevel());
           xxButton01.putClientProperty("p", sP.getPosition());
-          xxButton01.setText("S" + sP.getName().substring(7,8) + sP.getActualLife());
-          xxButton01.addActionListener(e -> soldierClick(xxButton01, xxJPanel01,a , b, map));
-          if (sP.getTeam() == 'A'){
+          xxButton01.setText(sP.getId());
+          xxButton01.addActionListener(e -> armyClick(xxButton01, xxJPanel01,a , b, map));
+          if (sP.getName() == 'A'){
             xxButton01.setBackground(new Color(173, 216, 230));
           }
-          else if (sP.getTeam() == 'B'){
+          else if (sP.getName() == 'B'){
             xxButton01.setBackground(new Color(255, 182, 193));
           }
         } else 
@@ -159,11 +159,11 @@ public class VideoJuego {
     return xxJPanel01;
   }
 
-  public static JPanel creatPanelWE(ArrayList<Soldado> ej) {
+  public static JPanel creatPanelWE(ArrayList<Ejercito> ej) {
     JPanel panelWE = new JPanel();
     panelWE.setLayout(new BoxLayout(panelWE, BoxLayout.Y_AXIS));
 
-    for (Soldado s : ej) {
+    for (Ejercito s : ej) {
       JButton soldierButton = new JButton();
       soldierButton.setLayout(new BorderLayout());
       soldierButton.setBorder(BorderFactory.createCompoundBorder(
@@ -171,7 +171,7 @@ public class VideoJuego {
         BorderFactory.createEmptyBorder(10, 20, 10, 20)
       ));
       soldierButton.setBackground(Color.WHITE);
-      JLabel soldierLabel = new JLabel(s.getType() + " - HP: " + s.getActualLife());
+      JLabel soldierLabel = new JLabel(s.getKingdom() + " - HP: " + s.getSumLifeLevel());
       soldierLabel.setFont(new Font("Courier New", Font.PLAIN, 14));
       soldierButton.add(soldierLabel, BorderLayout.CENTER);
       panelWE.add(soldierButton);
@@ -180,7 +180,7 @@ public class VideoJuego {
     return panelWE;
   }
 
-  public static void soldierClick(JButton buttonClicked, JPanel bo, Ejercito a, Ejercito b, Mapa map){
+  public static void armyClick(JButton buttonClicked, JPanel bo, Team a, Team b, Mapa map){
     if(buttonSel == null)
       buttonSel = buttonClicked;
     else {
@@ -196,13 +196,18 @@ public class VideoJuego {
     return !turnA;
   }
 
-  public static void fight(JPanel game, JButton attacker, JButton attacked, Ejercito a, Ejercito b, Mapa m){
+  public static void fight(JPanel game, JButton attacker, JButton attacked, Team a, Team b, Mapa m){
     int kerH = (int)attacker.getClientProperty("s");
     int kedH = (int)attacked.getClientProperty("s");
     
     //metrica especial
+    Random random = new Random();
+    double rand = random.nextDouble() * (kerH + kedH);
+    
+    double probA = ((double) kerH / (kerH + kedH)) * 100;
+    double probB = ((double) kedH / (kerH + kedH)) * 100;
 
-    if (kerH < kedH){
+    if (rand < probA){
       //attacker.setVisible(false);
       attacker.setBackground(Color.WHITE);
       attacker.setText(null);
@@ -210,8 +215,14 @@ public class VideoJuego {
       attacker.putClientProperty("s", null);
       attacker.putClientProperty("p", null);
       m.editDeleteBoard(coords / 10, coords % 10);
+      JOptionPane.showMessageDialog(null,
+      "Gano el Ejercito atacante  ("+ (turnA ? "A" : "B")  + ")          \n\n Ejercito atacante:\n\t\t" + probA + 
+      "% victoria\n Ejercito atacado:\n\t\t" + probB + "% de victoria\n\n El resultado aleatorio generado fue:\n\t\t" + 
+      rand,
+      "Batalla", 
+      JOptionPane.INFORMATION_MESSAGE);
     }
-    else if (kedH < kerH){
+    else {
       //attacker.setVisible(false);
       attacked.setBackground(Color.WHITE);
       attacked.setText(null);
@@ -219,6 +230,12 @@ public class VideoJuego {
       attacked.putClientProperty("s", null);
       attacked.putClientProperty("p", null);
       m.editDeleteBoard(coords / 10, coords % 10);
+      JOptionPane.showMessageDialog(null,
+      "Gano el Ejercito atacado  ("+ (turnA ? "A" : "B")  + ")          \n\n Ejercito atacante:\n\t\t" + probA + 
+      "% victoria\n Ejercito atacado:\n\t\t" + probB + "% de victoria\n\n El resultado aleatorio generado fue:\n\t\t" + 
+      rand,
+      "Batalla", 
+      JOptionPane.INFORMATION_MESSAGE);
     }
 
     if (endWar(m.getBoard())){
@@ -230,33 +247,34 @@ public class VideoJuego {
     return true;
   }
 
-  public static boolean endWar(Soldado[][] bo){
+  public static boolean endWar(Ejercito[][] bo){
     int a = 0;
     int b = 0;
-    for (Soldado so[] : bo){
-      for (Soldado s: so) {
+    for (Ejercito so[] : bo){
+      for (Ejercito s: so) {
         if (s != null){
-          a += s.getTeam() == ('A') ? 1 : 0;
-          b += s.getTeam() == ('B') ? 1 : 0;
+          a += s.getName() == ('A') ? 1 : 0;
+          b += s.getName() == ('B') ? 1 : 0;
         }
       }
     }
     return a == 0 || b == 0;
   }
 
-  public static void showWinner(Soldado[][] bo){
+  public static void showWinner(Ejercito [][] bo){
     int a = 0;
     int b = 0;
-    for (Soldado so[] : bo){
-      for (Soldado s: so) {
+    for (Ejercito so[] : bo){
+      for (Ejercito s: so) {
         if (s != null){
-          a += s.getTeam() == ('A') ? 1 : 0;
-          b += s.getTeam() == ('B') ? 1 : 0;
+          a += s.getName() == ('A') ? 1 : 0;
+          b += s.getName() == ('B') ? 1 : 0;
         }
       }
     }
     String ejWin = a > b ? "A" : "B";
-    JOptionPane.showMessageDialog(null, "Gano el Ejercito" + ejWin, "Ganador", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Gano el Equipo " + ejWin, "Ganador", 
+    JOptionPane.INFORMATION_MESSAGE);
     System.exit(0);
   }
 

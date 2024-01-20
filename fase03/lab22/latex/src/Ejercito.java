@@ -3,17 +3,25 @@ public class Ejercito {
   private String kingdom;
   private char name;
   private ArrayList<Soldado> army = new ArrayList<Soldado>();
-  
+  private int numSoldiers;
+  private int sumLifeLevel;
+  private int row;
+  private int col;
+  private int position;
+  private String id;
+
   public Ejercito(Mapa map, char name){
     String[] reinos = {"Inglaterra", "Francia","Castilla-Aragon",
                        "Moros", "Sacro Imperio Romano-Germanico"};
     kingdom = reinos[(int) (Math.random() * reinos.length)];
     
-    int n = (int) (Math.random() * 10) + 1;
-    for (int i = 0; i < n; i++) {
+    numSoldiers = (int) (Math.random() * 10) + 1;
+    sumLifeLevel = 0;
+    for (int i = 0; i < numSoldiers; i++) {
       Soldado s = createSoldier(map, this, name, i);
       army.add(s);
-      map.addSoldier(s, s.getRow(), s.getCol());
+      sumLifeLevel += s.getLifeLevel();
+      //map.addSoldier(s, s.getRow(), s.getCol());
     }
     if (benefits(map)){
       for (Soldado s : army){
@@ -21,6 +29,7 @@ public class Ejercito {
         s.setLifeLevel(s.getLifeLevel() + 1);
       }
     }
+    setName(name);
   }
 
   public Ejercito(int n){
@@ -51,12 +60,60 @@ public class Ejercito {
     return army;
   }
 
+  public void setNumSoldiers(int numSoldiers){
+    this.numSoldiers = numSoldiers;
+  }
+
+  public int getNumSoldiers(){
+    return numSoldiers;
+  }
+
+  public void setSumLifeLevel(int sumLifeLevel){
+    this.sumLifeLevel = sumLifeLevel;
+  }
+
+  public int getSumLifeLevel(){
+    return sumLifeLevel;
+  }
+
+  public void setRow (int row) {
+    this.row = row;
+  }
+  
+  public int getRow() {
+    return row;
+  }
+
+  public void setCol (int col) {
+    this.col = col;
+  }
+
+  public int getCol(){
+    return col;
+  }
+
+  public void setPosition(int position){
+    this.position = position;
+  }
+
+  public int getPosition(){
+    return position;
+  }
+
+  public void setId(String id){
+    this.id = id;
+  }
+
+  public String getId(){
+    return id;
+  }
+
   public Soldado createSoldier(Mapa map, Ejercito ej, char nameEj, int i ){
     int row, col;
     do {
       row = (int) (Math.random() * 10);
       col = (int) (Math.random() * 10);
-    } while (map.checkSoldier(row, col));
+    } while (false); // add method of MapS class to verify
 
     String[] typeSoldier = {"Espadachin", "Caballero", "Arquero", "Lancero"};
     int typ = (int) (Math.random() * typeSoldier.length);

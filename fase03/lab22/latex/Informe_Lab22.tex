@@ -257,7 +257,7 @@
     \item \texttt{\textcolor{blue}{game1vs1(JFrame w1)}}: 
     \item El método contiene una segunda ventana en la cual se muestra la interfaz del juego de soldados.
     \item Comienza utilizando dispose() para dejar de mostrar la ventana anterior.
-    \item Dentro configura la pantalla, agrega los elementos necesarios para el juego y se crean los objetos que permiten la ejecución del juego como: Mapa, Ejercito y Soldado.
+    \item Dentro configura la pantalla, agrega los elementos necesarios para el juego y se crean los objetos que permiten la ejecución del juego como: Mapa, Team, Ejercito y Soldado.
     \item Resaltar que se hace uso de funciones lambda, las cuales permiten darle acciones a los botones, además de ayudar al dinamismo del juego.
 \end{itemize}
 \begin{figure}[H]
@@ -268,22 +268,22 @@
 \lstinputlisting[language=Java, firstline=79, lastline=134,firstnumber=79,numbers=left]{src/VideoJuego.java}
 \newpage
 \begin{itemize}
-    \item \texttt{\textcolor{blue}{createJPanelC(Soldado[][] ejS, Ejercito a, Ejercito b, Mapa map)}}: 
-    \item Este método, el cual es usado anteriormente, crea un JPanel el cual va a contener el tablero con los soldados ya creados.
+    \item \texttt{\textcolor{blue}{createJPanelC(Ejercito[][] ejS, Team a, Team b, Mapa map)}}: 
+    \item Este método, el cual es usado anteriormente, crea un JPanel el cual va a contener el tablero con los ejércitos ya creados.
     \item Verificando con bucles crea botones según sea el caso, blancos para vacíos, azul para el equipo A y azules para el equipo B.
-    \item Haciendo uso de funciones lambda también se le asigna eventos a los botones, estos nos sirven al momento de que el jugador selecciona algún soldado.
+    \item Haciendo uso de funciones lambda también se le asigna eventos a los botones, estos nos sirven al momento de que el jugador selecciona algún ejército.
 \end{itemize}
 \lstinputlisting[language=Java, firstline=136, lastline=160,firstnumber=136,numbers=left]{src/VideoJuego.java}
 \begin{itemize}
-    \item \texttt{\textcolor{blue}{createPanelWE(ArrayList<Soldado> ej)}}: 
+    \item \texttt{\textcolor{blue}{createPanelWE(ArrayList<Ejercito> ej)}}: 
     \item Con este método se crean los paneles del este y oeste del JFrame.
-    \item Estos paneles contienen los nombres y la vida de los soldados del ejército recibido.
+    \item Estos paneles contienen los nombres y el nivel de vida de los ejércitos del team recibido.
     \item De esta manera los jugadores pueden ver con más claridad sus soldados creados.
 \end{itemize}
 \lstinputlisting[language=Java, firstline=162, lastline=181,firstnumber=162,numbers=left]{src/VideoJuego.java}
 \begin{itemize}
-    \item \texttt{\textcolor{blue}{soldierClick(JButton buttonClicked, JPanel bo, Ejercito a, Ejercito b, Mapa map)}}: 
-    \item Este método tiene la finalidad de realizar el combate entre los soldados seleccionados.
+    \item \texttt{\textcolor{blue}{armyClick(JButton buttonClicked, JPanel bo, Team a, Team b, Mapa map)}}: 
+    \item Este método tiene la finalidad de realizar el combate entre los ejércitos seleccionados.
     \item Se usa un botón atacante y uno atacado, luego con el método fight() se decide el ganador.
 \end{itemize}
 \lstinputlisting[language=Java, firstline=183, lastline=193,firstnumber=183,numbers=left]{src/VideoJuego.java}
@@ -298,29 +298,70 @@
 \end{figure}
 \lstinputlisting[language=Java, firstline=195, lastline=197,firstnumber=195,numbers=left]{src/VideoJuego.java}
 \begin{itemize}
-    \item \texttt{\textcolor{blue}{fight(JPanel game, JButton attacker, JButton attacked, Ejercito a, Ejercito b, Mapa m)}}: 
-    \item Haciendo uso del nivel de vida de los soldados de la pelea, se usan condicionales para determinar el ganador y perdedor.
+    \item \texttt{\textcolor{blue}{fight(JPanel game, JButton attacker, JButton attacked, Team a, Team b, Mapa m)}}: 
+    \item Haciendo uso del nivel de la suma de vida de los ejércitos de la pelea, se usan probabilidades para determinar el ganador y perdedor.
     \item el perdedor es borrado del tablero, mientras que el ganador en caso se pueda, va a la posición del derrotado o se queda en la misma si fue el atacado.
 \end{itemize}
-\lstinputlisting[language=Java, firstline=199, lastline=227,firstnumber=199,numbers=left]{src/VideoJuego.java}
-\begin{itemize}
-    \item \texttt{\textcolor{blue}{endWar(Soldado[][] bo)}}: 
-    \item Su única función es verificar que alguno de los dos ejércitos se quede sin soldados, en caso pase devuelve true.
-\end{itemize}
-\lstinputlisting[language=Java, firstline=233, lastline=245,firstnumber=233,numbers=left]{src/VideoJuego.java}
+\lstinputlisting[language=Java, firstline=199, lastline=244,firstnumber=199,numbers=left]{src/VideoJuego.java}
 \newpage
 \begin{itemize}
-    \item \texttt{\textcolor{blue}{showWinner(Soldado[][] bo)}}: 
-    \item El método tiene la misma lógica del anterior, pero en este caso muestra en pantalla al ejército ganador y finaliza el programa.
+    \item \texttt{\textcolor{blue}{endWar(Soldado[][] bo)}}: 
+    \item Su única función es verificar que alguno de los dos equipos se quede sin ejércitos, en caso pase devuelve true.
 \end{itemize}
-\lstinputlisting[language=Java, firstline=247, lastline=261,firstnumber=247,numbers=left]{src/VideoJuego.java}
+\lstinputlisting[language=Java, firstline=250, lastline=262,firstnumber=250,numbers=left]{src/VideoJuego.java}
+\begin{itemize}
+    \item \texttt{\textcolor{blue}{showWinner(Soldado[][] bo)}}: 
+    \item El método tiene la misma lógica del anterior, pero en este caso muestra en pantalla al team ganador y finaliza el programa.
+\end{itemize}
+\lstinputlisting[language=Java, firstline=264, lastline=279,firstnumber=264,numbers=left]{src/VideoJuego.java}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth,keepaspectratio]{img/vj5.png}
     \caption{}
 \end{figure}
-%%%%
 
+%%%%
+\newpage
+
+\subsection{Clase Team.java}
+\begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/b88b62a5f399f7d5f245434c901abf128f9c0705}{b88b62a}: Agregando la clase Team
+}][H]
+ $ git add .
+ $ git commit -m "Agregada la clase Team, objeto que contendra a los ejercitos"			
+ $ git push -u origin main
+\end{lstlisting}
+\subsubsection{Imports}
+\begin{itemize}
+    \item \texttt{import java.util.ArrayList;}: 
+\end{itemize}
+\lstinputlisting[language=Java, firstline=1, lastline=1,firstnumber=1,numbers=left]{src/Team.java}
+
+\subsubsection{Atributos}
+\begin{itemize}
+    \item \texttt{ArrayList<Ejercito> teams}: Contiene a los ejércitos de un equipo.
+    \item \texttt{int numArmy}: Contiene el número de Ejércitos que hay en el equipo.
+\end{itemize}
+\lstinputlisting[language=Java, firstline=4, lastline=5,firstnumber=4,numbers=left]{src/Team.java}
+
+\subsubsection{Métodos}
+\begin{itemize}
+    \item \texttt{\textcolor{blue}{Team (Mapa map, char name)}}: 
+    \item En el constructor se crean los Ejércitos del equipo, además que se van almacenando en el atributo tipo ArrayList de Ejercito.
+\end{itemize}
+\lstinputlisting[language=Java, firstline=7, lastline=15,firstnumber=7,numbers=left]{src/Team.java}
+\begin{itemize}
+    \item \texttt{\textcolor{blue}{getTeams()}}: 
+    \item Además del método para obtener el ArrayList de Ejercito.
+\end{itemize}
+\lstinputlisting[language=Java, firstline=17, lastline=19,firstnumber=17,numbers=left]{src/Team.java}
+\newpage
+\begin{itemize}
+    \item \texttt{\textcolor{blue}{createArmy (Mapa map, char n)}}: 
+    \item Sirve para crear a los elementos Ejercito del equipo, genera sus posiciones en el mapa y va seteando algunos atributos de los ejércitos.
+\end{itemize}
+\lstinputlisting[language=Java, firstline=21, lastline=35,firstnumber=21,numbers=left]{src/Team.java}
+
+%%%%
 \newpage
 \subsection{Clase Mapa.java}
 \begin{lstlisting}[language=bash,caption={Commit \href{https://github.com/hernanchoquehuanca/fp2-23b/commit/1a0586ff7f8bb3b99f7e0c7a74e9bb209487b2c5}{379f06f}: Terminada la clase mapa
@@ -341,7 +382,7 @@
     \item \texttt{static Mapa instanciaSingleton}: Crea el mapa de juego haciendo uso de Singleton.
     \item \texttt{String[] typesTerritory}: Contiene todos los posibles territorios que se pueden tener.
     \item \texttt{String territory}: Contiene el tipo de territorio del mapa actual.
-    \item \texttt{Soldado[][] board}: Contiene el tablero de soldados de ambos ejércitos.
+    \item \texttt{Ejercito[][] board}: Contiene el tablero de soldados de ambos ejércitos.
 \end{itemize}
 \lstinputlisting[language=Java, firstline=4, lastline=7,firstnumber=4,numbers=left]{src/Mapa.java}
 
@@ -357,18 +398,18 @@
 \end{itemize}
 \lstinputlisting[language=Java, firstline=17, lastline=40,firstnumber=9,numbers=left]{src/Mapa.java}
 \begin{itemize}
-    \item \texttt{\textcolor{blue}{addSoldier(Soldado s, int r, int c)}}: 
-    \item Sirve para agregar soldados al tablero del mapa.
+    \item \texttt{\textcolor{blue}{addArmy(Soldado s, int r, int c)}}: 
+    \item Sirve para agregar Ejercitos al tablero del mapa.
 \end{itemize}
 \lstinputlisting[language=Java, firstline=42, lastline=44,firstnumber=42,numbers=left]{src/Mapa.java}
 \begin{itemize}
-    \item \texttt{\textcolor{blue}{checkSoldier(int r, int c)}}: 
-    \item Verifica si existe o no un soldado en la posición recibida.
+    \item \texttt{\textcolor{blue}{checkArmy(int r, int c)}}: 
+    \item Verifica si existe o no un Ejercito en la posición recibida.
 \end{itemize}
 \lstinputlisting[language=Java, firstline=46, lastline=48,firstnumber=46,numbers=left]{src/Mapa.java}
 \begin{itemize}
     \item \texttt{\textcolor{blue}{editDeleteBoard(int r, int c)}}: 
-    \item Elimina soldados del tablero, útil para los enfrentamientos donde los soldados perdedores se eliminan.
+    \item Elimina Ejercitos del tablero, útil para los enfrentamientos donde los Ejercito perdedores se eliminan.
 \end{itemize}
 \lstinputlisting[language=Java, firstline=50, lastline=52,firstnumber=50,numbers=left]{src/Mapa.java}
 
@@ -392,7 +433,7 @@
     \item \texttt{char name}: Contiene el char identificador ('A' o 'B').
     \item \texttt{ArrayList<Soldado> army}: Guarda a los soldados creados.
 \end{itemize}
-\lstinputlisting[language=Java, firstline=3, lastline=5,firstnumber=3,numbers=left]{src/Ejercito.java}
+\lstinputlisting[language=Java, firstline=3, lastline=11,firstnumber=3,numbers=left]{src/Ejercito.java}
 
 \subsubsection{Métodos}
 \begin{itemize}
@@ -400,23 +441,21 @@
     \item El constructor de la clase Ejercito.
     \item Dentro se elije el reino aleatoriamente, además de crear los soldados y almacenarlos.
 \end{itemize}
-\lstinputlisting[language=Java, firstline=7, lastline=24,firstnumber=7,numbers=left]{src/Ejercito.java}
+\lstinputlisting[language=Java, firstline=13, lastline=33,firstnumber=13,numbers=left]{src/Ejercito.java}
 \begin{itemize}
-    \item \texttt{\textcolor{blue}{Getters y Setters}}: 
+    \item \texttt{\textcolor{blue}{Contiene Getters y Setters}}: 
 \end{itemize}
-\lstinputlisting[language=Java, firstline=30, lastline=52,firstnumber=30,numbers=left]{src/Ejercito.java}
 \begin{itemize}
     \item \texttt{\textcolor{blue}{createSoldier(Mapa map, Ejercito ej, char nameEj, int i )}}: 
     \item Este método es muy extenso porque verifica dentro que tipo de soldado se debe crear, va desde los especiales y verificando el reino para crearlos.
     \item En cada caso llama al constructor del soldado que se debe y lo retorna.
 \end{itemize}
-\lstinputlisting[language=Java, firstline=54, lastline=110,firstnumber=54,numbers=left]{src/Ejercito.java}
-\newpage
+\lstinputlisting[language=Java, firstline=111, lastline=167,firstnumber=111,numbers=left]{src/Ejercito.java}
 \begin{itemize}
     \item \texttt{\textcolor{blue}{benefits(Mapa m)}}: 
     \item El método se encarga de devolver un booleano, verificanso si los soldados del reino merecen o no una bonificación de vida.
 \end{itemize}
-\lstinputlisting[language=Java, firstline=112, lastline=138,firstnumber=112,numbers=left]{src/Ejercito.java}
+\lstinputlisting[language=Java, firstline=169, lastline=195,firstnumber=169,numbers=left]{src/Ejercito.java}
 
 %%%%
 
@@ -810,7 +849,7 @@
     \caption{}
 \end{figure}
 
-\href{https://github.com/hernanchoquehuanca/fp2-23b/blob/main/fase03/lab22/latex/img/22uml.png}{Diagrama 22 UML} para acceder al diagrama UML del repositorio y se observe con más claridad.
+\href{https://github.com/hernanchoquehuanca/fp2-23b/blob/main/fase03/lab22/latex/img/22uml.png}{Aquí} Diagrama UML 22 para acceder al diagrama UML del repositorio y se observe con más claridad.
 
 %------------------------------ ESTRUCTURA DE LABORATORIO --------------------------
 
@@ -863,6 +902,7 @@
             |   Lanzas.java
             |   Mapa.java
             |   Soldado.java
+            |   Team.java
             |   VideoJuego.java
             |───src
                     01game.png
