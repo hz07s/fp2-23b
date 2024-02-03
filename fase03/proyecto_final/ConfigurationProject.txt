@@ -1,0 +1,27 @@
+Project Specifications
+
+appName VideoGame.java - Shadow of the kingdoms
+appVersion 1.0
+authors
+- Eduardo Sebastian Stephan Portugal Portugal
+- Hernan Andy Choquehuanca Zapana
+e-mails
+- eportugalpor@unsa.edu.pe
+- hchoquehuancaz@unsa.edu.pe
+description turn-based video game about medieval wars between kingdoms, when you start the program you can log in with your username or register.
+
+------------------------------
+
+Database Specifications
+
+appName DataBase.java
+appVersion 8.0
+authors Eduardo Sebastian Stephan Portugal Portugal
+e-mails eportugalpor@unsa.edu.pe
+db_name bzd2feukkimivqje2lb7
+user_db uf812gj0y6ob1akl
+password 7nRZViLlzjURY9UTuZSd
+host bzd2feukkimivqje2lb7-mysql.services.clever-cloud.com
+port 3306
+uri mysql://uf812gj0y6ob1akl:7nRZViLlzjURY9UTuZSd@bzd2feukkimivqje2lb7-mysql.services.clever-cloud.com:3306/bzd2feukkimivqje2lb7
+description database in the cloud - the project allows you to create your own user.

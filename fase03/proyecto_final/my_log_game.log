@@ -1,0 +1,51 @@
+
+VideoJuego Iniciado
+Sesion iniciada del usuario: Edward
+Menu Principal -- Abierto
+Nuevo Juego Rapido
+Se creo el player: NickName: Player_1	 Reino: Moros	 Color: grey
+Se creo el player: NickName: Player_2	 Reino: Inglaterra	 Color: yellow
+Se creo un nuevo mapa:
+Territorio: campo abierto	Cantidad de ejercitos: 0
+Partida Iniciada
+Tablero de ejercitos creado
+Menu de Opciones -- Abierto
+Menu para Cargar Partida -- Abierto
+Query SQL ejecutado: "SELECT game_name FROM savegame"
+Query SQL ejecutado: "SELECT file_game FROM savegame WHERE game_name = Partida 3"
+Partida Cargada: Partida 3
+Se creo el player: NickName: Player_1	 Reino: Sacro Imperio Romano Germanico	 Color: blue
+Se creo el player: NickName: Player_2	 Reino: Inglaterra	 Color: red
+Se creo un nuevo mapa:
+Territorio: montana	Cantidad de ejercitos: 7
+Partida Iniciada
+Tablero de ejercitos creado
+
+VideoJuego Iniciado
+Query SQL ejecutado: "SELECT * FROM users WHERE nick_name = Edward AND password = 369789"
+Sesion iniciada del usuario: Edward
+Menu Principal -- Abierto
+Nuevo Juego Rapido
+Se creo el player: NickName: Player_1	 Reino: Castilla-Aragon	 Color: cyan
+Se creo el player: NickName: Player_2	 Reino: Inglaterra	 Color: green
+Se creo un nuevo mapa:
+Territorio: montana	Cantidad de ejercitos: 0
+Partida Iniciada
+Tablero de ejercitos creado
+
+VideoJuego Iniciado
+Query SQL ejecutado: "SELECT * FROM users WHERE nick_name = Edward AND password = 369789"
+Sesion iniciada del usuario: Edward
+Menu Principal -- Abierto
+Nuevo Juego Rapido
+Se creo el player: NickName: Player_1	 Reino: Sacro Imperio Romano Germanico	 Color: red
+Se creo el player: NickName: Player_2	 Reino: Castilla-Aragon	 Color: yellow
+Partida Iniciada
+Se creo un nuevo mapa:
+Territorio: desierto	Cantidad de ejercitos: 3
+Tablero de ejercitos creado
+
+VideoJuego Iniciado
+Query SQL ejecutado: "SELECT * FROM users WHERE nick_name = Edward AND password = 369789"
+Sesion iniciada del usuario: Edward
+Menu Principal -- Abierto
